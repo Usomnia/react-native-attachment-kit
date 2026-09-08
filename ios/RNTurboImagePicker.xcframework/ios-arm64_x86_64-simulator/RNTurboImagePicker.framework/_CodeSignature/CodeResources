@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/RNTurboImagePicker-Swift.h</key>
 		<data>
-		oOrQ8FnN6javBbGoTrUZEI6JZ4c=
+		eXekoU3EhAHV8sZTqWoxZYGJLUY=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		pwg+DtI7EzOAuHBwtrS4DuDVRjI=
+		EDnhclQcoLT5IWqm5JzHg3QCEY8=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		0LwBmxHTQ4rk+T+Ai5uQmlaG8U0=
+		h8uTxisEQIp08oTlW0YSMIORzQU=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -42,19 +42,19 @@
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		0LwBmxHTQ4rk+T+Ai5uQmlaG8U0=
+		h8uTxisEQIp08oTlW0YSMIORzQU=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		oY05WWxzBTMPbHBhYeugwkCFf+k=
+		k8YBnwVsqFTJwfm5G+nf+E0cklU=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		pwg+DtI7EzOAuHBwtrS4DuDVRjI=
+		EDnhclQcoLT5IWqm5JzHg3QCEY8=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		DL6/JSq/yCyOc1CT7bY3/wcm86I=
+		xqTgSwZ0tw26bX7pS3fvs/gpVUo=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -62,11 +62,11 @@
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		DL6/JSq/yCyOc1CT7bY3/wcm86I=
+		xqTgSwZ0tw26bX7pS3fvs/gpVUo=
 		</data>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		RMYkImqFP3ZooBWPqHHEm6RAH40=
+		WUoLNLsCqEJIjElzf6YJFnky60s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -207,21 +207,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2uDRWyeaT+dtMhE9wBEhuBlP3krSyqcJiOykair8BY8=
+			0MKwJUBs+JLSaOS9+bqUuP95nVo+awo2Pvo5vpJNEIo=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Whw4DnWqiFnPuZijnxRmVSaoRjOsPv3WhyGLoJKvZjk=
+			5KUR3zbNC4eAEiQ4edVqEBs2j3RtsNW6NREfn+fOz2I=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bllov1L9AYZLydEiXD/3Qv7fBWvUSTGyzec3cPWYgpw=
+			cXBh9BkEkT7hqvaLuWJNLvA3GsbtxZq8sZVyzX6Nibk=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -235,28 +235,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bllov1L9AYZLydEiXD/3Qv7fBWvUSTGyzec3cPWYgpw=
+			cXBh9BkEkT7hqvaLuWJNLvA3GsbtxZq8sZVyzX6Nibk=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			AxVMNy+fAjSpc5eTanFX035OAfUTxF0B8n3VWLBMsoM=
+			T5drFl5FzuL6leiW/6Be1/1KwSCmVjpT8SIzY1ZBpFE=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Whw4DnWqiFnPuZijnxRmVSaoRjOsPv3WhyGLoJKvZjk=
+			5KUR3zbNC4eAEiQ4edVqEBs2j3RtsNW6NREfn+fOz2I=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			QO0AJIJ5ujoAYMT1/6OOvADVuacCoC9U3I3Qv2u7wQg=
+			9TJeYT4hW70d9p5Z346Y4n3OVuWJDHLRHIpSXtz/0lE=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -270,14 +270,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QO0AJIJ5ujoAYMT1/6OOvADVuacCoC9U3I3Qv2u7wQg=
+			9TJeYT4hW70d9p5Z346Y4n3OVuWJDHLRHIpSXtz/0lE=
 			</data>
 		</dict>
 		<key>Modules/RNTurboImagePicker.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yIC6s5BtGWDkLAqrr0BIVamdaE0mHk5GWPaKN2W3foo=
+			z1FmK5BFhgrQi9+tiVGRms8sGtODECIKUeuopUeZzKA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

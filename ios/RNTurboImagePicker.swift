@@ -92,6 +92,7 @@ class RNTurboImagePicker: RCTEventEmitter {
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
+            // localPath might be a file:// URI or raw path
             var path = localPath
             if path.hasPrefix("file://") {
                 path = path.replacingOccurrences(of: "file://", with: "")
@@ -167,6 +168,19 @@ class RNTurboImagePicker: RCTEventEmitter {
         let animationType = options["animationType"] as? String ?? (options["sourceRect"] != nil ? "zoom" : "slide")
         let closeAnimationType = options["closeAnimationType"] as? String
         
+        var sourceBackgroundColor: UIColor = .clear
+        if let bgString = options["sourceBackgroundColorString"] as? String {
+            let comps = bgString.split(separator: ",")
+            if comps.count >= 3,
+               let r = Double(comps[0].trimmingCharacters(in: .whitespaces)),
+               let g = Double(comps[1].trimmingCharacters(in: .whitespaces)),
+               let b = Double(comps[2].trimmingCharacters(in: .whitespaces)) {
+                sourceBackgroundColor = UIColor(red: CGFloat(r/255.0), green: CGFloat(g/255.0), blue: CGFloat(b/255.0), alpha: 1.0)
+            }
+        } else if let bgHex = options["sourceBackgroundColor"] as? String, let color = UIColor(hexString: bgHex) {
+            sourceBackgroundColor = color
+        }
+        
         var parsedRect: CGRect?
         if let sourceRectDict = options["sourceRect"] as? NSDictionary {
             var x: CGFloat = 0
@@ -208,6 +222,7 @@ class RNTurboImagePicker: RCTEventEmitter {
             let viewerVC = RemoteImageViewerViewController(imageUrls: images, initialIndex: initialIndex)
             viewerVC.languageCode = languageCode
             viewerVC.viewerTitle = viewerTitle
+            viewerVC.placeholderImages = placeholderImages
             if let hex = themeColorHex, let color = UIColor(hexString: hex) {
                 viewerVC.themeColor = color
             }
@@ -219,25 +234,11 @@ class RNTurboImagePicker: RCTEventEmitter {
             }
             self.zoomAnimator.sourceBorderRadius = sourceBorderRadius
             self.zoomAnimator.sourceBorderCorners = mask
-            
-            // Parse background color from JS (passed as "R,G,B" string)
-            var sourceBackgroundColor: UIColor = .clear
-            if let bgString = options["sourceBackgroundColorString"] as? String {
-                let comps = bgString.split(separator: ",")
-                if comps.count >= 3,
-                   let r = Double(comps[0].trimmingCharacters(in: .whitespaces)),
-                   let g = Double(comps[1].trimmingCharacters(in: .whitespaces)),
-                   let b = Double(comps[2].trimmingCharacters(in: .whitespaces)) {
-                    sourceBackgroundColor = UIColor(red: CGFloat(r/255.0), green: CGFloat(g/255.0), blue: CGFloat(b/255.0), alpha: 1.0)
-                }
-            } else if let bgHex = options["sourceBackgroundColor"] as? String, let color = UIColor(hexString: bgHex) {
-                sourceBackgroundColor = color
-            }
             self.zoomAnimator.sourceBackgroundColor = sourceBackgroundColor
-
-            viewerVC.onViewerWillClose = { [weak self] in
-                self?.sendEvent(withName: "onViewerWillClose", body: nil)
-            }
+            // Reset any sourceImage left over from a previous openViewer() call - it's only
+            // meant to carry this call's local placeholder (see below), and must not leak
+            // into a later call that has no placeholder of its own.
+            self.zoomAnimator.sourceImage = nil
             
             viewerVC.modalPresentationStyle = .custom
             viewerVC.transitioningDelegate = self
@@ -248,31 +249,77 @@ class RNTurboImagePicker: RCTEventEmitter {
                 let eventBody: [String: Any] = ["index": index]
                 self.sendEvent(withName: "onPageSelected", body: eventBody)
             }
+            // ⚠️ 이전에는 이 클로저를 전혀 연결하지 않아서 "onViewerWillClose" 네이티브 이벤트가
+            // iOS에서는 절대 발생하지 않았습니다. JS 쪽(src/index.ts)은 정확히 이 이벤트가 와야만
+            // "onPageSelected" 구독을 정리(subscriptionPageSelected.remove())하기 때문에, 뷰어를
+            // 열 때마다 그 구독이 영구히 누수됐습니다. onPageSelected는 뷰어별로 구분되지 않는
+            // 전역 이벤트라서, 그룹 이미지를 여러 번 열면 예전 메시지의 리스너까지 전부 같이
+            // 반응해서 서로 다른 메시지의 measureMap 기준으로 updateSourceRect를 호출해
+            // 공유된 zoomAnimator.sourceRect를 덮어써버렸습니다 - "스와이프 후 닫으면 전혀
+            // 다른 그룹 이미지 위치로 애니메이션되는" 버그의 근본 원인이었습니다. 이제 실제로
+            // 뷰어가 닫히기 시작할 때 이벤트를 보내서 JS가 제때 구독을 정리하도록 합니다.
+            viewerVC.onViewerWillClose = { [weak self] () -> Void in
+                self?.sendEvent(withName: "onViewerWillClose", body: nil)
+            }
             
             let resolveResult: [String: Any] = ["success": true]
             
+            // Cache-first, then local placeholder, then wait-for-download - in that priority
+            // order. If the full-resolution image is ALREADY cached (memory or disk), we must
+            // animate with THAT, not with a lower-quality local thumbnail placeholder: using the
+            // placeholder here would show a needless blurry-then-sharp flash for an image that's
+            // already available in full quality. The placeholder is only a stand-in for when the
+            // full image genuinely isn't available yet (mirrors Android's onlyRetrieveFromCache
+            // gating - "use the real image if it's already cached, otherwise the local thumbnail").
+            // NOTE: only the memory cache is checked here (not the disk cache) - this bridge
+            // file is compiled directly as a pod source file, a SEPARATE module from the
+            // ViewerImageCache class (which ships compiled inside RNTurboImagePicker.xcframework).
+            // Cross-module Swift visibility requires `public`, and getDiskImageSynchronously()
+            // wasn't public until this same fix - until the xcframework is rebuilt (deploy.rb /
+            // build_xcframework.sh) and re-synced to Dist, calling it here would fail to compile.
+            // Memory-cache is the common case anyway (an image just viewed/downloaded this
+            // session); a disk-only cache hit will fall through to the placeholder path below,
+            // which is still correct (just not maximally optimal) until that rebuild happens.
+            var cachedFullImage: UIImage? = nil
             if images.indices.contains(initialIndex) {
+                let urlString = images[initialIndex]
+                cachedFullImage = ViewerImageCache.shared.getMemoryImage(for: urlString)
+            }
+
+            var initialPlaceholderImage: UIImage? = nil
+            if cachedFullImage == nil, let placeholderImages = placeholderImages, placeholderImages.indices.contains(initialIndex) {
+                let placeholderUrlString = placeholderImages[initialIndex]
+                if placeholderUrlString.hasPrefix("file://"), let url = URL(string: placeholderUrlString) {
+                    initialPlaceholderImage = UIImage(contentsOfFile: url.path)
+                }
+            }
+
+            if let cachedImage = cachedFullImage {
+                self.zoomAnimator.sourceImage = cachedImage
+                rootViewController.present(viewerVC, animated: true, completion: {
+                    resolve(resolveResult)
+                })
+            } else if let placeholderImage = initialPlaceholderImage {
+                self.zoomAnimator.sourceImage = placeholderImage
+                rootViewController.present(viewerVC, animated: true, completion: {
+                    resolve(resolveResult)
+                })
+                if images.indices.contains(initialIndex) {
+                    // Kick off/continue the full-resolution fetch in the background so it's
+                    // ready (and cached) as soon as possible; the viewer's own page loading
+                    // (ZoomableImageItemView.loadImage) will pick it up and swap it in.
+                    RemoteImageViewerViewController.prefetchImage(from: images[initialIndex], completion: { _ in })
+                }
+            } else if images.indices.contains(initialIndex) {
+                // No local placeholder available (exceptional case) - fall back to the previous
+                // behavior: present immediately if already cached, otherwise wait for the
+                // download to complete since there's nothing to animate with yet.
                 let initialUrl = images[initialIndex]
-                
-                let isRemote = initialUrl.hasPrefix("http://") || initialUrl.hasPrefix("https://")
-                let hasCache = RemoteImageViewerViewController.isImageCached(for: initialUrl)
-                
-                if isRemote && !hasCache {
-                    // 원격 URL이면서 캐시가 없는 경우:
-                    // 사용자 경험을 위해 프리패치를 기다리지 않고 즉시 뷰어를 엽니다.
-                    // (미리 만들어둔 ZoomTransitionAnimator의 캡처 풀백이 작동하여 빠르게 애니메이션 진행)
-                    rootViewController.present(viewerVC, animated: true, completion: {
-                        resolve(resolveResult)
-                    })
-                } else {
-                    // 로컬이거나 이미 캐시된 경우:
-                    // 정확히 로딩(렌더링)을 완료한 후 애니메이션을 부드럽게 시작합니다.
-                    RemoteImageViewerViewController.prefetchImage(from: initialUrl) { _ in
-                        DispatchQueue.main.async {
-                            rootViewController.present(viewerVC, animated: true, completion: {
-                                resolve(resolveResult)
-                            })
-                        }
+                RemoteImageViewerViewController.prefetchImage(from: initialUrl) { _ in
+                    DispatchQueue.main.async {
+                        rootViewController.present(viewerVC, animated: true, completion: {
+                            resolve(resolveResult)
+                        })
                     }
                 }
             } else {
@@ -292,7 +339,21 @@ class RNTurboImagePicker: RCTEventEmitter {
             let y = (rect["y"] as? NSNumber).map { CGFloat(truncating: $0) } ?? (rect["y"] as? Double).map { CGFloat($0) } ?? 0
             let w = (rect["width"] as? NSNumber).map { CGFloat(truncating: $0) } ?? (rect["width"] as? Double).map { CGFloat($0) } ?? 0
             let h = (rect["height"] as? NSNumber).map { CGFloat(truncating: $0) } ?? (rect["height"] as? Double).map { CGFloat($0) } ?? 0
+            
+            var mask: CACornerMask = []
+            if let corners = rect["sourceBorderCorners"] as? [String] {
+                if corners.contains("topLeft") { mask.insert(.layerMinXMinYCorner) }
+                if corners.contains("topRight") { mask.insert(.layerMaxXMinYCorner) }
+                if corners.contains("bottomLeft") { mask.insert(.layerMinXMaxYCorner) }
+                if corners.contains("bottomRight") { mask.insert(.layerMaxXMaxYCorner) }
+                if mask.isEmpty { mask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner] }
+            } else {
+                mask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+            }
+            
             self.zoomAnimator.sourceRect = CGRect(x: x, y: y, width: w, height: h)
+            self.zoomAnimator.sourceBorderCorners = mask
+            self.zoomAnimator.updateMaskView()
             resolve(nil)
         }
     }
@@ -1247,24 +1308,28 @@ class RNTurboImagePicker: RCTEventEmitter {
 extension UIColor {
     convenience init?(hexString: String) {
         var cString: String = hexString.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
-
-        if cString.hasPrefix("#") {
-            cString.remove(at: cString.startIndex)
-        }
-
-        if cString.count != 6 {
-            return nil
-        }
+        if cString.hasPrefix("#") { cString.remove(at: cString.startIndex) }
 
         var rgbValue: UInt64 = 0
         Scanner(string: cString).scanHexInt64(&rgbValue)
 
-        self.init(
-            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
-            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
-            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: 1.0
-        )
+        if cString.count == 6 {
+            self.init(
+                red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+                green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+                blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+                alpha: 1.0
+            )
+        } else if cString.count == 8 {
+            self.init(
+                red: CGFloat((rgbValue & 0xFF000000) >> 24) / 255.0,
+                green: CGFloat((rgbValue & 0x00FF0000) >> 16) / 255.0,
+                blue: CGFloat((rgbValue & 0x0000FF00) >> 8) / 255.0,
+                alpha: CGFloat(rgbValue & 0x000000FF) / 255.0
+            )
+        } else {
+            return nil
+        }
     }
 }
 

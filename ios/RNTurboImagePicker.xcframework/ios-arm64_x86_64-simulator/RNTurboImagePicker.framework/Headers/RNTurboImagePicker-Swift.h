@@ -499,13 +499,14 @@ SWIFT_CLASS("_TtC18RNTurboImagePicker31RemoteImageViewerViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
-@interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UIScrollViewDelegate>
-- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
-@end
-
 @interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 @interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UICollectionViewDataSource, UICollectionViewDelegate>
@@ -1044,13 +1045,14 @@ SWIFT_CLASS("_TtC18RNTurboImagePicker31RemoteImageViewerViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
-@interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UIScrollViewDelegate>
-- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
-@end
-
 @interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 @interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNTurboImagePicker)) <UICollectionViewDataSource, UICollectionViewDelegate>

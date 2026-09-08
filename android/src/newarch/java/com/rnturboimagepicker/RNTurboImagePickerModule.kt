@@ -398,9 +398,11 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
         val images = ArrayList<String>()
         for (i in 0 until imagesArray.size()) {
             val str = imagesArray.getString(i)
-            if (str != null) {
-                images.add(str)
-            }
+            // ⚠️ null을 그냥 건너뛰면(add를 안 하면) 그 뒤 모든 이미지의 인덱스가 하나씩
+            // 앞으로 당겨져서, initialIndex/placeholderImages와 어긋나는 "인덱스 밀림" 버그가
+            // 됩니다. 아래 placeholderImages 루프처럼 빈 문자열로라도 자리를 채워 인덱스를
+            // 보존합니다.
+            images.add(str ?: "")
         }
 
         val initialIndex = if (options.hasKey("initialIndex")) options.getInt("initialIndex") else 0

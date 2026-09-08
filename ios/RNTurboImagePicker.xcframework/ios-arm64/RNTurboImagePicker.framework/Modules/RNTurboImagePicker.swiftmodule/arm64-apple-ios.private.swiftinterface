@@ -232,6 +232,7 @@ extension RNTurboImagePicker.GalleryBaseViewController : UIKit.UIAdaptivePresent
   public static let shared: RNTurboImagePicker.ViewerImageCache
   public func hasCache(for url: Swift.String) -> Swift.Bool
   public func getMemoryImage(for url: Swift.String) -> UIKit.UIImage?
+  public func getDiskImageSynchronously(for url: Swift.String) -> UIKit.UIImage?
   public func setMemoryImage(_ image: UIKit.UIImage, for url: Swift.String)
   public func saveImage(_ image: UIKit.UIImage, for url: Swift.String)
   @objc deinit
@@ -242,6 +243,7 @@ extension RNTurboImagePicker.GalleryBaseViewController : UIKit.UIAdaptivePresent
   @_Concurrency.MainActor @preconcurrency public var themeColor: UIKit.UIColor
   @_Concurrency.MainActor @preconcurrency public var languageCode: Swift.String
   @_Concurrency.MainActor @preconcurrency public var viewerTitle: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var placeholderImages: [Swift.String]?
   @_Concurrency.MainActor @preconcurrency public static func isImageCached(for urlString: Swift.String) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency public static func prefetchImage(from urlString: Swift.String, completion: @escaping (UIKit.UIImage?) -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public init(imageUrls: [Swift.String], initialIndex: Swift.Int)
@@ -254,6 +256,7 @@ extension RNTurboImagePicker.RemoteImageViewerViewController : UIKit.UIGestureRe
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
 }
 extension RNTurboImagePicker.RemoteImageViewerViewController : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
 }
 extension RNTurboImagePicker.RemoteImageViewerViewController : UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegate {

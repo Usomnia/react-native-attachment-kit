@@ -58,6 +58,35 @@ export interface ViewerOptions {
   onPageSelected?: (index: number) => void
   onViewerWillClose?: () => void
   /**
+   * 상단바에 저장/공유/삭제 아이콘 3개를 표시할지 여부. 기본값 true.
+   */
+  showActionButtons?: boolean
+  /** 여러 장(묶음사진)일 때 저장 액션시트에 쓰는 문구들 - 기본값은 한국어. */
+  saveAllText?: string
+  saveOneText?: string
+  shareAllText?: string
+  shareOneText?: string
+  actionCancelText?: string
+  /**
+   * 삭제 확인 알럿 문구 - 넘기지 않으면 languageCode(ko/en/ja/zh, 그 외 언어는 en 폴백)에
+   * 맞춰 네이티브 쪽 기본 다국어 문구가 자동으로 적용됩니다.
+   */
+  deleteConfirmTitle?: string
+  deleteConfirmMessage?: string
+  /**
+   * 여러 장(묶음사진)을 삭제할 때만 쓰이는 경고 문구 - "삭제하면 전체가 함께 삭제된다"는
+   * 걸 미리 알려줍니다. deleteConfirmMessage를 넘기면 그게 항상 우선이고, 이건 아무 것도
+   * 안 넘겼을 때 사진이 2장 이상일 경우에만 자동으로 붙습니다.
+   */
+  deleteConfirmGroupMessage?: string
+  deleteButtonText?: string
+  /**
+   * 삭제 확인 알럿에서 사용자가 삭제를 눌렀을 때 호출됩니다. 네이티브는 실제 데이터를
+   * 지우지 않고(뷰어는 그대로 닫힘) 이 콜백으로만 알리므로, 메시지/사진을 실제로
+   * 지우는 처리는 RN 쪽에서 담당해야 합니다.
+   */
+  onImageDeleted?: (event: { index: number; url: string }) => void
+  /**
    * Android only. 열기 애니메이션이 완전히 끝난 시점에 한 번 호출됩니다.
    * 배경(호스트 화면) 스크롤 보정을 이 콜백 안에서 실행하면, 애니메이션 도중에 보정이
    * 끼어들어 보이지 않고 뷰어가 화면을 완전히 가린 상태에서 안전하게 적용할 수 있습니다.

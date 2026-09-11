@@ -51,7 +51,7 @@ class RNTurboImagePicker: RCTEventEmitter {
     
     @objc
     override func supportedEvents() -> [String]! {
-        return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose"]
+        return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose", "onImageDeleted"]
     }
     
     // MARK: - Public Methods
@@ -167,6 +167,18 @@ class RNTurboImagePicker: RCTEventEmitter {
         let viewerTitle = options["title"] as? String
         let animationType = options["animationType"] as? String ?? (options["sourceRect"] != nil ? "zoom" : "slide")
         let closeAnimationType = options["closeAnimationType"] as? String
+        // 저장/공유/삭제 상단바 버튼 - 사용자가 준 스크린샷(전체 저장/이 사진만 저장 등)에
+        // 맞춘 기본 한국어 문구가 있으므로, JS에서 안 넘기면 그 기본값을 그대로 씁니다.
+        let showActionButtons = (options["showActionButtons"] as? Bool) ?? true
+        let saveAllText = options["saveAllText"] as? String
+        let saveOneText = options["saveOneText"] as? String
+        let shareAllText = options["shareAllText"] as? String
+        let shareOneText = options["shareOneText"] as? String
+        let actionCancelText = options["actionCancelText"] as? String
+        let deleteConfirmTitle = options["deleteConfirmTitle"] as? String
+        let deleteConfirmMessage = options["deleteConfirmMessage"] as? String
+        let deleteConfirmGroupMessage = options["deleteConfirmGroupMessage"] as? String
+        let deleteButtonText = options["deleteButtonText"] as? String
         
         var sourceBackgroundColor: UIColor = .clear
         if let bgString = options["sourceBackgroundColorString"] as? String {
@@ -226,6 +238,16 @@ class RNTurboImagePicker: RCTEventEmitter {
             if let hex = themeColorHex, let color = UIColor(hexString: hex) {
                 viewerVC.themeColor = color
             }
+            viewerVC.showActionButtons = showActionButtons
+            if let saveAllText = saveAllText { viewerVC.saveAllText = saveAllText }
+            if let saveOneText = saveOneText { viewerVC.saveOneText = saveOneText }
+            if let shareAllText = shareAllText { viewerVC.shareAllText = shareAllText }
+            if let shareOneText = shareOneText { viewerVC.shareOneText = shareOneText }
+            if let actionCancelText = actionCancelText { viewerVC.actionCancelText = actionCancelText }
+            if let deleteConfirmTitle = deleteConfirmTitle { viewerVC.deleteConfirmTitle = deleteConfirmTitle }
+            viewerVC.deleteConfirmMessage = deleteConfirmMessage
+            viewerVC.deleteConfirmGroupMessage = deleteConfirmGroupMessage
+            if let deleteButtonText = deleteButtonText { viewerVC.deleteButtonText = deleteButtonText }
             
             self.zoomAnimator.animationType = animationType
             self.zoomAnimator.closeAnimationType = closeAnimationType
@@ -260,6 +282,14 @@ class RNTurboImagePicker: RCTEventEmitter {
             // 뷰어가 닫히기 시작할 때 이벤트를 보내서 JS가 제때 구독을 정리하도록 합니다.
             viewerVC.onViewerWillClose = { [weak self] () -> Void in
                 self?.sendEvent(withName: "onViewerWillClose", body: nil)
+            }
+            viewerVC.onImageDeleted = { [weak self] (index: Int, url: String) -> Void in
+                guard let self = self else { return }
+                let eventBody: [String: Any] = ["index": index, "url": url]
+                self.sendEvent(withName: "onImageDeleted", body: eventBody)
+            }
+            viewerVC.onWillDismissForDelete = { [weak self] () -> Void in
+                self?.zoomAnimator.fadeOutOnDismiss = true
             }
             
             let resolveResult: [String: Any] = ["success": true]

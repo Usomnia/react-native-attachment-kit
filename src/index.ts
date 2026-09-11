@@ -150,6 +150,15 @@ const TurboImagePicker: RNTurboImagePicker = {
     let subscriptionViewerWillClose: any = null
     let deviceSubscriptionViewerWillClose: any = null
 
+    let subscriptionImageDeleted: any = null
+    if (options.onImageDeleted) {
+      subscriptionImageDeleted = eventEmitter.addListener("onImageDeleted", (event: any) => {
+        if (options.onImageDeleted && event && typeof event.index === 'number') {
+          options.onImageDeleted({ index: event.index, url: event.url })
+        }
+      })
+    }
+
     if (options.onViewerWillClose) {
       const closeHandler = () => {
         if (options.onViewerWillClose) {
@@ -167,6 +176,9 @@ const TurboImagePicker: RNTurboImagePicker = {
         if (deviceSubscriptionViewerWillClose) {
           deviceSubscriptionViewerWillClose.remove()
         }
+        if (subscriptionImageDeleted) {
+          subscriptionImageDeleted.remove()
+        }
       };
 
       subscriptionViewerWillClose = eventEmitter.addListener("onViewerWillClose", closeHandler);
@@ -178,7 +190,7 @@ const TurboImagePicker: RNTurboImagePicker = {
     }
 
     try {
-      const { onPageSelected, onViewerWillClose, onViewerOpened, ...restOptions } = options
+      const { onPageSelected, onViewerWillClose, onViewerOpened, onImageDeleted, ...restOptions } = options
       const mergedOptions = {
         themeColor: _defaultThemeColor,
         languageCode: _defaultLanguageCode,

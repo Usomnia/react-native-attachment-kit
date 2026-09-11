@@ -84,6 +84,21 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
         }
     }
 
+    // 이미지 뷰어 상단바의 삭제를 사용자가 확정했을 때(ImageViewerOverlayView.handleDeleteTapped).
+    // iOS의 "onImageDeleted" 이벤트와 동일한 body(index, url)로 JS에 알립니다 - 실제 메시지 삭제는 RN이 담당.
+    private val imageDeletedReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
+            if (intent?.action == "com.rnturboimagepicker.IMAGE_DELETED") {
+                val params = Arguments.createMap()
+                params.putInt("index", intent.getIntExtra("index", 0))
+                params.putString("url", intent.getStringExtra("url") ?: "")
+                reactApplicationContext
+                    .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                    .emit("onImageDeleted", params)
+            }
+        }
+    }
+
     // 열기 애니메이션이 끝난 시점을 JS에 알리는 이벤트 (배경 스크롤 보정 타이밍용).
     private val viewerOpenedReceiver = object : android.content.BroadcastReceiver() {
         override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
@@ -119,6 +134,8 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
             .registerReceiver(viewerOpenedReceiver, android.content.IntentFilter("com.rnturboimagepicker.VIEWER_OPENED"))
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .registerReceiver(viewerWillCloseReceiver, android.content.IntentFilter("com.rnturboimagepicker.VIEWER_WILL_CLOSE"))
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
+            .registerReceiver(imageDeletedReceiver, android.content.IntentFilter("com.rnturboimagepicker.IMAGE_DELETED"))
     }
 
     override fun updateSourceRect(options: ReadableMap, promise: Promise) {
@@ -242,6 +259,9 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
         } else {
             "en"
         }
+        // 편집기/크롭 등 다른 화면들은 TurboImagePickerConfig.languageCode(전역)로 로케일을 잡는데,
+        // 그동안 JS가 넘긴 languageCode를 여기에 반영하는 코드가 없어서 항상 기본값 "en"이었습니다.
+        TurboImagePickerConfig.languageCode = languageCode
         
         val themeColor = if (options.hasKey("themeColor")) {
             options.getString("themeColor")
@@ -409,6 +429,13 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
         val themeColor = if (options.hasKey("themeColor")) options.getString("themeColor") else "#FF6B35"
         val title = if (options.hasKey("title")) options.getString("title") else null
         val animationType = if (options.hasKey("animationType")) options.getString("animationType") else null
+        // ⚠️ 뷰어가 항상 영어로만 나오던 원인: JS는 init()에서 설정한 기본 언어를 openViewer 옵션의
+        // languageCode로 매번 같이 넘기는데, 안드로이드 쪽에서는 그 값을 한 번도 읽지 않았고
+        // ImageViewerOverlayView는 TurboImagePickerConfig.attachBaseContext()(전역 languageCode,
+        // 기본값 "en")로 로케일을 강제하고 있었습니다. 여기서 반영해야 뷰어의 모든 문구가
+        // 설정된 언어를 따릅니다.
+        val viewerLanguageCode = if (options.hasKey("languageCode")) (options.getString("languageCode") ?: "en") else "en"
+        TurboImagePickerConfig.languageCode = viewerLanguageCode
 
         var startX = -1f
         var startY = -1f
@@ -479,6 +506,17 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
                                 placeholders.add(placeholderArray.getString(i) ?: "")
                             }
                             putStringArrayList("placeholderImages", placeholders)
+                        }
+                    }
+                    // 상단바 저장/공유/삭제 버튼과 그 문구들 (iOS와 동일한 옵션 키). 문구를 안 넘기면
+                    // 네이티브 쪽 로케일 리소스(values-ko/ja/zh, 그 외 en)가 자동 적용됩니다.
+                    putBoolean("showActionButtons", !options.hasKey("showActionButtons") || options.getBoolean("showActionButtons"))
+                    for (key in listOf(
+                        "saveAllText", "saveOneText", "shareAllText", "shareOneText", "actionCancelText",
+                        "deleteConfirmTitle", "deleteConfirmMessage", "deleteConfirmGroupMessage", "deleteButtonText"
+                    )) {
+                        if (options.hasKey(key)) {
+                            options.getString(key)?.let { putString(key, it) }
                         }
                     }
                 }
@@ -927,6 +965,8 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
             .unregisterReceiver(viewerOpenedReceiver)
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .unregisterReceiver(viewerWillCloseReceiver)
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
+            .unregisterReceiver(imageDeletedReceiver)
     }
 }
 

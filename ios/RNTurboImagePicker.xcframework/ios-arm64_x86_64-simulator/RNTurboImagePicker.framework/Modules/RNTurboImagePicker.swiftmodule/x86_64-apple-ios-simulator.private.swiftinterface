@@ -244,6 +244,18 @@ extension RNTurboImagePicker.GalleryBaseViewController : UIKit.UIAdaptivePresent
   @_Concurrency.MainActor @preconcurrency public var languageCode: Swift.String
   @_Concurrency.MainActor @preconcurrency public var viewerTitle: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var placeholderImages: [Swift.String]?
+  @_Concurrency.MainActor @preconcurrency public var showActionButtons: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var saveAllText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var saveOneText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var shareAllText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var shareOneText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var actionCancelText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var deleteConfirmTitle: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var deleteConfirmMessage: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var deleteConfirmGroupMessage: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var deleteButtonText: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public var onImageDeleted: ((Swift.Int, Swift.String) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onWillDismissForDelete: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public static func isImageCached(for urlString: Swift.String) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency public static func prefetchImage(from urlString: Swift.String, completion: @escaping (UIKit.UIImage?) -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public init(imageUrls: [Swift.String], initialIndex: Swift.Int)
@@ -298,6 +310,7 @@ public struct Localizer {
   @_Concurrency.MainActor @preconcurrency public var sourceBorderRadius: CoreFoundation.CGFloat
   @_Concurrency.MainActor @preconcurrency public var sourceBorderCorners: QuartzCore.CACornerMask
   @_Concurrency.MainActor @preconcurrency public var sourceBackgroundColor: UIKit.UIColor
+  @_Concurrency.MainActor @preconcurrency public var fadeOutOnDismiss: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public func updateMaskView()
   @_Concurrency.MainActor @preconcurrency public var openDuration: Swift.Double
   @_Concurrency.MainActor @preconcurrency public var closeDuration: Swift.Double

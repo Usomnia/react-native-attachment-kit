@@ -18608,168 +18608,168 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 48234,
+      "offset": 48566,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 48337,
+      "offset": 48669,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 71492,
+      "offset": 71824,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "Dictionary",
-      "offset": 95728,
+      "offset": 96060,
       "length": 331,
       "value": "[(\"ko\", \"ko_KR\"), (\"ja\", \"ja_JP\"), (\"zh\", \"zh_CN\"), (\"de\", \"de_DE\"), (\"es\", \"es_ES\"), (\"fr\", \"fr_FR\"), (\"hi\", \"hi_IN\"), (\"id\", \"id_ID\"), (\"it\", \"it_IT\"), (\"ms\", \"ms_MY\"), (\"nl\", \"nl_NL\"), (\"pl\", \"pl_PL\"), (\"pt\", \"pt_PT\"), (\"ru\", \"ru_RU\"), (\"th\", \"th_TH\"), (\"tr\", \"tr_TR\"), (\"vi\", \"vi_VN\"), (\"da\", \"da_DK\"), (\"en\", \"en_US\")]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "Dictionary",
-      "offset": 96118,
+      "offset": 96450,
       "length": 137,
       "value": "[(\"ko\", \"yyyy년 M월\"), (\"ja\", \"yyyy年M月\"), (\"zh\", \"yyyy年M月\")]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 106489,
+      "offset": 106821,
       "length": 3,
       "value": "0.4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 106515,
+      "offset": 106847,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 109170,
+      "offset": 109502,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 109792,
+      "offset": 110124,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 111947,
+      "offset": 112279,
       "length": 3,
       "value": "0.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 111989,
+      "offset": 112321,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 112380,
+      "offset": 112712,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 113414,
+      "offset": 113746,
       "length": 3,
       "value": "0.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 114520,
+      "offset": 114852,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 114546,
+      "offset": 114878,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 117323,
+      "offset": 117655,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 117369,
+      "offset": 117701,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 117419,
+      "offset": 117751,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 117465,
+      "offset": 117797,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 117552,
+      "offset": 117884,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 117608,
+      "offset": 117940,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 117661,
+      "offset": 117993,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 120414,
+      "offset": 120746,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 137932,
+      "offset": 138264,
       "length": 5,
       "value": "0.967"
     },
@@ -23249,28 +23249,28 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController+CollectionView.swift",
       "kind": "IntegerLiteral",
-      "offset": 39445,
+      "offset": 40143,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController+CollectionView.swift",
       "kind": "IntegerLiteral",
-      "offset": 39485,
+      "offset": 40183,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController+CollectionView.swift",
       "kind": "Array",
-      "offset": 39552,
+      "offset": 40250,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/GalleryViewController+CollectionView.swift",
       "kind": "IntegerLiteral",
-      "offset": 39596,
+      "offset": 40294,
       "length": 1,
       "value": "0"
     },
@@ -23641,238 +23641,238 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 32131,
+      "offset": 32863,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 51437,
+      "offset": 56506,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 51526,
+      "offset": 56595,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 51570,
+      "offset": 56639,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 51889,
+      "offset": 56958,
       "length": 4,
       "value": "0.08"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 51902,
+      "offset": 56971,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 51924,
+      "offset": 56993,
       "length": 3,
       "value": "0.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 51936,
+      "offset": 57005,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 52064,
+      "offset": 57133,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 52115,
+      "offset": 57184,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 52349,
+      "offset": 57418,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52399,
+      "offset": 57468,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52458,
+      "offset": 57527,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 52461,
+      "offset": 57530,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52475,
+      "offset": 57544,
       "length": 3,
       "value": "185"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 52479,
+      "offset": 57548,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52492,
+      "offset": 57561,
       "length": 3,
       "value": "129"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 52496,
+      "offset": 57565,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 52510,
+      "offset": 57579,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52568,
+      "offset": 57637,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 52605,
+      "offset": 57674,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52790,
+      "offset": 57859,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52887,
+      "offset": 57956,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 52986,
+      "offset": 58055,
       "length": 2,
       "value": "-2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 53082,
+      "offset": 58151,
       "length": 2,
       "value": "-2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57098,
+      "offset": 62167,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 57101,
+      "offset": 62170,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57115,
+      "offset": 62184,
       "length": 3,
       "value": "185"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 57119,
+      "offset": 62188,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57132,
+      "offset": 62201,
       "length": 3,
       "value": "129"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 57136,
+      "offset": 62205,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 57150,
+      "offset": 62219,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 57750,
+      "offset": 62819,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 63944,
+      "offset": 69013,
       "length": 5,
       "value": "false"
     },
@@ -23908,8 +23908,8 @@
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/Localizer.swift",
       "kind": "Dictionary",
       "offset": 111,
-      "length": 10050,
-      "value": "[(\"ko\", [(\"cancel\", \"취소\"), (\"send\", \"전송\"), (\"done\", \"완료\"), (\"all_photos\", \"모든 사진\"), (\"selected\", \"선택됨\"), (\"recents\", \"최근 항목\"), (\"confirm\", \"확인\"), (\"enter_text\", \"텍스트를 입력해 주세요\"), (\"text\", \"텍스트\"), (\"delete_edits_title\", \"편집 취소\"), (\"delete_edits_message\", \"편집을 삭제 하시겠습니까?\"), (\"yes\", \"예\"), (\"no\", \"아니오\"), (\"delete\", \"삭제\"), (\"save_all_photos\", \"묶음사진 전체 저장\"), (\"save_this_photo\", \"이 사진만 저장\"), (\"share_all_photos\", \"묶음사진 전체 공유\"), (\"share_this_photo\", \"이 사진만 공유\"), (\"delete_photo_title\", \"사진을 삭제할까요?\"), (\"delete_photo_group_message\", \"여러 장이 묶인 사진이에요. 삭제하면 전체가 함께 삭제됩니다.\"), (\"album_recents\", \"최근 항목\"), (\"album_favorites\", \"즐겨찾기\"), (\"album_selfies\", \"셀피\"), (\"album_live_photos\", \"Live Photo\"), (\"album_panoramas\", \"파노라마\"), (\"album_timelapses\", \"타임랩스\"), (\"album_slow_mo\", \"슬로모션\"), (\"album_videos\", \"비디오\"), (\"album_screenshots\", \"스크린샷\"), (\"album_recently_added\", \"최근 추가됨\"), (\"album_bursts\", \"연사\"), (\"album_portrait\", \"인물 사진\"), (\"album_default\", \"앨범\"), (\"crop_freeform\", \"자유롭게\"), (\"effect\", \"효과\"), (\"filter_original\", \"원본\"), (\"filter_soft\", \"부드러운\"), (\"filter_clean\", \"깨끗한\"), (\"filter_winter\", \"그 겨울\"), (\"filter_warm\", \"따스한\"), (\"filter_shining\", \"빛나는\"), (\"filter_mono\", \"흑백\"), (\"filter_vintage\", \"빈티지\"), (\"filter_fade\", \"페이드\"), (\"filter_dramatic\", \"극적인\"), (\"filter_fresh\", \"싱그러운\"), (\"filter_vibrant\", \"생동감\"), (\"filter_cinematic\", \"영화같은\"), (\"filter_instant\", \"아날로그\"), (\"filter_noir\", \"누아르\"), (\"filter_process\", \"프로세스\"), (\"filter_tonal\", \"토널\"), (\"filter_transfer\", \"트랜스퍼\"), (\"filter_chrome\", \"크롬\"), (\"filter_vignette\", \"비네팅\"), (\"editor_apply\", \"적용\")]), (\"en\", [(\"cancel\", \"Cancel\"), (\"send\", \"Send\"), (\"done\", \"Done\"), (\"all_photos\", \"All Photos\"), (\"selected\", \"Selected\"), (\"recents\", \"Recents\"), (\"confirm\", \"Confirm\"), (\"enter_text\", \"Enter text\"), (\"text\", \"Text\"), (\"delete_edits_title\", \"Cancel Edit\"), (\"delete_edits_message\", \"Are you sure you want to delete the edits?\"), (\"yes\", \"Yes\"), (\"no\", \"No\"), (\"delete\", \"Delete\"), (\"save_all_photos\", \"Save All Photos\"), (\"save_this_photo\", \"Save This Photo Only\"), (\"share_all_photos\", \"Share All Photos\"), (\"share_this_photo\", \"Share This Photo Only\"), (\"delete_photo_title\", \"Delete this photo?\"), (\"delete_photo_group_message\", \"This is a group of photos. Deleting will remove all of them.\"), (\"album_recents\", \"Recents\"), (\"album_favorites\", \"Favorites\"), (\"album_selfies\", \"Selfies\"), (\"album_live_photos\", \"Live Photos\"), (\"album_panoramas\", \"Panoramas\"), (\"album_timelapses\", \"Timelapses\"), (\"album_slow_mo\", \"Slow Motion\"), (\"album_videos\", \"Videos\"), (\"album_screenshots\", \"Screenshots\"), (\"album_recently_added\", \"Recently Added\"), (\"album_bursts\", \"Bursts\"), (\"album_portrait\", \"Portrait Photos\"), (\"album_default\", \"Album\"), (\"crop_freeform\", \"Free\"), (\"effect\", \"Effect\"), (\"filter_original\", \"Original\"), (\"filter_soft\", \"Soft\"), (\"filter_clean\", \"Clean\"), (\"filter_winter\", \"Winter\"), (\"filter_warm\", \"Warm\"), (\"filter_shining\", \"Shining\"), (\"filter_mono\", \"Mono\"), (\"filter_vintage\", \"Vintage\"), (\"filter_fade\", \"Fade\"), (\"filter_dramatic\", \"Dramatic\"), (\"filter_fresh\", \"Fresh\"), (\"filter_vibrant\", \"Vibrant\"), (\"filter_cinematic\", \"Cinematic\"), (\"filter_instant\", \"Instant\"), (\"filter_noir\", \"Noir\"), (\"filter_process\", \"Process\"), (\"filter_tonal\", \"Tonal\"), (\"filter_transfer\", \"Transfer\"), (\"filter_chrome\", \"Chrome\"), (\"filter_vignette\", \"Vignette\"), (\"editor_apply\", \"Apply\")]), (\"ja\", [(\"cancel\", \"キャンセル\"), (\"send\", \"送信\"), (\"done\", \"完了\"), (\"all_photos\", \"すべての写真\"), (\"selected\", \"選択済み\"), (\"recents\", \"最近の項目\"), (\"confirm\", \"確認\"), (\"enter_text\", \"テキストを入力してください\"), (\"text\", \"テキスト\"), (\"delete_edits_title\", \"編集をキャンセル\"), (\"delete_edits_message\", \"編集を削除しますか？\"), (\"yes\", \"はい\"), (\"no\", \"いいえ\"), (\"delete\", \"削除\"), (\"save_all_photos\", \"すべての写真を保存\"), (\"save_this_photo\", \"この写真のみ保存\"), (\"share_all_photos\", \"すべての写真を共有\"), (\"share_this_photo\", \"この写真のみ共有\"), (\"delete_photo_title\", \"この写真を削除しますか?\"), (\"delete_photo_group_message\", \"複数の写真がまとめられています。削除するとすべて削除されます。\"), (\"album_recents\", \"最近の項目\"), (\"album_favorites\", \"お気に入り\"), (\"album_selfies\", \"セルフィー\"), (\"album_live_photos\", \"Live Photos\"), (\"album_panoramas\", \"パノラマ\"), (\"album_timelapses\", \"タイムラプス\"), (\"album_slow_mo\", \"スローモーション\"), (\"album_videos\", \"ビデオ\"), (\"album_screenshots\", \"スクリーンショット\"), (\"album_recently_added\", \"最近追加した項目\"), (\"album_bursts\", \"バースト\"), (\"album_portrait\", \"ポートレート\"), (\"album_default\", \"アルバム\"), (\"effect\", \"効果\"), (\"filter_original\", \"オリジナル\"), (\"filter_soft\", \"ソフト\"), (\"filter_clean\", \"クリーン\"), (\"filter_winter\", \"冬\"), (\"filter_warm\", \"暖かい\"), (\"filter_shining\", \"輝く\"), (\"filter_mono\", \"モノクロ\"), (\"filter_vintage\", \"ヴィンテージ\"), (\"filter_fade\", \"フェード\"), (\"filter_dramatic\", \"ドラマチック\"), (\"filter_fresh\", \"フレッシュ\"), (\"filter_vibrant\", \"鮮やか\"), (\"filter_cinematic\", \"シネマティック\"), (\"filter_instant\", \"インスタント\"), (\"filter_noir\", \"ノワール\"), (\"filter_process\", \"プロセス\"), (\"filter_tonal\", \"トナル\"), (\"filter_transfer\", \"トランスファー\"), (\"filter_chrome\", \"クローム\"), (\"filter_vignette\", \"ビネット\"), (\"editor_apply\", \"適用\")]), (\"zh\", [(\"cancel\", \"取消\"), (\"send\", \"发送\"), (\"done\", \"完成\"), (\"all_photos\", \"所有照片\"), (\"selected\", \"已选择\"), (\"recents\", \"最近项目\"), (\"confirm\", \"确认\"), (\"enter_text\", \"请输入文本\"), (\"text\", \"文字\"), (\"delete_edits_title\", \"取消编辑\"), (\"delete_edits_message\", \"确定要删除编辑吗？\"), (\"yes\", \"是\"), (\"no\", \"否\"), (\"delete\", \"删除\"), (\"save_all_photos\", \"保存全部照片\"), (\"save_this_photo\", \"仅保存这张照片\"), (\"share_all_photos\", \"分享全部照片\"), (\"share_this_photo\", \"仅分享这张照片\"), (\"delete_photo_title\", \"要删除这张照片吗?\"), (\"delete_photo_group_message\", \"这是一组照片，删除后将全部一起删除。\"), (\"album_recents\", \"最近项目\"), (\"album_favorites\", \"个人收藏\"), (\"album_selfies\", \"自拍\"), (\"album_live_photos\", \"实况照片\"), (\"album_panoramas\", \"全景照片\"), (\"album_timelapses\", \"延时摄影\"), (\"album_slow_mo\", \"慢动作\"), (\"album_videos\", \"视频\"), (\"album_screenshots\", \"截屏\"), (\"album_recently_added\", \"最近添加\"), (\"album_bursts\", \"连拍快照\"), (\"album_portrait\", \"人像\"), (\"album_default\", \"相簿\"), (\"effect\", \"效果\"), (\"filter_original\", \"原图\"), (\"filter_soft\", \"柔和\"), (\"filter_clean\", \"清晰\"), (\"filter_winter\", \"冬日\"), (\"filter_warm\", \"温暖\"), (\"filter_shining\", \"闪耀\"), (\"filter_mono\", \"黑白\"), (\"filter_vintage\", \"复古\"), (\"filter_fade\", \"褪色\"), (\"filter_dramatic\", \"戏剧\"), (\"filter_fresh\", \"清新\"), (\"filter_vibrant\", \"生动\"), (\"filter_cinematic\", \"电影\"), (\"filter_instant\", \"拍立得\"), (\"filter_noir\", \"黑白电影\"), (\"filter_process\", \"冲印\"), (\"filter_tonal\", \"色调\"), (\"filter_transfer\", \"岁月\"), (\"filter_chrome\", \"铬黄\"), (\"filter_vignette\", \"晕影\"), (\"editor_apply\", \"应用\")])]"
+      "length": 10515,
+      "value": "[(\"ko\", [(\"cancel\", \"취소\"), (\"send\", \"전송\"), (\"done\", \"완료\"), (\"all_photos\", \"모든 사진\"), (\"selected\", \"선택됨\"), (\"recents\", \"최근 항목\"), (\"confirm\", \"확인\"), (\"enter_text\", \"텍스트를 입력해 주세요\"), (\"text\", \"텍스트\"), (\"delete_edits_title\", \"편집 취소\"), (\"delete_edits_message\", \"편집을 삭제 하시겠습니까?\"), (\"yes\", \"예\"), (\"no\", \"아니오\"), (\"delete\", \"삭제\"), (\"save_all_photos\", \"묶음사진 전체 저장\"), (\"save_this_photo\", \"이 사진만 저장\"), (\"share_all_photos\", \"묶음사진 전체 공유\"), (\"share_this_photo\", \"이 사진만 공유\"), (\"delete_photo_title\", \"사진을 삭제할까요?\"), (\"delete_photo_group_message\", \"여러 장이 묶인 사진이에요. 삭제하면 전체가 함께 삭제됩니다.\"), (\"photo_saved\", \"사진이 저장되었습니다\"), (\"photo_save_failed\", \"사진 저장에 실패했습니다\"), (\"album_recents\", \"최근 항목\"), (\"album_favorites\", \"즐겨찾기\"), (\"album_selfies\", \"셀피\"), (\"album_live_photos\", \"Live Photo\"), (\"album_panoramas\", \"파노라마\"), (\"album_timelapses\", \"타임랩스\"), (\"album_slow_mo\", \"슬로모션\"), (\"album_videos\", \"비디오\"), (\"album_screenshots\", \"스크린샷\"), (\"album_recently_added\", \"최근 추가됨\"), (\"album_bursts\", \"연사\"), (\"album_portrait\", \"인물 사진\"), (\"album_default\", \"앨범\"), (\"crop_freeform\", \"자유롭게\"), (\"effect\", \"효과\"), (\"filter_original\", \"원본\"), (\"filter_soft\", \"부드러운\"), (\"filter_clean\", \"깨끗한\"), (\"filter_winter\", \"그 겨울\"), (\"filter_warm\", \"따스한\"), (\"filter_shining\", \"빛나는\"), (\"filter_mono\", \"흑백\"), (\"filter_vintage\", \"빈티지\"), (\"filter_fade\", \"페이드\"), (\"filter_dramatic\", \"극적인\"), (\"filter_fresh\", \"싱그러운\"), (\"filter_vibrant\", \"생동감\"), (\"filter_cinematic\", \"영화같은\"), (\"filter_instant\", \"아날로그\"), (\"filter_noir\", \"누아르\"), (\"filter_process\", \"프로세스\"), (\"filter_tonal\", \"토널\"), (\"filter_transfer\", \"트랜스퍼\"), (\"filter_chrome\", \"크롬\"), (\"filter_vignette\", \"비네팅\"), (\"editor_apply\", \"적용\")]), (\"en\", [(\"cancel\", \"Cancel\"), (\"send\", \"Send\"), (\"done\", \"Done\"), (\"all_photos\", \"All Photos\"), (\"selected\", \"Selected\"), (\"recents\", \"Recents\"), (\"confirm\", \"Confirm\"), (\"enter_text\", \"Enter text\"), (\"text\", \"Text\"), (\"delete_edits_title\", \"Cancel Edit\"), (\"delete_edits_message\", \"Are you sure you want to delete the edits?\"), (\"yes\", \"Yes\"), (\"no\", \"No\"), (\"delete\", \"Delete\"), (\"save_all_photos\", \"Save All Photos\"), (\"save_this_photo\", \"Save This Photo Only\"), (\"share_all_photos\", \"Share All Photos\"), (\"share_this_photo\", \"Share This Photo Only\"), (\"delete_photo_title\", \"Delete this photo?\"), (\"delete_photo_group_message\", \"This is a group of photos. Deleting will remove all of them.\"), (\"photo_saved\", \"Photo saved\"), (\"photo_save_failed\", \"Failed to save photo\"), (\"album_recents\", \"Recents\"), (\"album_favorites\", \"Favorites\"), (\"album_selfies\", \"Selfies\"), (\"album_live_photos\", \"Live Photos\"), (\"album_panoramas\", \"Panoramas\"), (\"album_timelapses\", \"Timelapses\"), (\"album_slow_mo\", \"Slow Motion\"), (\"album_videos\", \"Videos\"), (\"album_screenshots\", \"Screenshots\"), (\"album_recently_added\", \"Recently Added\"), (\"album_bursts\", \"Bursts\"), (\"album_portrait\", \"Portrait Photos\"), (\"album_default\", \"Album\"), (\"crop_freeform\", \"Free\"), (\"effect\", \"Effect\"), (\"filter_original\", \"Original\"), (\"filter_soft\", \"Soft\"), (\"filter_clean\", \"Clean\"), (\"filter_winter\", \"Winter\"), (\"filter_warm\", \"Warm\"), (\"filter_shining\", \"Shining\"), (\"filter_mono\", \"Mono\"), (\"filter_vintage\", \"Vintage\"), (\"filter_fade\", \"Fade\"), (\"filter_dramatic\", \"Dramatic\"), (\"filter_fresh\", \"Fresh\"), (\"filter_vibrant\", \"Vibrant\"), (\"filter_cinematic\", \"Cinematic\"), (\"filter_instant\", \"Instant\"), (\"filter_noir\", \"Noir\"), (\"filter_process\", \"Process\"), (\"filter_tonal\", \"Tonal\"), (\"filter_transfer\", \"Transfer\"), (\"filter_chrome\", \"Chrome\"), (\"filter_vignette\", \"Vignette\"), (\"editor_apply\", \"Apply\")]), (\"ja\", [(\"cancel\", \"キャンセル\"), (\"send\", \"送信\"), (\"done\", \"完了\"), (\"all_photos\", \"すべての写真\"), (\"selected\", \"選択済み\"), (\"recents\", \"最近の項目\"), (\"confirm\", \"確認\"), (\"enter_text\", \"テキストを入力してください\"), (\"text\", \"テキスト\"), (\"delete_edits_title\", \"編集をキャンセル\"), (\"delete_edits_message\", \"編集を削除しますか？\"), (\"yes\", \"はい\"), (\"no\", \"いいえ\"), (\"delete\", \"削除\"), (\"save_all_photos\", \"すべての写真を保存\"), (\"save_this_photo\", \"この写真のみ保存\"), (\"share_all_photos\", \"すべての写真を共有\"), (\"share_this_photo\", \"この写真のみ共有\"), (\"delete_photo_title\", \"この写真を削除しますか?\"), (\"delete_photo_group_message\", \"複数の写真がまとめられています。削除するとすべて削除されます。\"), (\"photo_saved\", \"写真を保存しました\"), (\"photo_save_failed\", \"写真の保存に失敗しました\"), (\"album_recents\", \"最近の項目\"), (\"album_favorites\", \"お気に入り\"), (\"album_selfies\", \"セルフィー\"), (\"album_live_photos\", \"Live Photos\"), (\"album_panoramas\", \"パノラマ\"), (\"album_timelapses\", \"タイムラプス\"), (\"album_slow_mo\", \"スローモーション\"), (\"album_videos\", \"ビデオ\"), (\"album_screenshots\", \"スクリーンショット\"), (\"album_recently_added\", \"最近追加した項目\"), (\"album_bursts\", \"バースト\"), (\"album_portrait\", \"ポートレート\"), (\"album_default\", \"アルバム\"), (\"effect\", \"効果\"), (\"filter_original\", \"オリジナル\"), (\"filter_soft\", \"ソフト\"), (\"filter_clean\", \"クリーン\"), (\"filter_winter\", \"冬\"), (\"filter_warm\", \"暖かい\"), (\"filter_shining\", \"輝く\"), (\"filter_mono\", \"モノクロ\"), (\"filter_vintage\", \"ヴィンテージ\"), (\"filter_fade\", \"フェード\"), (\"filter_dramatic\", \"ドラマチック\"), (\"filter_fresh\", \"フレッシュ\"), (\"filter_vibrant\", \"鮮やか\"), (\"filter_cinematic\", \"シネマティック\"), (\"filter_instant\", \"インスタント\"), (\"filter_noir\", \"ノワール\"), (\"filter_process\", \"プロセス\"), (\"filter_tonal\", \"トナル\"), (\"filter_transfer\", \"トランスファー\"), (\"filter_chrome\", \"クローム\"), (\"filter_vignette\", \"ビネット\"), (\"editor_apply\", \"適用\")]), (\"zh\", [(\"cancel\", \"取消\"), (\"send\", \"发送\"), (\"done\", \"完成\"), (\"all_photos\", \"所有照片\"), (\"selected\", \"已选择\"), (\"recents\", \"最近项目\"), (\"confirm\", \"确认\"), (\"enter_text\", \"请输入文本\"), (\"text\", \"文字\"), (\"delete_edits_title\", \"取消编辑\"), (\"delete_edits_message\", \"确定要删除编辑吗？\"), (\"yes\", \"是\"), (\"no\", \"否\"), (\"delete\", \"删除\"), (\"save_all_photos\", \"保存全部照片\"), (\"save_this_photo\", \"仅保存这张照片\"), (\"share_all_photos\", \"分享全部照片\"), (\"share_this_photo\", \"仅分享这张照片\"), (\"delete_photo_title\", \"要删除这张照片吗?\"), (\"delete_photo_group_message\", \"这是一组照片，删除后将全部一起删除。\"), (\"photo_saved\", \"照片已保存\"), (\"photo_save_failed\", \"保存照片失败\"), (\"album_recents\", \"最近项目\"), (\"album_favorites\", \"个人收藏\"), (\"album_selfies\", \"自拍\"), (\"album_live_photos\", \"实况照片\"), (\"album_panoramas\", \"全景照片\"), (\"album_timelapses\", \"延时摄影\"), (\"album_slow_mo\", \"慢动作\"), (\"album_videos\", \"视频\"), (\"album_screenshots\", \"截屏\"), (\"album_recently_added\", \"最近添加\"), (\"album_bursts\", \"连拍快照\"), (\"album_portrait\", \"人像\"), (\"album_default\", \"相簿\"), (\"effect\", \"效果\"), (\"filter_original\", \"原图\"), (\"filter_soft\", \"柔和\"), (\"filter_clean\", \"清晰\"), (\"filter_winter\", \"冬日\"), (\"filter_warm\", \"温暖\"), (\"filter_shining\", \"闪耀\"), (\"filter_mono\", \"黑白\"), (\"filter_vintage\", \"复古\"), (\"filter_fade\", \"褪色\"), (\"filter_dramatic\", \"戏剧\"), (\"filter_fresh\", \"清新\"), (\"filter_vibrant\", \"生动\"), (\"filter_cinematic\", \"电影\"), (\"filter_instant\", \"拍立得\"), (\"filter_noir\", \"黑白电影\"), (\"filter_process\", \"冲印\"), (\"filter_tonal\", \"色调\"), (\"filter_transfer\", \"岁月\"), (\"filter_chrome\", \"铬黄\"), (\"filter_vignette\", \"晕影\"), (\"editor_apply\", \"应用\")])]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNTurboImagePicker\/RNTurboImagePicker\/ios\/RNTurboImagePicker\/ImageEditorTransitionAnimator.swift",

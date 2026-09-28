@@ -92,6 +92,8 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
                 val params = Arguments.createMap()
                 params.putInt("index", intent.getIntExtra("index", 0))
                 params.putString("url", intent.getStringExtra("url") ?: "")
+                // patch405: 사용자가 고른 삭제 방식(deleteOptions 의 key). 선택지가 없었으면 생략.
+                intent.getStringExtra("option")?.let { params.putString("option", it) }
                 reactApplicationContext
                     .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
                     .emit("onImageDeleted", params)
@@ -246,8 +248,18 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
             options.getBoolean("autoCloseOnSelect")
         } else false
 
-        val maxSelection = if (autoCloseOnSelect) {
+        // 선택 방식 (selectionMode: 'single' | 'multi', 생략 시 기존 규칙)
+        //  - 'multi' : maxSelection 이 1 이어도 멀티와 똑같이 (autoCloseOnSelect 무시, 1 미만이면 1장)
+        //  - 'single': 기존 단일 동작 (maxSelection 을 1로, autoCloseOnSelect 면 0)
+        //  - 생략     : 기존 그대로 (autoCloseOnSelect → 0, 아니면 maxSelection, 기본 1)
+        val selectionMode = if (options.hasKey("selectionMode")) options.getString("selectionMode")?.lowercase() else null
+        val forceMultiMode = selectionMode == "multi"
+        val maxSelection = if (forceMultiMode) {
+            (if (options.hasKey("maxSelection")) options.getInt("maxSelection") else 1).coerceAtLeast(1)
+        } else if (autoCloseOnSelect) {
             0
+        } else if (selectionMode == "single") {
+            1
         } else if (options.hasKey("maxSelection")) {
             options.getInt("maxSelection")
         } else {
@@ -321,7 +333,8 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
             fragmentActivity.runOnUiThread {
                 try {
                     val bottomSheet = ImagePickerBottomSheet.newInstance(
-                        maxSelection, languageCode, enableEditor, profileMode, maxWidth, maxHeight, themeColor
+                        maxSelection, languageCode, enableEditor, profileMode, maxWidth, maxHeight, themeColor,
+                        forceMultiMode = forceMultiMode
                     )
                     bottomSheet.setOnImagesSelectedListener { uris ->
                         val result = WritableNativeArray()
@@ -425,6 +438,18 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
             images.add(str ?: "")
         }
 
+        // cacheFiles: images 와 같은 순서의 앱 캐시 파일 경로 (null → 빈 문자열). 뷰어 전체(모든 방식)에 적용.
+        val cacheFiles = ArrayList<String>()
+        if (options.hasKey("cacheFiles") && !options.isNull("cacheFiles")) {
+            val arr = options.getArray("cacheFiles")
+            if (arr != null) {
+                for (i in 0 until arr.size()) {
+                    cacheFiles.add(if (arr.isNull(i)) "" else (arr.getString(i) ?: ""))
+                }
+            }
+        }
+        ViewerCacheFiles.register(images, if (cacheFiles.isEmpty()) null else cacheFiles)
+
         val initialIndex = if (options.hasKey("initialIndex")) options.getInt("initialIndex") else 0
         val themeColor = if (options.hasKey("themeColor")) options.getString("themeColor") else "#FF6B35"
         val title = if (options.hasKey("title")) options.getString("title") else null
@@ -517,6 +542,29 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
                     )) {
                         if (options.hasKey(key)) {
                             options.getString(key)?.let { putString(key, it) }
+                        }
+                    }
+                    // patch405: 삭제 방식 선택지 [{ key, label, destructive }] → 나란한 배열 3개로 전달
+                    if (options.hasKey("deleteOptions") && !options.isNull("deleteOptions")) {
+                        val arr = options.getArray("deleteOptions")
+                        if (arr != null) {
+                            val keys = ArrayList<String>()
+                            val labels = ArrayList<String>()
+                            val destructive = ArrayList<Boolean>()
+                            for (i in 0 until arr.size()) {
+                                val m = arr.getMap(i) ?: continue
+                                val k = if (m.hasKey("key")) m.getString("key") else null
+                                val l = if (m.hasKey("label")) m.getString("label") else null
+                                if (k.isNullOrEmpty() || l.isNullOrEmpty()) continue
+                                keys.add(k)
+                                labels.add(l)
+                                destructive.add(m.hasKey("destructive") && !m.isNull("destructive") && m.getBoolean("destructive"))
+                            }
+                            if (keys.isNotEmpty()) {
+                                putStringArrayList("deleteOptionKeys", keys)
+                                putStringArrayList("deleteOptionLabels", labels)
+                                putBooleanArray("deleteOptionDestructive", destructive.toBooleanArray())
+                            }
                         }
                     }
                 }

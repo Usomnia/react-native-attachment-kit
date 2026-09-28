@@ -1,3 +1,9 @@
+/** 모듈이 번역을 내장한 언어 코드 (ISO 639-1, 59개) */
+export type SupportedLanguageCode = "af" | "ar" | "be" | "bg" | "bn" | "ca" | "cs" | "cy" | "da" | "de" | "el" | "en" | "eo" | "es" | "et" | "fa" | "fi" | "fr" | "ga" | "gl" | "gu" | "he" | "hi" | "hr" | "ht" | "hu" | "id" | "is" | "it" | "ja" | "ka" | "kn" | "ko" | "lt" | "lv" | "mk" | "mr" | "ms" | "mt" | "nl" | "no" | "pl" | "pt" | "ro" | "ru" | "sk" | "sl" | "sq" | "sv" | "sw" | "ta" | "te" | "th" | "tl" | "tr" | "uk" | "ur" | "vi" | "zh"
+
+/** languageCode 옵션 타입 — 지원 코드 자동완성 + 지역 코드가 붙은 값("pt-BR", "zh_Hans")도 허용 */
+export type LanguageCode = SupportedLanguageCode | (string & {})
+
 export interface ImageResult {
   originalUri: string // 원본 URI (ph:// 또는 file://)
   originalFileUri?: string // 원본 해상도의 파일 URI (file://) - 선택적
@@ -30,8 +36,17 @@ export interface GalleryOptions {
   selectedItemsText?: string
   doneButtonText?: string
   recentsAlbumText?: string
-  languageCode?: "da" | "de" | "en" | "es" | "fr" | "hi" | "id" | "it" | "ja" | "ko" | "ms" | "nl" | "pl" | "pt" | "ru" | "th" | "tr" | "vi" | "zh"
+  /** 지원 언어 코드(59개). "pt-BR", "zh-Hant", "iw" 같은 값도 받아서 지원 코드로 정규화하고, 지원하지 않으면 영어(en)로 표시합니다. */
+  languageCode?: LanguageCode
   autoCloseOnSelect?: boolean
+  /**
+   * 선택 방식.
+   * - 'single': 한 장 즉시 선택형 (기존 maxSelection 0/1 동작 — 탭하면 바로 반환, 편집 ON 이면 탭 → 편집 → 전송)
+   * - 'multi' : 체크(번호 배지) → (필요하면 편집) → 완료. maxSelection 이 1 이어도 멀티와 똑같이 동작하고,
+   *             1장일 때 다른 사진을 고르면 기존 선택과 교체됩니다. autoCloseOnSelect 는 무시되며 maxSelection 생략/1 미만이면 1장.
+   * 생략 시 기존 규칙으로 판단: autoCloseOnSelect 또는 maxSelection <= 1 → 단일, 그 외 멀티 (하위 호환)
+   */
+  selectionMode?: "single" | "multi"
   enableEditor?: boolean // 단일 이미지 선택 시 편집기 활성화 여부
   profileMode?: boolean // 1:1 프로필 크롭 모드 활성화 여부
   themeColor?: string // 테마 컬러 지정 (ex: "#FFEB3B")
@@ -45,6 +60,12 @@ export interface GalleryOptions {
 export interface ViewerOptions {
   images: string[]
   placeholderImages?: string[]
+  /**
+   * images 와 같은 순서의 로컬 캐시 파일 경로(절대 경로, file:// 없음). 원격 URL 사진에 대해:
+   * 파일이 있으면 네트워크 없이 그 파일을 그리고, 없으면 내려받은 원본 바이트를 그 경로에 저장합니다.
+   * (앱이 캐시를 한 곳에서 관리하기 위한 옵션 — 항목이 null/빈 문자열이면 해당 사진은 기존 방식)
+   */
+  cacheFiles?: (string | null)[]
   initialIndex?: number
   themeColor?: string // Added themeColor for Android
   title?: string
@@ -68,7 +89,7 @@ export interface ViewerOptions {
   shareOneText?: string
   actionCancelText?: string
   /**
-   * 삭제 확인 알럿 문구 - 넘기지 않으면 languageCode(ko/en/ja/zh, 그 외 언어는 en 폴백)에
+   * 삭제 확인 알럿 문구 - 넘기지 않으면 languageCode(59개 언어 지원, 그 외 언어는 en 폴백)에
    * 맞춰 네이티브 쪽 기본 다국어 문구가 자동으로 적용됩니다.
    */
   deleteConfirmTitle?: string
@@ -81,11 +102,19 @@ export interface ViewerOptions {
   deleteConfirmGroupMessage?: string
   deleteButtonText?: string
   /**
+   * patch405: 삭제 방식 선택지. 넘기면 삭제 확인 팝업에 "삭제" 버튼 하나 대신 이 항목들이
+   * (위에서부터 순서대로) 표시되고, 고른 항목의 key 가 onImageDeleted 의 option 으로 전달됩니다.
+   * 예) [{ key: 'everyone', label: '나와 상대에게서 삭제', destructive: true },
+   *      { key: 'me', label: '나만 삭제', destructive: true }]
+   * 넘기지 않으면 기존처럼 [취소] [삭제] 확인 팝업입니다(option 없음).
+   */
+  deleteOptions?: { key: string; label: string; destructive?: boolean }[]
+  /**
    * 삭제 확인 알럿에서 사용자가 삭제를 눌렀을 때 호출됩니다. 네이티브는 실제 데이터를
    * 지우지 않고(뷰어는 그대로 닫힘) 이 콜백으로만 알리므로, 메시지/사진을 실제로
    * 지우는 처리는 RN 쪽에서 담당해야 합니다.
    */
-  onImageDeleted?: (event: { index: number; url: string }) => void
+  onImageDeleted?: (event: { index: number; url: string; option?: string }) => void
   /**
    * Android only. 열기 애니메이션이 완전히 끝난 시점에 한 번 호출됩니다.
    * 배경(호스트 화면) 스크롤 보정을 이 콜백 안에서 실행하면, 애니메이션 도중에 보정이

@@ -16,6 +16,21 @@ try {
 let _defaultThemeColor = "#10b981";
 let _defaultLanguageCode = "en";
 
+/** 모듈이 번역을 내장한 언어 코드 (ISO 639-1, 59개) */
+export const SUPPORTED_LANGUAGE_CODES: readonly string[] = ["af", "ar", "be", "bg", "bn", "ca", "cs", "cy", "da", "de", "el", "en", "eo", "es", "et", "fa", "fi", "fr", "ga", "gl", "gu", "he", "hi", "hr", "ht", "hu", "id", "is", "it", "ja", "ka", "kn", "ko", "lt", "lv", "mk", "mr", "ms", "mt", "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "vi", "zh"]
+const LANGUAGE_ALIASES: Record<string, string> = { iw: "he", in: "id", nb: "no", nn: "no", fil: "tl" }
+
+/**
+ * "pt-BR", "zh_Hant", "EN", "iw" 같은 값을 모듈 지원 언어 코드로 정규화합니다.
+ * 지원하지 않는 언어면 "en" 을 돌려줍니다.
+ */
+export function normalizeLanguageCode(code?: string | null): string {
+  if (!code) return "en"
+  const base = String(code).trim().toLowerCase().split(/[-_]/)[0]
+  const mapped = LANGUAGE_ALIASES[base] ?? base
+  return SUPPORTED_LANGUAGE_CODES.includes(mapped) ? mapped : "en"
+}
+
 export interface InitOptions {
   languageCode?: string;
   themeColor?: string;
@@ -54,7 +69,7 @@ const TurboImagePicker: RNTurboImagePicker = {
       _defaultThemeColor = options.themeColor;
     }
     if (options?.languageCode) {
-      _defaultLanguageCode = options.languageCode;
+      _defaultLanguageCode = normalizeLanguageCode(options.languageCode);
     }
     if (!RNTurboImagePickerModule) {
       throw new Error(LINKING_ERROR)
@@ -86,6 +101,7 @@ const TurboImagePicker: RNTurboImagePicker = {
         languageCode: _defaultLanguageCode,
         ...restOptions,
       }
+      nativeOptions.languageCode = normalizeLanguageCode(nativeOptions.languageCode)
       const result = await RNTurboImagePickerModule.openGallery(nativeOptions)
       return result
     } finally {
@@ -110,6 +126,7 @@ const TurboImagePicker: RNTurboImagePicker = {
       languageCode: _defaultLanguageCode,
       ...options,
     }
+    mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
     return RNTurboImagePickerModule.openEditor(mergedOptions)
   },
 
@@ -154,7 +171,12 @@ const TurboImagePicker: RNTurboImagePicker = {
     if (options.onImageDeleted) {
       subscriptionImageDeleted = eventEmitter.addListener("onImageDeleted", (event: any) => {
         if (options.onImageDeleted && event && typeof event.index === 'number') {
-          options.onImageDeleted({ index: event.index, url: event.url })
+          // patch405: deleteOptions 중 사용자가 고른 항목의 key (선택지를 안 넘겼으면 undefined)
+          options.onImageDeleted({
+            index: event.index,
+            url: event.url,
+            option: typeof event.option === 'string' && event.option.length > 0 ? event.option : undefined,
+          })
         }
       })
     }
@@ -196,6 +218,7 @@ const TurboImagePicker: RNTurboImagePicker = {
         languageCode: _defaultLanguageCode,
         ...restOptions,
       }
+      mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
       return await RNTurboImagePickerModule.openViewer(mergedOptions)
     } finally {
       // Listeners are now removed inside the onViewerWillClose callback

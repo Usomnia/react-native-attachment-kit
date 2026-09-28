@@ -25,6 +25,7 @@ import _SwiftConcurrencyShims
   @_Concurrency.MainActor @preconcurrency public var editingAsset: Photos.PHAsset?
   @_Concurrency.MainActor @preconcurrency public var profileCropTransitionDelegate: (any UIKit.UIViewControllerTransitioningDelegate)?
   @_Concurrency.MainActor @preconcurrency public var maxSelection: Swift.Int
+  @_Concurrency.MainActor @preconcurrency public var forceMultiMode: Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor @preconcurrency public var maxWidth: Swift.Int
@@ -60,6 +61,9 @@ import _SwiftConcurrencyShims
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency public func forceCleanupBeforeDismiss()
+  @_Concurrency.MainActor @preconcurrency public func refreshThumbnails(for changed: [Photos.PHAsset])
+  @_Concurrency.MainActor @preconcurrency public func sendSelectionFromEditor()
+  @_Concurrency.MainActor @preconcurrency public var hasReturnedImages: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public func updateNavigationBarForSelection()
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func didReceiveMemoryWarning()
   @objc deinit
@@ -97,9 +101,11 @@ public struct FilterState {
   @_Concurrency.MainActor @preconcurrency public var disableCrop: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var selectedAssets: [Photos.PHAsset]
   @_Concurrency.MainActor @preconcurrency public var onSelectionToggled: ((Photos.PHAsset, Swift.Bool) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var replaceSelectionWhenFull: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var onEditDeleted: ((Photos.PHAsset) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onConfirm: ((Photos.PHAsset?, UIKit.UIImage?, RNTurboImagePicker.FilterState, Swift.String) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onConfirmMulti: (([Photos.PHAsset], [Photos.PHAsset : UIKit.UIImage], [Photos.PHAsset : RNTurboImagePicker.FilterState]) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onSendMulti: (([Photos.PHAsset], [Photos.PHAsset : UIKit.UIImage], [Photos.PHAsset : RNTurboImagePicker.FilterState]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCancel: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var themeColor: UIKit.UIColor?
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
@@ -150,6 +156,9 @@ public struct Album {
   public func fetchInitialPhotos(completion: @escaping ([Photos.PHAsset]) -> Swift.Void)
   public func fetchAllPhotosMetadata(skip: Swift.Int = 0, completion: @escaping ([Photos.PHAsset]) -> Swift.Void)
   public func fetchAllPhotos(completion: @escaping ([Photos.PHAsset]) -> Swift.Void)
+  public var thumbnailImageManager: Photos.PHImageManager {
+    get
+  }
   public func requestThumbnail(for asset: Photos.PHAsset, targetSize: CoreFoundation.CGSize, completion: @escaping (UIKit.UIImage?) -> Swift.Void) -> Photos.PHImageRequestID
   public func requestFullImage(for asset: Photos.PHAsset, targetSize: CoreFoundation.CGSize, progressHandler: ((Swift.Double) -> Swift.Void)? = nil, completion: @escaping (UIKit.UIImage?) -> Swift.Void) -> Photos.PHImageRequestID
   public func startCachingImages(for assets: [Photos.PHAsset], targetSize: CoreFoundation.CGSize)
@@ -244,6 +253,7 @@ extension RNTurboImagePicker.GalleryBaseViewController : UIKit.UIAdaptivePresent
   @_Concurrency.MainActor @preconcurrency public var languageCode: Swift.String
   @_Concurrency.MainActor @preconcurrency public var viewerTitle: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var placeholderImages: [Swift.String]?
+  @_Concurrency.MainActor @preconcurrency public var cacheFiles: [Swift.String]?
   @_Concurrency.MainActor @preconcurrency public var showActionButtons: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var saveAllText: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var saveOneText: Swift.String?
@@ -254,7 +264,14 @@ extension RNTurboImagePicker.GalleryBaseViewController : UIKit.UIAdaptivePresent
   @_Concurrency.MainActor @preconcurrency public var deleteConfirmMessage: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var deleteConfirmGroupMessage: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var deleteButtonText: Swift.String?
-  @_Concurrency.MainActor @preconcurrency public var onImageDeleted: ((Swift.Int, Swift.String) -> Swift.Void)?
+  public struct DeleteOption {
+    public let key: Swift.String
+    public let label: Swift.String
+    public let destructive: Swift.Bool
+    public init(key: Swift.String, label: Swift.String, destructive: Swift.Bool)
+  }
+  @_Concurrency.MainActor @preconcurrency public var deleteOptions: [RNTurboImagePicker.RemoteImageViewerViewController.DeleteOption]
+  @_Concurrency.MainActor @preconcurrency public var onImageDeleted: ((Swift.Int, Swift.String, Swift.String?) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onWillDismissForDelete: (() -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public static func isImageCached(for urlString: Swift.String) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency public static func prefetchImage(from urlString: Swift.String, completion: @escaping (UIKit.UIImage?) -> Swift.Void)
@@ -277,6 +294,8 @@ extension RNTurboImagePicker.RemoteImageViewerViewController : UIKit.UICollectio
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
 }
 public struct Localizer {
+  public static let supportedLanguageCodes: [Swift.String]
+  public static func normalize(_ languageCode: Swift.String) -> Swift.String
   public static func getString(key: Swift.String, languageCode: Swift.String) -> Swift.String
 }
 @_hasMissingDesignatedInitializers public class ImageProcessor {

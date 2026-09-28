@@ -103,6 +103,11 @@ if (project != rootProject) {
         implementation "androidx.cardview:cardview:1.0.0"
         implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
         implementation "com.github.bumptech.glide:glide:4.16.0"
+        // ⚠️ 필수: AAR(files(...))로 배포되는 구조라 AAR 내부의 implementation 의존성은
+        // 소비 앱(ZemTalk 등)으로 전달되지 않습니다. TurboImagePickerGlideModule이
+        // OkHttpUrlLoader를 사용하므로 여기에도 반드시 선언해야 합니다. 빠지면 런타임에
+        // NoClassDefFoundError로 Glide 초기화가 실패해 피커/뷰어 이미지가 전부 안 뜹니다.
+        implementation "com.github.bumptech.glide:okhttp3-integration:4.16.0"
         implementation "androidx.exifinterface:exifinterface:1.3.7"
         
         // CameraX dependencies

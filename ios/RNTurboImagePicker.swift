@@ -142,6 +142,13 @@ class RNTurboImagePicker: RCTEventEmitter {
                     mask = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
                 }
                 self.zoomAnimator.sourceBorderCorners = mask
+                // 넘긴 사진 자리의 라운드 값도 갱신 (예: 원형 대표 사진 → 둥근 사각 카드).
+                // 이전에는 처음 연 사진의 라운드가 그대로 남아, 다른 모양의 자리로 닫힐 때 모양이 틀어졌음.
+                if let r = optDict["sourceBorderRadius"] as? NSNumber {
+                    self.zoomAnimator.sourceBorderRadius = CGFloat(truncating: r)
+                } else if let r = optDict["sourceBorderRadius"] as? Double {
+                    self.zoomAnimator.sourceBorderRadius = CGFloat(r)
+                }
                 self.zoomAnimator.updateMaskView()
                 
                 resolve(true)
@@ -162,6 +169,8 @@ class RNTurboImagePicker: RCTEventEmitter {
         
         let initialIndex = options["initialIndex"] as? Int ?? 0
         let placeholderImages = options["placeholderImages"] as? [String]
+        // cacheFiles: images 와 같은 순서의 로컬 캐시 파일 경로 (null 항목은 NSNull 로 옴 → 빈 문자열)
+        let cacheFiles: [String]? = (options["cacheFiles"] as? [Any])?.map { ($0 as? String) ?? "" }
         let themeColorHex = options["themeColor"] as? String
         let languageCode = options["languageCode"] as? String ?? "en"
         let viewerTitle = options["title"] as? String
@@ -179,6 +188,15 @@ class RNTurboImagePicker: RCTEventEmitter {
         let deleteConfirmMessage = options["deleteConfirmMessage"] as? String
         let deleteConfirmGroupMessage = options["deleteConfirmGroupMessage"] as? String
         let deleteButtonText = options["deleteButtonText"] as? String
+        // patch405: 삭제 방식 선택지 [{ key, label, destructive }]
+        let deleteOptions: [RemoteImageViewerViewController.DeleteOption] =
+            ((options["deleteOptions"] as? [Any]) ?? []).compactMap { raw in
+                guard let d = raw as? [String: Any],
+                      let key = d["key"] as? String, !key.isEmpty,
+                      let label = d["label"] as? String, !label.isEmpty else { return nil }
+                let destructive = (d["destructive"] as? Bool) ?? ((d["destructive"] as? NSNumber)?.boolValue ?? false)
+                return RemoteImageViewerViewController.DeleteOption(key: key, label: label, destructive: destructive)
+            }
         
         var sourceBackgroundColor: UIColor = .clear
         if let bgString = options["sourceBackgroundColorString"] as? String {
@@ -235,6 +253,7 @@ class RNTurboImagePicker: RCTEventEmitter {
             viewerVC.languageCode = languageCode
             viewerVC.viewerTitle = viewerTitle
             viewerVC.placeholderImages = placeholderImages
+            viewerVC.cacheFiles = cacheFiles
             if let hex = themeColorHex, let color = UIColor(hexString: hex) {
                 viewerVC.themeColor = color
             }
@@ -248,6 +267,7 @@ class RNTurboImagePicker: RCTEventEmitter {
             viewerVC.deleteConfirmMessage = deleteConfirmMessage
             viewerVC.deleteConfirmGroupMessage = deleteConfirmGroupMessage
             if let deleteButtonText = deleteButtonText { viewerVC.deleteButtonText = deleteButtonText }
+            viewerVC.deleteOptions = deleteOptions
             
             self.zoomAnimator.animationType = animationType
             self.zoomAnimator.closeAnimationType = closeAnimationType
@@ -283,9 +303,10 @@ class RNTurboImagePicker: RCTEventEmitter {
             viewerVC.onViewerWillClose = { [weak self] () -> Void in
                 self?.sendEvent(withName: "onViewerWillClose", body: nil)
             }
-            viewerVC.onImageDeleted = { [weak self] (index: Int, url: String) -> Void in
+            viewerVC.onImageDeleted = { [weak self] (index: Int, url: String, option: String?) -> Void in
                 guard let self = self else { return }
-                let eventBody: [String: Any] = ["index": index, "url": url]
+                var eventBody: [String: Any] = ["index": index, "url": url]
+                if let option = option { eventBody["option"] = option } // patch405
                 self.sendEvent(withName: "onImageDeleted", body: eventBody)
             }
             viewerVC.onWillDismissForDelete = { [weak self] () -> Void in
@@ -559,10 +580,21 @@ class RNTurboImagePicker: RCTEventEmitter {
                 ])
             }
             
-            // maxSelection 설정 (autoCloseOnSelect가 true면 0으로 설정하여 단일 선택 자동 닫기 처리)
+            // 선택 방식 (selectionMode: 'single' | 'multi', 생략 시 기존 규칙)
+            //  - 'multi' : maxSelection 이 1 이어도 멀티와 똑같이 (autoCloseOnSelect 무시, 1 미만이면 1장)
+            //  - 'single': 기존 단일 동작 (maxSelection 을 1로, autoCloseOnSelect 면 0)
+            //  - 생략     : 기존 그대로 (autoCloseOnSelect → 0, 아니면 maxSelection)
+            let selectionMode = (options["selectionMode"] as? String)?.lowercased()
             let autoCloseOnSelect = options["autoCloseOnSelect"] as? Bool ?? false
-            if autoCloseOnSelect {
+            galleryVC.forceMultiMode = (selectionMode == "multi")
+            if selectionMode == "multi" {
+                let requested = options["maxSelection"] as? Int ?? 1
+                galleryVC.maxSelection = requested < 1 ? 1 : requested
+            } else if autoCloseOnSelect {
+                // maxSelection 설정 (autoCloseOnSelect가 true면 0으로 설정하여 단일 선택 자동 닫기 처리)
                 galleryVC.maxSelection = 0
+            } else if selectionMode == "single" {
+                galleryVC.maxSelection = 1
             } else if let maxSelection = options["maxSelection"] as? Int {
                 galleryVC.maxSelection = maxSelection
             }
@@ -1419,7 +1451,7 @@ fileprivate extension RNTurboImagePicker {
     func _turbo_handleSingleImageTappedForEdit(asset: PHAsset, sourceFrame: CGRect, sourceImage: UIImage?, options: NSDictionary, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         guard let currentGallery = self.currentGalleryVC else { return }
         let galleryNav = currentGallery.navigationController
-        let isMultiSelect = currentGallery.maxSelection != 1 && currentGallery.maxSelection != 0
+        let isMultiSelect = currentGallery.forceMultiMode || (currentGallery.maxSelection != 1 && currentGallery.maxSelection != 0)
 
         let editorVC = ImageEditorViewController()
         editorVC.languageCode = options["languageCode"] as? String ?? "en"
@@ -1459,6 +1491,8 @@ fileprivate extension RNTurboImagePicker {
         
         editorVC.modalPresentationStyle = .overFullScreen
         editorVC.singlePhotoMode = !isMultiSelect
+        // selectionMode 'multi' + 최대 1장: 편집 화면에서 다른 사진을 선택하면 기존 선택과 교체
+        editorVC.replaceSelectionWhenFull = currentGallery.forceMultiMode && currentGallery.maxSelection == 1
         
         var initialCroppedImages: [Int: UIImage] = [:]
         for (i, a) in editorAssets.enumerated() {
@@ -1549,8 +1583,38 @@ fileprivate extension RNTurboImagePicker {
             }
         }
 
+        // patch398: 편집 화면의 전송 버튼 — 편집본을 갤러리에 반영하고 선택한 사진을 바로 전송(편집 화면/갤러리 모두 닫힘)
+        editorVC.onSendMulti = { [weak currentGallery] (assets, croppedImages, filterStates) in
+            guard let currentGallery = currentGallery else { return }
+            for asset in assets {
+                guard var img = croppedImages[asset] else { continue }
+                if let state = filterStates[asset],
+                   state.filterId != "original",
+                   let filter = FilterManager.shared.filters.first(where: { $0.id == state.filterId }),
+                   let ciImage = CIImage(image: img),
+                   let out = filter.apply(ciImage, state.intensity),
+                   let cgImg = FilterManager.shared.context.createCGImage(out, from: out.extent) {
+                    img = UIImage(cgImage: cgImg, scale: img.scale, orientation: img.imageOrientation)
+                }
+                currentGallery.editedImages[asset.localIdentifier] = img
+            }
+            // patch399: 편집 화면의 이미지가 갤러리 자리로 돌아가는 애니메이션이 끝난 뒤에 전송합니다.
+            currentGallery.refreshThumbnails(for: assets)
+            currentGallery.updateSelectedCellNumbers()
+            editorVC.dismiss(animated: true) { [weak currentGallery] in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    currentGallery?.sendSelectionFromEditor()
+                }
+            }
+        }
+
         editorVC.onConfirm = { [weak self, weak galleryNav, weak currentGallery] (editedAsset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String) in
             guard let self = self else { return }
+            // 단일 편집 → 전송: 결과 전달 책임이 processEditorResult 로 넘어가므로, 갤러리를 닫기 "전에"
+            // 가드를 세웁니다. 안 그러면 갤러리 viewDidDisappear 의 "스와이프로 닫힘" 안전장치가
+            // 먼저 onImagesSelected([]) → reject("CANCELLED") 를 보내서, 편집된 사진이 JS 로 오지
+            // 않았습니다 (autoCloseOnSelect + enableEditor 조합에서 사진이 안 들어오던 버그).
+            currentGallery?.hasReturnedImages = true
             let navToDismiss = galleryNav ?? currentGallery
             let presenter = navToDismiss?.presentingViewController ?? navToDismiss
             presenter?.dismiss(animated: true) {

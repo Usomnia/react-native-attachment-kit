@@ -987,8 +987,144 @@ class RNTurboImagePickerModule(reactContext: ReactApplicationContext) :
     }
 
 
+    // MARK: - Media gallery (사진 모아보기)
+
+    /** 열려 있는 미디어 갤러리 (galleryId → 화면). 메인 스레드에서만 접근 */
+    private val mediaGalleries = HashMap<String, MediaGalleryOverlay>()
+
+    private fun emitGalleryEvent(name: String, body: WritableMap) {
+        try {
+            reactApplicationContext
+                .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                .emit(name, body)
+        } catch (e: Exception) {
+            android.util.Log.w("TurboMediaGallery", "emit $name failed", e)
+        }
+    }
+
+    /**
+     * openMediaGallery(options) → { galleryId }
+     * - dataSource: 등록된 네이티브 데이터 소스 이름 (MediaGalleryRegistry) — 페이지 요청이 JS 를 거치지 않음
+     * - initialItems / nextCursor / hasMore: JS 공급 방식 (끝에 가까우면 onGalleryNeedPage → appendGalleryItems)
+     * Activity 를 띄우지 않고 호스트 Activity 위에 View 로 얹습니다.
+     */
+    @ReactMethod
+    fun openMediaGallery(options: ReadableMap, promise: Promise) {
+        val activity = getCurrentActivity()
+        if (activity == null) {
+            promise.reject(E_NO_ACTIVITY, "Activity doesn't exist")
+            return
+        }
+        val o: Map<String, Any?> = options.toHashMap()
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            try {
+                val systemDark = (activity.resources.configuration.uiMode and
+                    android.content.res.Configuration.UI_MODE_NIGHT_MASK) == android.content.res.Configuration.UI_MODE_NIGHT_YES
+                val config = MediaGalleryConfig(o, systemDark)
+                val galleryId = config.galleryId
+                if (mediaGalleries[galleryId]?.isShowing == true) {
+                    promise.reject("E_GALLERY_OPEN", "Media gallery '$galleryId' is already open")
+                    return@runOnUiThread
+                }
+                MediaGalleryRegistry.ensureDemo(activity.applicationContext)
+                val dataSourceName = o["dataSource"] as? String
+                val store: MediaGalleryStore
+                if (!dataSourceName.isNullOrEmpty()) {
+                    val dataSource = MediaGalleryRegistry.source(dataSourceName)
+                    if (dataSource == null) {
+                        promise.reject("E_NO_DATA_SOURCE", "Media gallery data source '$dataSourceName' is not registered")
+                        return@runOnUiThread
+                    }
+                    @Suppress("UNCHECKED_CAST")
+                    val params = (o["dataSourceParams"] as? Map<String, Any?>) ?: emptyMap()
+                    store = MediaGalleryStore(galleryId, MediaGalleryStore.Source.Native(dataSource, params))
+                } else {
+                    store = MediaGalleryStore(
+                        galleryId,
+                        MediaGalleryStore.Source.JavaScript,
+                        MediaGalleryItem.listFrom(o["initialItems"]),
+                        o["nextCursor"] as? String,
+                        o["hasMore"] as? Boolean ?: false
+                    )
+                    store.onNeedPage = { cursor ->
+                        emitGalleryEvent("onGalleryNeedPage", Arguments.createMap().apply {
+                            putString("galleryId", galleryId)
+                            if (cursor != null) putString("cursor", cursor) else putNull("cursor")
+                        })
+                    }
+                }
+                val overlay = MediaGalleryOverlay(activity, store, config)
+                overlay.onClosed = {
+                    if (mediaGalleries[galleryId] === overlay) mediaGalleries.remove(galleryId)
+                    emitGalleryEvent("onGalleryClosed", Arguments.createMap().apply { putString("galleryId", galleryId) })
+                }
+                // 뷰어에서 삭제를 고르면: 모듈은 그 묶음을 그리드·뷰어에서 지우고, 실제 삭제는 앱이 하도록 이벤트만 보냄
+                overlay.onItemDeleted = { item, option ->
+                    emitGalleryEvent("onGalleryItemDeleted", Arguments.createMap().apply {
+                        putString("galleryId", galleryId)
+                        putString("id", item.id)
+                        putString("groupId", item.groupId)
+                        if (option != null) putString("option", option) else putNull("option")
+                    })
+                }
+                mediaGalleries[galleryId] = overlay
+                overlay.show()
+                promise.resolve(Arguments.createMap().apply { putString("galleryId", galleryId) })
+            } catch (e: Exception) {
+                promise.reject("E_MEDIA_GALLERY", "Failed to open media gallery: ${e.message}", e)
+            }
+        }
+    }
+
+    @ReactMethod
+    fun closeMediaGallery(galleryId: String, promise: Promise) {
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            mediaGalleries[galleryId]?.close(includeViewer = true)
+            promise.resolve(null)
+        }
+    }
+
+    /** JS 공급 방식: { galleryId, items, nextCursor?, hasMore } */
+    @ReactMethod
+    fun appendGalleryItems(payload: ReadableMap, promise: Promise) {
+        val p: Map<String, Any?> = payload.toHashMap()
+        val galleryId = p["galleryId"] as? String ?: ""
+        val page = MediaGalleryPage(
+            MediaGalleryItem.listFrom(p["items"]),
+            p["nextCursor"] as? String,
+            p["hasMore"] as? Boolean ?: false
+        )
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            mediaGalleries[galleryId]?.store?.appendExternal(page)
+            promise.resolve(null)
+        }
+    }
+
+    /** 앱이 다른 경로로 지운 묶음 반영: { galleryId, groupIds } */
+    @ReactMethod
+    fun removeGalleryItems(payload: ReadableMap, promise: Promise) {
+        val p: Map<String, Any?> = payload.toHashMap()
+        val galleryId = p["galleryId"] as? String ?: ""
+        val groupIds = (p["groupIds"] as? List<*> ?: emptyList<Any?>()).mapNotNull { v ->
+            when (v) {
+                is String -> v
+                is Number -> v.toDouble().let { d -> if (d % 1.0 == 0.0) d.toLong().toString() else d.toString() }
+                else -> null
+            }
+        }.toSet()
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            mediaGalleries[galleryId]?.store?.removeGroups(groupIds)
+            promise.resolve(null)
+        }
+    }
+
     override fun invalidate() {
         super.invalidate()
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            val open = mediaGalleries.values.toList()
+            mediaGalleries.clear()
+            open.forEach { it.dismissImmediately() }
+        }
         reactApplicationContext.removeActivityEventListener(this)
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .unregisterReceiver(viewerOpenedReceiver)

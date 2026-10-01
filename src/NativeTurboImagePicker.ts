@@ -15,6 +15,12 @@ export interface Spec extends TurboModule {
   updateSourceRect(options: Object): Promise<void>;
   
   getDefaultAnimationConfig(): Promise<Object>;
+
+  // 미디어 갤러리 (사진 모아보기)
+  openMediaGallery(options: Object): Promise<Object>;
+  closeMediaGallery(galleryId: string): Promise<void>;
+  appendGalleryItems(payload: Object): Promise<void>;
+  removeGalleryItems(payload: Object): Promise<void>;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>("RNTurboImagePicker");

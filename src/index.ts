@@ -1,5 +1,5 @@
 import { NativeModules, Platform, TurboModuleRegistry, NativeEventEmitter } from "react-native"
-import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions } from "./types"
+import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions, MediaGalleryOptions, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
 const LINKING_ERROR = `The package 'react-native-turbo-image-picker' doesn't seem to be linked. Make sure: \n\n` + Platform.select({ ios: "- You have run 'pod install'\n", default: "" }) + "- You rebuilt the app after installing the package\n" + "- You are not using Expo Go\n"
 
@@ -50,6 +50,7 @@ if (!RNTurboImagePickerModule) {
 const eventEmitter = new NativeEventEmitter(RNTurboImagePickerModule)
 
 export type { SelectionChangeEvent } from "./types"
+export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
 export interface RNTurboImagePicker {
   init(licenseKey: string, options?: InitOptions): Promise<boolean>
@@ -61,6 +62,15 @@ export interface RNTurboImagePicker {
   addSelectionChangeListener(listener: (event: SelectionChangeEvent) => void): () => void
   getDefaultAnimationConfig(): Promise<{ galleryOpen: number, galleryClose: number, editorOpen: number, editorClose: number, viewerOpen: number, viewerClose: number }>
   injectImageCache(urlString: string, localPath: string): Promise<boolean>
+  /** 네이티브 미디어 갤러리(사진 모아보기)를 지원하는 네이티브 빌드인지 (옛 빌드면 false → 앱 RN 화면으로 폴백) */
+  isMediaGallerySupported(): boolean
+  /** 네이티브 미디어 갤러리 열기. 화면이 뜨면 resolve (닫힘은 onClosed) */
+  openMediaGallery(options: MediaGalleryOptions): Promise<{ galleryId: string }>
+  closeMediaGallery(galleryId: string): Promise<void>
+  /** (B) JS 공급: onNeedPage 에 대한 응답 */
+  appendGalleryItems(payload: MediaGalleryAppendPayload): Promise<void>
+  /** 앱이 다른 경로로 지운 묶음을 갤러리·뷰어에서 제거 */
+  removeGalleryItems(payload: MediaGalleryRemovePayload): Promise<void>
 }
 
 const TurboImagePicker: RNTurboImagePicker = {
@@ -264,6 +274,76 @@ const TurboImagePicker: RNTurboImagePicker = {
       return RNTurboImagePickerModule.injectImageCache(urlString, localPath)
     }
     return false;
+  },
+
+  isMediaGallerySupported: (): boolean => {
+    return !!RNTurboImagePickerModule && typeof RNTurboImagePickerModule.openMediaGallery === "function"
+  },
+
+  openMediaGallery: async (options: MediaGalleryOptions): Promise<{ galleryId: string }> => {
+    if (!RNTurboImagePickerModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    if (typeof RNTurboImagePickerModule.openMediaGallery !== "function") {
+      throw new Error("[RNTurboImagePicker] openMediaGallery is not available in this native build")
+    }
+    const { onItemDeleted, onNeedPage, onClosed, ...rest } = options
+    // 이벤트를 열기 전에 구독해야 하므로 galleryId 는 JS 에서 정함
+    const galleryId = rest.galleryId || `mg_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`
+    const subs: { remove: () => void }[] = []
+    const removeAll = () => {
+      while (subs.length) {
+        try { subs.pop()?.remove() } catch (e) { /* noop */ }
+      }
+    }
+    if (onItemDeleted) {
+      subs.push(eventEmitter.addListener("onGalleryItemDeleted", (e: any) => {
+        if (e && e.galleryId === galleryId) onItemDeleted(e)
+      }))
+    }
+    if (onNeedPage) {
+      subs.push(eventEmitter.addListener("onGalleryNeedPage", (e: any) => {
+        if (e && e.galleryId === galleryId) onNeedPage({ galleryId, cursor: e.cursor ?? null })
+      }))
+    }
+    subs.push(eventEmitter.addListener("onGalleryClosed", (e: any) => {
+      if (!e || e.galleryId !== galleryId) return
+      removeAll()
+      try {
+        onClosed?.({ galleryId })
+      } catch (err) {
+        console.error("[RNTurboImagePicker] options.onClosed() threw:", err)
+      }
+    }))
+    const nativeOptions: Record<string, any> = {
+      languageCode: _defaultLanguageCode,
+      ...rest,
+      galleryId,
+    }
+    nativeOptions.languageCode = normalizeLanguageCode(nativeOptions.languageCode)
+    nativeOptions.viewer = { themeColor: _defaultThemeColor, ...(rest.viewer || {}) }
+    try {
+      const result = await RNTurboImagePickerModule.openMediaGallery(nativeOptions)
+      return { galleryId: (result && result.galleryId) || galleryId }
+    } catch (e) {
+      removeAll()
+      throw e
+    }
+  },
+
+  closeMediaGallery: async (galleryId: string): Promise<void> => {
+    if (!RNTurboImagePickerModule || typeof RNTurboImagePickerModule.closeMediaGallery !== "function") return
+    return RNTurboImagePickerModule.closeMediaGallery(galleryId)
+  },
+
+  appendGalleryItems: async (payload: MediaGalleryAppendPayload): Promise<void> => {
+    if (!RNTurboImagePickerModule || typeof RNTurboImagePickerModule.appendGalleryItems !== "function") return
+    return RNTurboImagePickerModule.appendGalleryItems(payload)
+  },
+
+  removeGalleryItems: async (payload: MediaGalleryRemovePayload): Promise<void> => {
+    if (!RNTurboImagePickerModule || typeof RNTurboImagePickerModule.removeGalleryItems !== "function") return
+    return RNTurboImagePickerModule.removeGalleryItems(payload)
   },
 }
 

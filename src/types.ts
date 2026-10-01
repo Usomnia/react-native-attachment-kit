@@ -179,3 +179,121 @@ export interface RNTurboImagePicker {
   addSelectionChangeListener(listener: (event: SelectionChangeEvent) => void): () => void
   getDefaultAnimationConfig(): Promise<{ galleryOpen: number, galleryClose: number, editorOpen: number, editorClose: number, viewerOpen: number, viewerClose: number }>
 }
+
+// MARK: - Media gallery (사진 모아보기)
+
+/** 갤러리 항목. 썸네일은 파일 경로만 주고받습니다(base64 금지). */
+export interface MediaGalleryItem {
+  /** 고유 키 (예: "<seq>_<idx>") — 같은 id 가 다시 오면 무시 */
+  id: string
+  /** 함께 삭제되는 묶음 (예: "<seq>"). 생략 시 id */
+  groupId?: string
+  /** ms — 월 표시용 */
+  timestamp?: number
+  /** file:// 썸네일 (그리드·뷰어 플레이스홀더) */
+  thumbUri?: string
+  /** 원본 (http(s) 또는 file://) */
+  imageUri: string
+  /** 원본 캐시 경로 (openViewer 의 cacheFiles 와 같은 의미) */
+  cacheFile?: string
+  /** 삭제 메뉴 구성용 */
+  isMine?: boolean
+  width?: number
+  height?: number
+}
+
+export interface MediaGalleryDeleteOption {
+  key: string
+  label: string
+  destructive?: boolean
+}
+
+/**
+ * 기본 모양·색은 피커 갤러리(openGallery)와 같습니다. isDark 로 다크/라이트 세트를 고르고,
+ * 아래 색은 넘긴 것만 덮어씁니다 (생략 권장 — 피커와 똑같이 보이게).
+ */
+export interface MediaGalleryTheme {
+  /** 다크 모드 (생략 시 시스템 설정) */
+  isDark: boolean
+  /** 시트·칸 사이 배경 */
+  screenBg?: string
+  /** 사진 로딩 전 칸 색 */
+  cellBg?: string
+  /** 스켈레톤 */
+  skeleton?: string
+  titleColor?: string
+  subTextColor?: string
+}
+
+export interface MediaGalleryViewerOptions {
+  themeColor?: string
+  deleteOptionsForMine?: MediaGalleryDeleteOption[]
+  deleteOptionsForOthers?: MediaGalleryDeleteOption[]
+  /** 뷰어 제목 = 사진 날짜 */
+  titleFormat?: "date" | "none"
+  /** 기존 openViewer 문구 옵션(saveAllText 등)도 그대로 전달 */
+  [key: string]: any
+}
+
+export interface MediaGalleryItemDeletedEvent {
+  galleryId: string
+  id: string
+  groupId: string
+  /** 선택한 삭제 옵션 key */
+  option: string
+}
+
+export interface MediaGalleryNeedPageEvent {
+  galleryId: string
+  cursor: string | null
+}
+
+export interface MediaGalleryClosedEvent {
+  galleryId: string
+}
+
+export interface MediaGalleryOptions {
+  /** 이벤트 구분용 (생략 시 자동 생성해서 반환) */
+  galleryId?: string
+  /** (A) 네이티브에 등록된 데이터 소스 이름 (예: 'tinodeChatPhotos', 데모: 'turboDemo') */
+  dataSource?: string
+  /** (A) 데이터 소스에 그대로 전달 (예: { topic }, 데모: { count: 10000 }) */
+  dataSourceParams?: Record<string, any>
+  /** (B) JS 공급 — 첫 페이지 */
+  initialItems?: MediaGalleryItem[]
+  /** (B) 더 있으면 true → 끝에 가까울 때 onNeedPage 호출 */
+  hasMore?: boolean
+  nextCursor?: string
+  /** 상단 바 제목 */
+  title: string
+  /** 기본 3 (피커와 동일) */
+  columns?: number
+  /** 칸 사이 간격 pt/dp (기본: 피커와 동일) */
+  spacing?: number
+  theme?: Partial<MediaGalleryTheme>
+  /** 월 표시 로케일 */
+  languageCode?: LanguageCode
+  emptyTitle?: string
+  emptySubtitle?: string
+  /** 상단 오른쪽 개수, 더 있으면 more 형식 ("{count}" 치환, 기본 "{count}+") */
+  countFormat?: { more: string }
+  /** 사진을 누르면 그 칸에서 줌으로 열리는 뷰어 설정 (닫으면 지금 보던 사진의 칸으로 돌아감) */
+  viewer?: MediaGalleryViewerOptions
+  /** 뷰어에서 삭제를 고르면 호출. 모듈은 그 groupId 묶음을 화면에서 이미 지운 상태 — 실제 삭제는 앱이 처리 */
+  onItemDeleted?: (event: MediaGalleryItemDeletedEvent) => void
+  /** (B) 다음 페이지 요청 → appendGalleryItems 로 응답 */
+  onNeedPage?: (event: MediaGalleryNeedPageEvent) => void
+  onClosed?: (event: MediaGalleryClosedEvent) => void
+}
+
+export interface MediaGalleryAppendPayload {
+  galleryId: string
+  items: MediaGalleryItem[]
+  nextCursor?: string
+  hasMore: boolean
+}
+
+export interface MediaGalleryRemovePayload {
+  galleryId: string
+  groupIds: string[]
+}

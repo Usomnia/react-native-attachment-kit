@@ -36,6 +36,8 @@ class RNTurboImagePicker: RCTEventEmitter {
     // 현재 표시 중인 갤러리 참조
     private weak var currentGalleryVC: GalleryViewController?
     private var editorTransitionDelegate: ImageEditorTransitionDelegate?
+    /// 열려 있는 미디어 갤러리 (galleryId → 화면)
+    fileprivate var mediaGalleries: [String: MediaGalleryViewController] = [:]
     
     // MARK: - Module Setup
     
@@ -51,7 +53,8 @@ class RNTurboImagePicker: RCTEventEmitter {
     
     @objc
     override func supportedEvents() -> [String]! {
-        return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose", "onImageDeleted"]
+        return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose", "onImageDeleted",
+                "onGalleryItemDeleted", "onGalleryNeedPage", "onGalleryClosed"]
     }
     
     // MARK: - Public Methods
@@ -1395,6 +1398,121 @@ extension UIColor {
     }
 }
 
+// MARK: - Media Gallery (사진 모아보기)
+
+extension RNTurboImagePicker {
+
+    /// openMediaGallery(options) → { galleryId }
+    /// - dataSource: 등록된 네이티브 데이터 소스 이름 (MediaGalleryRegistry) — 페이지 요청이 JS 를 거치지 않음
+    /// - initialItems / nextCursor / hasMore: JS 공급 방식 (끝에 가까우면 onGalleryNeedPage → appendGalleryItems)
+    @objc
+    func openMediaGallery(_ options: NSDictionary,
+                          resolve: @escaping RCTPromiseResolveBlock,
+                          reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let o = options as? [String: Any] ?? [:]
+        DispatchQueue.main.async {
+            let config = MediaGalleryConfig(dictionary: o)
+            let galleryId = config.galleryId
+            if self.mediaGalleries[galleryId] != nil {
+                reject("E_GALLERY_OPEN", "Media gallery '\(galleryId)' is already open", nil)
+                return
+            }
+            let store: MediaGalleryStore
+            if let name = o["dataSource"] as? String, !name.isEmpty {
+                guard let dataSource = MediaGalleryRegistry.source(named: name) else {
+                    reject("E_NO_DATA_SOURCE", "Media gallery data source '\(name)' is not registered", nil)
+                    return
+                }
+                let params = o["dataSourceParams"] as? [String: Any] ?? [:]
+                store = MediaGalleryStore(galleryId: galleryId, source: .native(dataSource, params: params))
+            } else {
+                let raw = o["initialItems"] as? [[String: Any]] ?? []
+                let items = raw.compactMap { MediaGalleryItem(dictionary: $0) }
+                let hasMore = (o["hasMore"] as? NSNumber)?.boolValue ?? false
+                store = MediaGalleryStore(galleryId: galleryId, source: .javascript, initialItems: items,
+                                          nextCursor: o["nextCursor"] as? String, hasMore: hasMore)
+                store.onNeedPage = { [weak self] cursor in
+                    let body: [String: Any] = ["galleryId": galleryId, "cursor": cursor.map { $0 as Any } ?? NSNull()]
+                    self?.sendEvent(withName: "onGalleryNeedPage", body: body)
+                }
+            }
+            guard let root = self.getRootViewController() else {
+                reject("E_NO_ROOT", "No root view controller", nil)
+                return
+            }
+            let vc = MediaGalleryViewController(store: store, config: config)
+            vc.onClosed = { [weak self] in
+                guard let self = self else { return }
+                self.mediaGalleries.removeValue(forKey: galleryId)
+                self.sendEvent(withName: "onGalleryClosed", body: ["galleryId": galleryId])
+            }
+            // 뷰어에서 삭제를 고르면: 모듈은 그 묶음을 그리드·뷰어에서 지우고, 실제 삭제는 앱이 하도록 이벤트만 보냄
+            vc.onItemDeleted = { [weak self] item, option in
+                var body: [String: Any] = ["galleryId": galleryId, "id": item.id, "groupId": item.groupId]
+                body["option"] = option.map { $0 as Any } ?? NSNull()
+                self?.sendEvent(withName: "onGalleryItemDeleted", body: body)
+            }
+            self.mediaGalleries[galleryId] = vc
+            // 피커 갤러리와 같은 바텀시트로 표시
+            root.present(vc.makePresentableController(), animated: true)
+            resolve(["galleryId": galleryId])
+        }
+    }
+
+    @objc
+    func closeMediaGallery(_ galleryId: String,
+                           resolve: @escaping RCTPromiseResolveBlock,
+                           reject: @escaping RCTPromiseRejectBlock) -> Void {
+        DispatchQueue.main.async {
+            guard let vc = self.mediaGalleries[galleryId] else {
+                resolve(nil)
+                return
+            }
+            // 갤러리 위에 띄운 화면(뷰어 등)까지 함께 닫음
+            if let presenting = vc.navigationController?.presentingViewController ?? vc.presentingViewController {
+                presenting.dismiss(animated: true) { resolve(nil) }
+            } else {
+                resolve(nil)
+            }
+        }
+    }
+
+    /// JS 공급 방식: { galleryId, items, nextCursor?, hasMore }
+    @objc
+    func appendGalleryItems(_ payload: NSDictionary,
+                            resolve: @escaping RCTPromiseResolveBlock,
+                            reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let p = payload as? [String: Any] ?? [:]
+        let galleryId = p["galleryId"] as? String ?? ""
+        let raw = p["items"] as? [[String: Any]] ?? []
+        let items = raw.compactMap { MediaGalleryItem(dictionary: $0) }
+        let page = MediaGalleryPage(items: items, nextCursor: p["nextCursor"] as? String,
+                                    hasMore: (p["hasMore"] as? NSNumber)?.boolValue ?? false)
+        DispatchQueue.main.async {
+            self.mediaGalleries[galleryId]?.store.appendExternal(page)
+            resolve(nil)
+        }
+    }
+
+    /// 앱이 다른 경로로 지운 묶음 반영: { galleryId, groupIds }
+    @objc
+    func removeGalleryItems(_ payload: NSDictionary,
+                            resolve: @escaping RCTPromiseResolveBlock,
+                            reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let p = payload as? [String: Any] ?? [:]
+        let galleryId = p["galleryId"] as? String ?? ""
+        let groupIds = (p["groupIds"] as? [Any] ?? []).compactMap { v -> String? in
+            if let s = v as? String { return s }
+            if let n = v as? NSNumber { return n.stringValue }
+            return nil
+        }
+        DispatchQueue.main.async {
+            self.mediaGalleries[galleryId]?.store.removeGroups(Set(groupIds))
+            resolve(nil)
+        }
+    }
+}
+
 #if RCT_NEW_ARCH_ENABLED
 // MARK: - Turbo Module Protocol Conformance (New Architecture)
 // extension RNTurboImagePicker: RCTTurboModule {
@@ -1531,6 +1649,14 @@ fileprivate extension RNTurboImagePicker {
             self.editorTransitionDelegate?.frameProvider = { [weak currentGallery] currentAsset in
                 return currentGallery?.frameForAsset(currentAsset)
             }
+            // sticky: 편집 화면이 열려 있는 동안 지금 사진의 갤러리 칸을 비워 두고(넘기면 따라감), 닫히면 다시 보이게
+            self.editorTransitionDelegate?.onCurrentAssetChanged = { [weak currentGallery] currentAsset in
+                currentGallery?.setHiddenAsset(currentAsset, scrollIntoView: true)
+            }
+            self.editorTransitionDelegate?.onEditorClosed = { [weak currentGallery] in
+                currentGallery?.setHiddenAsset(nil)
+            }
+            currentGallery.setHiddenAsset(asset)
             
             editorVC.transitioningDelegate = self.editorTransitionDelegate
         }

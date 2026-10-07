@@ -3,5 +3,5 @@ android/build
 android/extracted-aar
 docs/
 *.tgz
-android/rnturboimagepicker-release.aar
-android/src/main/libs/react-native-turbo-image-picker.aar
+android/rnattachmentkit-release.aar
+android/src/main/libs/react-native-attachment-kit.aar

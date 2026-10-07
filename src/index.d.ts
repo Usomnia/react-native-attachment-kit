@@ -33,7 +33,7 @@ export interface SelectionChangeEvent {
   maxSelection: number
 }
 
-export interface RNTurboImagePicker {
+export interface RNAttachmentKit {
   init(licenseKey: string): Promise<boolean>;
   openGallery(options?: GalleryOptions): Promise<ImageResult[]>;
   openEditor(options: EditorOptions): Promise<ImageResult>;
@@ -51,6 +51,6 @@ export const isUsingTurboModule: boolean
  */
 export const isUsingLegacyModule: boolean
 
-declare const TurboImagePicker: RNTurboImagePicker
+declare const AttachmentKit: RNAttachmentKit
 
-export default TurboImagePicker
+export default AttachmentKit

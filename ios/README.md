@@ -1,4 +1,4 @@
-# RNTurboImagePicker
+# RNAttachmentKit
 
 고성능 텔레그램 스타일 이미지 갤러리 피커 for React Native
 
@@ -19,9 +19,9 @@
 cd /path/to/your/react-native-project
 
 # package.json에 로컬 모듈 추가
-yarn add file:../NativeModules/RNTurboImagePicker/ios
+yarn add file:../NativeModules/RNAttachmentKit/ios
 # 또는
-npm install file:../NativeModules/RNTurboImagePicker/ios
+npm install file:../NativeModules/RNAttachmentKit/ios
 ```
 
 ### 2. iOS Pod 설치
@@ -48,14 +48,14 @@ cd ..
 ### 기본 사용
 
 ```typescript
-import { RNTurboImagePicker } from 'react-native-turbo-image-picker';
+import { RNAttachmentKit } from 'react-native-attachment-kit';
 
 // 1. 권한 체크
-const status = await RNTurboImagePicker.checkPermission();
+const status = await RNAttachmentKit.checkPermission();
 
 if (status.status !== 'authorized') {
   // 2. 권한 요청
-  const result = await RNTurboImagePicker.requestPermission();
+  const result = await RNAttachmentKit.requestPermission();
   if (result.status !== 'authorized') {
     console.log('권한이 거부되었습니다.');
     return;
@@ -64,7 +64,7 @@ if (status.status !== 'authorized') {
 
 // 3. 갤러리 열기
 try {
-  const result = await RNTurboImagePicker.openGallery({
+  const result = await RNAttachmentKit.openGallery({
     maxSelection: 10,
     quality: 'high',
     includeBase64: false,
@@ -115,19 +115,19 @@ interface ImagePickerResult {
 ### 프로젝트 구조
 
 ```
-RNTurboImagePicker/
+RNAttachmentKit/
 ├── ios/
-│   ├── RNTurboImagePicker/        # iOS 네이티브 코드
+│   ├── RNAttachmentKit/        # iOS 네이티브 코드
 │   │   ├── PhotoManager.swift     # 사진 관리자
 │   │   ├── GalleryViewController.swift
 │   │   └── ...
 │   ├── ios/                       # RN 브리지
-│   │   ├── RNTurboImagePickerModule.swift
-│   │   └── RNTurboImagePickerModule.m
+│   │   ├── RNAttachmentKitModule.swift
+│   │   └── RNAttachmentKitModule.m
 │   ├── src/                       # TypeScript 인터페이스
 │   │   └── index.ts
 │   ├── package.json
-│   └── RNTurboImagePicker.podspec
+│   └── RNAttachmentKit.podspec
 └── android/                       # (향후 추가 예정)
 ```
 
@@ -150,7 +150,7 @@ yarn ios
 포토 라이브러리 권한을 요청합니다.
 
 ```typescript
-const result = await RNTurboImagePicker.requestPermission();
+const result = await RNAttachmentKit.requestPermission();
 // { status: 'authorized' | 'denied' | 'restricted' | 'notDetermined' }
 ```
 
@@ -159,7 +159,7 @@ const result = await RNTurboImagePicker.requestPermission();
 현재 권한 상태를 확인합니다.
 
 ```typescript
-const result = await RNTurboImagePicker.checkPermission();
+const result = await RNAttachmentKit.checkPermission();
 // { status: 'authorized' | 'denied' | 'restricted' | 'notDetermined' }
 ```
 
@@ -168,7 +168,7 @@ const result = await RNTurboImagePicker.checkPermission();
 이미지 갤러리를 엽니다.
 
 ```typescript
-const result = await RNTurboImagePicker.openGallery({
+const result = await RNAttachmentKit.openGallery({
   maxSelection: 10,
   quality: 'high',
   includeBase64: false,

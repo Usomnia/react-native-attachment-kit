@@ -3,10 +3,10 @@ module.exports = {
     platforms: {
       android: {
         sourceDir: './android',
-        packageImportPath: 'import com.rnturboimagepicker.RNTurboImagePickerPackage;',
-        packageInstance: 'new RNTurboImagePickerPackage()',
+        packageImportPath: 'import com.rnattachmentkit.RNAttachmentKitPackage;',
+        packageInstance: 'new RNAttachmentKitPackage()',
         cmakeListsPath: 'build/generated/source/codegen/jni/CMakeLists.txt',
-        libraryName: 'RNTurboImagePickerSpec',
+        libraryName: 'RNAttachmentKitSpec',
       },
       ios: {},
     },

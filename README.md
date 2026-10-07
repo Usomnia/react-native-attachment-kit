@@ -1,4 +1,4 @@
-# React Native Turbo Image Picker 🚀
+# React Native Attachment Kit 🚀
 
 A highly customizable, high-performance, and purely native image picker and editor for React Native.
 
@@ -34,10 +34,10 @@ A highly customizable, high-performance, and purely native image picker and edit
 
 ```bash
 # using yarn
-yarn add react-native-turbo-image-picker
+yarn add react-native-attachment-kit
 
 # or using npm
-npm install react-native-turbo-image-picker
+npm install react-native-attachment-kit
 ```
 
 If you are using iOS, run pod install:
@@ -63,11 +63,11 @@ You must add the following permissions to your `ios/YourAppName/Info.plist` file
 ## 🛠 Usage Example
 
 ```javascript
-import RNTurboImagePicker from 'react-native-turbo-image-picker';
+import AttachmentKit from 'react-native-attachment-kit';
 
 // Step 1: Initialize the module (usually in App.tsx or index.js)
 // Pass your license key (if you have one to remove the watermark) and default configurations
-RNTurboImagePicker.init("", { 
+AttachmentKit.init("", { 
   languageCode: 'en', 
   themeColor: '#ff0000' 
 }).catch(console.error);
@@ -75,7 +75,7 @@ RNTurboImagePicker.init("", {
 // Step 2: Open Image Picker
 const handleOpenPicker = async () => {
   try {
-    const result = await RNTurboImagePicker.openGallery({
+    const result = await AttachmentKit.openGallery({
       maxSelection: 10,
       themeColor: '#FF6B35',
       enableEditor: true,
@@ -91,14 +91,14 @@ const handleOpenPicker = async () => {
 ### Image Viewer with Sticky Transition (Recommended)
 
 ```javascript
-import RNTurboImagePicker from 'react-native-turbo-image-picker';
+import AttachmentKit from 'react-native-attachment-kit';
 
 // Get the on-screen position of the thumbnail to enable the sticky viewer transition
 const imageRef = useRef(null);
 
 const openViewer = () => {
   imageRef.current?.measure((x, y, width, height, pageX, pageY) => {
-    RNTurboImagePicker.openViewer({
+    AttachmentKit.openViewer({
       images: ['https://example.com/photo1.jpg', 'https://example.com/photo2.jpg'],
       initialIndex: 0,
       themeColor: '#FF6B35',
@@ -128,7 +128,7 @@ const openViewer = () => {
 
 ## 📖 API Reference
 
-### `RNTurboImagePicker.init(licenseKey, options?): Promise<boolean>`
+### `AttachmentKit.init(licenseKey, options?): Promise<boolean>`
 
 Initializes the module with a license key and global defaults.
 
@@ -140,7 +140,7 @@ Initializes the module with a license key and global defaults.
 
 ---
 
-### `RNTurboImagePicker.openGallery(options?): Promise<ImageResult[]>`
+### `AttachmentKit.openGallery(options?): Promise<ImageResult[]>`
 
 Opens the native image gallery for selecting photos and videos.
 
@@ -163,7 +163,7 @@ Opens the native image gallery for selecting photos and videos.
 
 ---
 
-### `RNTurboImagePicker.openEditor(options): Promise<ImageResult>`
+### `AttachmentKit.openEditor(options): Promise<ImageResult>`
 
 Directly opens the built-in image editor for a specific image.
 
@@ -177,7 +177,7 @@ Directly opens the built-in image editor for a specific image.
 
 ---
 
-### `RNTurboImagePicker.openViewer(options): Promise<void>`
+### `AttachmentKit.openViewer(options): Promise<void>`
 
 Opens a high-performance, full-screen image viewer with smooth swiping, thumbnail navigation, and pinch-to-zoom capabilities.
 
@@ -228,7 +228,7 @@ On Android, the viewer can be opened in three different modes. Choose based on y
 
 ---
 
-### `RNTurboImagePicker.updateSourceRect(rect): Promise<void>`
+### `AttachmentKit.updateSourceRect(rect): Promise<void>`
 
 Updates the source thumbnail coordinates while the viewer is open. Call this inside `onPageSelected` after measuring the newly selected thumbnail's position, so the close animation correctly animates back to the right thumbnail.
 
@@ -236,25 +236,25 @@ Updates the source thumbnail coordinates while the viewer is open. Call this ins
 onPageSelected: async (index) => {
   const rect = await measureThumbnail(index); // your measurement logic
   if (rect) {
-    RNTurboImagePicker.updateSourceRect(rect);
+    AttachmentKit.updateSourceRect(rect);
   }
 }
 ```
 
 ---
 
-### `RNTurboImagePicker.closeGallery(): Promise<boolean>`
+### `AttachmentKit.closeGallery(): Promise<boolean>`
 
 Programmatically closes the gallery picker. Returns `true` if it was open and is now closed.
 
 ---
 
-### `RNTurboImagePicker.addSelectionChangeListener(listener): () => void`
+### `AttachmentKit.addSelectionChangeListener(listener): () => void`
 
 Subscribes to selection change events outside of `openGallery`. Returns an unsubscribe function.
 
 ```typescript
-const unsubscribe = RNTurboImagePicker.addSelectionChangeListener((event) => {
+const unsubscribe = AttachmentKit.addSelectionChangeListener((event) => {
   console.log(`${event.selectedCount} / ${event.maxSelection} selected`);
 });
 
@@ -264,23 +264,23 @@ unsubscribe();
 
 ---
 
-### `RNTurboImagePicker.getDefaultAnimationConfig(): Promise<AnimationConfig>`
+### `AttachmentKit.getDefaultAnimationConfig(): Promise<AnimationConfig>`
 
 Returns the native default animation durations (in ms) for all transitions. Useful for synchronizing JS animations.
 
 ```typescript
-const config = await RNTurboImagePicker.getDefaultAnimationConfig();
+const config = await AttachmentKit.getDefaultAnimationConfig();
 // { galleryOpen, galleryClose, editorOpen, editorClose, viewerOpen, viewerClose }
 ```
 
 ---
 
-### `RNTurboImagePicker.injectImageCache(url, localPath): Promise<boolean>`
+### `AttachmentKit.injectImageCache(url, localPath): Promise<boolean>`
 
 Pre-populates the native image cache (SDWebImage on iOS, Glide on Android) with a local file for a given remote URL. This lets the viewer display the image instantly from disk without a network request.
 
 ```typescript
-await RNTurboImagePicker.injectImageCache(
+await AttachmentKit.injectImageCache(
   'https://example.com/photo.jpg',
   '/path/to/cached/photo.jpg'
 );
@@ -322,6 +322,6 @@ interface SourceRect {
 
 ## 📜 License & Contact
 
-This `RNTurboImagePicker` library is released under the **MIT License**.
+This `react-native-attachment-kit` library is released under the **MIT License**.
 
 📧 **Contact**: [contact@usomnia.co.kr](mailto:contact@usomnia.co.kr)

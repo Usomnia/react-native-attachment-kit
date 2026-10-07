@@ -169,7 +169,7 @@ export interface EditorOptions {
   closeDuration?: number
 }
 
-export interface RNTurboImagePicker {
+export interface RNAttachmentKit {
   init(licenseKey: string): Promise<boolean>
   openGallery(options?: GalleryOptions): Promise<ImageResult[]>
   openEditor(options: EditorOptions): Promise<ImageResult>
@@ -248,9 +248,18 @@ export interface MediaGalleryNeedPageEvent {
   cursor: string | null
 }
 
+export interface MediaGalleryGridSizeChangedEvent {
+  galleryId: string
+  /** 사용자가 고른 그리드 크기 */
+  gridSize: MediaGalleryGridSize
+}
+
 export interface MediaGalleryClosedEvent {
   galleryId: string
 }
+
+/** 사진 모아보기 그리드 크기 — 한 줄에 3 / 4 / 5칸 */
+export type MediaGalleryGridSize = "3x3" | "4x4" | "5x5"
 
 export interface MediaGalleryOptions {
   /** 이벤트 구분용 (생략 시 자동 생성해서 반환) */
@@ -266,7 +275,14 @@ export interface MediaGalleryOptions {
   nextCursor?: string
   /** 상단 바 제목 */
   title: string
-  /** 기본 3 (피커와 동일) */
+  /**
+   * 기본 그리드 크기 (사용자가 아직 고른 적이 없을 때). 생략 시 "3x3" (피커와 동일).
+   * - "3x3": 한 줄 3칸 / "4x4": 한 줄 4칸 / "5x5": 한 줄 5칸
+   * 사용자는 열린 화면의 상단 바 그리드 버튼으로 언제든 바꿀 수 있고, 고른 크기는 기기에 저장되어
+   * 다음에 열 때 이 옵션보다 우선합니다. columns 보다 우선합니다.
+   */
+  gridSize?: MediaGalleryGridSize
+  /** @deprecated gridSize 를 쓰세요. 기본 한 줄 칸 수 (gridSize 가 있거나 사용자가 고른 값이 있으면 무시) */
   columns?: number
   /** 칸 사이 간격 pt/dp (기본: 피커와 동일) */
   spacing?: number
@@ -284,6 +300,8 @@ export interface MediaGalleryOptions {
   /** (B) 다음 페이지 요청 → appendGalleryItems 로 응답 */
   onNeedPage?: (event: MediaGalleryNeedPageEvent) => void
   onClosed?: (event: MediaGalleryClosedEvent) => void
+  /** 사용자가 상단 바 그리드 버튼으로 크기를 바꿨을 때 (모듈이 이미 기기에 저장함 — 앱이 따로 저장하려면 사용) */
+  onGridSizeChanged?: (event: MediaGalleryGridSizeChangedEvent) => void
 }
 
 export interface MediaGalleryAppendPayload {

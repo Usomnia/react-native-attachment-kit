@@ -1,27 +1,30 @@
 {
-  "name": "react-native-turbo-image-picker",
-  "version": "2.0.8",
-  "description": "High-performance Telegram-like image gallery picker for React Native with Turbo Module",
+  "name": "react-native-attachment-kit",
+  "version": "1.0.0",
+  "description": "Native attachment kit for React Native — gallery picker, editor, image viewer and media gallery (Turbo Module)",
   "main": "src/index.ts",
   "types": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "typescript": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "example": "yarn --cwd ../RNTurboImagePickerApp"
+    "example": "yarn --cwd ../RNAttachmentKitApp"
   },
   "keywords": [
     "react-native",
     "ios",
     "android",
+    "attachment",
     "image-picker",
     "gallery",
     "photo-picker",
-    "telegram",
+    "media-gallery",
+    "image-viewer",
+    "image-editor",
     "turbo-module",
     "new-architecture"
   ],
-  "homepage": "https://github.com/Usomnia/react-native-turbo-image-picker",
+  "homepage": "https://github.com/Usomnia/react-native-attachment-kit",
   "author": "Mike",
   "license": "MIT",
   "peerDependencies": {
@@ -37,30 +40,29 @@
   },
   "files": [
     "src",
-    "ios/RNTurboImagePicker.xcframework",
-    "ios/RNTurboImagePicker.h",
-    "ios/RNTurboImagePicker.m",
-    "ios/RNTurboImagePicker.mm",
-    "ios/RNTurboImagePicker.swift",
-    "ios/RNTurboImagePickerAssets",
+    "ios/RNAttachmentKit.xcframework",
+    "ios/RNAttachmentKit.m",
+    "ios/RNAttachmentKit.swift",
+    "ios/RNAttachmentKitAssets",
     "android/src",
     "android/build.gradle",
     "android/CMakeLists.txt",
     "android/proguard-rules.pro",
-    "react-native-turbo-image-picker.podspec",
+    "react-native-attachment-kit.podspec",
     "README.md",
+    "CHANGELOG.md",
     "react-native.config.js"
   ],
   "codegenConfig": {
-    "name": "RNTurboImagePickerSpec",
+    "name": "RNAttachmentKitSpec",
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackageName": "com.rnturboimagepicker"
+      "javaPackageName": "com.rnattachmentkit"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Usomnia/react-native-turbo-image-picker.git"
+    "url": "https://github.com/Usomnia/react-native-attachment-kit.git"
   }
 }

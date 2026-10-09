@@ -1,5 +1,5 @@
 import { NativeModules, Platform, TurboModuleRegistry, NativeEventEmitter } from "react-native"
-import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions, MediaGalleryOptions, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
+import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions, MediaGalleryOptions, MediaGalleryAppendPayload, MediaGalleryRemovePayload, Appearance } from "./types"
 
 const LINKING_ERROR = `The package 'react-native-attachment-kit' doesn't seem to be linked. Make sure: \n\n` + Platform.select({ ios: "- You have run 'pod install'\n", default: "" }) + "- You rebuilt the app after installing the package\n" + "- You are not using Expo Go\n"
 
@@ -15,6 +15,13 @@ try {
 
 let _defaultThemeColor = "#10b981";
 let _defaultLanguageCode = "en";
+let _defaultAppearance: Appearance = "system";
+
+/** "light" | "dark" 외의 값(생략·오타 포함)은 "system" */
+export function normalizeAppearance(value?: string | null): Appearance {
+  const v = String(value ?? "").trim().toLowerCase()
+  return v === "light" || v === "dark" ? v : "system"
+}
 
 /** 모듈이 번역을 내장한 언어 코드 (ISO 639-1, 59개) */
 export const SUPPORTED_LANGUAGE_CODES: readonly string[] = ["af", "ar", "be", "bg", "bn", "ca", "cs", "cy", "da", "de", "el", "en", "eo", "es", "et", "fa", "fi", "fr", "ga", "gl", "gu", "he", "hi", "hr", "ht", "hu", "id", "is", "it", "ja", "ka", "kn", "ko", "lt", "lv", "mk", "mr", "ms", "mt", "nl", "no", "pl", "pt", "ro", "ru", "sk", "sl", "sq", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "ur", "vi", "zh"]
@@ -34,7 +41,15 @@ export function normalizeLanguageCode(code?: string | null): string {
 export interface InitOptions {
   languageCode?: string;
   themeColor?: string;
+  /**
+   * 화면 모드 기본값. "system"(기본) = 기기 설정을 따름, "light"/"dark" = 강제.
+   * 각 open* 호출의 appearance 옵션이 있으면 그게 우선합니다.
+   */
+  appearance?: Appearance;
 }
+
+/** 기본값만 바꿀 때 (예: 앱 설정에서 테마/언어를 바꾼 직후). 넘긴 값만 바뀝니다. */
+export type DefaultOptions = InitOptions
 
 // Fallback to Legacy Native Module (Old Architecture)
 const LegacyModule = NativeModules.RNAttachmentKit
@@ -49,11 +64,15 @@ if (!RNAttachmentKitModule) {
 // Create event emitter
 const eventEmitter = new NativeEventEmitter(RNAttachmentKitModule)
 
-export type { SelectionChangeEvent } from "./types"
+export type { SelectionChangeEvent, Appearance } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
 export interface RNAttachmentKit {
   init(licenseKey: string, options?: InitOptions): Promise<boolean>
+  /** 기본 언어 / 테마 색 / 화면 모드를 바꿈 (init 이후 언제든) */
+  setDefaults(options: DefaultOptions): void
+  /** 현재 기본값 */
+  getDefaults(): { languageCode: string; themeColor: string; appearance: Appearance }
   openGallery(options?: GalleryOptions): Promise<ImageResult[]>
   openEditor(options: EditorOptions): Promise<ImageResult>
   openViewer(options: ViewerOptions): Promise<void>
@@ -81,11 +100,22 @@ const AttachmentKit: RNAttachmentKit = {
     if (options?.languageCode) {
       _defaultLanguageCode = normalizeLanguageCode(options.languageCode);
     }
+    if (options?.appearance) {
+      _defaultAppearance = normalizeAppearance(options.appearance);
+    }
     if (!RNAttachmentKitModule) {
       throw new Error(LINKING_ERROR)
     }
     return RNAttachmentKitModule.init(licenseKey)
   },
+
+  setDefaults: (options: DefaultOptions): void => {
+    if (options?.themeColor) _defaultThemeColor = options.themeColor
+    if (options?.languageCode) _defaultLanguageCode = normalizeLanguageCode(options.languageCode)
+    if (options?.appearance) _defaultAppearance = normalizeAppearance(options.appearance)
+  },
+
+  getDefaults: () => ({ languageCode: _defaultLanguageCode, themeColor: _defaultThemeColor, appearance: _defaultAppearance }),
 
   openGallery: async (options: GalleryOptions = {}): Promise<ImageResult[]> => {
     if (!RNAttachmentKitModule) {
@@ -109,9 +139,11 @@ const AttachmentKit: RNAttachmentKit = {
       const nativeOptions = {
         themeColor: _defaultThemeColor,
         languageCode: _defaultLanguageCode,
+        appearance: _defaultAppearance,
         ...restOptions,
       }
       nativeOptions.languageCode = normalizeLanguageCode(nativeOptions.languageCode)
+      nativeOptions.appearance = normalizeAppearance(nativeOptions.appearance)
       const result = await RNAttachmentKitModule.openGallery(nativeOptions)
       return result
     } finally {
@@ -134,9 +166,11 @@ const AttachmentKit: RNAttachmentKit = {
     const mergedOptions = {
       themeColor: _defaultThemeColor,
       languageCode: _defaultLanguageCode,
+      appearance: _defaultAppearance,
       ...options,
     }
     mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
+    mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
     return RNAttachmentKitModule.openEditor(mergedOptions)
   },
 
@@ -226,9 +260,11 @@ const AttachmentKit: RNAttachmentKit = {
       const mergedOptions = {
         themeColor: _defaultThemeColor,
         languageCode: _defaultLanguageCode,
+        appearance: _defaultAppearance,
         ...restOptions,
       }
       mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
+      mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
       return await RNAttachmentKitModule.openViewer(mergedOptions)
     } finally {
       // Listeners are now removed inside the onViewerWillClose callback
@@ -326,7 +362,13 @@ const AttachmentKit: RNAttachmentKit = {
       galleryId,
     }
     nativeOptions.languageCode = normalizeLanguageCode(nativeOptions.languageCode)
-    nativeOptions.viewer = { themeColor: _defaultThemeColor, ...(rest.viewer || {}) }
+    // 화면 모드: theme.isDark 를 직접 넘기지 않았으면 appearance(옵션 > 기본값)로 정함 ("system" 이면 기기 설정)
+    const appearance = normalizeAppearance(rest.appearance ?? _defaultAppearance)
+    delete nativeOptions.appearance
+    if (appearance !== "system" && (rest.theme == null || rest.theme.isDark == null)) {
+      nativeOptions.theme = { ...(rest.theme || {}), isDark: appearance === "dark" }
+    }
+    nativeOptions.viewer = { themeColor: _defaultThemeColor, appearance, ...(rest.viewer || {}) }
     try {
       const result = await RNAttachmentKitModule.openMediaGallery(nativeOptions)
       return { galleryId: (result && result.galleryId) || galleryId }

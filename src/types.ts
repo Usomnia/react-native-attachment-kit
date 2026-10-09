@@ -1,3 +1,6 @@
+/** 화면 모드: 기기 설정 따름 / 라이트 강제 / 다크 강제 */
+export type Appearance = "system" | "light" | "dark"
+
 /** 모듈이 번역을 내장한 언어 코드 (ISO 639-1, 59개) */
 export type SupportedLanguageCode = "af" | "ar" | "be" | "bg" | "bn" | "ca" | "cs" | "cy" | "da" | "de" | "el" | "en" | "eo" | "es" | "et" | "fa" | "fi" | "fr" | "ga" | "gl" | "gu" | "he" | "hi" | "hr" | "ht" | "hu" | "id" | "is" | "it" | "ja" | "ka" | "kn" | "ko" | "lt" | "lv" | "mk" | "mr" | "ms" | "mt" | "nl" | "no" | "pl" | "pt" | "ro" | "ru" | "sk" | "sl" | "sq" | "sv" | "sw" | "ta" | "te" | "th" | "tl" | "tr" | "uk" | "ur" | "vi" | "zh"
 
@@ -50,6 +53,11 @@ export interface GalleryOptions {
   enableEditor?: boolean // 단일 이미지 선택 시 편집기 활성화 여부
   profileMode?: boolean // 1:1 프로필 크롭 모드 활성화 여부
   themeColor?: string // 테마 컬러 지정 (ex: "#FFEB3B")
+  /**
+   * 화면 모드. "system"(기본)은 기기 설정을 따르고, "light"/"dark" 는 강제합니다.
+   * 생략하면 init / setDefaults 의 appearance 기본값을 씁니다.
+   */
+  appearance?: Appearance
   asyncProcessing?: boolean // 완전 비동기 이벤트 리턴 여부
   onSelectionChange?: (event: SelectionChangeEvent) => void
   onImageProcessed?: (event: any) => void
@@ -68,6 +76,11 @@ export interface ViewerOptions {
   cacheFiles?: (string | null)[]
   initialIndex?: number
   themeColor?: string // Added themeColor for Android
+  /**
+   * 화면 모드. "system"(기본)은 기기 설정을 따르고, "light"/"dark" 는 강제합니다.
+   * 생략하면 init / setDefaults 의 appearance 기본값을 씁니다.
+   */
+  appearance?: Appearance
   title?: string
   animationType?: 'slide' | 'fade' | 'zoom'
   closeAnimationType?: 'slide' | 'fade' | 'zoom'
@@ -163,6 +176,11 @@ export interface EditorOptions {
   uri: string // 편집할 이미지의 uri (originalUri)
   editedFileUri?: string // 이전에 편집한 이미지의 파일 경로
   themeColor?: string // 편집기 테마 컬러
+  /**
+   * 화면 모드. "system"(기본)은 기기 설정을 따르고, "light"/"dark" 는 강제합니다.
+   * 생략하면 init / setDefaults 의 appearance 기본값을 씁니다.
+   */
+  appearance?: Appearance
   maxWidth?: number // 최대 width
   maxHeight?: number // 최대 height
   openDuration?: number
@@ -287,6 +305,11 @@ export interface MediaGalleryOptions {
   /** 칸 사이 간격 pt/dp (기본: 피커와 동일) */
   spacing?: number
   theme?: Partial<MediaGalleryTheme>
+  /**
+   * 화면 모드. "system"(기본)은 기기 설정을 따르고, "light"/"dark" 는 강제합니다.
+   * 생략하면 init / setDefaults 의 appearance 기본값을 씁니다.
+   */
+  appearance?: Appearance
   /** 월 표시 로케일 */
   languageCode?: LanguageCode
   emptyTitle?: string

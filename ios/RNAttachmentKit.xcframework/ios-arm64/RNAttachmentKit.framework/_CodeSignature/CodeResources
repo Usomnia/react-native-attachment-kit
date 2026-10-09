@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		03VRzGjp6W0VqxFvJN8AY4xjRVw=
+		24XBU3LEblGjGTOAqjhqZ+mB2U0=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -22,31 +22,31 @@
 		</data>
 		<key>Headers/RNAttachmentKit-Swift.h</key>
 		<data>
-		Ys9lLqlfJAtIsFQq26nfQENxyeo=
+		9eXYEX8SEHbJbIAO5oi9E+ixfSE=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		SD1iiBGnOP+ezicinOy7RIipzl4=
+		j3hBOu8tw88RaNdCsncnO061Ieo=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		k50kV/DkT8T5xIP/1xzHIXeZdog=
+		uwkHCPtan0seIRQLswQUe4/uCkw=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		Ujk+Igywe9COJTCi81xVkTwcECA=
+		4Ybp3MM3g60QP1iMcymg0U7h+HY=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		BoBYaR3IApHGqz2ytdbt7FSoMKg=
+		kpidfdF6Ix5tuAsZUpgnrtXbjE8=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		Ujk+Igywe9COJTCi81xVkTwcECA=
+		4Ybp3MM3g60QP1iMcymg0U7h+HY=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		lfMptBMjkGulaQeX5V1qNyL9TvQ=
+		DTRbmac6/AbqawAYeqUzlSxJDXI=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -159,7 +159,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			K6PX3sVHEd2JeOb4jj/ugkC2t0a59p3+09NK+dozSlk=
+			hcxV/4NZu79SXIpwsHu8Fo8WVAZLQfuKhITugdLFV+I=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -187,42 +187,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			bM0iiWPf6o9M05ArRiKahUTATZ1mWI9l1ANOby/8zgA=
+			F7r8P8o20cnjZ0RH4uFyX5XG8G2SQS5yI60bTFDuhSs=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			swY7U8UzMQ/ZEeo0Guv6KIlNHjatWsYkJSHloI+Ez7Q=
+			Ypciu0FX/bBykNCBBhlREgixbP+yP9KTWc2xgMgDxiQ=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XhL9SSY52JKK8XvXWGNKJJl3Bj/CVIX9X/2rgeXVyRA=
+			kx3y9JLU6Rl4k8m0ZWGJiSn2vqEqM5AkdY8SCyOWEpk=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ar7BVsm6eeVUfPkb4yz+MJtOs+Kg+ded+jd3g6qY/4A=
+			QVpeKdqP1B11pCZP1cESZSWOYR+A6HBG2jMfydq6tEY=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XhL9SSY52JKK8XvXWGNKJJl3Bj/CVIX9X/2rgeXVyRA=
+			kx3y9JLU6Rl4k8m0ZWGJiSn2vqEqM5AkdY8SCyOWEpk=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			puAg5DUWjtUua5aJ7x6Yf0B/wJcqwC+Rx2KkUZcVzEQ=
+			LOUKg1KcGpQxxueRryHU9uVtkh/B8o1ZkYRfKmDAMDY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

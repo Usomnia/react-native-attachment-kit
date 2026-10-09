@@ -69,7 +69,8 @@ import AttachmentKit from 'react-native-attachment-kit';
 // Pass your license key (if you have one to remove the watermark) and default configurations
 AttachmentKit.init("", { 
   languageCode: 'en', 
-  themeColor: '#ff0000' 
+  themeColor: '#ff0000',
+  appearance: 'system', // 'system' (default, follows the device) | 'light' | 'dark'
 }).catch(console.error);
 
 // Step 2: Open Image Picker
@@ -137,6 +138,15 @@ Initializes the module with a license key and global defaults.
 | `licenseKey` | `string` | Your license key. Pass `""` for evaluation (watermark shown). |
 | `options.themeColor` | `string` | Global default theme color (hex). |
 | `options.languageCode` | `string` | Global default language code. |
+| `options.appearance` | `'system' \| 'light' \| 'dark'` | Global default screen mode. `'system'` (default) follows the device setting; `'light'` / `'dark'` force it. Every `open*` call also accepts `appearance` to override per call. |
+
+### `AttachmentKit.setDefaults(options)` / `AttachmentKit.getDefaults()`
+
+Changes the global defaults (`languageCode`, `themeColor`, `appearance`) at any time after `init` — e.g. right after the user changes the app's theme or language. Only the values you pass are changed.
+
+```ts
+AttachmentKit.setDefaults({ appearance: 'dark' })
+```
 
 ---
 

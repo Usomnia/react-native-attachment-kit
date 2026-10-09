@@ -4,15 +4,18 @@
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.3
 import AVFoundation
 import CoreImage
+import CoreLocation
 import CoreText
 import CryptoKit
 import DeveloperToolsSupport
 import Foundation
 import ImageIO
+import MapKit
 import Photos
 import Swift
 import SwiftUI
 import UIKit
+import UniformTypeIdentifiers
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -27,6 +30,21 @@ import _SwiftConcurrencyShims
   @_Concurrency.MainActor @preconcurrency public var profileCropTransitionDelegate: (any UIKit.UIViewControllerTransitioningDelegate)?
   @_Concurrency.MainActor @preconcurrency public var maxSelection: Swift.Int
   @_Concurrency.MainActor @preconcurrency public var forceMultiMode: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var showsAttachMenu: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var attachMenuTabs: [RNAttachmentKit.AttachMenuTab]
+  @_Concurrency.MainActor @preconcurrency public var onAttachMenuTabChanged: ((RNAttachmentKit.AttachMenuTab) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var selectedAttachTab: RNAttachmentKit.AttachMenuTab {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var attachMenuBar: RNAttachmentKit.AttachMenuBar {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var attachMenuBackdrop: RNAttachmentKit.AttachMenuBackdrop {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public var onLocationSelected: ((RNAttachmentKit.AttachLocationResult) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onFilesSelected: (([RNAttachmentKit.AttachFileResult]) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var allowsMultipleFiles: Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor @preconcurrency public var maxWidth: Swift.Int
@@ -84,6 +102,100 @@ import _SwiftConcurrencyShims
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init()
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
+}
+extension RNAttachmentKit.GalleryViewController : UIKit.UIGestureRecognizerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc final public func gestureRecognizer(_ gestureRecognizer: UIKit.UIGestureRecognizer, shouldReceive touch: UIKit.UITouch) -> Swift.Bool
+}
+extension RNAttachmentKit.GalleryBaseViewController : UIKit.UIDocumentPickerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func documentPicker(_ controller: UIKit.UIDocumentPickerViewController, didPickDocumentsAt urls: [Foundation.URL])
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func documentPickerWasCancelled(_ controller: UIKit.UIDocumentPickerViewController)
+}
+public enum AttachMenuTab : Swift.String, Swift.CaseIterable {
+  case gallery
+  case location
+  case file
+  public init?(rawValue: Swift.String)
+  public typealias AllCases = [RNAttachmentKit.AttachMenuTab]
+  public typealias RawValue = Swift.String
+  nonisolated public static var allCases: [RNAttachmentKit.AttachMenuTab] {
+    get
+  }
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class AttachMenuBar : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public static let barHeight: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static let sinkIntoSafeArea: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static let minBottomGap: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static let sideMargin: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var usesNativeTabBar: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public static var nativeContentHeight: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var nativeIconSize: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var nativeTitleSize: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var nativeTitleSpacing: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var nativeUsesClearGlass: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public static var nativeGlassTint: UIKit.UIColor?
+  @_Concurrency.MainActor @preconcurrency public static var nativeBackingPadding: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var reservedHeight: CoreFoundation.CGFloat {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency final public var onSelect: ((RNAttachmentKit.AttachMenuTab) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var selectedTab: RNAttachmentKit.AttachMenuTab {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency final public let tabs: [RNAttachmentKit.AttachMenuTab]
+  @_Concurrency.MainActor @preconcurrency final public var blurIntensity: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency final public var tintAlpha: CoreFoundation.CGFloat {
+    get
+    set
+  }
+  @_Concurrency.MainActor @preconcurrency public init(tabs: [RNAttachmentKit.AttachMenuTab] = AttachMenuTab.allCases, selected: RNAttachmentKit.AttachMenuTab = .gallery, languageCode: Swift.String, accentColor: UIKit.UIColor)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override final public func didMoveToWindow()
+  @_Concurrency.MainActor @preconcurrency final public func prepareNativeAppearance()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor @preconcurrency final public func select(_ tab: RNAttachmentKit.AttachMenuTab, animated: Swift.Bool, notify: Swift.Bool = false)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class AttachMenuBackdrop : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency public static var blurIntensity: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var materialStyle: UIKit.UIBlurEffect.Style?
+  @_Concurrency.MainActor @preconcurrency public static var dimAlpha: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency public static var fadeHeight: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func didMoveToWindow()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+}
+extension RNAttachmentKit.AttachMenuBar : UIKit.UITabBarDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc final public func tabBar(_ tabBar: UIKit.UITabBar, didSelect item: UIKit.UITabBarItem)
+}
+public struct AttachLocationResult {
+  public let latitude: Swift.Double
+  public let longitude: Swift.Double
+  public let accuracy: Swift.Double?
+  public let title: Swift.String?
+  public let address: Swift.String?
+  public let isCurrentLocation: Swift.Bool
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+}
+public struct AttachFileResult {
+  public let url: Foundation.URL
+  public let name: Swift.String
+  public let size: Swift.Int64
+  public let mimeType: Swift.String
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
 }
 public struct FilterState {
   public var filterId: Swift.String
@@ -513,5 +625,8 @@ extension RNAttachmentKit.MediaGalleryViewController : UIKit.UICollectionViewDat
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init()
   @objc deinit
 }
+extension RNAttachmentKit.AttachMenuTab : Swift.Equatable {}
+extension RNAttachmentKit.AttachMenuTab : Swift.Hashable {}
+extension RNAttachmentKit.AttachMenuTab : Swift.RawRepresentable {}
 extension RNAttachmentKit.ImageEditorTransitionDelegate : Swift.Sendable {}
 extension RNAttachmentKit.ZoomTransitionAnimator : Swift.Sendable {}

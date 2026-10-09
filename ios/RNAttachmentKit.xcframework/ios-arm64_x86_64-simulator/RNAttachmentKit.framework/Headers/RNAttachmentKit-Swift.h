@@ -374,6 +374,31 @@ extern "C" {
 
 @class NSCoder;
 @class UITraitCollection;
+/// 바 뒤 화면 하단을 아래로 갈수록 진하게 흐리게(+아주 옅게 어둡게) 덮는 배경. 터치는 통과.
+SWIFT_CLASS("_TtC15RNAttachmentKit18AttachMenuBackdrop")
+@interface AttachMenuBackdrop : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+- (void)didMoveToWindow;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
+
+SWIFT_CLASS("_TtC15RNAttachmentKit13AttachMenuBar")
+@interface AttachMenuBar : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)didMoveToWindow;
+- (void)layoutSubviews;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+@class UITabBar;
+@class UITabBarItem;
+@interface AttachMenuBar (SWIFT_EXTENSION(RNAttachmentKit)) <UITabBarDelegate>
+- (void)tabBar:(UITabBar * _Nonnull)tabBar didSelectItem:(UITabBarItem * _Nonnull)item;
+@end
+
 @class NSString;
 @class NSBundle;
 SWIFT_CLASS("_TtC15RNAttachmentKit25GalleryBaseViewController")
@@ -414,6 +439,13 @@ SWIFT_AVAILABILITY(ios,introduced=15.0)
 - (void)collectionView:(UICollectionView * _Nonnull)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths;
 @end
 
+@class UIDocumentPickerViewController;
+@class NSURL;
+@interface GalleryBaseViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIDocumentPickerDelegate>
+- (void)documentPicker:(UIDocumentPickerViewController * _Nonnull)controller didPickDocumentsAtURLs:(NSArray<NSURL *> * _Nonnull)urls;
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController * _Nonnull)controller;
+@end
+
 @class UIImagePickerController;
 @interface GalleryBaseViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (void)imagePickerController:(UIImagePickerController * _Nonnull)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info;
@@ -443,6 +475,12 @@ SWIFT_CLASS("_TtC15RNAttachmentKit21GalleryViewController")
 - (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UIGestureRecognizer;
+@class UITouch;
+@interface GalleryViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIGestureRecognizerDelegate>
+- (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldReceiveTouch:(UITouch * _Nonnull)touch SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @protocol UIViewControllerAnimatedTransitioning;
@@ -475,7 +513,6 @@ SWIFT_CLASS("_TtC15RNAttachmentKit25ImageEditorViewController")
 - (void)collectionView:(UICollectionView * _Nonnull)cv cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths;
 @end
 
-@class UIGestureRecognizer;
 @interface ImageEditorViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
@@ -951,6 +988,31 @@ extern "C" {
 
 @class NSCoder;
 @class UITraitCollection;
+/// 바 뒤 화면 하단을 아래로 갈수록 진하게 흐리게(+아주 옅게 어둡게) 덮는 배경. 터치는 통과.
+SWIFT_CLASS("_TtC15RNAttachmentKit18AttachMenuBackdrop")
+@interface AttachMenuBackdrop : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+- (void)didMoveToWindow;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
+
+SWIFT_CLASS("_TtC15RNAttachmentKit13AttachMenuBar")
+@interface AttachMenuBar : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)didMoveToWindow;
+- (void)layoutSubviews;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+@class UITabBar;
+@class UITabBarItem;
+@interface AttachMenuBar (SWIFT_EXTENSION(RNAttachmentKit)) <UITabBarDelegate>
+- (void)tabBar:(UITabBar * _Nonnull)tabBar didSelectItem:(UITabBarItem * _Nonnull)item;
+@end
+
 @class NSString;
 @class NSBundle;
 SWIFT_CLASS("_TtC15RNAttachmentKit25GalleryBaseViewController")
@@ -991,6 +1053,13 @@ SWIFT_AVAILABILITY(ios,introduced=15.0)
 - (void)collectionView:(UICollectionView * _Nonnull)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths;
 @end
 
+@class UIDocumentPickerViewController;
+@class NSURL;
+@interface GalleryBaseViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIDocumentPickerDelegate>
+- (void)documentPicker:(UIDocumentPickerViewController * _Nonnull)controller didPickDocumentsAtURLs:(NSArray<NSURL *> * _Nonnull)urls;
+- (void)documentPickerWasCancelled:(UIDocumentPickerViewController * _Nonnull)controller;
+@end
+
 @class UIImagePickerController;
 @interface GalleryBaseViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (void)imagePickerController:(UIImagePickerController * _Nonnull)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> * _Nonnull)info;
@@ -1020,6 +1089,12 @@ SWIFT_CLASS("_TtC15RNAttachmentKit21GalleryViewController")
 - (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UIGestureRecognizer;
+@class UITouch;
+@interface GalleryViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIGestureRecognizerDelegate>
+- (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldReceiveTouch:(UITouch * _Nonnull)touch SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @protocol UIViewControllerAnimatedTransitioning;
@@ -1052,7 +1127,6 @@ SWIFT_CLASS("_TtC15RNAttachmentKit25ImageEditorViewController")
 - (void)collectionView:(UICollectionView * _Nonnull)cv cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> * _Nonnull)indexPaths;
 @end
 
-@class UIGestureRecognizer;
 @interface ImageEditorViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer * _Nonnull)gestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;

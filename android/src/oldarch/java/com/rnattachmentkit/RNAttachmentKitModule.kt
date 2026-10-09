@@ -137,6 +137,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
     @ReactMethod
     override fun openEditor(options: ReadableMap, promise: Promise) {
         val activity = getCurrentActivity()
+        TurboImagePickerConfig.updateAppearance(if (options.hasKey("appearance")) options.getString("appearance") else null)
         if (activity == null) {
             promise.reject(E_NO_ACTIVITY, "Activity doesn't exist")
             return
@@ -212,6 +213,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         // 편집기/크롭 등 다른 화면들은 TurboImagePickerConfig.languageCode(전역)로 로케일을 잡는데,
         // 그동안 JS가 넘긴 languageCode를 여기에 반영하는 코드가 없어서 항상 기본값 "en"이었습니다.
         TurboImagePickerConfig.languageCode = languageCode
+        TurboImagePickerConfig.updateAppearance(if (options.hasKey("appearance")) options.getString("appearance") else null)
         
         val themeColor = if (options.hasKey("themeColor")) {
             options.getString("themeColor")
@@ -458,6 +460,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         // 설정된 언어를 따릅니다.
         val viewerLanguageCode = if (options.hasKey("languageCode")) (options.getString("languageCode") ?: "en") else "en"
         TurboImagePickerConfig.languageCode = viewerLanguageCode
+        TurboImagePickerConfig.updateAppearance(if (options.hasKey("appearance")) options.getString("appearance") else null)
         
         val openDuration = if (options.hasKey("openDuration")) options.getInt("openDuration") else defaultAnimationConfig["viewerOpen"] ?: 250
         val closeDuration = if (options.hasKey("closeDuration")) options.getInt("closeDuration") else defaultAnimationConfig["viewerClose"] ?: 200

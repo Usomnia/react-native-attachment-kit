@@ -1,6 +1,6 @@
 {
   "name": "react-native-attachment-kit",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Native attachment kit for React Native — gallery picker, editor, image viewer and media gallery (Turbo Module)",
   "main": "src/index.ts",
   "types": "src/index.ts",

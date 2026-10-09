@@ -22,6 +22,16 @@ import SDWebImageWebPCoder
 
 @objc(RNAttachmentKit)
 class RNAttachmentKit: RCTEventEmitter {
+
+    /// RN 옵션 appearance: "light" | "dark" | "system"(기본, 생략) → 화면 강제 모드.
+    /// "system" 이면 기기 설정을 따릅니다 (.unspecified).
+    static func interfaceStyle(_ options: NSDictionary?) -> UIUserInterfaceStyle {
+        switch (options?["appearance"] as? String)?.lowercased() {
+        case "dark": return .dark
+        case "light": return .light
+        default: return .unspecified
+        }
+    }
     
     public static var shared: RNAttachmentKit?
     
@@ -286,6 +296,7 @@ class RNAttachmentKit: RCTEventEmitter {
             self.zoomAnimator.sourceImage = nil
             
             viewerVC.modalPresentationStyle = .custom
+            viewerVC.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
             viewerVC.transitioningDelegate = self
             
             self.activeViewerVC = viewerVC
@@ -452,6 +463,7 @@ class RNAttachmentKit: RCTEventEmitter {
                 editorVC.allAssets = [asset]
                 editorVC.currentIndex = 0
                 editorVC.modalPresentationStyle = .fullScreen
+                editorVC.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
                 editorVC.singlePhotoMode = true
                 if let color = themeColor {
                     editorVC.themeColor = color
@@ -502,6 +514,7 @@ class RNAttachmentKit: RCTEventEmitter {
                             editorVC.standaloneImage = image
                             editorVC.currentIndex = 0
                             editorVC.modalPresentationStyle = .fullScreen
+                            editorVC.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
                             editorVC.singlePhotoMode = true
                             if let color = themeColor {
                                 editorVC.themeColor = color
@@ -648,6 +661,7 @@ class RNAttachmentKit: RCTEventEmitter {
                         editorVC.disableCrop = true
                         editorVC.croppedImages = [0: croppedImage]
                         editorVC.modalPresentationStyle = .overFullScreen
+                        editorVC.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
                         
                         if let hex = currentGallery.themeColorHex, let color = UIColor(hexString: hex) {
                             editorVC.themeColor = color
@@ -829,6 +843,7 @@ class RNAttachmentKit: RCTEventEmitter {
 
             let navigationController = UINavigationController(rootViewController: galleryVC)
             navigationController.modalPresentationStyle = .custom
+            navigationController.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
             navigationController.transitioningDelegate = galleryVC.customTransitioningDelegate
             
             // navigationController.view.backgroundColor 설정 제거 (투명한 탑바 지원을 위함)
@@ -1613,6 +1628,7 @@ fileprivate extension RNAttachmentKit {
         }
         
         editorVC.modalPresentationStyle = .overFullScreen
+        editorVC.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
         editorVC.singlePhotoMode = !isMultiSelect
         // selectionMode 'multi' + 최대 1장: 편집 화면에서 다른 사진을 선택하면 기존 선택과 교체
         editorVC.replaceSelectionWhenFull = currentGallery.forceMultiMode && currentGallery.maxSelection == 1

@@ -347,7 +347,9 @@ extern "C" {
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import CoreFoundation;
+@import CoreLocation;
 @import Foundation;
+@import MapKit;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -527,6 +529,34 @@ SWIFT_CLASS("_TtC15RNAttachmentKit25ImageEditorViewController")
 - (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 - (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)decelerate;
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView * _Nonnull)scrollView;
+@end
+
+SWIFT_CLASS("_TtC15RNAttachmentKit23MapViewerViewController")
+@interface MapViewerViewController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)viewDidLoad;
+- (void)viewDidLayoutSubviews;
+@property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidAppear:(BOOL)animated;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@class CLLocationManager;
+@class CLLocation;
+@interface MapViewerViewController (SWIFT_EXTENSION(RNAttachmentKit)) <CLLocationManagerDelegate>
+- (void)locationManagerDidChangeAuthorization:(CLLocationManager * _Nonnull)manager;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
+- (void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
+@end
+
+@class MKMapView;
+@protocol MKAnnotation;
+@class MKAnnotationView;
+@interface MapViewerViewController (SWIFT_EXTENSION(RNAttachmentKit)) <MKMapViewDelegate>
+- (void)mapViewDidFinishRenderingMap:(MKMapView * _Nonnull)mapView fullyRendered:(BOOL)fullyRendered;
+- (MKAnnotationView * _Nullable)mapView:(MKMapView * _Nonnull)mapView viewForAnnotation:(id <MKAnnotation> _Nonnull)annotation SWIFT_WARN_UNUSED_RESULT;
+- (void)mapView:(MKMapView * _Nonnull)mapView didSelectAnnotationView:(MKAnnotationView * _Nonnull)view;
 @end
 
 /// 사진 모아보기 화면. 피커 갤러리(GalleryViewController)와 같은 바텀시트(60% → 확장, 아래로 끌어 닫기),

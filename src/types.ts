@@ -61,8 +61,215 @@ export interface GalleryOptions {
   asyncProcessing?: boolean // 완전 비동기 이벤트 리턴 여부
   onSelectionChange?: (event: SelectionChangeEvent) => void
   onImageProcessed?: (event: any) => void
+  /**
+   * 갤러리 아래에 첨부 메뉴(갤러리 / 위치 / 파일)를 보여줍니다. 기본 false.
+   * 위치 탭: iOS 는 Apple 지도(키 필요 없음), Android 는 Google 지도 — 앱의 AndroidManifest 에
+   * `com.google.android.geo.API_KEY` meta-data 가 있어야 지도가 그려집니다 (주소 변환은 기기 내장 Geocoder).
+   */
+  showAttachMenu?: boolean
+  /**
+   * 위치 보내기 때 지도 캡처 이미지를 만들지 (기본 true = 예전과 같음).
+   * false 면 캡처 없이 위치 정보만 바로 보냅니다 — AttachLocationResult 에 imageUri/imagePath/imageWidth/imageHeight 가 없고,
+   * imageSpanMeters 는 캡처했을 때와 같은 값이 옵니다. 받는 쪽은 renderLocationThumbnail 로 썸네일을 그립니다.
+   */
+  captureLocationImage?: boolean
+  /**
+   * (Android) 첨부 메뉴 바의 아래 여백 조정 (dp).
+   * attachMenuSinkIntoNav: 바가 내비게이션 바 영역으로 내려앉는 정도. 기본 12 (지금 모양). 0 이면 내비게이션 바 바로 위.
+   * attachMenuMinBottomMargin: 화면 아래와의 최소 간격. 기본 8.
+   * iOS 는 무시.
+   */
+  attachMenuSinkIntoNav?: number
+  attachMenuMinBottomMargin?: number
+  /**
+   * 위치 탭에서 위치를 보냈을 때 호출됩니다. 이때 openGallery 는 빈 배열로 끝납니다.
+   */
+  onLocationSelected?: (location: AttachLocationResult) => void
+  /**
+   * 파일 탭에서 파일을 보냈을 때 호출됩니다 (앱 캐시/임시 폴더로 복사된 파일). 이때 openGallery 는 빈 배열로 끝납니다.
+   * Android 는 시스템 파일 선택기(내부 저장 공간 탐색), iOS 는 파일 앱 선택기를 씁니다.
+   * 복사에 실패한 파일이 있으면 두 번째 인자 failed 로 { name, error } 목록이 옵니다 (없으면 undefined).
+   * 복사본은 iOS tmp/AttachmentKitFiles, Android cache/AttachmentKitFiles 에 있고 24시간이 지난 것은 다음 갤러리 열기 때 지워지므로 바로 옮기거나 업로드하세요.
+   */
+  onFilesSelected?: (files: AttachFileResult[], failed?: AttachFileFailure[]) => void
   openDuration?: number
   closeDuration?: number
+}
+
+/** 첨부 메뉴 > 파일 에서 복사에 실패한 파일 */
+export interface AttachFileFailure {
+  /** 원래 파일 이름 */
+  name: string
+  /** 실패 사유 (네이티브 오류 메시지) */
+  error: string
+}
+
+/** 첨부 메뉴 > 파일 에서 보낸 파일 (앱 캐시/임시 폴더로 복사본) */
+export interface AttachFileResult {
+  /** file:// URI */
+  uri: string
+  /** 파일 경로 */
+  path: string
+  /** 원래 파일 이름 */
+  name: string
+  /** 바이트 */
+  size: number
+  mimeType: string
+}
+
+/** 첨부 메뉴 > 위치 에서 보낸 위치 */
+export interface AttachLocationResult {
+  latitude: number
+  longitude: number
+  /** 정확도(m). 내 현재 위치를 보낼 때만 */
+  accuracy?: number
+  /** 장소 이름 (장소를 골랐을 때) */
+  title?: string
+  /** 주소 */
+  address?: string
+  /** 내 현재 위치를 보냈는지 (false = 지도에서 옮긴 위치 또는 장소) */
+  isCurrentLocation: boolean
+  /** 보낸 지점의 지도 캡처 (세로형 480×1040 webp (9:19.5), 내 위치 점 없이 핀만). 캡처 실패 시 없음 */
+  imageUri?: string
+  imagePath?: string
+  imageWidth?: number
+  imageHeight?: number
+  /** 보낸 위치와 별개로, 보낸 순간의 내 현재 위치 (권한이 있고 위치를 알 때만) */
+  currentLatitude?: number
+  currentLongitude?: number
+  /** 내 현재 위치 정확도(m) */
+  currentAccuracy?: number
+  /** 지도 이미지에 내 위치 점을 그렸는지 ("내 위치 공유" 토글 — 기본 끔, 선택은 기기에 기억) */
+  includesMyLocation?: boolean
+  /** 마커 종류 (지도 뷰어가 같은 아이콘을 그리도록): "current" 내 위치 / "pin" 지도에서 옮긴 지점 / "place" 장소 */
+  markerType?: 'current' | 'pin' | 'place'
+  /** (iOS) 장소 종류 — MKPointOfInterestCategory rawValue. 장소일 때만 */
+  placeCategory?: string
+  /** 보낸 이미지 가로가 덮는 실제 거리(m) — 지도 뷰어를 같은 축척으로 열 때 (captureLocationImage: false 여도 옴) */
+  imageSpanMeters?: number
+}
+
+/**
+ * 위치 메시지 말풍선 지도 썸네일 — 이 기기에서 위치 정보만으로 그려 캐시합니다.
+ * AttachLocationResult 값을 그대로 넘기면 보낸 화면과 같은 마커·축척으로 그립니다.
+ */
+export interface LocationThumbnailOptions {
+  latitude: number
+  longitude: number
+  /** 썸네일 가로 (dp/pt). 결과 이미지는 기기 배율을 곱한 px */
+  width: number
+  /** 썸네일 세로 (dp/pt). aspect 를 주면 생략 (aspect 가 우선) */
+  height?: number
+  /**
+   * 세로를 가로에서 계산: "square" 1:1 / "portrait" 9:19.5 (보내는 지도 이미지와 같은 비율) /
+   * "device" 이 기기 화면 세로 비율 (지도 뷰어를 열 때 말풍선 이미지가 화면을 꼭 맞게 채움).
+   * 생략하면 height 를 그대로 씁니다.
+   */
+  aspect?: 'square' | 'portrait' | 'device'
+  /**
+   * 결과 이미지 최대 크기 (px). 비율을 유지한 채 이 안에 들어가게 줄입니다.
+   * 둘 다 생략하면 512 × 512, 하나만 주면 다른 쪽은 제한하지 않습니다.
+   * 예: width 170 + aspect "device" + maxWidth 512 + maxHeight 1152 → 3배 기기에서 약 510×1105 px (세로가 512 로 잘리지 않음)
+   */
+  maxWidth?: number
+  /** 결과 이미지 최대 세로 (px). maxWidth 참고 */
+  maxHeight?: number
+  /** AttachLocationResult.markerType — 마커 아이콘 */
+  markerType?: 'current' | 'pin' | 'place'
+  /** (iOS 아이콘) AttachLocationResult.placeCategory */
+  placeCategory?: string
+  /** 썸네일 가로가 덮는 실제 거리(m). AttachLocationResult.imageSpanMeters. 없으면 400 */
+  spanMeters?: number
+  /**
+   * 보낸 쪽이 "내 위치 공유"를 켰을 때(includesMyLocation)의 내 위치 — 있으면 파란 점을 그리고
+   * 두 점이 다 들어오게 범위를 넓힙니다. 공유를 안 켰으면 넘기지 마세요.
+   */
+  myLatitude?: number
+  myLongitude?: number
+  /** 마커 색 (기본: setDefaults 의 themeColor) */
+  themeColor?: string
+  /** 지도 모드. "system" 은 지금 기기/앱 화면 모드. 생략하면 setDefaults 의 appearance */
+  appearance?: Appearance
+}
+
+export interface LocationThumbnailResult {
+  /** file:// (캐시 파일, webp) */
+  uri: string
+  path: string
+  /** 픽셀 크기 */
+  width: number
+  height: number
+  /** 캐시에서 바로 꺼냈는지 */
+  cached: boolean
+}
+
+/**
+ * 지도 뷰어 (위치 메시지를 눌렀을 때). AttachLocationResult 의 값을 그대로 넘기면 보낸 화면과 같은 마커·축척으로 열립니다.
+ * sourceRect + sourceImageUri 를 주면 말풍선 이미지가 화면을 채우며 지도로 바뀌고(스티키), 닫을 땐 반대로 돌아갑니다.
+ */
+/** 좌표 → 주소 (기기 지오코더, 무료). 결과는 디스크에 캐시됩니다 */
+export interface ReverseGeocodeOptions {
+  latitude: number
+  longitude: number
+  /**
+   * 주소 언어. 앱 언어 코드 그대로 ('ko', 'en', 'ja', 'zh-Hans', 'zh-TW', 'pt-BR' …) — 모듈 UI 언어 목록으로 줄이지 않습니다.
+   * 생략하면 setDefaults / init 의 languageCode (넘긴 그대로)
+   */
+  languageCode?: string
+}
+
+export interface ReverseGeocodeResult {
+  /** 전체 주소. 위치 탭 address 와 같은 형식 (시·도 시·군·구 동 도로 번지, 국가명 없음). 결과가 없으면 null */
+  address: string | null
+  /** 목록용 짧은 주소 (동/도로 + 번지). 없으면 null */
+  shortAddress: string | null
+  /** 디스크(또는 메모리) 캐시에서 바로 꺼냈는지 */
+  cached: boolean
+}
+
+/**
+ * reverseGeocode reject 코드
+ *  - E_INVALID_COORDINATE: 범위를 벗어난 좌표 / NaN
+ *  - E_GEOCODE_UNAVAILABLE: (Android) 기기에 Geocoder 가 없음
+ *  - E_GEOCODE_THROTTLED: 요청 제한(iOS 앱당 분당 약 50건 등) — 잠시 뒤 다시 시도
+ *  - E_GEOCODE_TIMEOUT: 지오코더가 8초 안에 답하지 않음
+ *  - E_GEOCODE_NETWORK: 오프라인
+ *  - E_GEOCODE_FAILED: 그 밖의 오류
+ * 오류는 캐시하지 않습니다
+ */
+export type ReverseGeocodeErrorCode =
+  | 'E_INVALID_COORDINATE' | 'E_GEOCODE_UNAVAILABLE' | 'E_GEOCODE_THROTTLED'
+  | 'E_GEOCODE_TIMEOUT' | 'E_GEOCODE_NETWORK' | 'E_GEOCODE_FAILED'
+
+export interface MapViewerOptions {
+  latitude: number
+  longitude: number
+  /** 장소 이름 */
+  title?: string
+  /** 주소. 생략하면 기기 지오코더로 채움 (reverseGeocode 와 같은 캐시, 언어는 languageCode ?? setDefaults 의 languageCode) */
+  address?: string
+  /** AttachLocationResult.markerType — 보낸 화면과 같은 마커 */
+  markerType?: 'current' | 'pin' | 'place'
+  /** (iOS) AttachLocationResult.placeCategory */
+  placeCategory?: string
+  /** AttachLocationResult.imageSpanMeters — 처음 축척을 말풍선 이미지와 맞춤 */
+  spanMeters?: number
+  /** "길찾기" 버튼 표시 (기본 true) */
+  showDirections?: boolean
+  /** 말풍선 이미지 위치 (measureInWindow 값 그대로, dp/pt). 있으면 스티키 애니메이션 */
+  sourceRect?: SourceRect
+  /**
+   * 말풍선 이미지 (https:// 또는 file://). 못 불러오면 이미지 없이 지도만 엶.
+   * sourceRect 와 비율이 달라도 됩니다 (예: 4:3 칸 + 화면 비율 이미지) — 칸 안에 가운데 크롭(cover)으로 그려
+   * 첫 프레임이 말풍선(resizeMode="cover")과 같고, 열리며 잘린 위아래가 펼쳐집니다 (닫을 땐 반대)
+   */
+  sourceImageUri?: string
+  /** 말풍선 이미지 라운드 (dp/pt, 기본 12) */
+  sourceCornerRadius?: number
+  /** 마커·버튼 색 (기본: setDefaults 의 themeColor) */
+  themeColor?: string
+  languageCode?: LanguageCode
+  appearance?: Appearance
 }
 
 export interface ViewerOptions {
@@ -185,17 +392,6 @@ export interface EditorOptions {
   maxHeight?: number // 최대 height
   openDuration?: number
   closeDuration?: number
-}
-
-export interface RNAttachmentKit {
-  init(licenseKey: string): Promise<boolean>
-  openGallery(options?: GalleryOptions): Promise<ImageResult[]>
-  openEditor(options: EditorOptions): Promise<ImageResult>
-  openViewer(options: ViewerOptions): Promise<void>
-  updateViewerSourceRect(rect: SourceRect): Promise<void>
-  closeGallery(): Promise<boolean>
-  addSelectionChangeListener(listener: (event: SelectionChangeEvent) => void): () => void
-  getDefaultAnimationConfig(): Promise<{ galleryOpen: number, galleryClose: number, editorOpen: number, editorClose: number, viewerOpen: number, viewerClose: number }>
 }
 
 // MARK: - Media gallery (사진 모아보기)

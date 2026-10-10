@@ -1,4 +1,4 @@
-import { NativeModules, Platform, TurboModuleRegistry, NativeEventEmitter } from "react-native"
+import { NativeModules, Platform, TurboModuleRegistry, NativeEventEmitter, DeviceEventEmitter } from "react-native"
 import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions, MediaGalleryOptions, MediaGalleryAppendPayload, MediaGalleryRemovePayload, Appearance } from "./types"
 
 const LINKING_ERROR = `The package 'react-native-attachment-kit' doesn't seem to be linked. Make sure: \n\n` + Platform.select({ ios: "- You have run 'pod install'\n", default: "" }) + "- You rebuilt the app after installing the package\n" + "- You are not using Expo Go\n"
@@ -15,6 +15,8 @@ try {
 
 let _defaultThemeColor = "#10b981";
 let _defaultLanguageCode = "en";
+/** setDefaults/init 에 넘긴 언어 코드 그대로 (예: "zh-Hans", "pt-BR") — 주소(역지오코딩)는 UI 언어 목록으로 줄이지 않음 */
+let _rawLanguageCode: string | null = null;
 let _defaultAppearance: Appearance = "system";
 
 /** "light" | "dark" 외의 값(생략·오타 포함)은 "system" */
@@ -64,7 +66,27 @@ if (!RNAttachmentKitModule) {
 // Create event emitter
 const eventEmitter = new NativeEventEmitter(RNAttachmentKitModule)
 
-export type { SelectionChangeEvent, Appearance } from "./types"
+/** 같은 화면을 중복으로 열려고 할 때 reject 하는 Error (code: "E_ALREADY_OPEN") */
+function alreadyOpenError(what: string): Error {
+  const err = new Error(`${what} is already open`)
+  ;(err as any).code = "E_ALREADY_OPEN"
+  return err
+}
+
+/**
+ * openGallery 가 아직 끝나지 않았는지. 네이티브는 갤러리 Promise 를 하나만 보관하므로(iOS currentGalleryVC,
+ * Android pickImagesPromise) 중복 호출하면 앞 호출의 Promise 가 영영 끝나지 않습니다 → JS 에서 먼저 막습니다.
+ */
+let _galleryOpen = false
+/** openEditor 도 Android 가 editImagePromise 하나만 보관하므로 같은 보호가 필요 */
+let _editorOpen = false
+/**
+ * asyncProcessing 모드의 onImageProcessed 구독. 이 모드에선 openGallery 가 끝난 뒤에도 이벤트가 오므로
+ * finally 에서 제거하지 않고, 다음 openGallery(asyncProcessing) 호출 때 이전 구독만 제거합니다 (최대 1개 유지).
+ */
+let _asyncImgProcessedSub: { remove: () => void } | null = null
+
+export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
 export interface RNAttachmentKit {
@@ -77,6 +99,21 @@ export interface RNAttachmentKit {
   openEditor(options: EditorOptions): Promise<ImageResult>
   openViewer(options: ViewerOptions): Promise<void>
   updateSourceRect(rect: import("./types").SourceRect): Promise<void>
+  /** 지도 뷰어. 닫히면 resolve */
+  openMapViewer(options: import("./types").MapViewerOptions): Promise<void>
+  /** 지도 뷰어가 열린 동안 말풍선 위치가 바뀌었을 때 (닫힐 때 돌아갈 자리) */
+  updateMapViewerSourceRect(rect: import("./types").SourceRect | null): Promise<void>
+  /** 위치 메시지 말풍선 지도 썸네일을 이 기기에서 그려 캐시 (같은 요청이면 캐시에서 바로) */
+  renderLocationThumbnail(options: import("./types").LocationThumbnailOptions): Promise<import("./types").LocationThumbnailResult>
+  /** renderLocationThumbnail 캐시 비우기 */
+  clearLocationThumbnailCache(): Promise<void>
+  /**
+   * 좌표 → 주소 (기기 지오코더, 무료). 언어는 languageCode 그대로 (생략하면 setDefaults 의 languageCode).
+   * 결과("결과 없음" 포함)는 디스크에 캐시. 오류는 ReverseGeocodeErrorCode 로 reject (캐시 안 함)
+   */
+  reverseGeocode(options: import("./types").ReverseGeocodeOptions): Promise<import("./types").ReverseGeocodeResult>
+  /** reverseGeocode 캐시 비우기 */
+  clearReverseGeocodeCache(): Promise<void>
   closeGallery(): Promise<boolean>
   addSelectionChangeListener(listener: (event: SelectionChangeEvent) => void): () => void
   getDefaultAnimationConfig(): Promise<{ galleryOpen: number, galleryClose: number, editorOpen: number, editorClose: number, viewerOpen: number, viewerClose: number }>
@@ -99,6 +136,7 @@ const AttachmentKit: RNAttachmentKit = {
     }
     if (options?.languageCode) {
       _defaultLanguageCode = normalizeLanguageCode(options.languageCode);
+      _rawLanguageCode = options.languageCode;
     }
     if (options?.appearance) {
       _defaultAppearance = normalizeAppearance(options.appearance);
@@ -111,7 +149,10 @@ const AttachmentKit: RNAttachmentKit = {
 
   setDefaults: (options: DefaultOptions): void => {
     if (options?.themeColor) _defaultThemeColor = options.themeColor
-    if (options?.languageCode) _defaultLanguageCode = normalizeLanguageCode(options.languageCode)
+    if (options?.languageCode) {
+      _defaultLanguageCode = normalizeLanguageCode(options.languageCode)
+      _rawLanguageCode = options.languageCode
+    }
     if (options?.appearance) _defaultAppearance = normalizeAppearance(options.appearance)
   },
 
@@ -121,21 +162,46 @@ const AttachmentKit: RNAttachmentKit = {
     if (!RNAttachmentKitModule) {
       throw new Error(LINKING_ERROR)
     }
+    // 이미 열려 있으면 네이티브를 건드리지 않고 바로 reject (앞 호출의 Promise 를 지키기 위해)
+    if (_galleryOpen) {
+      throw alreadyOpenError("Gallery")
+    }
+    _galleryOpen = true
 
     // 콜백 이벤트 임시 리스너 등록
     let subscriptionSelChange: any = null
     let subscriptionImgProcessed: any = null
-    
+
     if (options.onSelectionChange) {
       subscriptionSelChange = eventEmitter.addListener("onSelectionChange", options.onSelectionChange)
     }
     if (options.onImageProcessed) {
-      subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", options.onImageProcessed)
+      if (options.asyncProcessing) {
+        // async 모드: 이전 호출이 남겨 둔 구독을 먼저 제거해서 리스너가 쌓이지 않게 함
+        if (_asyncImgProcessedSub) {
+          try { _asyncImgProcessedSub.remove() } catch (e) { /* noop */ }
+          _asyncImgProcessedSub = null
+        }
+        subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", options.onImageProcessed)
+        _asyncImgProcessedSub = subscriptionImgProcessed
+      } else {
+        subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", options.onImageProcessed)
+      }
+    }
+    let subscriptionLocation: any = null
+    if (options.onLocationSelected) {
+      subscriptionLocation = eventEmitter.addListener("onLocationSelected", options.onLocationSelected)
+    }
+    let subscriptionFiles: any = null
+    if (options.onFilesSelected) {
+      const onFiles = options.onFilesSelected
+      // failed: 복사에 실패한 파일 목록 [{ name, error }] (없으면 undefined)
+      subscriptionFiles = eventEmitter.addListener("onFilesSelected", (e: any) => onFiles(e?.files ?? [], e?.failed ?? undefined))
     }
 
     try {
       // 이벤트 콜백은 네이티브로 전달하지 않음
-      const { onSelectionChange, onImageProcessed, ...restOptions } = options
+      const { onSelectionChange, onImageProcessed, onLocationSelected, onFilesSelected, ...restOptions } = options
       const nativeOptions = {
         themeColor: _defaultThemeColor,
         languageCode: _defaultLanguageCode,
@@ -147,9 +213,17 @@ const AttachmentKit: RNAttachmentKit = {
       const result = await RNAttachmentKitModule.openGallery(nativeOptions)
       return result
     } finally {
+      _galleryOpen = false
       // 갤러리가 닫히면 onSelectionChange 리스너 제거
       if (subscriptionSelChange) {
         subscriptionSelChange.remove()
+      }
+      // 위치 이벤트는 openGallery 가 끝나기 전에 오므로 여기서 바로 제거
+      if (subscriptionLocation) {
+        subscriptionLocation.remove()
+      }
+      if (subscriptionFiles) {
+        subscriptionFiles.remove()
       }
       // asyncProcessing 모드가 아닐 때만 onImageProcessed 리스너 제거 (async 모드에선 백그라운드 처리를 위해 유지해야 함)
       // 호출부에서 수동으로 제거하거나, 최종 완료 시 정리하는 구조가 필요할 수 있음
@@ -163,6 +237,11 @@ const AttachmentKit: RNAttachmentKit = {
     if (!RNAttachmentKitModule) {
       throw new Error(LINKING_ERROR)
     }
+    // Android 는 editImagePromise 를 하나만 보관해서 중복 호출 시 앞 Promise 가 끝나지 않음 → JS 에서 막음
+    if (_editorOpen) {
+      throw alreadyOpenError("Editor")
+    }
+    _editorOpen = true
     const mergedOptions = {
       themeColor: _defaultThemeColor,
       languageCode: _defaultLanguageCode,
@@ -171,7 +250,11 @@ const AttachmentKit: RNAttachmentKit = {
     }
     mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
     mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
-    return RNAttachmentKitModule.openEditor(mergedOptions)
+    try {
+      return await RNAttachmentKitModule.openEditor(mergedOptions)
+    } finally {
+      _editorOpen = false
+    }
   },
 
   openViewer: async (options: ViewerOptions): Promise<void> => {
@@ -225,34 +308,34 @@ const AttachmentKit: RNAttachmentKit = {
       })
     }
 
-    if (options.onViewerWillClose) {
-      const closeHandler = () => {
-        if (options.onViewerWillClose) {
-          options.onViewerWillClose()
-        }
-        if (subscriptionPageSelected) {
-          subscriptionPageSelected.remove()
-        }
-        if (subscriptionViewerOpened) {
-          subscriptionViewerOpened.remove()
-        }
-        if (subscriptionViewerWillClose) {
-          subscriptionViewerWillClose.remove()
-        }
-        if (deviceSubscriptionViewerWillClose) {
-          deviceSubscriptionViewerWillClose.remove()
-        }
-        if (subscriptionImageDeleted) {
-          subscriptionImageDeleted.remove()
-        }
-      };
-
-      subscriptionViewerWillClose = eventEmitter.addListener("onViewerWillClose", closeHandler);
-
-      if (Platform.OS === "android") {
-        const { DeviceEventEmitter } = require("react-native");
-        deviceSubscriptionViewerWillClose = DeviceEventEmitter.addListener("onViewerWillClose", closeHandler);
+    // 네이티브 "onViewerWillClose"(iOS sendEvent / Android RCTDeviceEventEmitter) 는 앱이 콜백을 넘기지 않아도
+    // 항상 구독합니다 — 이 이벤트가 와야 onPageSelected / onImageDeleted 구독을 정리할 수 있기 때문입니다
+    // (예전엔 options.onViewerWillClose 가 없으면 구독을 안 해서 뷰어를 열 때마다 리스너가 누수됐음).
+    const closeHandler = () => {
+      if (options.onViewerWillClose) {
+        options.onViewerWillClose()
       }
+      if (subscriptionPageSelected) {
+        subscriptionPageSelected.remove()
+      }
+      if (subscriptionViewerOpened) {
+        subscriptionViewerOpened.remove()
+      }
+      if (subscriptionViewerWillClose) {
+        subscriptionViewerWillClose.remove()
+      }
+      if (deviceSubscriptionViewerWillClose) {
+        deviceSubscriptionViewerWillClose.remove()
+      }
+      if (subscriptionImageDeleted) {
+        subscriptionImageDeleted.remove()
+      }
+    };
+
+    subscriptionViewerWillClose = eventEmitter.addListener("onViewerWillClose", closeHandler);
+
+    if (Platform.OS === "android") {
+      deviceSubscriptionViewerWillClose = DeviceEventEmitter.addListener("onViewerWillClose", closeHandler);
     }
 
     try {
@@ -266,9 +349,14 @@ const AttachmentKit: RNAttachmentKit = {
       mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
       mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
       return await RNAttachmentKitModule.openViewer(mergedOptions)
-    } finally {
-      // Listeners are now removed inside the onViewerWillClose callback
+    } catch (e) {
+      // 뷰어가 아예 안 떴으면(reject) onViewerWillClose 가 오지 않으므로 여기서 구독 정리 (앱 콜백은 호출 안 함)
+      for (const sub of [subscriptionPageSelected, subscriptionViewerOpened, subscriptionImageDeleted, subscriptionViewerWillClose, deviceSubscriptionViewerWillClose]) {
+        try { sub?.remove() } catch (err) { /* noop */ }
+      }
+      throw e
     }
+    // 정상적으로 열렸으면 리스너는 onViewerWillClose 콜백 안에서 제거됨
   },
 
   updateSourceRect: async (rect: import("./types").SourceRect): Promise<void> => {
@@ -276,6 +364,71 @@ const AttachmentKit: RNAttachmentKit = {
       throw new Error(LINKING_ERROR)
     }
     return RNAttachmentKitModule.updateSourceRect(rect)
+  },
+
+  openMapViewer: async (options: import("./types").MapViewerOptions): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    const mergedOptions: Record<string, any> = {
+      themeColor: _defaultThemeColor,
+      languageCode: _defaultLanguageCode,
+      appearance: _defaultAppearance,
+      ...options,
+    }
+    // 주소를 안 넘기면 네이티브가 채움 — reverseGeocode 와 같은 캐시를 쓰도록 같은 언어(넘긴 그대로)
+    mergedOptions.addressLanguageCode = options.languageCode || _rawLanguageCode || _defaultLanguageCode
+    mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
+    mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
+    await RNAttachmentKitModule.openMapViewer(mergedOptions)
+  },
+
+  updateMapViewerSourceRect: async (rect: import("./types").SourceRect | null): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    return RNAttachmentKitModule.updateMapViewerSourceRect(rect ?? {})
+  },
+
+  renderLocationThumbnail: async (options: import("./types").LocationThumbnailOptions): Promise<import("./types").LocationThumbnailResult> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    const mergedOptions = {
+      themeColor: _defaultThemeColor,
+      appearance: _defaultAppearance,
+      ...options,
+    }
+    mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
+    // 내 위치는 둘 다 있을 때만
+    if (typeof mergedOptions.myLatitude !== "number" || typeof mergedOptions.myLongitude !== "number") {
+      delete mergedOptions.myLatitude
+      delete mergedOptions.myLongitude
+    }
+    return RNAttachmentKitModule.renderLocationThumbnail(mergedOptions)
+  },
+
+  clearLocationThumbnailCache: async (): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    return RNAttachmentKitModule.clearLocationThumbnailCache()
+  },
+
+  reverseGeocode: async (options: import("./types").ReverseGeocodeOptions): Promise<import("./types").ReverseGeocodeResult> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    const languageCode = options.languageCode || _rawLanguageCode || _defaultLanguageCode
+    const r = await RNAttachmentKitModule.reverseGeocode({ latitude: options.latitude, longitude: options.longitude, languageCode })
+    return { address: r?.address ?? null, shortAddress: r?.shortAddress ?? null, cached: !!r?.cached }
+  },
+
+  clearReverseGeocodeCache: async (): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    return RNAttachmentKitModule.clearReverseGeocodeCache()
   },
 
   closeGallery: async (): Promise<boolean> => {

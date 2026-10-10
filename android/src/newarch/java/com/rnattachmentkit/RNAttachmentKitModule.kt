@@ -324,6 +324,21 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         }
 
         pickImagesPromise = promise
+        // 이번 호출의 promise 를 붙잡아 둠 — 리스너가 모듈 필드를 읽으면, 시트가 열린 채 openGallery 를 다시 불렀을 때
+        // 이전 시트가 치워지며 오는 onDismiss 가 "새" promise 를 거부해 버림. 시트마다 자기 promise 를 한 번만 끝냄
+        val thisPromise = promise
+        var settled = false
+        val settle: ((Promise) -> Unit) -> Unit = { block ->
+            if (!settled) {
+                settled = true
+                if (pickImagesPromise === thisPromise) pickImagesPromise = null
+                block(thisPromise)
+            }
+        }
+        // 지난 호출이 남긴 오래된 임시 파일(24시간 지난 것) 정리 — 백그라운드
+        moduleScope.launch(Dispatchers.IO) {
+            try { TempFileCleaner.cleanStale(reactApplicationContext) } catch (_: Exception) {}
+        }
 
         val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             Manifest.permission.READ_MEDIA_IMAGES
@@ -336,19 +351,70 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                 try {
                     val bottomSheet = ImagePickerBottomSheet.newInstance(
                         maxSelection, languageCode, enableEditor, profileMode, maxWidth, maxHeight, themeColor,
-                        forceMultiMode = forceMultiMode
+                        forceMultiMode = forceMultiMode,
+                        // 첨부 메뉴(갤러리 / 위치 / 파일). 기본 false — 켜지 않으면 기존과 같음
+                        showAttachMenu = options.hasKey("showAttachMenu") && options.getBoolean("showAttachMenu"),
+                        // (Android) 첨부 메뉴 바 아래 여백 (dp). 없으면 기본 12 / 8
+                        attachMenuSinkIntoNav = if (options.hasKey("attachMenuSinkIntoNav") && !options.isNull("attachMenuSinkIntoNav"))
+                            options.getDouble("attachMenuSinkIntoNav").toFloat() else com.rnattachmentkit.AttachMenuBarView.SINK_INTO_NAV_DP.toFloat(),
+                        attachMenuMinBottomMargin = if (options.hasKey("attachMenuMinBottomMargin") && !options.isNull("attachMenuMinBottomMargin"))
+                            options.getDouble("attachMenuMinBottomMargin").toFloat() else com.rnattachmentkit.AttachMenuBarView.BOTTOM_MARGIN_DP.toFloat(),
+                        // 위치 보내기 때 지도 이미지 캡처 여부. 기본 true (기존 그대로). false 면 이미지 없이 위치 정보만
+                        captureLocationImage = !(options.hasKey("captureLocationImage") && !options.isNull("captureLocationImage")) ||
+                            options.getBoolean("captureLocationImage")
                     )
+                    // 위치 탭에서 보내기 → onLocationSelected 이벤트로 결과를 넘기고, openGallery 는 빈 배열로 끝냄
+                    bottomSheet.setOnLocationSelectedListener { loc ->
+                        val body = com.facebook.react.bridge.Arguments.createMap()
+                        for ((k, v) in loc) {
+                            when (v) {
+                                is Int -> body.putInt(k, v)
+                                is Long -> body.putDouble(k, v.toDouble())
+                                is Double -> body.putDouble(k, v)
+                                is Float -> body.putDouble(k, v.toDouble())
+                                is Boolean -> body.putBoolean(k, v)
+                                is String -> body.putString(k, v)
+                            }
+                        }
+                        emitGalleryEvent("onLocationSelected", body)
+                        settle { it.resolve(com.facebook.react.bridge.Arguments.createArray()) }
+                    }
+                    // 파일 탭에서 보내기 → onFilesSelected 이벤트 { files: [{uri, path, name, size, mimeType}], failed: [{name, error}] }, openGallery 는 빈 배열
+                    bottomSheet.setOnFilesResultListener { files, failed ->
+                        val arr = com.facebook.react.bridge.Arguments.createArray()
+                        for (file in files) {
+                            val m = com.facebook.react.bridge.Arguments.createMap()
+                            for ((k, v) in file) {
+                                when (v) {
+                                    is Double -> m.putDouble(k, v)
+                                    is String -> m.putString(k, v)
+                                }
+                            }
+                            arr.pushMap(m)
+                        }
+                        val body = com.facebook.react.bridge.Arguments.createMap()
+                        body.putArray("files", arr)
+                        // 복사에 실패한 파일 (추가 필드 — files 는 예전과 같음)
+                        val failedArr = com.facebook.react.bridge.Arguments.createArray()
+                        for (f in failed) {
+                            val m = com.facebook.react.bridge.Arguments.createMap()
+                            m.putString("name", f["name"]?.toString() ?: "")
+                            m.putString("error", f["error"]?.toString() ?: "")
+                            failedArr.pushMap(m)
+                        }
+                        body.putArray("failed", failedArr)
+                        emitGalleryEvent("onFilesSelected", body)
+                        settle { it.resolve(com.facebook.react.bridge.Arguments.createArray()) }
+                    }
                     bottomSheet.setOnImagesSelectedListener { uris ->
                         val result = WritableNativeArray()
                         for (uri in uris) {
                             result.pushString(uri.toString())
                         }
-                        handleSelectedImages(result, pickImagesPromise)
-                        pickImagesPromise = null
+                        settle { handleSelectedImages(result, it) }
                     }
                     bottomSheet.setOnCancelledListener {
-                        pickImagesPromise?.reject(E_PICKER_CANCELLED, "User cancelled image picker")
-                        pickImagesPromise = null
+                        settle { it.reject(E_PICKER_CANCELLED, "User cancelled image picker") }
                     }
                     
                     val existingFragment = fragmentActivity.supportFragmentManager.findFragmentByTag("ImagePickerBottomSheet")
@@ -361,8 +427,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                         .commitAllowingStateLoss()
                         
                 } catch (e: Exception) {
-                    pickImagesPromise?.reject(E_FAILED_TO_PICK, "Failed to open image picker: ${e.message}", e)
-                    pickImagesPromise = null
+                    settle { it.reject(E_FAILED_TO_PICK, "Failed to open image picker: ${e.message}", e) }
                 }
             }
         }
@@ -402,8 +467,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                         if (isGranted) {
                             showSheet()
                         } else {
-                            pickImagesPromise?.reject("E_PERMISSION_DENIED", "Permission denied")
-                            pickImagesPromise = null
+                            settle { it.reject("E_PERMISSION_DENIED", "Permission denied") }
                         }
                     }
                     return true
@@ -1158,5 +1222,239 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .unregisterReceiver(imageDeletedReceiver)
     }
-}
 
+    // ── 지도 뷰어 (위치 메시지 → 지도) ──
+
+    private var mapViewer: java.lang.ref.WeakReference<MapViewerDialogFragment>? = null
+    /** updateMapViewerSourceRect 로 갱신되는 닫힘 위치 (화면 px) */
+    @Volatile private var mapViewerSourceRect: android.graphics.Rect? = null
+
+    /** RN measureInWindow 값(dp, 창 기준) → 화면 px Rect */
+    private fun mapRectFromDp(map: ReadableMap?, activity: Activity): android.graphics.Rect? {
+        if (map == null || !map.hasKey("x") || !map.hasKey("y") || !map.hasKey("width") || !map.hasKey("height")) return null
+        val w = com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(map.getDouble("width").toFloat())
+        val h = com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(map.getDouble("height").toFloat())
+        if (w <= 0f || h <= 0f) return null
+        val loc = IntArray(2)
+        try { activity.window?.decorView?.getLocationOnScreen(loc) } catch (_: Exception) {}
+        val x = com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(map.getDouble("x").toFloat()) + loc[0]
+        val y = com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(map.getDouble("y").toFloat()) + loc[1]
+        return android.graphics.Rect(Math.round(x), Math.round(y), Math.round(x + w), Math.round(y + h))
+    }
+
+    /** 말풍선 이미지 → 로컬 파일 경로. file:// 는 그대로, http(s) 는 Glide 캐시 파일. 실패·지연 시 null (이미지 없이 엶) */
+    private fun mapSourceImagePath(uri: String?): String? {
+        if (uri.isNullOrBlank()) return null
+        if (uri.startsWith("/")) return uri.takeIf { File(it).exists() }
+        if (uri.startsWith("file://")) return Uri.parse(uri).path?.takeIf { File(it).exists() }
+        if (!uri.startsWith("http://") && !uri.startsWith("https://")) return null
+        return try {
+            com.bumptech.glide.Glide.with(reactApplicationContext.applicationContext)
+                .downloadOnly().load(uri).submit()
+                .get(1500, java.util.concurrent.TimeUnit.MILLISECONDS)
+                ?.absolutePath
+        } catch (e: Exception) {
+            android.util.Log.w("RNAttachmentKit", "openMapViewer: source image not loaded (${e.javaClass.simpleName})")
+            null
+        }
+    }
+
+    override fun openMapViewer(options: ReadableMap, promise: Promise) {
+        val activity = getCurrentActivity() as? FragmentActivity
+        if (activity == null) {
+            promise.reject("NO_ACTIVITY", "Activity is not a FragmentActivity")
+            return
+        }
+        if (!options.hasKey("latitude") || !options.hasKey("longitude")) {
+            promise.reject("ERROR", "latitude and longitude are required")
+            return
+        }
+        fun str(key: String) = if (options.hasKey(key) && !options.isNull(key)) options.getString(key) else null
+        fun num(key: String) = if (options.hasKey(key) && !options.isNull(key)) options.getDouble(key) else null
+        val lat = options.getDouble("latitude")
+        val lng = options.getDouble("longitude")
+        val rect = mapRectFromDp(if (options.hasKey("sourceRect") && !options.isNull("sourceRect")) options.getMap("sourceRect") else null, activity)
+        val imageUri = str("sourceImageUri")
+        val themeColor = str("themeColor")?.let { try { android.graphics.Color.parseColor(it) } catch (_: Exception) { null } }
+        val radiusPx = com.facebook.react.uimanager.PixelUtil.toPixelFromDIP((num("sourceCornerRadius") ?: 12.0).toFloat())
+        val showDirections = if (options.hasKey("showDirections") && !options.isNull("showDirections")) options.getBoolean("showDirections") else true
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val imagePath = if (rect != null) mapSourceImagePath(imageUri) else null
+            withContext(Dispatchers.Main) {
+                if (activity.isFinishing || activity.isDestroyed || activity.supportFragmentManager.isStateSaved) {
+                    promise.reject("ERROR", "Activity is not available")
+                    return@withContext
+                }
+                try {
+                    mapViewerSourceRect = rect
+                    val f = MapViewerDialogFragment.show(
+                        activity, lat, lng,
+                        title = str("title"),
+                        address = str("address"),
+                        markerType = str("markerType"),
+                        themeColor = themeColor,
+                        languageCode = str("languageCode") ?: "en",
+                        showDirections = showDirections,
+                        sourceRect = rect,
+                        sourceImagePath = imagePath,
+                        sourceCornerRadius = radiusPx,
+                        spanMeters = num("spanMeters") ?: 0.0,
+                        appearance = str("appearance"),
+                        addressLanguageCode = str("addressLanguageCode"),
+                    )
+                    if (rect != null) f.sourceRectProvider = { mapViewerSourceRect }
+                    var settled = false
+                    f.onClosed = {
+                        if (!settled) { settled = true; promise.resolve(null) }
+                        mapViewerSourceRect = null
+                        mapViewer = null
+                    }
+                    mapViewer = java.lang.ref.WeakReference(f)
+                } catch (e: Exception) {
+                    promise.reject("ERROR", e.message, e)
+                }
+            }
+        }
+    }
+
+    override fun updateMapViewerSourceRect(rect: ReadableMap, promise: Promise) {
+        val activity = getCurrentActivity()
+        if (mapViewer?.get() != null && activity != null) mapViewerSourceRect = mapRectFromDp(rect, activity)
+        promise.resolve(null)
+    }
+
+    /**
+     * 위치 메시지 지도 썸네일을 이 기기에서 그림 (테마별 캐시). 결과 { uri, path, width, height(px), cached }
+     * options: latitude, longitude, width, height (dp, 필수) / markerType, placeCategory, spanMeters, themeColor,
+     *          appearance ("light"/"dark"/"system"), myLatitude + myLongitude (둘 다 있을 때만)
+     * aspect ("square" | "portrait" | "device"): 주면 width 만 필수, height 는 비율로 (square = 1:1,
+     *          portrait = 480:1040 보내던 이미지와 같은 9:19.5, device = 실제 화면 긴 변/짧은 변). 모르는 값이면 없는 것과 같음
+     * maxWidth / maxHeight (px, 기본 512, 0 이하면 무시): 출력 WebP 가 이 안에 들어가게 비율대로 줄임
+     *          (k = min(density, maxWidth / widthDp, maxHeight / heightDp)) → 결과 width/height 는 출력 px
+     */
+    @ReactMethod
+    override fun renderLocationThumbnail(options: ReadableMap, promise: Promise) {
+        fun str(key: String) = if (options.hasKey(key) && !options.isNull(key)) options.getString(key) else null
+        fun num(key: String) = if (options.hasKey(key) && !options.isNull(key)) options.getDouble(key) else null
+        val lat = num("latitude")
+        val lng = num("longitude")
+        val wDp = num("width")
+        val activity = getCurrentActivity()
+        val aspectRatio: Double? = when (str("aspect")?.lowercase()) {
+            "square" -> 1.0
+            "portrait" -> 1040.0 / 480.0
+            "device" -> {
+                // 실제 화면 크기 (세로 기준: 긴 변 / 짧은 변 → h > w)
+                val dm = (activity ?: reactApplicationContext).resources.displayMetrics
+                var sw = dm.widthPixels; var sh = dm.heightPixels
+                if (activity != null && android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                    try {
+                        val b = activity.windowManager.currentWindowMetrics.bounds
+                        if (b.width() > 0 && b.height() > 0) { sw = b.width(); sh = b.height() }
+                    } catch (_: Exception) {}
+                }
+                val lo = minOf(sw, sh); val hi = maxOf(sw, sh)
+                if (lo > 0) hi.toDouble() / lo else 19.5 / 9.0
+            }
+            else -> null
+        }
+        val hDp = if (aspectRatio != null) wDp?.let { it * aspectRatio } else num("height")
+        if (lat == null || lng == null || wDp == null || hDp == null || wDp <= 0 || hDp <= 0 ||
+            lat.isNaN() || lng.isNaN()) {
+            promise.reject("E_INVALID_ARGS", "latitude, longitude, width, height (> 0) are required")
+            return
+        }
+        val myLat = num("myLatitude")
+        val myLng = num("myLongitude")
+        if ((myLat == null) != (myLng == null)) {
+            promise.reject("E_INVALID_ARGS", "myLatitude and myLongitude must be given together")
+            return
+        }
+        if (activity == null) {
+            promise.reject(E_NO_ACTIVITY, "Activity doesn't exist")
+            return
+        }
+        val accent = str("themeColor")?.let { try { android.graphics.Color.parseColor(it) } catch (_: Exception) { null } }
+            ?: android.graphics.Color.parseColor("#FF6B35")
+        val dark = when (str("appearance")?.lowercase()) {
+            "dark" -> true
+            "light" -> false
+            else -> (activity.resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK) ==
+                android.content.res.Configuration.UI_MODE_NIGHT_YES
+        }
+        val wPx = Math.round(com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(wDp.toFloat())).coerceAtLeast(1)
+        val hPx = Math.round(com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(hDp.toFloat())).coerceAtLeast(1)
+        val maxOutW = num("maxWidth")?.takeIf { it > 0 }?.let { Math.round(it).toInt() }
+        val maxOutH = num("maxHeight")?.takeIf { it > 0 }?.let { Math.round(it).toInt() }
+        val req = LocationThumbnailRenderer.Request(
+            lat = lat, lng = lng, widthPx = wPx, heightPx = hPx,
+            density = activity.resources.displayMetrics.density,
+            dark = dark,
+            markerType = str("markerType"),
+            placeCategory = str("placeCategory"),
+            spanMeters = num("spanMeters"),
+            accent = accent,
+            myLat = myLat, myLng = myLng,
+            // 출력 최대 크기 (0 이하·없음 → 기본 512)
+            // 결과 최대 크기 (px). 둘 다 없으면 512 × 512, 하나만 주면 다른 쪽은 제한 없음(0)
+            maxOutWidthPx = maxOutW ?: if (maxOutH != null) 0 else LocationThumbnailRenderer.DEFAULT_MAX_OUT_PX,
+            maxOutHeightPx = maxOutH ?: if (maxOutW != null) 0 else LocationThumbnailRenderer.DEFAULT_MAX_OUT_PX,
+        )
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            try {
+                LocationThumbnailRenderer.render(activity, req) { r ->
+                    r.fold(
+                        onSuccess = { m ->
+                            val body = Arguments.createMap()
+                            body.putString("uri", m["uri"] as? String)
+                            body.putString("path", m["path"] as? String)
+                            body.putInt("width", (m["width"] as? Int) ?: wPx)
+                            body.putInt("height", (m["height"] as? Int) ?: hPx)
+                            body.putBoolean("cached", (m["cached"] as? Boolean) ?: false)
+                            promise.resolve(body)
+                        },
+                        onFailure = { e -> promise.reject("E_THUMBNAIL_FAILED", e.message ?: "Thumbnail render failed", e) }
+                    )
+                }
+            } catch (e: Exception) {
+                promise.reject("E_THUMBNAIL_FAILED", e.message ?: "Thumbnail render failed", e)
+            }
+        }
+    }
+
+    /** 지도 썸네일 캐시 비우기 */
+    @ReactMethod
+    override fun clearLocationThumbnailCache(promise: Promise) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try { LocationThumbnailRenderer.clearCache(reactApplicationContext) } catch (_: Exception) {}
+            promise.resolve(null)
+        }
+    }
+
+    // ── 역지오코딩 (기기 Geocoder, 디스크 캐시) ──
+
+    override fun reverseGeocode(options: ReadableMap, promise: Promise) {
+        val lat = if (options.hasKey("latitude") && !options.isNull("latitude")) options.getDouble("latitude") else Double.NaN
+        val lng = if (options.hasKey("longitude") && !options.isNull("longitude")) options.getDouble("longitude") else Double.NaN
+        val lang = if (options.hasKey("languageCode") && !options.isNull("languageCode")) options.getString("languageCode") else null
+        ReverseGeocoder.reverseGeocode(reactApplicationContext, lat, lng, lang) { r, e ->
+            if (r != null) {
+                val map = Arguments.createMap()
+                r.address?.let { map.putString("address", it) } ?: map.putNull("address")
+                r.shortAddress?.let { map.putString("shortAddress", it) } ?: map.putNull("shortAddress")
+                map.putBoolean("cached", r.cached)
+                promise.resolve(map)
+            } else {
+                promise.reject(e?.code ?: "E_GEOCODE_FAILED", e?.message ?: "Reverse geocoding failed")
+            }
+        }
+    }
+
+    override fun clearReverseGeocodeCache(promise: Promise) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try { ReverseGeocoder.clearCache(reactApplicationContext) } catch (_: Exception) {}
+            promise.resolve(null)
+        }
+    }
+}

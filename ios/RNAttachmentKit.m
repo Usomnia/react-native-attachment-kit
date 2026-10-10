@@ -41,6 +41,28 @@ RCT_EXTERN_METHOD(updateSourceRect:(NSDictionary *)options
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(openMapViewer:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(updateMapViewerSourceRect:(NSDictionary *)rect
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(renderLocationThumbnail:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(reverseGeocode:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(clearReverseGeocodeCache:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(clearLocationThumbnailCache:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(getDefaultAnimationConfig:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
@@ -99,6 +121,28 @@ RCT_EXTERN_METHOD(injectImageCache:(NSString *)urlString
 
 RCT_EXTERN_METHOD(updateSourceRect:(NSDictionary *)options
                   resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(openMapViewer:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(updateMapViewerSourceRect:(NSDictionary *)rect
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(renderLocationThumbnail:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(reverseGeocode:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(clearReverseGeocodeCache:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(clearLocationThumbnailCache:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(getDefaultAnimationConfig:(RCTPromiseResolveBlock)resolve

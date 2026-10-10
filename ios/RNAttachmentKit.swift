@@ -8,6 +8,7 @@
 import UIKit
 import Photos
 import ImageIO
+import CoreLocation
 import RNAttachmentKit
 
 #if RCT_NEW_ARCH_ENABLED
@@ -64,7 +65,8 @@ class RNAttachmentKit: RCTEventEmitter {
     @objc
     override func supportedEvents() -> [String]! {
         return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose", "onImageDeleted",
-                "onGalleryItemDeleted", "onGalleryNeedPage", "onGalleryClosed", "onGalleryGridSizeChanged"]
+                "onGalleryItemDeleted", "onGalleryNeedPage", "onGalleryClosed", "onGalleryGridSizeChanged",
+                "onLocationSelected", "onFilesSelected"]
     }
     
     // MARK: - Public Methods
@@ -171,6 +173,213 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
     
+    // MARK: - Map Viewer (위치 메시지 → 지도)
+
+    private weak var activeMapViewerVC: MapViewerViewController?
+    /// updateMapViewerSourceRect 로 갱신되는 닫힘 위치 (window points)
+    private var mapViewerSourceRect: CGRect?
+
+    private static func cgFloat(_ v: Any?) -> CGFloat? {
+        if let n = v as? NSNumber { return CGFloat(truncating: n) }
+        if let d = v as? Double { return CGFloat(d) }
+        return nil
+    }
+
+    private static func parseRect(_ v: Any?) -> CGRect? {
+        guard let d = v as? NSDictionary,
+              let x = cgFloat(d["x"]), let y = cgFloat(d["y"]),
+              let w = cgFloat(d["width"]), let h = cgFloat(d["height"]), w > 0, h > 0 else { return nil }
+        return CGRect(x: x, y: y, width: w, height: h)
+    }
+
+    /// 말풍선 이미지(정적 지도 스냅샷) 로드. 메모리/디스크 캐시 → file:// → 다운로드 순.
+    /// 실패하거나 너무 오래 걸리면 nil (이미지 없이 지도만 엶)
+    /// completion(이미지, 마커 뺀 이미지인지). renderLocationThumbnail 결과면 마커 뺀 짝을 씀 → 뷰어가 마커를 따로 그려
+    /// 말풍선 속 크기 ↔ 지도 마커 크기로 자연스럽게 바꿈
+    private func loadMapSourceImage(_ uri: String?, completion: @escaping (UIImage?, Bool) -> Void) {
+        guard let uri = uri, !uri.isEmpty else { completion(nil, false); return }
+        if uri.hasPrefix("file://") || uri.hasPrefix("/") {
+            let path = uri.hasPrefix("file://") ? (URL(string: uri)?.path ?? String(uri.dropFirst(7))) : uri
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let base = LocationThumbnailRenderer.markerlessFile(for: path), let img = UIImage(contentsOfFile: base) {
+                    DispatchQueue.main.async { completion(img, true) }
+                    return
+                }
+                let image = UIImage(contentsOfFile: path)
+                DispatchQueue.main.async { completion(image, false) }
+            }
+            return
+        }
+        if let cached = ViewerImageCache.shared.getMemoryImage(for: uri) { completion(cached, false); return }
+        var done = false
+        let finish: (UIImage?) -> Void = { image in
+            DispatchQueue.main.async {
+                guard !done else { return }
+                done = true
+                completion(image, false)
+            }
+        }
+        // 다운로드가 늦으면 이미지 없이 바로 엶 (탭 반응이 늦어지지 않게)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { finish(nil) }
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let disk = ViewerImageCache.shared.getDiskImageSynchronously(for: uri) { finish(disk); return }
+            RemoteImageViewerViewController.prefetchImage(from: uri) { finish($0) }
+        }
+    }
+
+    @objc
+    func openMapViewer(_ options: NSDictionary,
+                       resolve: @escaping RCTPromiseResolveBlock,
+                       reject: @escaping RCTPromiseRejectBlock) -> Void {
+        guard let lat = RNAttachmentKit.cgFloat(options["latitude"]),
+              let lng = RNAttachmentKit.cgFloat(options["longitude"]) else {
+            reject("ERROR", "latitude and longitude are required", nil)
+            return
+        }
+        let sourceRect = RNAttachmentKit.parseRect(options["sourceRect"])
+        let imageUri = options["sourceImageUri"] as? String
+        DispatchQueue.main.async {
+            // 위치 정보만으로 여는 경우엔 이미지 로드를 기다리지 않음
+            let load: (@escaping (UIImage?, Bool) -> Void) -> Void = { done in
+                if sourceRect == nil { done(nil, false) } else { self.loadMapSourceImage(imageUri, completion: done) }
+            }
+            load { image, markerless in
+                guard let root = self.getRootViewController() else {
+                    reject("ERROR", "Unable to get root view controller", nil)
+                    return
+                }
+                var accent = UIColor(red: 1, green: 0.42, blue: 0.21, alpha: 1)
+                if let hex = options["themeColor"] as? String, let c = UIColor(hexString: hex) { accent = c }
+                let vc = MapViewerViewController(
+                    latitude: Double(lat), longitude: Double(lng),
+                    title: options["title"] as? String,
+                    address: options["address"] as? String,
+                    markerType: options["markerType"] as? String,
+                    placeCategory: options["placeCategory"] as? String,
+                    accentColor: accent,
+                    languageCode: options["languageCode"] as? String ?? "en")
+                vc.overrideUserInterfaceStyle = RNAttachmentKit.interfaceStyle(options)
+                vc.showsDirections = (options["showDirections"] as? Bool) ?? true
+                vc.addressLanguageCode = (options["addressLanguageCode"] as? String).flatMap { $0.isEmpty ? nil : $0 }
+                if let span = RNAttachmentKit.cgFloat(options["spanMeters"]), span > 0 { vc.spanMeters = Double(span) }
+                if let r = RNAttachmentKit.cgFloat(options["sourceCornerRadius"]) { vc.sourceCornerRadius = r }
+                self.mapViewerSourceRect = sourceRect
+                if let rect = sourceRect {
+                    vc.sourceRect = rect
+                    vc.sourceImage = image
+                    vc.sourceImageIsMarkerless = markerless && image != nil
+                    vc.sourceRectProvider = { [weak self] in self?.mapViewerSourceRect }
+                }
+                vc.onClosed = { [weak self] in
+                    self?.mapViewerSourceRect = nil
+                    resolve(nil)
+                }
+                self.activeMapViewerVC = vc
+                root.present(vc, animated: sourceRect == nil)
+            }
+        }
+    }
+
+    @objc
+    func updateMapViewerSourceRect(_ rect: NSDictionary,
+                                   resolve: @escaping RCTPromiseResolveBlock,
+                                   reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let parsed = RNAttachmentKit.parseRect(rect)
+        DispatchQueue.main.async {
+            if self.activeMapViewerVC != nil { self.mapViewerSourceRect = parsed }
+            resolve(nil)
+        }
+    }
+
+    /// 위치 메시지 말풍선 지도 썸네일을 이 기기에서 그려 캐시 (보낸 이미지 없이 위치 정보만으로)
+    @objc
+    func renderLocationThumbnail(_ options: NSDictionary,
+                                 resolve: @escaping RCTPromiseResolveBlock,
+                                 reject: @escaping RCTPromiseRejectBlock) -> Void {
+        guard let lat = RNAttachmentKit.cgFloat(options["latitude"]),
+              let lng = RNAttachmentKit.cgFloat(options["longitude"]),
+              let w = RNAttachmentKit.cgFloat(options["width"]), w > 0 else {
+            reject("E_INVALID_ARGS", "latitude, longitude and width are required", nil)
+            return
+        }
+        DispatchQueue.main.async {
+            // 비율(aspect)이 있으면 세로는 가로에서 계산, 없으면 height 그대로
+            guard let h = LocationThumbnailRenderer.height(forWidth: w, aspect: options["aspect"] as? String)
+                    ?? RNAttachmentKit.cgFloat(options["height"]), h > 0 else {
+                reject("E_INVALID_ARGS", "height (or aspect) is required", nil)
+                return
+            }
+            var accent = UIColor(red: 1, green: 0.42, blue: 0.21, alpha: 1)
+            if let hex = options["themeColor"] as? String, let c = UIColor(hexString: hex) { accent = c }
+            var style = RNAttachmentKit.interfaceStyle(options)
+            if style == .unspecified {
+                // "system": 지금 앱 화면 모드
+                style = UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.windows.first(where: \.isKeyWindow) }
+                    .first?.traitCollection.userInterfaceStyle ?? UITraitCollection.current.userInterfaceStyle
+            }
+            var me: CLLocationCoordinate2D?
+            if let mlat = RNAttachmentKit.cgFloat(options["myLatitude"]), let mlng = RNAttachmentKit.cgFloat(options["myLongitude"]) {
+                me = CLLocationCoordinate2D(latitude: Double(mlat), longitude: Double(mlng))
+            }
+            let span = RNAttachmentKit.cgFloat(options["spanMeters"]).map { Double($0) }
+            var req = LocationThumbnailRequest(
+                latitude: Double(lat), longitude: Double(lng),
+                size: CGSize(width: w, height: h), scale: min(UIScreen.main.scale, 3),
+                isDark: style == .dark,
+                markerType: options["markerType"] as? String,
+                placeCategory: options["placeCategory"] as? String,
+                spanMeters: (span ?? 0) > 0 ? span : nil,
+                accentColor: accent,
+                myLocation: me)
+            // 결과 이미지 최대 크기 (px). 둘 다 없으면 512 × 512, 하나만 주면 다른 쪽은 제한 없음
+            // (예: maxWidth 512 만 주고 세로가 기본 512 에 잘려 작아지는 일이 없게)
+            let maxW = RNAttachmentKit.cgFloat(options["maxWidth"]).flatMap { $0 > 0 ? $0 : nil }
+            let maxH = RNAttachmentKit.cgFloat(options["maxHeight"]).flatMap { $0 > 0 ? $0 : nil }
+            if maxW != nil || maxH != nil {
+                req.maxPixelWidth = maxW ?? .greatestFiniteMagnitude
+                req.maxPixelHeight = maxH ?? .greatestFiniteMagnitude
+            }
+            LocationThumbnailRenderer.render(req) { result in
+                switch result {
+                case .success(let dict): resolve(dict)
+                case .failure(let error): reject("E_THUMBNAIL_FAILED", error.localizedDescription, error)
+                }
+            }
+        }
+    }
+
+    // MARK: - Reverse geocode (기기 지오코더, 디스크 캐시)
+
+    @objc
+    func reverseGeocode(_ options: NSDictionary,
+                        resolve: @escaping RCTPromiseResolveBlock,
+                        reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let lat = (options["latitude"] as? NSNumber)?.doubleValue ?? .nan
+        let lng = (options["longitude"] as? NSNumber)?.doubleValue ?? .nan
+        let lang = (options["languageCode"] as? String).flatMap { $0.isEmpty ? nil : $0 } ?? "en"
+        ReverseGeocoder.shared.reverseGeocode(latitude: lat, longitude: lng, languageCode: lang) { result in
+            switch result {
+            case .success(let r): resolve(r.dictionary)
+            case .failure(let e): reject(e.code, e.message, nil)
+            }
+        }
+    }
+
+    @objc
+    func clearReverseGeocodeCache(_ resolve: @escaping RCTPromiseResolveBlock,
+                                  reject: @escaping RCTPromiseRejectBlock) -> Void {
+        ReverseGeocoder.shared.clearCache { resolve(nil) }
+    }
+
+    @objc
+    func clearLocationThumbnailCache(_ resolve: @escaping RCTPromiseResolveBlock,
+                                     reject: @escaping RCTPromiseRejectBlock) -> Void {
+        DispatchQueue.global(qos: .utility).async {
+            LocationThumbnailRenderer.clearCache()
+            resolve(nil)
+        }
+    }
+
     @objc
     func openViewer(_ options: NSDictionary,
                     resolve: @escaping RCTPromiseResolveBlock,
@@ -560,30 +769,42 @@ class RNAttachmentKit: RCTEventEmitter {
                      resolve: @escaping RCTPromiseResolveBlock,
                      reject: @escaping RCTPromiseRejectBlock) -> Void {
         let startTime = CFAbsoluteTimeGetCurrent()
+        #if DEBUG
         print("✅ [DEBUG] received options: \(options)")
         print("🔵 [DEBUG] openGallery 시작 - 시간: \(startTime)")
-        
+        #endif
+
+        // 예전에 파일/위치 탭에서 임시 폴더에 복사해 두고 24시간이 지난 것 정리 (백그라운드, UI 와 무관)
+        DispatchQueue.global(qos: .utility).async {
+            TempFileCleaner.cleanupStaleTempFiles()
+        }
+
         // Main thread에서 실행
         DispatchQueue.main.async { [weak self] () -> Void in
             guard let self = self else {
                 reject("ERROR", "Module deallocated", nil)
                 return
             }
-            
+
+            #if DEBUG
             print("🔵 [DEBUG] workItem 실행 시작 - 경과: \(String(format: "%.3f", CFAbsoluteTimeGetCurrent() - startTime))초")
-            
+            #endif
+
             let step1 = CFAbsoluteTimeGetCurrent()
             guard let rootViewController = self.getRootViewController() else {
                 print("❌ [DEBUG] getRootViewController 실패")
                 reject("ERROR", "Unable to get root view controller", nil)
                 return
             }
+            #if DEBUG
             print("🔵 [DEBUG] getRootViewController 완료 - 경과: \(String(format: "%.3f", CFAbsoluteTimeGetCurrent() - step1))초")
-            
+            #endif
+
             let step2 = CFAbsoluteTimeGetCurrent()
-            print("🔵 [DEBUG] GalleryViewController 생성 시작...")
             let galleryVC = GalleryViewController()
+            #if DEBUG
             print("🔵 [DEBUG] GalleryViewController 생성 완료 - 경과: \(String(format: "%.3f", CFAbsoluteTimeGetCurrent() - step2))초")
+            #endif
             
             // 현재 갤러리 참조 저장
             self.currentGalleryVC = galleryVC
@@ -679,6 +900,8 @@ class RNAttachmentKit: RCTEventEmitter {
                         editorVC.onCancel = { [weak currentGallery] in
                             currentGallery?.selectedAssets.removeAll()
                             currentGallery?.refreshSelectionAfterEdit()
+                            // 결과 전달 책임이 갤러리로 돌아옴 → 닫기가 다시 취소(reject)를 보낼 수 있게
+                            currentGallery?.hasReturnedImages = false
                         }
                         
                         var savedDetent: UISheetPresentationController.Detent.Identifier? = nil
@@ -714,7 +937,35 @@ class RNAttachmentKit: RCTEventEmitter {
                 }
             }
 
-            galleryVC.onImagesSelected = { [weak self] selectedImages in
+            // 첨부 메뉴(갤러리 / 위치 / 파일). 기본 false — 켜지 않으면 기존과 같음
+            galleryVC.showsAttachMenu = options["showAttachMenu"] as? Bool ?? false
+            // 위치 보내기 때 지도 캡처 이미지 (기본 true). false 면 위치 정보만 — 받는 쪽이 renderLocationThumbnail 로 그림
+            galleryVC.capturesLocationImage = options["captureLocationImage"] as? Bool ?? true
+            // 위치 탭에서 보내기 → onLocationSelected 이벤트로 결과를 넘기고, openGallery 는 빈 배열로 끝냄
+            galleryVC.onLocationSelected = { [weak self, weak galleryVC] location in
+                self?.currentGalleryVC = nil
+                self?.sendEvent(withName: "onLocationSelected", body: location.dictionary)
+                resolve([])
+                galleryVC?.releaseAfterReturn()
+            }
+            // 파일 탭에서 보내기 → onFilesSelected 이벤트 { files: [{uri, path, name, size, mimeType}] }, openGallery 는 빈 배열
+            // 일부 파일만 복사에 실패하면 (추가 필드) failed: [{name, error}] 를 함께 보냄 (files 는 그대로)
+            galleryVC.onFilesSelectedWithFailures = { [weak self, weak galleryVC] files, failures in
+                self?.currentGalleryVC = nil
+                var body: [String: Any] = ["files": files.map { $0.dictionary }]
+                if !failures.isEmpty { body["failed"] = failures.map { $0.dictionary } }
+                self?.sendEvent(withName: "onFilesSelected", body: body)
+                resolve([])
+                galleryVC?.releaseAfterReturn()
+            }
+
+            // ⚠️ 클로저 안에서 galleryVC 를 강하게 잡으면 galleryVC → onImagesSelected → galleryVC 순환 참조가 되어
+            // (성공 경로는 viewDidDisappear 가 정리를 deinit 으로 미루므로) 갤러리가 영영 해제되지 않았습니다.
+            // 필요한 값은 미리 상수로 꺼내고, galleryVC 는 weak 로만 씁니다.
+            let galleryMaxWidth  = galleryVC.maxWidth
+            let galleryMaxHeight = galleryVC.maxHeight
+            let galleryFormat    = galleryVC.outputFormat   // "webp" | "jpg" | "png"
+            galleryVC.onImagesSelected = { [weak self, weak galleryVC] selectedImages in
                 guard let self = self else { resolve([]); return }
 
                 guard !selectedImages.isEmpty else {
@@ -725,16 +976,22 @@ class RNAttachmentKit: RCTEventEmitter {
 
                 var results: [[String: Any]] = []
                 let tempDir    = self.prepareCacheDirectory()
-                let maxWidth   = galleryVC.maxWidth
-                let maxHeight  = galleryVC.maxHeight
-                let format     = galleryVC.outputFormat       // "webp" | "jpg" | "png"
+                let maxWidth   = galleryMaxWidth
+                let maxHeight  = galleryMaxHeight
+                let format     = galleryFormat
                 let mimeType   = self.mimeType(for: format)
                 let needResize = (maxWidth > 0 || maxHeight > 0)
+                let total      = selectedImages.count
 
                 let resultsLock = NSLock()
-                
+                // 처리한 이미지는 바로 놓아 주도록 (전체 UIImage 배열을 끝까지 들고 있지 않게) 옵셔널 배열로 옮김
+                var pending: [(PHAsset?, UIImage)?] = selectedImages.map { $0 }
+
                 DispatchQueue.global(qos: .userInitiated).async {
-                    for (index, pair) in selectedImages.enumerated() {
+                    for index in 0..<total {
+                        guard let pair = pending[index] else { continue }
+                        pending[index] = nil
+                        autoreleasepool {
                             let (asset, image) = pair
                             let timestamp    = Int(Date().timeIntervalSince1970 * 1000)
                             let originalSize = image.size
@@ -778,7 +1035,7 @@ class RNAttachmentKit: RCTEventEmitter {
                                 
                                 self.sendEvent(withName: "onImageProcessed", body: [
                                     "index": index,
-                                    "total": selectedImages.count,
+                                    "total": total,
                                     "image": currentResult
                                 ])
                             } else {
@@ -828,15 +1085,18 @@ class RNAttachmentKit: RCTEventEmitter {
                                 
                                 self.sendEvent(withName: "onImageProcessed", body: [
                                     "index": index,
-                                    "total": selectedImages.count,
+                                    "total": total,
                                     "image": currentResult
                                 ])
                             }
+                        } // end autoreleasepool
                     } // end for
 
                     DispatchQueue.main.async {
                         self.currentGalleryVC = nil
                         resolve(results)
+                        // 결과를 넘긴 뒤: 갤러리의 PHCachingImageManager 캐시·콜백 해제 (닫힘 애니메이션에는 영향 없음)
+                        galleryVC?.releaseAfterReturn()
                     }
                 }
             }
@@ -877,13 +1137,16 @@ class RNAttachmentKit: RCTEventEmitter {
                     }
                 }
             }
+            #if DEBUG
             print("🔵 [DEBUG] Sheet 설정 완료 - 경과: \(String(format: "%.3f", CFAbsoluteTimeGetCurrent() - step3))초")
+            #endif
             
             let step4 = CFAbsoluteTimeGetCurrent()
-            print("🔵 [DEBUG] present 시작...")
             rootViewController.present(navigationController, animated: true)
+            #if DEBUG
             print("🔵 [DEBUG] present 완료 - 경과: \(String(format: "%.3f", CFAbsoluteTimeGetCurrent() - step4))초")
             print("✅ [DEBUG] openGallery 전체 완료 - 총 경과: \(String(format: "%.3f", CFAbsoluteTimeGetCurrent() - startTime))초")
+            #endif
         }
     }
     
@@ -902,6 +1165,13 @@ class RNAttachmentKit: RCTEventEmitter {
                 return
             }
             
+            // openGallery 약속이 아직 안 풀렸으면 (닫기 버튼과 같은 경로로) 취소를 먼저 전달 → reject("CANCELLED")
+            // 안 그러면 아래 cleanupMemory 가 콜백을 지워 버려 JS 약속이 영영 안 풀렸습니다.
+            if !galleryVC.hasReturnedImages {
+                galleryVC.hasReturnedImages = true
+                galleryVC.onImagesSelected?([])
+            }
+
             // 갤러리 닫기 전 강제 정리
             galleryVC.forceCleanupBeforeDismiss()
             
@@ -1032,14 +1302,18 @@ class RNAttachmentKit: RCTEventEmitter {
                     let options: [CFString: Any] = [kCGImageDestinationLossyCompressionQuality: quality]
                     CGImageDestinationAddImage(destination, cgImage, options as CFDictionary)
                     if CGImageDestinationFinalize(destination) {
+                        #if DEBUG
                         NSLog("✅ [encodeWebP] iOS 16 네이티브 WebP 인코딩 성공 - %d bytes", data.length)
+                        #endif
                         return data as Data
                     }
                 }
             }
         }
         
+        #if DEBUG
         NSLog("🟣 [encodeWebP] SDImageWebPCoder 런타임 폴백 시도")
+        #endif
         // iOS 14, 15이거나 네이티브 실패 시 SDImageWebPCoder 런타임 호출
         if let coderClass = NSClassFromString("SDImageWebPCoder") as? NSObject.Type {
             if coderClass.responds(to: NSSelectorFromString("sharedCoder")) {
@@ -1057,7 +1331,9 @@ class RNAttachmentKit: RCTEventEmitter {
                     // format: 3 (SDImageFormatWebP)
                     let options: [String: Any] = ["encodeCompressionQuality": quality]
                     if let data = encode(sharedCoder, encodeSel, image, 3, options) {
+                        #if DEBUG
                         NSLog("✅ [encodeWebP] SDImageWebPCoder 런타임 인코딩 성공 - %d bytes", data.count)
+                        #endif
                         return data
                     } else {
                         NSLog("❌ [encodeWebP] SDImageWebPCoder 런타임 인코딩 실패 (nil 반환)")
@@ -1237,6 +1513,7 @@ class RNAttachmentKit: RCTEventEmitter {
                 DispatchQueue.main.async {
                     self.currentGalleryVC = nil
                     reject("ERROR", "Failed to load image from editor", nil)
+                    galleryVC?.releaseAfterReturn()
                 }
                 return
             }
@@ -1275,6 +1552,7 @@ class RNAttachmentKit: RCTEventEmitter {
             DispatchQueue.main.async {
                 self.currentGalleryVC = nil
                 resolve([result])
+                galleryVC?.releaseAfterReturn()
             }
         }
     }
@@ -1289,10 +1567,12 @@ class RNAttachmentKit: RCTEventEmitter {
         DispatchQueue.global(qos: .userInitiated).async {
             let photoManager = PhotoManager.shared
             var results: [[String: Any]] = []
-            let dispatchGroup = DispatchGroup()
             let resultsLock = NSLock()
             
+            // 한 장씩 순서대로 처리 (동시에 전부 디코딩하면 메모리가 치솟음). 해상도는 줄이지 않음
             for (index, asset) in assets.enumerated() {
+              autoreleasepool {
+                let dispatchGroup = DispatchGroup()
                 dispatchGroup.enter()
                 let timestamp = Int(Date().timeIntervalSince1970 * 1000)
                 let originalUri = "ph://\(asset.localIdentifier)"
@@ -1367,9 +1647,9 @@ class RNAttachmentKit: RCTEventEmitter {
                         }
                     }
                 }
+                dispatchGroup.wait()
+              } // end autoreleasepool
             }
-            
-            dispatchGroup.wait()
             
             DispatchQueue.main.async {
                 self.currentGalleryVC = nil
@@ -1379,6 +1659,7 @@ class RNAttachmentKit: RCTEventEmitter {
                     // 순서를 유지하기 위해
                     resolve(results)
                 }
+                galleryVC.releaseAfterReturn()
             }
         }
     }
@@ -1674,8 +1955,11 @@ fileprivate extension RNAttachmentKit {
             self.editorTransitionDelegate?.onCurrentAssetChanged = { [weak currentGallery] currentAsset in
                 currentGallery?.setHiddenAsset(currentAsset, scrollIntoView: true)
             }
-            self.editorTransitionDelegate?.onEditorClosed = { [weak currentGallery] in
+            self.editorTransitionDelegate?.onEditorClosed = { [weak self, weak currentGallery] in
                 currentGallery?.setHiddenAsset(nil)
+                // 편집 화면이 닫혔으니 sourceImage/uncroppedImage 를 들고 있는 전환 델리게이트를 놓아 줌
+                // (호출 중인 객체이므로 다음 런루프에서)
+                DispatchQueue.main.async { self?.editorTransitionDelegate = nil }
             }
             currentGallery.setHiddenAsset(asset)
             
@@ -1686,10 +1970,10 @@ fileprivate extension RNAttachmentKit {
             editorVC.themeColor = color
         }
 
-        editorVC.onConfirmMulti = { [weak currentGallery] (assets, croppedImages, filterStates) in
+        editorVC.onConfirmMulti = { [weak currentGallery, weak editorVC] (assets, croppedImages, filterStates) in
             guard let currentGallery = currentGallery else { return }
             
-            editorVC.dismiss(animated: true) {
+            editorVC?.dismiss(animated: true) {
                 DispatchQueue.global(qos: .userInitiated).async {
                     var newlyEditedAssets: [PHAsset] = []
                     
@@ -1731,7 +2015,7 @@ fileprivate extension RNAttachmentKit {
         }
 
         // patch398: 편집 화면의 전송 버튼 — 편집본을 갤러리에 반영하고 선택한 사진을 바로 전송(편집 화면/갤러리 모두 닫힘)
-        editorVC.onSendMulti = { [weak currentGallery] (assets, croppedImages, filterStates) in
+        editorVC.onSendMulti = { [weak currentGallery, weak editorVC] (assets, croppedImages, filterStates) in
             guard let currentGallery = currentGallery else { return }
             for asset in assets {
                 guard var img = croppedImages[asset] else { continue }
@@ -1748,7 +2032,7 @@ fileprivate extension RNAttachmentKit {
             // patch399: 편집 화면의 이미지가 갤러리 자리로 돌아가는 애니메이션이 끝난 뒤에 전송합니다.
             currentGallery.refreshThumbnails(for: assets)
             currentGallery.updateSelectedCellNumbers()
-            editorVC.dismiss(animated: true) { [weak currentGallery] in
+            editorVC?.dismiss(animated: true) { [weak currentGallery] in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                     currentGallery?.sendSelectionFromEditor()
                 }

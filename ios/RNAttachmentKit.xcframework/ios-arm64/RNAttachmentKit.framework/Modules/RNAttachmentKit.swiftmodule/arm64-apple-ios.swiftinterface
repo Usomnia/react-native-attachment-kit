@@ -43,7 +43,10 @@ import _SwiftConcurrencyShims
     get
   }
   @_Concurrency.MainActor @preconcurrency public var onLocationSelected: ((RNAttachmentKit.AttachLocationResult) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var capturesLocationImage: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public func releaseAfterReturn()
   @_Concurrency.MainActor @preconcurrency public var onFilesSelected: (([RNAttachmentKit.AttachFileResult]) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onFilesSelectedWithFailures: (([RNAttachmentKit.AttachFileResult], [RNAttachmentKit.AttachFileFailure]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var allowsMultipleFiles: Swift.Bool
   @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -184,6 +187,17 @@ public struct AttachLocationResult {
   public let title: Swift.String?
   public let address: Swift.String?
   public let isCurrentLocation: Swift.Bool
+  public var imageUri: Swift.String?
+  public var imagePath: Swift.String?
+  public var imageWidth: Swift.Int?
+  public var imageHeight: Swift.Int?
+  public var currentLatitude: Swift.Double?
+  public var currentLongitude: Swift.Double?
+  public var currentAccuracy: Swift.Double?
+  public var includesMyLocation: Swift.Bool
+  public var markerType: Swift.String
+  public var placeCategory: Swift.String?
+  public var imageSpanMeters: Swift.Double?
   public var dictionary: [Swift.String : Any] {
     get
   }
@@ -196,6 +210,16 @@ public struct AttachFileResult {
   public var dictionary: [Swift.String : Any] {
     get
   }
+}
+public struct AttachFileFailure {
+  public let name: Swift.String
+  public let error: Swift.String
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+}
+public enum TempFileCleaner {
+  public static func cleanupStaleTempFiles(now: Foundation.Date = Date())
 }
 public struct FilterState {
   public var filterId: Swift.String
@@ -358,9 +382,9 @@ extension RNAttachmentKit.GalleryBaseViewController : UIKit.UIAdaptivePresentati
   public func hasCache(for url: Swift.String) -> Swift.Bool
   public func getMemoryImage(for url: Swift.String) -> UIKit.UIImage?
   public func getDiskImageSynchronously(for url: Swift.String) -> UIKit.UIImage?
+  @objc deinit
   public func setMemoryImage(_ image: UIKit.UIImage, for url: Swift.String)
   public func saveImage(_ image: UIKit.UIImage, for url: Swift.String)
-  @objc deinit
 }
 @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class RemoteImageViewerViewController : UIKit.UIViewController {
   @_Concurrency.MainActor @preconcurrency public var onPageChanged: ((Swift.Int) -> Swift.Void)?
@@ -623,6 +647,99 @@ extension RNAttachmentKit.MediaGalleryViewController : UIKit.UICollectionViewDat
   @_Concurrency.MainActor @preconcurrency @objc public func transitionDuration(using transitionContext: (any UIKit.UIViewControllerContextTransitioning)?) -> Foundation.TimeInterval
   @_Concurrency.MainActor @preconcurrency @objc public func animateTransition(using transitionContext: any UIKit.UIViewControllerContextTransitioning)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init()
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class MapViewerViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor @preconcurrency final public let coordinate: _LocationEssentials.CLLocationCoordinate2D
+  @_Concurrency.MainActor @preconcurrency final public let placeTitle: Swift.String?
+  @_Concurrency.MainActor @preconcurrency final public var address: Swift.String? {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency final public let markerType: Swift.String?
+  @_Concurrency.MainActor @preconcurrency final public let placeCategory: Swift.String?
+  @_Concurrency.MainActor @preconcurrency final public let accentColor: UIKit.UIColor
+  @_Concurrency.MainActor @preconcurrency final public let languageCode: Swift.String
+  @_Concurrency.MainActor @preconcurrency final public var onClosed: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var showsDirections: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency final public var spanMeters: Swift.Double?
+  @_Concurrency.MainActor @preconcurrency final public var sourceRect: CoreFoundation.CGRect?
+  @_Concurrency.MainActor @preconcurrency final public var sourceImage: UIKit.UIImage?
+  @_Concurrency.MainActor @preconcurrency final public var sourceImageIsMarkerless: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency final public var sourceCornerRadius: CoreFoundation.CGFloat
+  @_Concurrency.MainActor @preconcurrency final public var sourceRectProvider: (() -> CoreFoundation.CGRect?)?
+  @_Concurrency.MainActor @preconcurrency final public var addressLanguageCode: Swift.String?
+  @_Concurrency.MainActor @preconcurrency public init(latitude: Swift.Double, longitude: Swift.Double, title: Swift.String? = nil, address: Swift.String? = nil, markerType: Swift.String? = nil, placeCategory: Swift.String? = nil, accentColor: UIKit.UIColor = UIColor(red: 1, green: 0.42, blue: 0.21, alpha: 1), languageCode: Swift.String = "en")
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidLayoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public var preferredStatusBarStyle: UIKit.UIStatusBarStyle {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override final public func viewDidAppear(_ animated: Swift.Bool)
+  @objc deinit
+}
+extension RNAttachmentKit.MapViewerViewController : MapKit.MKMapViewDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc final public func mapViewDidFinishRenderingMap(_ mapView: MapKit.MKMapView, fullyRendered: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc final public func mapView(_ mapView: MapKit.MKMapView, viewFor annotation: any MapKit.MKAnnotation) -> MapKit.MKAnnotationView?
+  @_Concurrency.MainActor @preconcurrency @objc final public func mapView(_ mapView: MapKit.MKMapView, didSelect view: MapKit.MKAnnotationView)
+}
+extension RNAttachmentKit.MapViewerViewController : CoreLocation.CLLocationManagerDelegate {
+  @_Concurrency.MainActor @preconcurrency @objc final public func locationManagerDidChangeAuthorization(_ manager: CoreLocation.CLLocationManager)
+  @_Concurrency.MainActor @preconcurrency @objc final public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [_LocationEssentials.CLLocation])
+  @_Concurrency.MainActor @preconcurrency @objc final public func locationManager(_ manager: CoreLocation.CLLocationManager, didFailWithError error: any Swift.Error)
+}
+public struct LocationThumbnailRequest {
+  public var latitude: Swift.Double
+  public var longitude: Swift.Double
+  public var size: CoreFoundation.CGSize
+  public var scale: CoreFoundation.CGFloat
+  public var isDark: Swift.Bool
+  public var markerType: Swift.String?
+  public var placeCategory: Swift.String?
+  public var spanMeters: Swift.Double?
+  public var accentColor: UIKit.UIColor
+  public var myLocation: _LocationEssentials.CLLocationCoordinate2D?
+  public var maxPixelWidth: CoreFoundation.CGFloat
+  public var maxPixelHeight: CoreFoundation.CGFloat
+  public init(latitude: Swift.Double, longitude: Swift.Double, size: CoreFoundation.CGSize, scale: CoreFoundation.CGFloat, isDark: Swift.Bool, markerType: Swift.String?, placeCategory: Swift.String?, spanMeters: Swift.Double?, accentColor: UIKit.UIColor, myLocation: _LocationEssentials.CLLocationCoordinate2D?)
+}
+public enum LocationThumbnailError : Swift.Error {
+  case failed(Swift.String)
+}
+public enum LocationThumbnailRenderer {
+  public typealias Completion = (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void
+  public static let defaultMaxPixel: CoreFoundation.CGFloat
+  public static let markerWidthFraction: CoreFoundation.CGFloat
+  public static func markerlessFile(for path: Swift.String) -> Swift.String?
+  public static func render(_ req: RNAttachmentKit.LocationThumbnailRequest, completion: @escaping RNAttachmentKit.LocationThumbnailRenderer.Completion)
+  public static func height(forWidth w: CoreFoundation.CGFloat, aspect: Swift.String?) -> CoreFoundation.CGFloat?
+  public static func clearCache()
+}
+public struct ReverseGeocodeResult {
+  public let address: Swift.String?
+  public let shortAddress: Swift.String?
+  public let cached: Swift.Bool
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+}
+public struct ReverseGeocodeError : Swift.Error {
+  public let code: Swift.String
+  public let message: Swift.String
+}
+@_hasMissingDesignatedInitializers final public class ReverseGeocoder {
+  public static let shared: RNAttachmentKit.ReverseGeocoder
+  public static let maxEntries: Swift.Int
+  public static let trimTo: Swift.Int
+  public static let timeout: Swift.Double
+  public typealias Completion = (Swift.Result<RNAttachmentKit.ReverseGeocodeResult, RNAttachmentKit.ReverseGeocodeError>) -> Swift.Void
+  public static var cacheDirectory: Foundation.URL {
+    get
+  }
+  public static func cacheKey(latitude: Swift.Double, longitude: Swift.Double, languageCode: Swift.String) -> Swift.String
+  final public func reverseGeocode(latitude: Swift.Double, longitude: Swift.Double, languageCode: Swift.String, completion: @escaping RNAttachmentKit.ReverseGeocoder.Completion)
+  final public func address(latitude: Swift.Double, longitude: Swift.Double, languageCode: Swift.String, completion: @escaping (Swift.String?) -> Swift.Void)
+  final public func clearCache(completion: (() -> Swift.Void)? = nil)
   @objc deinit
 }
 extension RNAttachmentKit.AttachMenuTab : Swift.Equatable {}

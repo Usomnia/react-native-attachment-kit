@@ -22,7 +22,7 @@
 		</data>
 		<key>Headers/RNAttachmentKit-Swift.h</key>
 		<data>
-		1Mewxss6sAkZSJX9bLi5lcR8Ero=
+		4lqGZdGnjvCCDxNRFc2GgyyzqyE=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -30,43 +30,43 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		ZUbxG02kJwnptfPMGwXLMg1wG4k=
+		yzVs+k0n+fAWBNbxtMQPWwrjRN0=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		VbKiyMAMwT9rblGdSs6r8cDQufw=
+		3d+7crlvM8P5/XPlmAcyIbpS6zs=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Z/5yZJFa9UBY8jt5q3kcLLo3R5M=
+		3Y+Yb6iItYSkNObvNxCJpXncvHQ=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		VbKiyMAMwT9rblGdSs6r8cDQufw=
+		3d+7crlvM8P5/XPlmAcyIbpS6zs=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		4OAjHSojZm4OtKW3mxQ0PMQVSS0=
+		pTw5/RKAzDXtx8rwalHKzC1QVrw=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		ZUbxG02kJwnptfPMGwXLMg1wG4k=
+		yzVs+k0n+fAWBNbxtMQPWwrjRN0=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		fQRfJNNvI6MxomIzzZWQziqxq8I=
+		YZtIbnfcDasieXiHsoxa0r1/Hkc=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		jxMs61J1rGaAXEBOi8vovg1xVgs=
+		174LWJPXzjBzOETdSc+BKgsj/ig=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		fQRfJNNvI6MxomIzzZWQziqxq8I=
+		YZtIbnfcDasieXiHsoxa0r1/Hkc=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		PRd9yDAdAt5fPqp0EEw916xbwwI=
+		brFa0/Ksy3av4Ce56nRbOQSY1c0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -78,99 +78,147 @@
 		</data>
 		<key>ToolbarIcons/ic_crop_reflect~dark.webp</key>
 		<data>
-		uhN5IuKnjO1ikuRBV3YabBlzSjM=
+		79oOLj7HzdOxiWVKWVqSEWs5aA0=
 		</data>
 		<key>ToolbarIcons/ic_crop_reflect~light.webp</key>
 		<data>
-		S9k8cMBucUhXxIfRK7CTMZeQby4=
+		grEA+Iz8v7Ha0N76s2mHxoqmFz4=
 		</data>
 		<key>ToolbarIcons/ic_crop_rotate~dark.webp</key>
 		<data>
-		X8aiv7yfBKfKOdSZ7ixkqPOOTns=
+		YGSZjvEu4DZgZK7ezTfj1YcyGBM=
 		</data>
 		<key>ToolbarIcons/ic_crop_rotate~light.webp</key>
 		<data>
-		Mw/SU9w0IYZX/Vko01Ii/b5223M=
+		8SRO0J8/ai2Qn2y0oQBaXe0TKjs=
 		</data>
 		<key>ToolbarIcons/ic_drawing_delete~dark.webp</key>
 		<data>
-		8Nmb2b9POBjtIgTBmA6b3tpY5E8=
+		3KlY/vE377McHPYpGXTm0P8bvBc=
 		</data>
 		<key>ToolbarIcons/ic_drawing_delete~light.webp</key>
 		<data>
-		t2OBOMDMC/Yj3+1Mt5kABsZPxbQ=
+		catvZFh80uyrO0QnuBOS65iGUWQ=
 		</data>
 		<key>ToolbarIcons/ic_drawing_forward~dark.webp</key>
 		<data>
-		OEfWim8IWUUolQCDPZVDiCC4Ros=
+		akboxBYcmoRgKUwtR7qNGdOdEZM=
 		</data>
 		<key>ToolbarIcons/ic_drawing_forward~light.webp</key>
 		<data>
-		w+EZAeE/RCSqzPTbYdwxPnIuX1Q=
+		vPFdQ+XjU4Zl+9ltXgXhd1RuUyM=
 		</data>
 		<key>ToolbarIcons/ic_drawing_reward~dark.webp</key>
 		<data>
-		A/LDFctmOavSaP3n77jhsR4iXVk=
+		tn2ijhNoUzgqHrLws+8+NS3uIOg=
 		</data>
 		<key>ToolbarIcons/ic_drawing_reward~light.webp</key>
 		<data>
-		uJBfI3rz71SnX1qZJxSFfbiVYu4=
+		alLeWAG4y93xoTxUbfNRugpYNhY=
+		</data>
+		<key>ToolbarIcons/ic_editor_back~dark.webp</key>
+		<data>
+		23LEyGGWXzwlYqVEf735DZyYEOQ=
+		</data>
+		<key>ToolbarIcons/ic_editor_back~light.webp</key>
+		<data>
+		HV0H7oDh9G5yH4caA0LzwxnRnl0=
+		</data>
+		<key>ToolbarIcons/ic_editor_blur~dark.webp</key>
+		<data>
+		qYpmn9+cH+vRSTVW0liddVY9i9Y=
+		</data>
+		<key>ToolbarIcons/ic_editor_blur~light.webp</key>
+		<data>
+		aoeASu52LoFYUY/aTdvsuY5HbwA=
+		</data>
+		<key>ToolbarIcons/ic_editor_check_small~dark.webp</key>
+		<data>
+		cN08HJ2r1/i7m53/Zk9lX2yZ0KQ=
+		</data>
+		<key>ToolbarIcons/ic_editor_check_small~light.webp</key>
+		<data>
+		vC1u40il/M+gJ3WWLmD1uHofHXE=
+		</data>
+		<key>ToolbarIcons/ic_editor_check~dark.webp</key>
+		<data>
+		QlGlq71R1hMtvjAAQ9ZiRnM27YQ=
+		</data>
+		<key>ToolbarIcons/ic_editor_check~light.webp</key>
+		<data>
+		+mxnRnF3M9ohbmVNNKh52j5x7tc=
+		</data>
+		<key>ToolbarIcons/ic_editor_close~dark.webp</key>
+		<data>
+		dfav5VkXZRWJVVUkRgjINGsgca4=
+		</data>
+		<key>ToolbarIcons/ic_editor_close~light.webp</key>
+		<data>
+		Z2+fY4lj97l2TZ4KgD0gV8oNJrc=
 		</data>
 		<key>ToolbarIcons/ic_editor_crop~dark.webp</key>
 		<data>
-		vkE/t9hE8QsShCAt5Rv0kzmU9qw=
+		d2u3SCyNb4B+u72gGpilaqnVydg=
 		</data>
 		<key>ToolbarIcons/ic_editor_crop~light.webp</key>
 		<data>
-		7MLR5M3sHUtGEIyloV/E2B4rxIE=
+		T3wXqARHAR124bCZhMJNV/iyLtw=
 		</data>
 		<key>ToolbarIcons/ic_editor_drawing~dark.webp</key>
 		<data>
-		JXwGXPwUyUpsR+3mF9G5tthmPgA=
+		kYYuf68Hn/XVSrF6SK/ObLMGCFg=
 		</data>
 		<key>ToolbarIcons/ic_editor_drawing~light.webp</key>
 		<data>
-		XZBip505Y2S20mwhWH+6iwReHBA=
+		TlVyFw2/s/O7z8+ubzEluVEVPnA=
 		</data>
 		<key>ToolbarIcons/ic_editor_effect~dark.webp</key>
 		<data>
-		2BH2x79ITaCyk0K0UbqHTYp+Jt4=
+		ySqAdr8aMeuT1oS7vVLjuZcW3s8=
 		</data>
 		<key>ToolbarIcons/ic_editor_effect~light.webp</key>
 		<data>
-		MZ6aBrS9VPAKhd033nhjhdwzgqM=
+		t674lheI7xoxBOFy9Zc8CStsXpo=
 		</data>
 		<key>ToolbarIcons/ic_editor_emoji~dark.webp</key>
 		<data>
-		LY1e6UckPj+dowJmDvAmhKSI9EA=
+		TpsTTFJCjOQdHk3wIP+Jq+gl3CY=
 		</data>
 		<key>ToolbarIcons/ic_editor_emoji~light.webp</key>
 		<data>
-		WxRvHB2EQdKjN+mIiyXE4ahqFD8=
+		22Id3IVM6s61bVZv/LRp59+8LxU=
 		</data>
 		<key>ToolbarIcons/ic_editor_eraser~dark.webp</key>
 		<data>
-		zWYdZ8FLiLu9Bk5m3OQqLSFh8ts=
+		frBKBi68LFWiUrKzQ6ohOpJk0w8=
 		</data>
 		<key>ToolbarIcons/ic_editor_eraser~light.webp</key>
 		<data>
-		Kaprq8lKq2RbrluIHRui+0UIRAY=
+		nvLqUGGXaEKRAxmb6flEAh1uo+s=
 		</data>
 		<key>ToolbarIcons/ic_editor_mosaic~dark.webp</key>
 		<data>
-		qG4ohaN7IVT9memfUWmjf1Rsimw=
+		2LFi5UWbgR4lldUQtHNAFJxwIdI=
 		</data>
 		<key>ToolbarIcons/ic_editor_mosaic~light.webp</key>
 		<data>
-		nYopLAZ0/0Z1H2cBqQZNH/B1mVA=
+		a8HyOFDkL6css/yJCefLHXiwHTU=
 		</data>
 		<key>ToolbarIcons/ic_editor_text~dark.webp</key>
 		<data>
-		HgtXySmkyU4gV3cVplfDR/El8yg=
+		M7yAnXf15RFDfAdtuI0M+jgBKu8=
 		</data>
 		<key>ToolbarIcons/ic_editor_text~light.webp</key>
 		<data>
-		a7IGrSlvI5bkv4dMccicecREZzQ=
+		FlBRjWY3eCewE2FYK1KmJv4HZ4E=
+		</data>
+		<key>ToolbarIcons/ic_text_add~dark.webp</key>
+		<data>
+		zZaHN8zUs4r3zLMMIc5/iON7SP8=
+		</data>
+		<key>ToolbarIcons/ic_text_add~light.webp</key>
+		<data>
+		HALgX8K/VDGzQT4APKwkXC7UxwI=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -207,77 +255,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6pCNuW9w10Oa3p7CzKDpslv8z862+kWZ5XTAf7qzeBs=
+			jP+jiNnXhkOKTRJb5kKT4Skcl3imtlmW8htzvrG/9B8=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ROhcRvIOQmdrR/4FZKu4zsm55qbFVAqeJEy9f2cBrZM=
+			wPEN6QtxVqoCbCp/z3rYhGT5QOE2vKZR2uHf1sFkKcQ=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JNw6CovE9sPKkm+Thup4Ys0axnGm9S6RmW3Y5CxHnCg=
+			PCJzsbciCPQjQ+8d1NaEqra2tG6IhnKGxArWy0tMCNU=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			HMa8cFj2D5MOb7Nzosb4O4c/tJwpLjC5pfMFa/+hdSk=
+			IqlfotL45Jo1H46fYK8QlNdsrWP+Wc4omyD8Ei0M38Y=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JNw6CovE9sPKkm+Thup4Ys0axnGm9S6RmW3Y5CxHnCg=
+			PCJzsbciCPQjQ+8d1NaEqra2tG6IhnKGxArWy0tMCNU=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yjm5JJdgmICEMY3wUhx1338SzFZJtvaOxjb0wKVJgZo=
+			+69q+F1mVqbDKIgKGmPaw7Oh0Evf2i4ESrGeEAa4b94=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ROhcRvIOQmdrR/4FZKu4zsm55qbFVAqeJEy9f2cBrZM=
+			wPEN6QtxVqoCbCp/z3rYhGT5QOE2vKZR2uHf1sFkKcQ=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nJdvUeMgKh48oNHn869/k8l57lFZfaRqi/499k+If/w=
+			+c23Df2P+F8jTw46r7Qo0C11WzQMkRn3zQP3nOBtOng=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TezAeRJzQq1Ub109gC3ogXxoKFQewYf10ZBMaoKiISg=
+			oh5aRAAJiHhK6wJJLdK4eEzb5vdFcETRW28KyIXHj0g=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nJdvUeMgKh48oNHn869/k8l57lFZfaRqi/499k+If/w=
+			+c23Df2P+F8jTw46r7Qo0C11WzQMkRn3zQP3nOBtOng=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2+pCITxiKBs7FGZNC+IYSmFl0jtVcQh/ILXB+35pYcs=
+			hC7shtU5k+++O06+9Yl5UBbBKbXd0idJRMcEokgi3Co=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -298,168 +346,252 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2DXjUCvpg0bqsJuYZXrYPS2u4z+PMBiQ/Wq8Awkocd8=
+			/UYtsVrNNNLOX7WeUdU+1Iibk1wGPnhyxfajFuldcM4=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_crop_reflect~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Yh+4vxRv7YiPxoqil8E9LkLvUIUeS78yCJeBBMy/kbY=
+			W7jZr2hZZy7nsZMnMloyHTgtRu0ZdEQDWYy5v79P3Lk=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_crop_rotate~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VhoDGU2EJqjlMhhnydR2Lw0JFd/zetOciOAN8p2xUuA=
+			4k1ERudQOo+PpF/mmn0rftoH4XTl79ShUw4lxwMsAQg=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_crop_rotate~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Pz+gmTiYnDZ6vqtN2CmsyqECNk0VcglUupZ0S2vopyI=
+			3sIYjvMwSlg/mmU+VNOHqifynA/T+iZ6ZAcyBj2JM40=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_drawing_delete~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XtL5qilrVt5GaBNk3on//yYSl9e65zMXxMx/hEg+5G8=
+			8p9A5zKdbsTQ9WfbqByfy0uIYTkl7Rs/GvqxkIy/l28=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_drawing_delete~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Gzh0ScraswHmdKhdRWqkyRBnA1WLiEuLEfINUn14J5Q=
+			lVSvSp85pGpOgQmTa7OzRj2eWVX4MnFNNyV68jKUte8=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_drawing_forward~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			szkJr5cXk/vCYEJRDhIsiPIa6I+eq0/hfbOH/sDUeKA=
+			EPynlhs2r7QGof+lahT5xbIUa68AFhMnFngVMy76KAQ=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_drawing_forward~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			dOd4K/epueTEHG6ET+lhLSCNdI4fxIDbgodL31Ic8S0=
+			aMeIJwup5d9fZFvQVfc/8PSru+Iw+6pzZMQJ2Luzu1o=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_drawing_reward~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gBQmK737rLoVf6k7n4ZejurWpkhQpVxoLS1YJNPpi3U=
+			dAsZnDrFpvZ9//t64q+CwJDTSSimDxpDIyPYh6yFVy4=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_drawing_reward~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			W9Agusdf8JC2UQsrcjX86I6Puk4cD4W+0advm2HU+F8=
+			G5C8PFSLCi7R7W0Z9lM+z0QKwi5u0LhWsxo9mUF70bo=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_back~dark.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lqM+Q4JydDWKxjLH/eky0xpHkHN2FDotU8D9mj69Elo=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_back~light.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			g+Ibg8DAUPsZdwewP6kf4uLhMvtFL5bufKFHP1fKhb4=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_blur~dark.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2j98DvdKnmEDcQz+dCeDD8b1R/CBVZyyEfDK7eoFTG8=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_blur~light.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+gSlhSn7GdSx2S3q0C3BgLSelYc+cPu1/LlOMyJ08nY=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_check_small~dark.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			dC/sJAvvBcICxElFJyL30V5m5rXiWmR7qy/RyfOaMJI=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_check_small~light.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HqM/Lsc8mrx79ERMqH9liLG3DYfYhbYAy4IDGDy91gQ=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_check~dark.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			j2aMxm6pdzSHi1GfRyOOgtd2aA3OGQkIXXGxrhq0Ba8=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_check~light.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			o6IEYdQ4klzwq4PRUkatJA2kVYfKCUUvs0J214ILGsA=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_close~dark.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BV0m8RXTcwsM6ZQ4lReiY1+8yZ0xbEIaLTk5BhQAjJo=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_editor_close~light.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LlkmFHUBlF4YOGHMGCjb3s8UXX+8z8tuh3/s5eCqz5s=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_crop~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Aie7WXuXZKJyvrFjKUFBcql845+34EzPSGIeu0Th+tw=
+			7tamVOWRAgOQQrBFOhhcUus2nwK9362SazEB+MCn+6U=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_crop~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			BMNtOlNZFkZuDPwnGAs2G49oTSbyUWqmtGSRNlG0Ilc=
+			1TqDKKEnRia16v4zfcGvmiH/9kVjAiu6ZdNEOvSHaHY=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_drawing~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			K/tcRmIAo5Gu0hgWJZbuhSlbSGkCX3eOH2evZ0MW5Y8=
+			VHz5CS40e7dqVUcYoX/FgjLc37D7mFOo2KxXsIICfNI=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_drawing~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			IvV5CbAvEz2Fzuu60Rv2iMYlYYpMhAFR6hSCfVGahHU=
+			MnsJGGAYJzU5fraDO9UeaLMWaKbUIlLxIchPRb0hFrk=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_effect~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			q/6lYwVS4Ma9o394rH9cXbZ4aF++IixUV2g2edoYjaY=
+			M+2iYFxPHdYnrUPWTyO4B/Wa5znBLn7R95lLrSrxBUs=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_effect~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			S+32Xi6g8w7Wv5QDMNIGTNQEacfybmrk7j8DM7vR8yg=
+			XsnPNtjqfi84AhADYrlAdkaltrBnh2D2aYhn4r4RCww=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_emoji~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RCpogLoef1vYf/UR01iXcLdVHj3keJSZbIW1GffHrX8=
+			Q3SS+gkcyqku01aEcftS/86nVFGERXFCKsyALYihdp8=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_emoji~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NzTOgv/8ZkNwHbmeRBd7MDY5p615wQn5QZ8RB+qd6kc=
+			aiCwSDKAv806tCvc9D1xyfOrHQxvX1mAvkQef7prZxY=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_eraser~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			+aXRuoYUNfppaS6ZSgQoBnMahQzWt2NszNdiCxFFWSA=
+			XrKTpLdMO2r8Cprju9Rcto5axxd7NNCbWcIzJ+NkMmI=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_eraser~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			XiSCbIBiapma13m8VrltRX57/R1P14Ru9UxBCAy+gNQ=
+			caOomRDpHwqlaC9Pkal/WWO9jM1crWbfwHSNiyIYUg0=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_mosaic~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nWnvfu/H2x/iE6ZMz8kvi6XzGaAAoodCwahHlYGrv4U=
+			WrGBB0Ouxj3M2oCWbrt/PpF54/gqiLrTXlZ7ay3InEM=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_mosaic~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EzKtte+ggAOIBGC9ZqWM+Y6TAhRe3zEzxogtkEQSCmw=
+			Fyd3XR7aeNuhPsxVGq5sFYVmVN4WrYtZCBWW+iAHdRQ=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_text~dark.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			trssq7NPYo+hlLb/aqylxmKoJbBM+mQErjJyIUjNkQ0=
+			03aAA0nO2RJCMce91HoDSVgqeQV03MzKM6E+Gn3c1/c=
 			</data>
 		</dict>
 		<key>ToolbarIcons/ic_editor_text~light.webp</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			mOs1eOOwdaVvM/yt0MdA2EAhRpPH+RHhnv5lvP3OknU=
+			E3vI2VlwnUZjXtl88K7dyhLYa0enDfpeIy8+kAOMdIk=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_text_add~dark.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lhBRsf62SBnln3FD8vK6i/1YWcqk3Nfntm9XfLG9kSo=
+			</data>
+		</dict>
+		<key>ToolbarIcons/ic_text_add~light.webp</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			DX4vVNyrxwNh3n79jndKINycBJ08allE+3b2RvbDiBk=
 			</data>
 		</dict>
 	</dict>

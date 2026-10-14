@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.6 — 2026-10-14
+
+- **Video in the picker, editor and viewer (iOS + Android)**: `openGallery({ mediaType: "all" | "video", video })` picks videos; the editor gets video pages (trim, mute, quality, crop, drawing/stickers/text, pre-encoding); `openViewer({ images, videos })` plays videos (progress pill, mute/options, remote video cache, pinch zoom). Sending progress is reported as events. `video.posterFormat` (`"webp"` default / `"jpg"`). Video limits are checked before sending.
+- **In-app full-screen camera (iOS + Android)**: photo + hold-to-record video (with lock), ratio menu (꽉 참 / 9:16 / 3:4 / 1:1), resolution HD / FHD (default) / 4K, timer, grid, level, tap focus + exposure, stabilization, 30/60 fps, front screen flash, selfie mirror. The screen stays portrait; captures follow how the phone is held. Default lens 1×, smooth pinch zoom across lenses. The podspec now also links `CoreMotion`.
+- **AI (Gemini) generate / edit**: `setAIConfig(...)`; generation screen, natural-language editing in the editor, recent works. Full features only in licensed (ZemTalk) apps; other apps get chat-only generate/edit.
+- **Gallery attach menu "AI 이미지" tab**: shown when AI-made or AI-edited images exist; opens them in the image viewer (save, share, delete).
+- **Image viewer video controls** readable in light mode (follow the Liquid Glass light/dark state).
+- **Android performance**: the gallery opens without waiting for the camera; the camera cell is no longer rebound on scroll, tab change or editor pull-down; the editor zoom lands exactly on video pages.
+- **iOS**: no empty-cell flash when a gallery photo opens in the editor; the AI images viewer no longer shows a red cell slot while open.
+
 ## 1.0.5 — 2026-10-10
 
 - iOS map viewer: Directions is a menu anchored above the button (the action sheet floated at the top on iOS 26); TMAP added (Korean only, with Kakao Map / Naver Map); cancelling the system "Open in …?" prompt no longer falls through to the web map (which opened the app anyway). Uses `canOpenURL` when the host declares `comgooglemaps`, `kakaomap`, `nmap`, `tmap` in `LSApplicationQueriesSchemes`.

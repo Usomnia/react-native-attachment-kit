@@ -2304,7 +2304,10 @@ fileprivate extension RNAttachmentKit {
                 // (호출 중인 객체이므로 다음 런루프에서)
                 DispatchQueue.main.async { self?.editorTransitionDelegate = nil }
             }
-            currentGallery.setHiddenAsset(asset)
+            // 칸은 열기 애니메이션의 첫 프레임에 비움 (누르자마자 비우면 편집 화면이 준비되는 동안 빈 칸이 번쩍임)
+            self.editorTransitionDelegate?.onPresentationStarted = { [weak currentGallery] in
+                currentGallery?.setHiddenAsset(asset)
+            }
             
             editorVC.transitioningDelegate = self.editorTransitionDelegate
         }

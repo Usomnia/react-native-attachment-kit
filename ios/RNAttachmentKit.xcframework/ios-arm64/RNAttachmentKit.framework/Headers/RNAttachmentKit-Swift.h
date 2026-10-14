@@ -593,6 +593,12 @@ SWIFT_CLASS("_TtC15RNAttachmentKit31RemoteImageViewerViewController")
 @interface RemoteImageViewerViewController : UIViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
+- (void)viewDidAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+@property (nonatomic, readonly) BOOL prefersStatusBarHidden;
+@property (nonatomic, readonly) UIStatusBarAnimation preferredStatusBarUpdateAnimation;
+@property (nonatomic, readonly) BOOL prefersHomeIndicatorAutoHidden;
+- (void)viewDidDisappear:(BOOL)animated;
 - (void)viewDidLayoutSubviews;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
@@ -602,15 +608,16 @@ SWIFT_CLASS("_TtC15RNAttachmentKit31RemoteImageViewerViewController")
 - (BOOL)gestureRecognizer:(UIGestureRecognizer * _Nonnull)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer * _Nonnull)otherGestureRecognizer SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIScrollViewDelegate>
-- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
-- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
-@end
-
 @interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UICollectionViewDataSource, UICollectionViewDelegate>
 - (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)collectionView:(UICollectionView * _Nonnull)collectionView didSelectItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+@interface RemoteImageViewerViewController (SWIFT_EXTENSION(RNAttachmentKit)) <UIScrollViewDelegate>
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+- (void)scrollViewDidEndDragging:(UIScrollView * _Nonnull)scrollView willDecelerate:(BOOL)decelerate;
+- (void)scrollViewDidEndDecelerating:(UIScrollView * _Nonnull)scrollView;
 @end
 
 @class UICollectionViewLayoutAttributes;
@@ -624,6 +631,15 @@ SWIFT_CLASS("_TtC15RNAttachmentKit21TelegramGalleryLayout")
 - (void)invalidateLayout;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+/// 동영상 변환 중 화면 전체를 덮는 진행 표시 (원형 진행률 + “1/3” + 취소). 갤러리가 닫힌 뒤에도 보여야 해서 키 윈도우에 얹음
+SWIFT_CLASS("_TtC15RNAttachmentKit14VideoExportHUD")
+@interface VideoExportHUD : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+- (void)willMoveToSuperview:(UIView * _Nullable)newSuperview;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 @protocol UIViewControllerContextTransitioning;

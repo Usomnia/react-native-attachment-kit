@@ -5,6 +5,7 @@
 import AVFoundation
 import CoreImage
 import CoreLocation
+import CoreMotion
 import CoreText
 import CryptoKit
 import DeveloperToolsSupport
@@ -16,6 +17,8 @@ import Swift
 import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
+import VideoToolbox
+import Vision
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -44,7 +47,10 @@ import _SwiftConcurrencyShims
   }
   @_Concurrency.MainActor @preconcurrency public var onLocationSelected: ((RNAttachmentKit.AttachLocationResult) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var capturesLocationImage: Swift.Bool
-  @_Concurrency.MainActor @preconcurrency public func releaseAfterReturn()
+  @_Concurrency.MainActor @preconcurrency public var mediaType: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var maxVideoDurationSec: Swift.Double
+  @_Concurrency.MainActor @preconcurrency public var videoExportOptions: RNAttachmentKit.VideoExportOptions
+  @_Concurrency.MainActor @preconcurrency public func releaseAfterReturn(discardPreparedVideos: Swift.Bool = true)
   @_Concurrency.MainActor @preconcurrency public var onFilesSelected: (([RNAttachmentKit.AttachFileResult]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onFilesSelectedWithFailures: (([RNAttachmentKit.AttachFileResult], [RNAttachmentKit.AttachFileFailure]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var allowsMultipleFiles: Swift.Bool
@@ -71,6 +77,7 @@ import _SwiftConcurrencyShims
   @_Concurrency.MainActor @preconcurrency final public let galleryID: Swift.String
   @_Concurrency.MainActor @preconcurrency public var selectedAssets: [Photos.PHAsset]
   @_Concurrency.MainActor @preconcurrency public var editedImages: [Swift.String : UIKit.UIImage]
+  @_Concurrency.MainActor @preconcurrency public var videoEditStates: [Swift.String : RNAttachmentKit.VideoEditState]
   @_Concurrency.MainActor @preconcurrency public var selectedAssetsSet: Swift.Set<Swift.String>
   @_Concurrency.MainActor @preconcurrency public var hiddenAssetId: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var collectionView: UIKit.UICollectionView {
@@ -245,6 +252,9 @@ public struct FilterState {
   @_Concurrency.MainActor @preconcurrency public var onConfirmMulti: (([Photos.PHAsset], [Photos.PHAsset : UIKit.UIImage], [Photos.PHAsset : RNAttachmentKit.FilterState]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onSendMulti: (([Photos.PHAsset], [Photos.PHAsset : UIKit.UIImage], [Photos.PHAsset : RNAttachmentKit.FilterState]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onCancel: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var videoEditStates: [Swift.Int : RNAttachmentKit.VideoEditState]
+  @_Concurrency.MainActor @preconcurrency public var videoOptions: RNAttachmentKit.VideoExportOptions
+  @_Concurrency.MainActor @preconcurrency public var onVideoStateChanged: ((Photos.PHAsset, RNAttachmentKit.VideoEditState) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var themeColor: UIKit.UIColor?
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
@@ -287,6 +297,7 @@ public struct Album {
 }
 @_hasMissingDesignatedInitializers public class PhotoManager {
   public var languageCode: Swift.String
+  public var mediaType: Swift.String
   public static let shared: RNAttachmentKit.PhotoManager
   public func resetCachingManager()
   public func fetchAlbums(completion: @escaping ([RNAttachmentKit.Album]) -> Swift.Void)
@@ -387,7 +398,9 @@ extension RNAttachmentKit.GalleryBaseViewController : UIKit.UIAdaptivePresentati
   public func saveImage(_ image: UIKit.UIImage, for url: Swift.String)
 }
 @objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency public class RemoteImageViewerViewController : UIKit.UIViewController {
+  @objc deinit
   @_Concurrency.MainActor @preconcurrency public var onPageChanged: ((Swift.Int) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var videos: [RNAttachmentKit.ViewerVideoItem?]
   @_Concurrency.MainActor @preconcurrency public var prefersPlaceholderThumbnails: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var hasMoreItems: Swift.Bool {
     get
@@ -422,13 +435,24 @@ extension RNAttachmentKit.GalleryBaseViewController : UIKit.UIAdaptivePresentati
   @_Concurrency.MainActor @preconcurrency public var deleteOptions: [RNAttachmentKit.RemoteImageViewerViewController.DeleteOption]
   @_Concurrency.MainActor @preconcurrency public var onImageDeleted: ((Swift.Int, Swift.String, Swift.String?) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onWillDismissForDelete: (() -> Swift.Void)?
-  @_Concurrency.MainActor @preconcurrency public func appendImages(urls: [Swift.String], placeholders: [Swift.String]?, cacheFiles newCacheFiles: [Swift.String]?)
+  @_Concurrency.MainActor @preconcurrency public func appendImages(urls: [Swift.String], placeholders: [Swift.String]?, cacheFiles newCacheFiles: [Swift.String]?, videos newVideos: [RNAttachmentKit.ViewerVideoItem?]? = nil)
   @_Concurrency.MainActor @preconcurrency public static func isImageCached(for urlString: Swift.String) -> Swift.Bool
   @_Concurrency.MainActor @preconcurrency public static func prefetchImage(from urlString: Swift.String, completion: @escaping (UIKit.UIImage?) -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public init(imageUrls: [Swift.String], initialIndex: Swift.Int)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var prefersStatusBarHidden: Swift.Bool {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var preferredStatusBarUpdateAnimation: UIKit.UIStatusBarAnimation {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var prefersHomeIndicatorAutoHidden: Swift.Bool {
+    @objc get
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidDisappear(_ animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLayoutSubviews()
-  @objc deinit
 }
 extension RNAttachmentKit.RemoteImageViewerViewController : UIKit.UIGestureRecognizerDelegate {
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
@@ -436,12 +460,16 @@ extension RNAttachmentKit.RemoteImageViewerViewController : UIKit.UIGestureRecog
 }
 extension RNAttachmentKit.RemoteImageViewerViewController : UIKit.UIScrollViewDelegate {
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+  @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDragging(_ scrollView: UIKit.UIScrollView, willDecelerate decelerate: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func scrollViewDidEndDecelerating(_ scrollView: UIKit.UIScrollView)
 }
 extension RNAttachmentKit.RemoteImageViewerViewController : UIKit.UICollectionViewDataSource, UIKit.UICollectionViewDelegate {
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, cellForItemAt indexPath: Foundation.IndexPath) -> UIKit.UICollectionViewCell
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
+}
+extension RNAttachmentKit.RemoteImageViewerViewController {
+  @_Concurrency.MainActor @preconcurrency public func videoCloseSnapshot(in container: UIKit.UIView) -> (image: UIKit.UIImage, frame: CoreFoundation.CGRect)?
 }
 public struct Localizer {
   public static let supportedLanguageCodes: [Swift.String]
@@ -458,6 +486,15 @@ public struct MediaGalleryItem {
   public let isMine: Swift.Bool
   public let width: Swift.Int?
   public let height: Swift.Int?
+  public var videoUri: Swift.String?
+  public var videoCacheFile: Swift.String?
+  public var duration: Swift.Double?
+  public var isVideo: Swift.Bool {
+    get
+  }
+  public var viewerVideo: RNAttachmentKit.ViewerVideoItem? {
+    get
+  }
   public init(id: Swift.String, groupId: Swift.String, timestamp: Swift.Double, thumbUri: Swift.String?, imageUri: Swift.String, cacheFile: Swift.String? = nil, isMine: Swift.Bool = false, width: Swift.Int? = nil, height: Swift.Int? = nil)
   public init?(dictionary d: [Swift.String : Any])
   public func toDictionary() -> [Swift.String : Any]
@@ -660,6 +697,7 @@ extension RNAttachmentKit.MediaGalleryViewController : UIKit.UICollectionViewDat
   @_Concurrency.MainActor @preconcurrency final public let accentColor: UIKit.UIColor
   @_Concurrency.MainActor @preconcurrency final public let languageCode: Swift.String
   @_Concurrency.MainActor @preconcurrency final public var onClosed: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var onWillClose: ((Foundation.TimeInterval) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency final public var showsDirections: Swift.Bool
   @_Concurrency.MainActor @preconcurrency final public var spanMeters: Swift.Double?
   @_Concurrency.MainActor @preconcurrency final public var sourceRect: CoreFoundation.CGRect?
@@ -742,8 +780,153 @@ public struct ReverseGeocodeError : Swift.Error {
   final public func clearCache(completion: (() -> Swift.Void)? = nil)
   @objc deinit
 }
+@_hasMissingDesignatedInitializers final public class AIGemini {
+  public static var endpoint: Swift.String?
+  public static var extraHeaders: [Swift.String : Swift.String]
+  public static var apiKey: Swift.String?
+  public static var model: Swift.String
+  public static var analysisModel: Swift.String
+  public static var imageSize: Swift.String
+  public static var qualityGuard: Swift.String
+  public static var isConfigured: Swift.Bool {
+    get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers final public class AIBilling {
+  public static var enabled: Swift.Bool
+  public static var points: Swift.Int
+  public static var freeCount: Swift.Int
+  public static var costPerUse: Swift.Int
+  public static var highQualityCost: Swift.Int?
+  public static var onUsage: (([Swift.String : Any]) -> Swift.Void)?
+  public static var onChargeRequired: (([Swift.String : Any]) -> Swift.Void)?
+  public static var isAvailable: Swift.Bool {
+    get
+  }
+  public static func apply(_ config: [Swift.String : Any])
+  @objc deinit
+}
+public struct VideoExportOptions {
+  public var maxDurationSec: Swift.Double
+  public var maxFileSizeMB: Swift.Double
+  public var qualities: [Swift.Int]
+  public var defaultQuality: Swift.Int
+  public var codec: Swift.String
+  public var posterFormat: Swift.String
+  public init()
+  public init(dictionary d: [Swift.String : Any]?)
+}
+public struct VideoEditState : Swift.Equatable, Swift.Hashable {
+  public static func defaultQualityHeight(shortSide: Swift.Int, options: RNAttachmentKit.VideoExportOptions) -> Swift.Int
+  public static func defaultState(for asset: Photos.PHAsset, options: RNAttachmentKit.VideoExportOptions) -> RNAttachmentKit.VideoEditState
+  public var qualityHeight: Swift.Int?
+  public var muted: Swift.Bool
+  public var trimStart: Swift.Double
+  public var trimEnd: Swift.Double
+  public var cropRotations: Swift.Int
+  public var cropFlipH: Swift.Bool
+  public var cropX: Swift.Double
+  public var cropY: Swift.Double
+  public var cropW: Swift.Double
+  public var cropH: Swift.Double
+  public var overlayImage: UIKit.UIImage?
+  public init(qualityHeight: Swift.Int? = nil)
+  public var hasOverlay: Swift.Bool {
+    get
+  }
+  public var cropRect: CoreFoundation.CGRect {
+    get
+  }
+  public var hasCrop: Swift.Bool {
+    get
+  }
+  public func cropGeometry(displaySize d: CoreFoundation.CGSize) -> (edited: CoreFoundation.CGSize, cropped: CoreFoundation.CGSize, transform: CoreFoundation.CGAffineTransform)
+  public func croppedAspect(sourceAspect: CoreFoundation.CGFloat) -> CoreFoundation.CGFloat
+  public func applyCrop(to image: UIKit.UIImage) -> UIKit.UIImage
+  public func applyEdits(to image: UIKit.UIImage) -> UIKit.UIImage
+  public func remappedOverlay(from old: RNAttachmentKit.VideoEditState, displaySize: CoreFoundation.CGSize) -> UIKit.UIImage?
+  public func trimRange(duration: Swift.Double) -> CoreMedia.CMTimeRange?
+  public func outputDuration(sourceDuration: Swift.Double) -> Swift.Double
+  public func clamped(maxDuration: Swift.Double, sourceDuration: Swift.Double) -> RNAttachmentKit.VideoEditState
+  public static func == (a: RNAttachmentKit.VideoEditState, b: RNAttachmentKit.VideoEditState) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public struct VideoExportResult {
+  public let url: Foundation.URL
+  public let thumbnailURL: Foundation.URL?
+  public let thumbnailWidth: Swift.Int
+  public let thumbnailHeight: Swift.Int
+  public let duration: Swift.Double
+  public let width: Swift.Int
+  public let height: Swift.Int
+  public let fileSize: Swift.Int64
+  public let bitrate: Swift.Int
+  public let codec: Swift.String
+  public let passthrough: Swift.Bool
+}
+public enum VideoSendIssue {
+  case tooLong
+  case tooLarge
+  public static func == (a: RNAttachmentKit.VideoSendIssue, b: RNAttachmentKit.VideoSendIssue) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+final public class VideoExporter {
+  public static let sizeMargin: Swift.Double
+  public static func sendIssue(sourceDuration: Swift.Double, sourceShortSide: CoreFoundation.CGFloat, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions) -> RNAttachmentKit.VideoSendIssue?
+  public static func fittedQuality(_ want: Swift.Int, sourceShortSide: CoreFoundation.CGFloat, outputDuration: Swift.Double, options: RNAttachmentKit.VideoExportOptions) -> Swift.Int
+  public enum ExportError : Foundation.LocalizedError {
+    case cancelled, noVideoTrack, assetUnavailable, writerFailed(Swift.String), tooLarge
+    public var errorDescription: Swift.String? {
+      get
+    }
+  }
+  public static func bitrate(forHeight h: Swift.Int, fps: Swift.Double) -> Swift.Int
+  public static func estimatedSize(height: Swift.Int, fps: Swift.Double, duration: Swift.Double) -> Swift.Int64
+  public static func predictedOutputSize(displaySize d: CoreFoundation.CGSize, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions, sourceDuration: Swift.Double) -> CoreFoundation.CGSize
+  final public var makesThumbnail: Swift.Bool
+  public init()
+  final public func cancel()
+  final public func export(asset: Photos.PHAsset, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions, outputDir: Foundation.URL, baseName: Swift.String, progress: @escaping (Swift.Double) -> Swift.Void) throws -> RNAttachmentKit.VideoExportResult
+  final public func export(fileURL: Foundation.URL, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions, outputDir: Foundation.URL, baseName: Swift.String, progress: @escaping (Swift.Double) -> Swift.Void) throws -> RNAttachmentKit.VideoExportResult
+  public static func encodePoster(_ image: UIKit.UIImage, format: Swift.String, quality: CoreFoundation.CGFloat) -> (data: Foundation.Data, fileExtension: Swift.String)?
+  @objc deinit
+}
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor @preconcurrency final public class VideoExportHUD : UIKit.UIView {
+  @_Concurrency.MainActor @preconcurrency final public var onCancel: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public init(accent: UIKit.UIColor, languageCode: Swift.String)
+  @_Concurrency.MainActor @preconcurrency final public func update(progress: Swift.Double, index: Swift.Int, total: Swift.Int)
+  @_Concurrency.MainActor @preconcurrency public static func show(accent: UIKit.UIColor, languageCode: Swift.String) -> RNAttachmentKit.VideoExportHUD?
+  @_Concurrency.MainActor @preconcurrency final public func dismiss()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func willMove(toSuperview newSuperview: UIKit.UIView?)
+  @objc deinit
+}
+public struct ViewerVideoItem {
+  public var uri: Swift.String
+  public var duration: Swift.Double?
+  public var cacheFile: Swift.String?
+  public init(uri: Swift.String, duration: Swift.Double? = nil, cacheFile: Swift.String? = nil)
+  public init?(dictionary d: Any?)
+}
+@_hasMissingDesignatedInitializers final public class VideoPrepareManager {
+  public static let shared: RNAttachmentKit.VideoPrepareManager
+  final public func prepare(asset: Photos.PHAsset, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions)
+  final public func takeReady(asset: Photos.PHAsset, state: RNAttachmentKit.VideoEditState, progress: ((Swift.Double) -> Swift.Void)? = nil, isCancelled: (() -> Swift.Bool)? = nil) -> RNAttachmentKit.VideoExportResult?
+  final public func discard(asset: Photos.PHAsset)
+  final public func discardAll()
+  @objc deinit
+}
 extension RNAttachmentKit.AttachMenuTab : Swift.Equatable {}
 extension RNAttachmentKit.AttachMenuTab : Swift.Hashable {}
 extension RNAttachmentKit.AttachMenuTab : Swift.RawRepresentable {}
 extension RNAttachmentKit.ImageEditorTransitionDelegate : Swift.Sendable {}
 extension RNAttachmentKit.ZoomTransitionAnimator : Swift.Sendable {}
+extension RNAttachmentKit.VideoSendIssue : Swift.Equatable {}
+extension RNAttachmentKit.VideoSendIssue : Swift.Hashable {}

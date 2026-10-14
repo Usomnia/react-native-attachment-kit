@@ -7,6 +7,8 @@ export interface Spec extends TurboModule {
   openEditor(options: Object): Promise<Object>;
   openViewer(options: Object): Promise<void>;
   closeGallery(): Promise<boolean>;
+  /** 동영상 변환 취소. index -1 = 남은 동영상 전부, processingId "" = 가장 최근 처리 */
+  cancelVideoProcessing(index: number, processingId: string): Promise<boolean>;
   
   // RCTEventEmitter 필수 규격 (Turbo Module에서 이벤트 방출 시 필수)
   addListener(eventName: string): void;
@@ -25,6 +27,9 @@ export interface Spec extends TurboModule {
   // 좌표 → 주소 (기기 지오코더, 디스크 캐시)
   reverseGeocode(options: Object): Promise<Object>;
   clearReverseGeocodeCache(): Promise<void>;
+
+  // AI 기능 설정·잔액 (넘긴 값만 바뀜). 사용·충전 요청은 onAIUsage / onAIChargeRequired 이벤트
+  setAIConfig(config: Object): Promise<void>;
 
   // 미디어 갤러리 (사진 모아보기)
   openMediaGallery(options: Object): Promise<Object>;

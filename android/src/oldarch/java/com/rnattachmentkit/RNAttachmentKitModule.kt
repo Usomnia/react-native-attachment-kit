@@ -39,6 +39,33 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
     private var maxWidth: Int = 1024
     private var maxHeight: Int = 1024
     private var outputFormat: String = "webp" // Default to webp
+    // ─── 동영상 (openGallery mediaType / video 옵션) ───
+    private var mediaType: String = "photo"
+    private var videoOptions = com.rnattachmentkit.VideoExportOptions()
+    /** onSelectionChange 에 실어 보낼 maxSelection (예전엔 10 고정) */
+    private var lastMaxSelection: Int = 10
+    private var lastThemeColorInt: Int? = null
+    private var lastLanguageCode: String = "en"
+    @Volatile private var currentVideoExporter: com.rnattachmentkit.VideoExporter? = null
+    @Volatile private var videoCancelled = false
+    /** 진행 중인 전송 처리 (processingId → 작업). 보내는 중에 갤러리를 다시 열어 또 보낼 수 있어 여러 개일 수 있음 */
+    private val activeProcessingJobs = java.util.concurrent.ConcurrentHashMap<String, com.rnattachmentkit.ProcessingJob>()
+    /** 가장 최근에 시작한 처리 (cancelVideoProcessing 에 processingId 가 없을 때) */
+    @Volatile private var lastProcessingId: String? = null
+
+    /** 보낸 순간의 설정 — 처리 중에 갤러리를 다시 열면 모듈 필드가 새 호출 값으로 바뀌므로, 처리는 이 사본만 씀 */
+    private class SendSnapshot(
+        val maxWidth: Int, val maxHeight: Int, val outputFormat: String,
+        val videoOptions: com.rnattachmentkit.VideoExportOptions,
+        val states: Map<String, com.rnattachmentkit.VideoEditState>,
+        val showHUD: Boolean, val themeColor: Int?, val language: String
+    )
+    private fun sendSnapshot() = SendSnapshot(maxWidth, maxHeight, outputFormat, videoOptions, HashMap(lastVideoEditStates),
+        showVideoHUD, lastThemeColorInt, lastLanguageCode)
+    /** 동영상 변환 진행 HUD — video.showProgressHUD, 없으면 asyncProcessing 이 아닐 때만 (이벤트로 말풍선에 그리는 앱은 HUD 없이) */
+    private var showVideoHUD = true
+    /** 시트가 닫힐 때 넘겨받은 동영상 편집 상태 (원본 uri 문자열 → 품질·음소거) */
+    private var lastVideoEditStates: Map<String, com.rnattachmentkit.VideoEditState> = emptyMap()
 
     @ReactMethod
     fun addListener(eventName: String) {
@@ -255,6 +282,22 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             false
         }
 
+        // 동영상: mediaType "photo"(기본) | "video" | "all", video: VideoOptions
+        mediaType = (if (options.hasKey("mediaType") && !options.isNull("mediaType")) options.getString("mediaType") else null)
+            ?.lowercase()?.takeIf { it == "video" || it == "all" } ?: "photo"
+        videoOptions = com.rnattachmentkit.VideoExportOptions.fromMap(
+            if (options.hasKey("video") && !options.isNull("video")) options.getMap("video")?.toHashMap() else null
+        )
+        run {
+            val async = options.hasKey("asyncProcessing") && !options.isNull("asyncProcessing") && options.getBoolean("asyncProcessing")
+            val v = if (options.hasKey("video") && !options.isNull("video")) options.getMap("video") else null
+            showVideoHUD = if (v != null && v.hasKey("showProgressHUD") && !v.isNull("showProgressHUD")) v.getBoolean("showProgressHUD") else !async
+        }
+        lastMaxSelection = maxSelection
+        TurboImagePickerConfig.videoOptions = videoOptions
+        lastLanguageCode = languageCode
+        lastThemeColorInt = try { themeColor?.let { android.graphics.Color.parseColor(it) } } catch (_: Exception) { null }
+
         val fragmentActivity = activity as? FragmentActivity
         if (fragmentActivity == null) {
             promise.reject(E_NO_ACTIVITY, "Activity is not a FragmentActivity")
@@ -283,6 +326,12 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         } else {
             Manifest.permission.READ_EXTERNAL_STORAGE
         }
+        // Android 13+ 에서 동영상도 보이면 READ_MEDIA_VIDEO 를 같이 요청
+        val mediaPermissions: Array<String> = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && mediaType != "photo") {
+            arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO)
+        } else {
+            arrayOf(permission)
+        }
 
         val showSheet = {
             fragmentActivity.runOnUiThread {
@@ -299,7 +348,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                             options.getDouble("attachMenuMinBottomMargin").toFloat() else com.rnattachmentkit.AttachMenuBarView.BOTTOM_MARGIN_DP.toFloat(),
                         // 위치 보내기 때 지도 이미지 캡처 여부. 기본 true (기존 그대로). false 면 이미지 없이 위치 정보만
                         captureLocationImage = !(options.hasKey("captureLocationImage") && !options.isNull("captureLocationImage")) ||
-                            options.getBoolean("captureLocationImage")
+                            options.getBoolean("captureLocationImage"),
+                        // 동영상 (mediaType "video"/"all" 일 때 그리드에 동영상, 길이 제한)
+                        mediaType = mediaType,
+                        maxVideoDurationSec = videoOptions.maxDurationSec
                     )
                     // 위치 탭에서 보내기 → onLocationSelected 이벤트로 결과를 넘기고, openGallery 는 빈 배열로 끝냄
                     bottomSheet.setOnLocationSelectedListener { loc ->
@@ -345,6 +397,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                         settle { it.resolve(com.facebook.react.bridge.Arguments.createArray()) }
                     }
                     bottomSheet.setOnImagesSelectedListener { uris ->
+                        lastVideoEditStates = HashMap(bottomSheet.videoEditStates)
                         val result = WritableNativeArray()
                         for (uri in uris) {
                             result.pushString(uri.toString())
@@ -370,7 +423,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             }
         }
 
-        if (ContextCompat.checkSelfPermission(fragmentActivity, permission) == PackageManager.PERMISSION_GRANTED) {
+        if (mediaPermissions.all { ContextCompat.checkSelfPermission(fragmentActivity, it) == PackageManager.PERMISSION_GRANTED }) {
             showSheet()
         } else {
             val permissionAwareActivity = fragmentActivity as? PermissionAwareActivity
@@ -385,21 +438,19 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     showSheet()
                     return
                 }
-                arrayOf(Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED)
+                mediaPermissions + Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED
             } else {
-                arrayOf(permission)
+                mediaPermissions
             }
 
             permissionAwareActivity.requestPermissions(permissionsToRequest, 100, object : PermissionListener {
                 override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray): Boolean {
                     if (requestCode == 100 && grantResults != null) {
                         val isGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                            grantResults.isNotEmpty() && (
-                                grantResults[0] == PackageManager.PERMISSION_GRANTED || 
-                                (grantResults.size > 1 && grantResults[1] == PackageManager.PERMISSION_GRANTED)
-                            )
+                            // 14+: 전체 허용이든 "일부 선택"이든 하나라도 허용이면 진행
+                            grantResults.any { it == PackageManager.PERMISSION_GRANTED }
                         } else {
-                            grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                            grantResults.isNotEmpty() && grantResults.all { it == PackageManager.PERMISSION_GRANTED }
                         }
 
                         if (isGranted) {
@@ -460,6 +511,15 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         }
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext).sendBroadcast(intent)
         promise.resolve(null)
+    }
+
+    /** 동영상 변환 취소 (HUD 없이 앱이 말풍선에서). index -1 = 남은 동영상 전부. 진행 중인 처리가 없으면 false */
+    @ReactMethod
+    fun cancelVideoProcessing(index: Double, processingId: String, promise: Promise) {
+        val job = (processingId.ifEmpty { lastProcessingId })?.let { activeProcessingJobs[it] }
+        if (job == null) { promise.resolve(false); return }
+        job.cancel(if (index >= 0) index.toInt() else null)
+        promise.resolve(true)
     }
 
     @ReactMethod
@@ -598,6 +658,22 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                                 placeholders.add(placeholderArray.getString(i) ?: "")
                             }
                             putStringArrayList("placeholderImages", placeholders)
+                        }
+                    }
+                    // 동영상 페이지 (뷰어 동영상 작업 지시서 V1): videos[i] = { uri, cacheFile? } 또는 null(사진).
+                    // images[i] 는 그 동영상의 포스터. 이 오버레이 뷰어에서만 재생합니다.
+                    if (options.hasKey("videos")) {
+                        val videoArray = options.getArray("videos")
+                        if (videoArray != null) {
+                            val uris = ArrayList<String>()
+                            val caches = ArrayList<String>()
+                            for (i in 0 until videoArray.size()) {
+                                val m = if (videoArray.getType(i) == com.facebook.react.bridge.ReadableType.Map) videoArray.getMap(i) else null
+                                uris.add(if (m != null && m.hasKey("uri") && !m.isNull("uri")) m.getString("uri") ?: "" else "")
+                                caches.add(if (m != null && m.hasKey("cacheFile") && !m.isNull("cacheFile")) m.getString("cacheFile") ?: "" else "")
+                            }
+                            putStringArrayList(com.rnattachmentkit.ViewerVideoSource.ARG_URIS, uris)
+                            putStringArrayList(com.rnattachmentkit.ViewerVideoSource.ARG_CACHE_FILES, caches)
                         }
                     }
                     // 상단바 저장/공유/삭제 버튼과 그 문구들 (iOS와 동일한 옵션 키). 문구를 안 넘기면
@@ -792,9 +868,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                 return
             }
 
+            val snap = sendSnapshot()
             moduleScope.launch {
                 try {
-                    val results = processImages(uris)
+                    val results = processImages(uris, snap)
                     if (results.isNotEmpty()) {
                         promise.resolve(results[0])
                     } else {
@@ -838,7 +915,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         // Process images asynchronously
         val eventMap = com.facebook.react.bridge.WritableNativeMap()
         eventMap.putInt("selectedCount", uris.size)
-        eventMap.putInt("maxSelection", 10)
+        eventMap.putInt("maxSelection", lastMaxSelection)
         try {
             reactApplicationContext.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
                 .emit("onSelectionChange", eventMap)
@@ -846,25 +923,183 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             // Ignore
         }
 
+        val snap = sendSnapshot()
         moduleScope.launch {
             try {
-                val results = processImages(uris)
+                val results = processImages(uris, snap)
                 val array = com.facebook.react.bridge.Arguments.createArray()
                 results.forEach { array.pushMap(it) }
                 actualPromise.resolve(array)
+            } catch (e: com.rnattachmentkit.VideoExporter.CancelledException) {
+                actualPromise.reject("CANCELLED", "Video export cancelled")
             } catch (e: Exception) {
                 actualPromise.reject(E_FAILED_TO_PICK, "Failed to process images: ${e.message}", e)
             }
         }
     }
 
-    private suspend fun processImages(uris: List<Uri>): List<com.facebook.react.bridge.WritableMap> = withContext(Dispatchers.IO) {
+    private suspend fun processImages(uris: List<Uri>, snap: SendSnapshot): List<com.facebook.react.bridge.WritableMap> = withContext(Dispatchers.IO) {
+        // 보낸 순간의 설정 (모듈 필드와 같은 이름으로 가림 — 아래 코드는 그대로)
+        val maxWidth = snap.maxWidth
+        val maxHeight = snap.maxHeight
+        val outputFormat = snap.outputFormat
+        val videoOptions = snap.videoOptions
+        val lastVideoEditStates = snap.states
+        val showVideoHUD = snap.showHUD
+        val lastThemeColorInt = snap.themeColor
+        val lastLanguageCode = snap.language
+        val processingId = java.util.UUID.randomUUID().toString()
         val results = mutableListOf<com.facebook.react.bridge.WritableMap>()
         val contentResolver = reactApplicationContext.contentResolver
         val totalCount = uris.size
         var currentIndex = 0
 
+        // 동영상이 섞여 있으면 진행 HUD 를 띄우고, 동영상은 VideoExporter 로 (사진 처리와 같은 루프)
+        val isVideoUri: (Uri) -> Boolean = { u ->
+            u.toString().contains("/video/") || (try { contentResolver.getType(u)?.startsWith("video/") == true } catch (_: Exception) { false })
+        }
+        val hasVideo = uris.any(isVideoUri)
+        videoCancelled = false
+        val job = com.rnattachmentkit.ProcessingJob()
+        activeProcessingJobs[processingId] = job
+        lastProcessingId = processingId
+        // ✅ 처리 시작: 모든 자리(사진·동영상)를 먼저 알림 → 앱이 말풍선을 바로 만들고 진행률을 그림
+        try {
+            val items = Arguments.createArray()
+            uris.forEachIndexed { i, u ->
+                val it0 = if (isVideoUri(u)) {
+                    val st = lastVideoEditStates[u.toString()] ?: com.rnattachmentkit.VideoEditState(qualityHeight = videoOptions.defaultQuality)
+                    com.rnattachmentkit.MediaProcessing.videoItem(reactApplicationContext, i, u, st, videoOptions)
+                } else {
+                    com.rnattachmentkit.MediaProcessing.imageItem(reactApplicationContext, i, u, maxWidth, maxHeight)
+                }
+                items.pushMap(Arguments.createMap().apply {
+                    putInt("index", it0.index)
+                    putString("mediaType", if (it0.isVideo) "video" else "image")
+                    putString("originalUri", it0.originalUri)
+                    putInt("width", it0.width)
+                    putInt("height", it0.height)
+                    it0.durationSec?.let { d -> putDouble("duration", d) }
+                    it0.thumbnailUri?.let { t ->
+                        putString("thumbnailUri", t)
+                        putInt("thumbnailWidth", it0.thumbnailWidth)
+                        putInt("thumbnailHeight", it0.thumbnailHeight)
+                    }
+                })
+            }
+            emitGalleryEvent("onProcessingStart", Arguments.createMap().apply {
+                putString("processingId", processingId)
+                putInt("total", totalCount)
+                putArray("items", items)
+            })
+        } catch (e: Exception) {
+            android.util.Log.w("RNAttachmentKit", "onProcessingStart failed: ${e.message}")
+        }
+        var hud: com.rnattachmentkit.VideoExportHUD? = null
+        if (hasVideo && showVideoHUD) {
+            withContext(Dispatchers.Main) {
+                val act = getCurrentActivity() ?: return@withContext
+                hud = com.rnattachmentkit.VideoExportHUD(act, lastThemeColorInt, lastLanguageCode).also { h ->
+                    h.onCancel = {
+                        videoCancelled = true
+                        currentVideoExporter?.cancel()
+                    }
+                    h.show()
+                }
+            }
+        }
+        val videoFiles = mutableListOf<File>()
+
+        try {
         for (uri in uris) {
+            if (videoCancelled) throw com.rnattachmentkit.VideoExporter.CancelledException()
+            if (isVideoUri(uri)) {
+                val idx = currentIndex
+                val exporter = com.rnattachmentkit.VideoExporter(reactApplicationContext)
+                currentVideoExporter = exporter
+                val cancelledMap = {
+                    WritableNativeMap().apply {
+                        putString("originalUri", uri.toString())
+                        putString("mediaType", "video")
+                        putString("error", "CANCELLED")
+                        putBoolean("cancelled", true)
+                    }
+                }
+                val resultMap = try {
+                    // 앱이 이미 취소한 동영상은 건너뜀
+                    if (job.isCancelled(idx)) throw com.rnattachmentkit.VideoExporter.CancelledException()
+                    job.begin(idx, exporter)
+                    val state = lastVideoEditStates[uri.toString()] ?: com.rnattachmentkit.VideoEditState(qualityHeight = videoOptions.defaultQuality)
+                    val throttle = com.rnattachmentkit.ProgressThrottle()
+                    val onProgress: (Float) -> Unit = { p ->
+                        hud?.let { h -> android.os.Handler(android.os.Looper.getMainLooper()).post { h.update(p, idx, totalCount) } }
+                        if (throttle.shouldSend(p)) emitGalleryEvent("onVideoProgress", Arguments.createMap().apply {
+                            putInt("index", idx); putInt("total", totalCount); putDouble("progress", p.toDouble())
+                            putString("processingId", processingId)
+                        })
+                    }
+                    // 편집 화면에서 미리 만들어 둔 파일이 있으면(또는 만드는 중이면 끝나고) 그대로 씀
+                    // 기다리는 동안 앱(X)이나 HUD 가 취소하면 바로 멈춤 (전엔 미리 만들기가 끝날 때까지 못 빠져나왔음)
+                    val stop = { videoCancelled || job.isCancelled(idx) }
+                    val res = com.rnattachmentkit.VideoPrepareManager.takeReady(uri, state, onProgress, stop)
+                        ?: run {
+                            if (stop()) throw com.rnattachmentkit.VideoExporter.CancelledException()
+                            exporter.export(uri, state, videoOptions, reactApplicationContext.cacheDir, "turbo_video_${System.currentTimeMillis()}_$idx", onProgress)
+                        }
+                    withContext(Dispatchers.Main) { hud?.update(1f, idx, totalCount) }
+                    // 미리 만든 파일을 기다리는 동안 취소됐으면 결과를 쓰지 않음
+                    if (job.isCancelled(idx)) throw com.rnattachmentkit.VideoExporter.CancelledException()
+                    videoFiles += res.file
+                    res.thumbnailFile?.let { videoFiles += it }
+                    WritableNativeMap().apply {
+                        putString("uri", Uri.fromFile(res.file).toString())
+                        putString("originalUri", uri.toString())
+                        putString("mediaType", "video")
+                        putString("type", "video/mp4")
+                        putInt("width", res.width)
+                        putInt("height", res.height)
+                        putDouble("duration", res.durationMs / 1000.0)
+                        putDouble("fileSize", res.fileSize.toDouble())
+                        putString("fileName", res.file.name)
+                        putString("fileExtension", "mp4")
+                        putString("videoCodec", res.codec)
+                        putInt("videoBitrate", res.bitrate)
+                        putBoolean("edited", res.edited)
+                        if (res.thumbnailFile != null) {
+                            putString("thumbnailUri", Uri.fromFile(res.thumbnailFile).toString())
+                            putInt("thumbnailWidth", res.thumbnailWidth)
+                            putInt("thumbnailHeight", res.thumbnailHeight)
+                        }
+                    }
+                } catch (e: com.rnattachmentkit.VideoExporter.CancelledException) {
+                    // 앱이 이 동영상만 취소 → 나머지는 계속. HUD 취소면 전체 취소
+                    if (job.isCancelled(idx) && !videoCancelled) cancelledMap() else throw e
+                } catch (e: Exception) {
+                    // 취소하면서 변환기가 다른 예외로 끝날 수도 있음 → 취소로 처리
+                    if (job.isCancelled(idx) && !videoCancelled) cancelledMap() else {
+                        android.util.Log.w("RNAttachmentKit", "video export failed: ${e.message}", e)
+                        WritableNativeMap().apply {
+                            putString("originalUri", uri.toString())
+                            putString("mediaType", "video")
+                            putString("error", e.message ?: "export failed")
+                        }
+                    }
+                } finally {
+                    currentVideoExporter = null
+                    job.end()
+                }
+                results.add(resultMap)
+                try {
+                    val copy = WritableNativeMap().apply { merge(resultMap) }
+                    reactApplicationContext.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                        .emit("onImageProcessed", WritableNativeMap().apply {
+                            putInt("total", totalCount); putInt("index", idx); putMap("image", copy)
+                            putString("processingId", processingId)
+                        })
+                } catch (_: Exception) {}
+                currentIndex++
+                continue
+            }
             try {
                 // 1. Get EXIF Orientation
                 var orientation = android.media.ExifInterface.ORIENTATION_NORMAL
@@ -995,6 +1230,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                                 val eventMap = WritableNativeMap().apply {
                                     putInt("total", totalCount)
                                     putInt("index", currentIndex)
+                                    putString("processingId", processingId)
                                     putMap("image", createImageInfo())
                                 }
                                 reactApplicationContext.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
@@ -1009,6 +1245,14 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                 // Skip failed images
                 continue
             }
+        }
+        } catch (e: com.rnattachmentkit.VideoExporter.CancelledException) {
+            // 취소: 지금까지 만든 동영상 파일은 지움
+            videoFiles.forEach { try { it.delete() } catch (_: Exception) {} }
+            throw e
+        } finally {
+            activeProcessingJobs.remove(processingId)
+            if (hud != null) withContext(Dispatchers.Main) { hud?.dismiss() }
         }
 
         results
@@ -1289,6 +1533,13 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     )
                     if (rect != null) f.sourceRectProvider = { mapViewerSourceRect }
                     var settled = false
+                    f.onWillClose = { ms ->
+                        try {
+                            reactApplicationContext
+                                .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                                .emit("onMapViewerWillClose", com.facebook.react.bridge.Arguments.createMap().apply { putInt("durationMs", ms) })
+                        } catch (_: Exception) {}
+                    }
                     f.onClosed = {
                         if (!settled) { settled = true; promise.resolve(null) }
                         mapViewerSourceRect = null
@@ -1415,6 +1666,24 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             try { LocationThumbnailRenderer.clearCache(reactApplicationContext) } catch (_: Exception) {}
             promise.resolve(null)
         }
+    }
+
+    // ── AI 기능 설정·잔액 (넘긴 값만 바뀜). 사용·충전 요청은 onAIUsage / onAIChargeRequired 이벤트로 알림 ──
+
+    @ReactMethod
+    fun setAIConfig(config: ReadableMap, promise: Promise) {
+        AIBilling.apply(config.toHashMap())
+        val ctx = reactApplicationContext
+        fun emit(name: String, body: Map<String, Any>) {
+            // 앱이 내려가는 중이면 조용히 무시
+            runCatching {
+                ctx.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                    .emit(name, com.facebook.react.bridge.Arguments.makeNativeMap(body))
+            }
+        }
+        AIBilling.onUsage = { emit("onAIUsage", it) }
+        AIBilling.onChargeRequired = { emit("onAIChargeRequired", it) }
+        promise.resolve(null)
     }
 
     // ── 역지오코딩 (기기 Geocoder, 디스크 캐시) ──

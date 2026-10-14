@@ -49,6 +49,13 @@ class RNAttachmentKit: RCTEventEmitter {
     private var editorTransitionDelegate: ImageEditorTransitionDelegate?
     /// 열려 있는 미디어 갤러리 (galleryId → 화면)
     fileprivate var mediaGalleries: [String: MediaGalleryViewController] = [:]
+    /// 진행 중인 전송 처리 (processingId → 작업, 메인 스레드에서만). 보내는 중에 갤러리를 다시 열어 또 보낼 수 있어 여러 개일 수 있음
+    private var processingJobs: [String: MediaProcessingJob] = [:]
+    /// 가장 최근에 시작한 처리 (cancelVideoProcessing 에 processingId 가 없을 때)
+    private var lastProcessingId: String?
+    /// 동영상 변환 진행 HUD 를 띄울지 — video.showProgressHUD, 없으면 asyncProcessing 이 아닐 때만
+    /// (앱이 onProcessingStart / onVideoProgress / onImageProcessed 로 말풍선에 진행 상황을 그리는 구조면 HUD 없이)
+    private var galleryShowsVideoHUD = true
     
     // MARK: - Module Setup
     
@@ -66,7 +73,8 @@ class RNAttachmentKit: RCTEventEmitter {
     override func supportedEvents() -> [String]! {
         return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose", "onImageDeleted",
                 "onGalleryItemDeleted", "onGalleryNeedPage", "onGalleryClosed", "onGalleryGridSizeChanged",
-                "onLocationSelected", "onFilesSelected"]
+                "onLocationSelected", "onFilesSelected", "onAIUsage", "onAIChargeRequired", "onVideoProgress",
+                "onMapViewerWillClose", "onProcessingStart"]
     }
     
     // MARK: - Public Methods
@@ -270,6 +278,9 @@ class RNAttachmentKit: RCTEventEmitter {
                     vc.sourceImageIsMarkerless = markerless && image != nil
                     vc.sourceRectProvider = { [weak self] in self?.mapViewerSourceRect }
                 }
+                vc.onWillClose = { [weak self] dur in
+                    self?.sendEvent(withName: "onMapViewerWillClose", body: ["durationMs": Int(dur * 1000)])
+                }
                 vc.onClosed = { [weak self] in
                     self?.mapViewerSourceRect = nil
                     resolve(nil)
@@ -365,6 +376,20 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
 
+    /// AI 기능 설정·잔액 (넘긴 값만 바뀜). 사용·충전 요청은 onAIUsage / onAIChargeRequired 이벤트로 알림
+    @objc
+    func setAIConfig(_ config: NSDictionary,
+                     resolve: @escaping RCTPromiseResolveBlock,
+                     reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let dict = config as? [String: Any] ?? [:]
+        DispatchQueue.main.async {
+            AIBilling.apply(dict)
+            AIBilling.onUsage = { [weak self] body in self?.sendEvent(withName: "onAIUsage", body: body) }
+            AIBilling.onChargeRequired = { [weak self] body in self?.sendEvent(withName: "onAIChargeRequired", body: body) }
+            resolve(nil)
+        }
+    }
+
     @objc
     func clearReverseGeocodeCache(_ resolve: @escaping RCTPromiseResolveBlock,
                                   reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -393,6 +418,8 @@ class RNAttachmentKit: RCTEventEmitter {
         let placeholderImages = options["placeholderImages"] as? [String]
         // cacheFiles: images 와 같은 순서의 로컬 캐시 파일 경로 (null 항목은 NSNull 로 옴 → 빈 문자열)
         let cacheFiles: [String]? = (options["cacheFiles"] as? [Any])?.map { ($0 as? String) ?? "" }
+        // videos: images 와 같은 순서. 항목이 있으면 그 페이지는 동영상 (images[i] 는 포스터)
+        let viewerVideos: [ViewerVideoItem?] = (options["videos"] as? [Any])?.map { ViewerVideoItem(dictionary: $0) } ?? []
         let themeColorHex = options["themeColor"] as? String
         let languageCode = options["languageCode"] as? String ?? "en"
         let viewerTitle = options["title"] as? String
@@ -476,6 +503,7 @@ class RNAttachmentKit: RCTEventEmitter {
             viewerVC.viewerTitle = viewerTitle
             viewerVC.placeholderImages = placeholderImages
             viewerVC.cacheFiles = cacheFiles
+            viewerVC.videos = viewerVideos
             if let hex = themeColorHex, let color = UIColor(hexString: hex) {
                 viewerVC.themeColor = color
             }
@@ -941,6 +969,14 @@ class RNAttachmentKit: RCTEventEmitter {
             galleryVC.showsAttachMenu = options["showAttachMenu"] as? Bool ?? false
             // 위치 보내기 때 지도 캡처 이미지 (기본 true). false 면 위치 정보만 — 받는 쪽이 renderLocationThumbnail 로 그림
             galleryVC.capturesLocationImage = options["captureLocationImage"] as? Bool ?? true
+            // 동영상: mediaType "photo"(기본) | "video" | "all" + video 옵션 (지시서 3-1)
+            let mediaTypeOption = (options["mediaType"] as? String)?.lowercased() ?? "photo"
+            galleryVC.mediaType = ["photo", "video", "all"].contains(mediaTypeOption) ? mediaTypeOption : "photo"
+            let videoOptions = VideoExportOptions(dictionary: options["video"] as? [String: Any])
+            let asyncProcessing = options["asyncProcessing"] as? Bool ?? false
+            self.galleryShowsVideoHUD = ((options["video"] as? [String: Any])?["showProgressHUD"] as? Bool) ?? !asyncProcessing
+            galleryVC.maxVideoDurationSec = videoOptions.maxDurationSec
+            galleryVC.videoExportOptions = videoOptions
             // 위치 탭에서 보내기 → onLocationSelected 이벤트로 결과를 넘기고, openGallery 는 빈 배열로 끝냄
             galleryVC.onLocationSelected = { [weak self, weak galleryVC] location in
                 self?.currentGalleryVC = nil
@@ -965,6 +1001,8 @@ class RNAttachmentKit: RCTEventEmitter {
             let galleryMaxWidth  = galleryVC.maxWidth
             let galleryMaxHeight = galleryVC.maxHeight
             let galleryFormat    = galleryVC.outputFormat   // "webp" | "jpg" | "png"
+            let galleryAccent    = galleryVC.parsedThemeColor
+            let galleryLanguage  = galleryVC.languageCode
             galleryVC.onImagesSelected = { [weak self, weak galleryVC] selectedImages in
                 guard let self = self else { resolve([]); return }
 
@@ -987,16 +1025,126 @@ class RNAttachmentKit: RCTEventEmitter {
                 // 처리한 이미지는 바로 놓아 주도록 (전체 UIImage 배열을 끝까지 들고 있지 않게) 옵셔널 배열로 옮김
                 var pending: [(PHAsset?, UIImage)?] = selectedImages.map { $0 }
 
+                // 동영상이 섞여 있으면 변환 진행 표시 (갤러리가 닫힌 뒤에도 보이게 키 윈도우에) + 취소
+                let hasVideo = selectedImages.contains { $0.0?.mediaType == .video }
+                // 편집 화면에서 고른 품질·음소거 (없으면 기본 품질)
+                let videoStates = galleryVC?.videoEditStates ?? [:]
+                var hud: VideoExportHUD?
+                var currentExporter: VideoExporter?
+                var cancelledAll = false
+                let exporterLock = NSLock()
+                // 앱이 동영상 하나(또는 전부)를 취소할 수 있게 (cancelVideoProcessing)
+                let job = MediaProcessingJob()
+                let processingId = UUID().uuidString
+                self.processingJobs[processingId] = job
+                self.lastProcessingId = processingId
+                // 처리 시작 이벤트용 — 고른 순서의 원본(사진은 편집 결과) 크기·포스터
+                let startItems = selectedImages.map { ($0.0, $0.1) }
+                if hasVideo && self.galleryShowsVideoHUD {
+                    hud = VideoExportHUD.show(accent: galleryAccent, languageCode: galleryLanguage)
+                    hud?.onCancel = {
+                        exporterLock.lock(); cancelledAll = true; currentExporter?.cancel(); exporterLock.unlock()
+                    }
+                }
+
                 DispatchQueue.global(qos: .userInitiated).async {
+                    // ✅ 처리 시작: 모든 자리(사진·동영상)를 먼저 알림 → 앱이 말풍선을 바로 만들고 진행률을 그림
+                    self.sendEvent(withName: "onProcessingStart", body: [
+                        "processingId": processingId,
+                        "total": total,
+                        "items": startItems.enumerated().map { i, pair in
+                            self.processingStartItem(index: i, asset: pair.0, image: pair.1, videoStates: videoStates,
+                                                     videoOptions: videoOptions, maxWidth: maxWidth, maxHeight: maxHeight,
+                                                     tempDir: tempDir)
+                        },
+                    ])
                     for index in 0..<total {
                         guard let pair = pending[index] else { continue }
                         pending[index] = nil
+                        exporterLock.lock(); let stop = cancelledAll; exporterLock.unlock()
+                        if stop { break }
                         autoreleasepool {
                             let (asset, image) = pair
                             let timestamp    = Int(Date().timeIntervalSince1970 * 1000)
                             let originalSize = image.size
 
-                            if let phAsset = asset {
+                            if let phAsset = asset, phAsset.mediaType == .video {
+                                // ✅ 동영상: VideoExporter 로 전송용 mp4 (+ 썸네일·메타). image 는 포스터(목록용)
+                                let exporter = VideoExporter()
+                                exporterLock.lock(); currentExporter = exporter; exporterLock.unlock()
+                                let base = "turbo_video_\(timestamp)_\(index)"
+                                var result: [String: Any] = [
+                                    "originalUri":    "ph://\(phAsset.localIdentifier)",
+                                    "originalWidth":  phAsset.pixelWidth,
+                                    "originalHeight": phAsset.pixelHeight,
+                                    "mediaType":      "video",
+                                    "type":           "video/mp4",
+                                    "duration":       phAsset.duration,
+                                ]
+                                do {
+                                    // 앱이 이미 취소한 동영상은 건너뜀 (결과에 cancelled 로)
+                                    if job.isCancelled(index) { throw VideoExporter.ExportError.cancelled }
+                                    job.begin(index: index, exporter: exporter)
+                                    let state = videoStates[phAsset.localIdentifier] ?? VideoEditState.defaultState(for: phAsset, options: videoOptions)
+                                    let throttle = ProgressThrottle()
+                                    let onProgress: (Double) -> Void = { p in
+                                        // 프레임마다 메인으로 보내지 않고 1%·0.1초 단위로만 (HUD 표시는 정수 % 라 같음)
+                                        guard throttle.shouldSend(p) else { return }
+                                        DispatchQueue.main.async { hud?.update(progress: p, index: index, total: total) }
+                                        self.sendEvent(withName: "onVideoProgress", body: ["index": index, "total": total, "progress": p, "processingId": processingId])
+                                    }
+                                    // 편집 화면에서 미리 만들어 둔 파일이 있으면(또는 만드는 중이면 끝나고) 그대로 씀
+                                    let r: VideoExportResult
+                                    // 기다리는 동안 앱(X)이나 HUD 가 취소하면 바로 멈춤 (전엔 미리 만들기가 끝날 때까지 못 빠져나왔음)
+                                    let stop = { () -> Bool in
+                                        exporterLock.lock(); let all = cancelledAll; exporterLock.unlock()
+                                        return all || job.isCancelled(index)
+                                    }
+                                    if let ready = VideoPrepareManager.shared.takeReady(asset: phAsset, state: state, progress: onProgress, isCancelled: stop) {
+                                        r = ready; onProgress(1)
+                                    } else {
+                                        if stop() { throw VideoExporter.ExportError.cancelled }
+                                        r = try exporter.export(asset: phAsset, state: state,
+                                                                options: videoOptions, outputDir: URL(fileURLWithPath: tempDir), baseName: base, progress: onProgress)
+                                    }
+                                    // 미리 만든 파일을 기다리는 동안 취소됐으면 결과를 쓰지 않음
+                                    if job.isCancelled(index) { throw VideoExporter.ExportError.cancelled }
+                                    result["uri"]           = "file://" + r.url.path
+                                    result["width"]         = r.width
+                                    result["height"]        = r.height
+                                    result["duration"]      = r.duration
+                                    result["fileSize"]      = r.fileSize
+                                    result["fileName"]      = r.url.lastPathComponent
+                                    result["fileExtension"] = "mp4"
+                                    result["videoCodec"]    = r.codec
+                                    result["videoBitrate"]  = r.bitrate
+                                    result["edited"]        = !r.passthrough
+                                    if let t = r.thumbnailURL {
+                                        result["thumbnailUri"]    = "file://" + t.path
+                                        result["thumbnailWidth"]  = r.thumbnailWidth
+                                        result["thumbnailHeight"] = r.thumbnailHeight
+                                    }
+                                } catch VideoExporter.ExportError.cancelled where job.isCancelled(index) {
+                                    // 앱이 이 동영상만 취소 → 나머지는 계속
+                                    result["error"] = "CANCELLED"
+                                    result["cancelled"] = true
+                                } catch VideoExporter.ExportError.cancelled {
+                                    // HUD 의 취소 → 전체 취소 (Promise reject)
+                                    job.end()
+                                    exporterLock.lock(); cancelledAll = true; exporterLock.unlock()
+                                    return
+                                } catch {
+                                    result["error"] = error.localizedDescription
+                                }
+                                job.end()
+                                exporterLock.lock(); currentExporter = nil; exporterLock.unlock()
+
+                                resultsLock.lock()
+                                results.append(result)
+                                let currentResult = result
+                                resultsLock.unlock()
+                                self.sendEvent(withName: "onImageProcessed", body: ["index": index, "total": total, "image": currentResult, "processingId": processingId])
+                            } else if let phAsset = asset {
                                 // ✅ 1순위: PHAsset
                                 let originalUri = "ph://\(phAsset.localIdentifier)"
 
@@ -1036,7 +1184,8 @@ class RNAttachmentKit: RCTEventEmitter {
                                 self.sendEvent(withName: "onImageProcessed", body: [
                                     "index": index,
                                     "total": total,
-                                    "image": currentResult
+                                    "image": currentResult,
+                                    "processingId": processingId
                                 ])
                             } else {
                                 // ✅ 2순위: 카메라 촬영본
@@ -1086,17 +1235,30 @@ class RNAttachmentKit: RCTEventEmitter {
                                 self.sendEvent(withName: "onImageProcessed", body: [
                                     "index": index,
                                     "total": total,
-                                    "image": currentResult
+                                    "image": currentResult,
+                                    "processingId": processingId
                                 ])
                             }
                         } // end autoreleasepool
                     } // end for
 
                     DispatchQueue.main.async {
-                        self.currentGalleryVC = nil
-                        resolve(results)
-                        // 결과를 넘긴 뒤: 갤러리의 PHCachingImageManager 캐시·콜백 해제 (닫힘 애니메이션에는 영향 없음)
-                        galleryVC?.releaseAfterReturn()
+                        hud?.dismiss()
+                        // 처리하는 동안 새 갤러리가 열렸을 수 있음 → 내 갤러리일 때만 비움
+                        if self.currentGalleryVC == nil || self.currentGalleryVC === galleryVC { self.currentGalleryVC = nil }
+                        self.processingJobs[processingId] = nil
+                        exporterLock.lock(); let wasCancelled = cancelledAll; exporterLock.unlock()
+                        if wasCancelled {
+                            // 변환 취소: 이미 만든 파일은 버림
+                            results.compactMap { ($0["uri"] as? String)?.replacingOccurrences(of: "file://", with: "") }
+                                .forEach { try? FileManager.default.removeItem(atPath: $0) }
+                            reject("CANCELLED", "User cancelled video conversion", nil)
+                        } else {
+                            resolve(results)
+                        }
+                        // 결과를 넘긴 뒤: 갤러리의 PHCachingImageManager 캐시·콜백 해제 (닫힘 애니메이션에는 영향 없음).
+                        // 새 갤러리가 열려 있으면 그 화면이 미리 인코딩 중인 파일은 건드리지 않음
+                        galleryVC?.releaseAfterReturn(discardPreparedVideos: self.currentGalleryVC == nil)
                     }
                 }
             }
@@ -1150,6 +1312,75 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
     
+    /// 동영상 변환 취소 (HUD 없이 앱이 말풍선에서 취소할 때). index 생략(-1) = 남은 동영상 전부.
+    /// 취소된 동영상은 onImageProcessed / 결과에 { error: "CANCELLED", cancelled: true } 로 오고, 나머지는 계속 처리
+    /// processingId 생략("") = 가장 최근 처리
+    @objc(cancelVideoProcessing:processingId:resolve:reject:)
+    func cancelVideoProcessing(_ index: NSNumber, processingId: NSString, resolve: @escaping RCTPromiseResolveBlock,
+                               reject: @escaping RCTPromiseRejectBlock) -> Void {
+        DispatchQueue.main.async {
+            let id = processingId.length > 0 ? processingId as String : self.lastProcessingId
+            guard let id = id, let job = self.processingJobs[id] else { resolve(false); return }
+            let i = index.intValue
+            job.cancel(index: i >= 0 ? i : nil)
+            resolve(true)
+        }
+    }
+
+    /// onProcessingStart 의 한 자리: 사진은 예상 결과 크기, 동영상은 예상 결과 크기·길이(구간 반영)·포스터(크롭·그리기 반영 jpg)
+    private func processingStartItem(index: Int, asset: PHAsset?, image: UIImage?, videoStates: [String: VideoEditState],
+                                     videoOptions: VideoExportOptions, maxWidth: Int, maxHeight: Int, tempDir: String) -> [String: Any] {
+        if let a = asset, a.mediaType == .video {
+            let state = videoStates[a.localIdentifier] ?? VideoEditState.defaultState(for: a, options: videoOptions)
+            let d = CGSize(width: a.pixelWidth, height: a.pixelHeight)
+            let size = VideoExporter.predictedOutputSize(displaySize: d, state: state, options: videoOptions, sourceDuration: a.duration)
+            var item: [String: Any] = [
+                "index": index, "mediaType": "video", "originalUri": "ph://\(a.localIdentifier)",
+                "width": Int(size.width), "height": Int(size.height),
+                "duration": state.outputDuration(sourceDuration: a.duration),
+            ]
+            if let poster = image {
+                let edited = state.applyEdits(to: poster)
+                if let encoded = VideoExporter.encodePoster(edited, format: videoOptions.posterFormat, quality: 0.8) {
+                    let path = (tempDir as NSString).appendingPathComponent("turbo_video_poster_\(Int(Date().timeIntervalSince1970 * 1000))_\(index).\(encoded.fileExtension)")
+                    if (try? encoded.data.write(to: URL(fileURLWithPath: path))) != nil {
+                        item["thumbnailUri"] = "file://" + path
+                        item["thumbnailWidth"] = Int(edited.size.width * edited.scale)
+                        item["thumbnailHeight"] = Int(edited.size.height * edited.scale)
+                    }
+                }
+            }
+            return item
+        }
+        // 사진: 리사이즈 규칙(resizeImage)과 같은 예상 크기 (resizeImage 처럼 image.size 기준)
+        var w = image?.size.width ?? CGFloat(asset?.pixelWidth ?? 0)
+        var h = image?.size.height ?? CGFloat(asset?.pixelHeight ?? 0)
+        if w > 0, h > 0 {
+            var ratio: CGFloat = 1
+            if maxWidth > 0 && maxHeight > 0 { ratio = min(CGFloat(maxWidth) / w, CGFloat(maxHeight) / h, 1) }
+            else if maxWidth > 0 { ratio = min(CGFloat(maxWidth) / w, 1) }
+            else if maxHeight > 0 { ratio = min(CGFloat(maxHeight) / h, 1) }
+            w *= ratio; h *= ratio
+        }
+        var item: [String: Any] = ["index": index, "mediaType": "image", "width": Int(w.rounded()), "height": Int(h.rounded())]
+        if let a = asset { item["originalUri"] = "ph://\(a.localIdentifier)" }
+        return item
+    }
+
+    /// 동영상 포스터 (긴 변 512, 동기) — 처리 시작 이벤트용
+    private static func requestPoster(_ asset: PHAsset) -> UIImage? {
+        let o = PHImageRequestOptions()
+        o.isSynchronous = true
+        o.deliveryMode = .highQualityFormat
+        o.resizeMode = .fast
+        o.isNetworkAccessAllowed = true
+        var out: UIImage?
+        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 512, height: 512), contentMode: .aspectFit, options: o) { img, _ in
+            out = img
+        }
+        return out
+    }
+
     @objc
     func closeGallery(_ resolve: @escaping RCTPromiseResolveBlock,
                       reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -1457,9 +1688,105 @@ class RNAttachmentKit: RCTEventEmitter {
     }
     
     // MARK: - Editor Result Processing
+
+    /// 동영상 1장을 전송용 mp4 로 만들어 resolve (갤러리 다중 전송 경로의 동영상 분기와 같은 필드)
+    private func exportSingleVideo(_ phAsset: PHAsset, galleryVC: GalleryViewController?, tempDir: String,
+                                   resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+        let videoOptions = galleryVC?.videoExportOptions ?? VideoExportOptions()
+        let state = galleryVC?.videoEditStates[phAsset.localIdentifier] ?? VideoEditState.defaultState(for: phAsset, options: videoOptions)
+        let hud: VideoExportHUD? = galleryShowsVideoHUD ? VideoExportHUD.show(accent: galleryVC?.parsedThemeColor ?? UIColor(red: 236/255, green: 73/255, blue: 38/255, alpha: 1), languageCode: galleryVC?.languageCode ?? "en") : nil
+        let exporter = VideoExporter()
+        let hudCancelled = AtomicFlag()
+        hud?.onCancel = { hudCancelled.value = true; exporter.cancel() }
+        let job = MediaProcessingJob()
+        let processingId = UUID().uuidString
+        processingJobs[processingId] = job
+        lastProcessingId = processingId
+        DispatchQueue.global(qos: .userInitiated).async {
+            let poster = Self.requestPoster(phAsset)
+            self.sendEvent(withName: "onProcessingStart", body: [
+                "processingId": processingId,
+                "total": 1,
+                "items": [self.processingStartItem(index: 0, asset: phAsset, image: poster, videoStates: [phAsset.localIdentifier: state],
+                                                   videoOptions: videoOptions, maxWidth: 0, maxHeight: 0, tempDir: tempDir)],
+            ])
+            let timestamp = Int(Date().timeIntervalSince1970 * 1000)
+            var result: [String: Any] = [
+                "originalUri":    "ph://\(phAsset.localIdentifier)",
+                "originalWidth":  phAsset.pixelWidth,
+                "originalHeight": phAsset.pixelHeight,
+                "mediaType":      "video",
+                "type":           "video/mp4",
+                "duration":       phAsset.duration,
+            ]
+            do {
+                job.begin(index: 0, exporter: exporter)
+                let throttle = ProgressThrottle()
+                let onProgress: (Double) -> Void = { p in
+                    guard throttle.shouldSend(p) else { return }
+                    DispatchQueue.main.async { hud?.update(progress: p, index: 0, total: 1) }
+                    self.sendEvent(withName: "onVideoProgress", body: ["index": 0, "total": 1, "progress": p, "processingId": processingId])
+                }
+                let r: VideoExportResult
+                // HUD 취소는 exporter.cancel() — 기다리는 동안엔 job 으로 알 수 없으므로 HUD 취소도 job 에 기록
+                if let ready = VideoPrepareManager.shared.takeReady(asset: phAsset, state: state, progress: onProgress,
+                                                                     isCancelled: { job.isCancelled(0) || hudCancelled.value }) {
+                    r = ready; onProgress(1)
+                } else {
+                    if job.isCancelled(0) || hudCancelled.value { throw VideoExporter.ExportError.cancelled }
+                    r = try exporter.export(asset: phAsset, state: state, options: videoOptions,
+                                            outputDir: URL(fileURLWithPath: tempDir), baseName: "turbo_video_\(timestamp)_0", progress: onProgress)
+                }
+                result["uri"]           = "file://" + r.url.path
+                result["width"]         = r.width
+                result["height"]        = r.height
+                result["duration"]      = r.duration
+                result["fileSize"]      = r.fileSize
+                result["fileName"]      = r.url.lastPathComponent
+                result["fileExtension"] = "mp4"
+                result["videoCodec"]    = r.codec
+                result["videoBitrate"]  = r.bitrate
+                result["edited"]        = !r.passthrough
+                if let t = r.thumbnailURL {
+                    result["thumbnailUri"]    = "file://" + t.path
+                    result["thumbnailWidth"]  = r.thumbnailWidth
+                    result["thumbnailHeight"] = r.thumbnailHeight
+                }
+                if job.isCancelled(0) { throw VideoExporter.ExportError.cancelled }
+            } catch VideoExporter.ExportError.cancelled where job.isCancelled(0) {
+                // 앱이 취소 (cancelVideoProcessing) — 이벤트·결과에 cancelled 로
+                result["error"] = "CANCELLED"
+                result["cancelled"] = true
+            } catch VideoExporter.ExportError.cancelled {
+                job.end()
+                DispatchQueue.main.async {
+                    self.processingJobs[processingId] = nil
+                    hud?.dismiss(); reject("CANCELLED", "Video export cancelled", nil)
+                }
+                return
+            } catch {
+                result["error"] = error.localizedDescription
+            }
+            job.end()
+            self.sendEvent(withName: "onImageProcessed", body: ["index": 0, "total": 1, "image": result, "processingId": processingId])
+            DispatchQueue.main.async {
+                hud?.dismiss()
+                if self.currentGalleryVC == nil || self.currentGalleryVC === galleryVC { self.currentGalleryVC = nil }
+                self.processingJobs[processingId] = nil
+                galleryVC?.releaseAfterReturn(discardPreparedVideos: self.currentGalleryVC == nil)
+                resolve([result])
+            }
+        }
+    }
+
     
     private func processEditorResult(asset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String, galleryVC: GalleryViewController?, targetMaxWidth: Int? = nil, targetMaxHeight: Int? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         let tempDir = prepareCacheDirectory()
+        // 동영상 1장 편집 → 전송: 편집 화면에서 고른 품질·음소거로 VideoExporter (사진 경로와 같은 결과 형태)
+        if let phAsset = asset, phAsset.mediaType == .video {
+            exportSingleVideo(phAsset, galleryVC: galleryVC, tempDir: tempDir, resolve: resolve, reject: reject)
+            return
+        }
         let maxWidth = targetMaxWidth ?? galleryVC?.maxWidth ?? 1024
         let maxHeight = targetMaxHeight ?? galleryVC?.maxHeight ?? 1024
         let format = galleryVC?.outputFormat ?? "webp"
@@ -1906,6 +2233,7 @@ fileprivate extension RNAttachmentKit {
         
         editorVC.onEditDeleted = { [weak currentGallery] asset in
             currentGallery?.editedImages.removeValue(forKey: asset.localIdentifier)
+            currentGallery?.videoEditStates.removeValue(forKey: asset.localIdentifier)  // 동영상 편집도 기본으로 돌아간 것
         }
         
         editorVC.modalPresentationStyle = .overFullScreen
@@ -1921,7 +2249,22 @@ fileprivate extension RNAttachmentKit {
             }
         }
         editorVC.croppedImages = initialCroppedImages
+        // 동영상 페이지: 품질 단계·용량 상한 + 갤러리가 들고 있는 상태. 바뀌면 바로 갤러리에 반영 (전송 때 VideoExporter 가 읽음)
+        editorVC.videoOptions = VideoExportOptions(dictionary: options["video"] as? [String: Any])
+        var initialVideoStates: [Int: VideoEditState] = [:]
+        for (i, a) in editorAssets.enumerated() {
+            if let st = currentGallery.videoEditStates[a.localIdentifier] { initialVideoStates[i] = st }
+        }
+        editorVC.videoEditStates = initialVideoStates
+        editorVC.onVideoStateChanged = { [weak currentGallery] asset, state in
+            currentGallery?.videoEditStates[asset.localIdentifier] = state
+        }
         
+        if sourceFrame == .zero {
+            // 기준 칸이 없을 때(칸이 화면 밖 등): 기본 전환(아래로 미끄러짐)은 끌어내려 닫을 때 위로 치워 둔 상단 바가
+            // 화면과 함께 내려오며 보이므로 페이드로
+            editorVC.modalTransitionStyle = .crossDissolve
+        }
         if sourceFrame != .zero {
             self.editorTransitionDelegate = ImageEditorTransitionDelegate()
             self.editorTransitionDelegate?.sourceFrame = sourceFrame
@@ -2083,5 +2426,71 @@ extension RNAttachmentKit: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         zoomAnimator.isPresenting = false
         return zoomAnimator
+    }
+}
+
+// MARK: - 전송 처리 상태 (앱에서 동영상 취소)
+
+/// openGallery 결과 처리 한 번. cancelVideoProcessing(index) → 그 동영상만(또는 전부) 취소
+private final class MediaProcessingJob {
+    private let lock = NSLock()
+    private var cancelAll = false
+    private var cancelled = Set<Int>()
+    private var currentIndex: Int?
+    private var currentExporter: VideoExporter?
+
+    func cancel(index: Int?) {
+        lock.lock(); defer { lock.unlock() }
+        if let i = index {
+            cancelled.insert(i)
+            if currentIndex == i { currentExporter?.cancel() }
+        } else {
+            cancelAll = true
+            currentExporter?.cancel()
+        }
+    }
+
+    func isCancelled(_ i: Int) -> Bool {
+        lock.lock(); defer { lock.unlock() }
+        return cancelAll || cancelled.contains(i)
+    }
+
+    func begin(index: Int, exporter: VideoExporter) {
+        lock.lock(); defer { lock.unlock() }
+        currentIndex = index
+        currentExporter = exporter
+    }
+
+    func end() {
+        lock.lock(); defer { lock.unlock() }
+        currentIndex = nil
+        currentExporter = nil
+    }
+}
+
+/// onVideoProgress 를 1% 이상 바뀌고 0.1초 지났을 때만 (브릿지가 넘치지 않게). 0 과 1 은 항상
+private final class ProgressThrottle {
+    private let lock = NSLock()
+    private var last: Double = -1
+    private var lastTime: CFTimeInterval = 0
+
+    func shouldSend(_ p: Double) -> Bool {
+        lock.lock(); defer { lock.unlock() }
+        let now = CACurrentMediaTime()
+        guard p >= 1 || last < 0 || (p - last >= 0.01 && now - lastTime >= 0.1) else { return false }
+        if p >= 1 && last >= 1 { return false }
+        last = p
+        lastTime = now
+        return true
+    }
+}
+
+/// 스레드 사이에서 읽고 쓰는 Bool
+private final class AtomicFlag {
+    private let lock = NSLock()
+    private var v = false
+    var value: Bool {
+        get { lock.lock(); defer { lock.unlock() }; return v }
+        set { lock.lock(); v = newValue; lock.unlock() }
     }
 }

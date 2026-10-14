@@ -149,13 +149,16 @@ Opens the gallery bottom sheet. Resolves with the picked images (`[]` when the u
 | `outputFormat` | `'webp' \| 'jpg' \| 'png'` | `'webp'` | Output file format. (Not in the TS type yet — pass it with a cast.) |
 | `themeColor` / `languageCode` / `appearance` | | defaults | Per-call overrides. |
 | `doneButtonText` / `allItemsText` / `selectedItemsText` / `recentsAlbumText` | `string` | translated | Label overrides. |
-| `asyncProcessing` | `boolean` | `false` | Resolve right away and deliver each processed image through `onImageProcessed`. |
+| `asyncProcessing` | `boolean` | `false` | Event-driven sending: each item is delivered through `onImageProcessed` as soon as it is ready (the Promise still resolves with everything at the end), and videos show no progress HUD — draw progress in your own UI. See [Sending progress](#sending-progress-events). |
 | `onSelectionChange` | `(e: SelectionChangeEvent) => void` | — | `{ selectedCount, maxSelection }` on every change. |
-| `onImageProcessed` | `(e) => void` | — | Per image when `asyncProcessing` is on. |
+| `onProcessingStart` | `(e: ProcessingStartEvent) => void` | — | Once, right after Send, before any processing. |
+| `onImageProcessed` | `(e) => void` | — | Per item `{ index, total, image }` as soon as it is ready. |
+| `mediaType` | `'photo' \| 'all' \| 'video'` | `'photo'` | `'all'` mixes photos and videos. |
+| `video` | `VideoOptions` | — | `maxDurationSec`, `maxFileSizeMB`, `qualities`, `defaultQuality`, `codec`, `onProgress`, `showProgressHUD`. |
 | `openDuration` / `closeDuration` | `number` (ms) | native | Animation durations. |
 | `showAttachMenu` … | | | Attach menu options — see [Attach menu](#attach-menu-location--file). |
 
-`mediaType` and `quality` are accepted for compatibility but currently ignored (photos only; output quality is fixed).
+`quality` is accepted for compatibility but currently ignored (output quality is fixed).
 
 #### `ImageResult`
 
@@ -175,6 +178,26 @@ Closes the picker from code. `true` if it was open.
 
 #### `addSelectionChangeListener(listener): () => void`
 Selection events outside `openGallery`; returns an unsubscribe function.
+
+#### Sending progress (events)
+
+A chat can show every sent item at once and fill it in as it finishes (photos are resized, videos are encoded), the same way for photos and videos:
+
+1. **`onProcessingStart`** `{ total, items }`: once, right after Send. Each item has `index`, `mediaType` (`'image' | 'video'`), `originalUri`, and the expected output `width` / `height` (for the aspect ratio). Videos also have `duration` (seconds, after trim) and `thumbnailUri` / `thumbnailWidth` / `thumbnailHeight` (a poster jpg with crop and drawing applied). Create the placeholders here.
+2. **`onVideoProgress`** `{ index, total, progress }`: video encoding 0…1 (at most every 1% / 0.1 s). Draw a progress ring on that placeholder.
+3. **`onImageProcessed`** `{ index, total, image }`: the item is ready. Replace the placeholder with `image.uri`. A video the app cancelled comes as `{ error: 'CANCELLED', cancelled: true }`; a failed one has `error`.
+
+```ts
+const sub = emitter.addListener('onProcessingStart', ({ items }) => addPlaceholders(items))
+const prog = emitter.addListener('onVideoProgress', ({ index, progress }) => setProgress(index, progress))
+const done = emitter.addListener('onImageProcessed', ({ index, image }) => fillPlaceholder(index, image))
+await AttachmentKit.openGallery({ mediaType: 'all', asyncProcessing: true, enableEditor: true })
+// or pass onProcessingStart / onImageProcessed / video.onProgress as options
+```
+
+- **HUD:** `video.showProgressHUD` sets the full-screen progress HUD. The default is `true`, but `false` when `asyncProcessing: true`.
+- **Cancel:** without the HUD, cancel from your UI with `AttachmentKit.cancelVideoProcessing(index?, processingId?)`. No `index` cancels all remaining videos; no `processingId` targets the latest send. The rest keep going, and the cancelled item is reported as above. It returns `false` when nothing is in progress.
+- **Sending again while a video encodes:** the gallery can be opened again as soon as `onProcessingStart` arrives; you don't have to wait for the Promise, which still resolves with everything at the end. Every event carries `processingId`, so an app that listens with global listeners should use it to tell sends apart (`index` restarts at 0 for each send). Callbacks passed in the options are already filtered to their own send.
 
 ---
 
@@ -435,6 +458,80 @@ A native grid built for thousands of photos. It opens like the picker (same bott
 - Events: `onItemDeleted({ galleryId, id, groupId, option })` (the module already removed that group from the screen — delete it in the app), `onNeedPage`, `onGridSizeChanged`, `onClosed`.
 - Other: `closeMediaGallery(galleryId)`, `removeGalleryItems({ galleryId, groupIds })`, `isMediaGallerySupported()`.
 - Android: the sheet is a view on top of the host Activity (no Activity / Dialog window); system back closes it.
+
+---
+
+### AI (generate & edit)
+
+The gallery's ✦ button (AI image generation) and the editor's 6th tool **AI** (AI photo editing) use Google Gemini. They are **off until you call `setAIConfig({ enabled: true, ... })`**. In apps other than ZemTalk the AI screens are chat-only: generate shows an aspect-ratio bar and the chat input, edit shows the photo and the chat input, and the text is sent to the model as typed. The style/option menus, sample prompts, recommendation chips and recent works are ZemTalk-only.
+
+```ts
+await AttachmentKit.setAIConfig({
+  enabled: true,
+  endpoint: "https://api.example.com/ai/generate",   // your server: forwards the Gemini generateContent body with your key
+  headers: { Authorization: `Bearer ${token}` },     // header X-AI-Model carries the model name
+  points: 1200,          // current points
+  freeCount: 27,         // subscribers: free uses left (e.g. 30 per month — your server decides); used before points
+  costPerUse: 100,       // points per use (0 = free / unlimited)
+  highQualityCost: 150,  // points per use with Quality "High (1K)" (default: costPerUse)
+})
+
+const offUsage = AttachmentKit.addAIUsageListener(e => {
+  // { kind: "generate" | "edit", usedFreeCount, pointsDeducted, highQuality, points, freeCount }
+  api.reportAIUsage(e)
+})
+const offCharge = AttachmentKit.addAIChargeRequiredListener(e => {
+  // { kind, required, points, freeCount } — the AI screen has closed
+  AttachmentKit.closeGallery(); navigation.navigate("PointShop")
+})
+```
+
+- Only the values you pass change; call it again whenever the balance changes (after a top-up, after a server sync). An open AI screen updates at once.
+- Order of use: free uses → points → when points are short the user sees "Not enough points · Top up" (Top up → `onAIChargeRequired`, AI screen closes).
+- Only successful requests are charged (failures, cancel and safety blocks are free). The module lowers its own copy and sends `onAIUsage`; your server stays the source of truth.
+- The AI screen title shows "N free left" or "points · cost per use".
+- `apiKey` exists for testing only — never ship a Gemini key in the app.
+
+#### Your backend (the `endpoint`)
+
+The module never needs a Gemini key in the app. Point `endpoint` at **your own server**; it only has to pass the request through to Gemini with your key.
+
+**Request the module sends**
+
+```
+POST {endpoint}
+Content-Type: application/json
+X-AI-Model: gemini-3.1-flash-image        ← model to call (image: gemini-3.1-flash-image / gemini-3.1-flash-lite-image, photo analysis: gemini-3.5-flash-lite)
+…plus every header you passed in setAIConfig({ headers })   ← e.g. Authorization
+
+{ …Gemini generateContent request body… }
+```
+
+**What your server does**
+
+1. Check the user (your `headers`) and that `X-AI-Model` is a model you allow.
+2. Forward the body unchanged to `https://generativelanguage.googleapis.com/v1beta/models/{X-AI-Model}:generateContent` with header `x-goog-api-key: <your key>`.
+3. Return Gemini's status code and JSON body **as is**.
+
+```js
+// Minimal Express example
+app.post('/ai/generate', auth, express.json({ limit: '20mb' }), async (req, res) => {
+  const model = req.get('X-AI-Model');
+  if (!ALLOWED_MODELS.includes(model)) return res.status(400).json({ code: 'MODEL_NOT_ALLOWED' });
+  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': process.env.GEMINI_API_KEY },
+    body: JSON.stringify(req.body),
+  });
+  res.status(r.status).type('application/json').send(await r.text());
+});
+```
+
+**Billing (optional, on your server)** — the module's `points` / `freeCount` are only a display copy. If you charge, do it on the server: reserve before calling Gemini, confirm only when the response contains an image, refund otherwise (failures and safety blocks should be free). Then send the new balance back with `setAIConfig` (e.g. in `addAIUsageListener`).
+
+**Errors** — any status other than 200 is a failed attempt (nothing is deducted in the module). To show your own reason, answer in Gemini's error shape: `{ "error": { "message": "…" } }`. The "Not enough points · Top up" prompt comes from the module's own copy of `points` / `freeCount`, so keep it in sync with `setAIConfig`.
+
+**Security** — keep the key only on the server, allow-list models, limit the body size, and rate-limit per user (photo analysis requests carry no image output and are easy to abuse if left unlimited).
 
 ---
 

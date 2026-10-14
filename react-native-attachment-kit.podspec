@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   }
 
   s.vendored_frameworks = "ios/RNAttachmentKit.xcframework"
-  s.frameworks = "MapKit", "CoreLocation", "UniformTypeIdentifiers"  # 첨부 메뉴 > 위치·파일 탭
+  s.frameworks = "MapKit", "CoreLocation", "UniformTypeIdentifiers", "Vision", "CryptoKit", "CoreMotion"  # 위치·파일 탭 / AI 편집 사진 분석·캐시 / 카메라 기기 방향
 
   # s.dependency "SDWebImageWebPCoder"
 

@@ -20,6 +20,94 @@ export interface ImageResult {
   fileName?: string // 파일명
   fileExtension?: string // 확장자
   fileSize?: number // 파일 크기 (bytes)
+  /** "image"(기본) | "video" — mediaType: "all"/"video" 로 열었을 때 동영상이면 "video" */
+  mediaType?: "image" | "video"
+  /** 동영상: 길이(초, 소수) */
+  duration?: number
+  /** 동영상: 포스터 썸네일 file:// (video.posterFormat 형식 — 기본 webp, 긴 변 512) */
+  thumbnailUri?: string
+  thumbnailWidth?: number
+  thumbnailHeight?: number
+  /** 동영상: 전송본 코덱·평균 비트레이트(bps) */
+  videoCodec?: "h264" | "hevc" | string
+  videoBitrate?: number
+  /** 편집(trim/crop/overlay/음소거/품질 변경)했는지. false 면 원본을 그대로(리먹스) 보낸 것 */
+  edited?: boolean
+  /** 동영상 변환에 실패했을 때 (uri 없음). 사진·정상 동영상엔 없음. 앱이 취소했으면 "CANCELLED" */
+  error?: string
+  /** 앱이 cancelVideoProcessing 으로 취소한 동영상 (uri 없음) */
+  cancelled?: boolean
+}
+
+/**
+ * onProcessingStart — 갤러리에서 보낸 직후, 처리(사진 리사이즈·동영상 변환)를 시작하기 전에 한 번.
+ * 앱은 이걸로 말풍선 자리를 먼저 만들고(비율·포스터·길이), 동영상은 onVideoProgress 로 진행률을 그린 뒤
+ * onImageProcessed(index 같음)가 오면 실제 파일로 바꿉니다.
+ */
+export interface ProcessingStartEvent {
+  /**
+   * 이번 보내기의 ID. onVideoProgress / onImageProcessed 에도 같은 값이 붙음.
+   * 동영상을 변환하는 동안에도 갤러리를 다시 열어 또 보낼 수 있으므로, 이벤트를 전역 리스너로 받는 앱은 이 값으로 구분
+   */
+  processingId: string
+  total: number
+  items: ProcessingStartItem[]
+}
+
+export interface ProcessingStartItem {
+  index: number
+  mediaType: "image" | "video"
+  /** ph://… (iOS) / content://… (Android) */
+  originalUri?: string
+  /** 예상 결과 크기 (사진: 리사이즈 후, 동영상: 품질·크롭 반영). 비율용 */
+  width: number
+  height: number
+  /** 동영상: 보낼 길이(초, 구간 반영) */
+  duration?: number
+  /** 동영상: 포스터 file:// (video.posterFormat 형식 — 기본 webp, 크롭·그리기 반영) — 변환이 끝나기 전 말풍선에 */
+  thumbnailUri?: string
+  thumbnailWidth?: number
+  thumbnailHeight?: number
+}
+
+/** 동영상 옵션 (GalleryOptions.video). mediaType 이 "video"/"all" 일 때만 의미 */
+export interface VideoOptions {
+  /** 고를 수 있는 최대 길이(초). 기본 600 (10분). 넘는 동영상은 누르면 안내만. 0 = 제한 없음 */
+  maxDurationSec?: number
+  /** 전송 결과 최대 용량(MB). 기본 100. 추정치가 넘으면 더 낮은 품질로 자동 조정. 0 = 제한 없음 */
+  maxFileSizeMB?: number
+  /** 해상도 단계 (세로 px). 기본 [360, 480, 720, 1080]. 원본보다 큰 단계는 쓰지 않음(원본 유지) */
+  qualities?: number[]
+  /** 기본 품질 (세로 px). 기본 720. 원본이 더 작으면 원본 그대로 */
+  defaultQuality?: number
+  /** 구간 자르기 허용. 기본 true (편집 화면이 생기는 P2 부터) */
+  allowTrim?: boolean
+  /** 음소거 버튼 표시. 기본 true (P2 부터) */
+  allowMute?: boolean
+  /** 코덱. 기본 "h264". "hevc" 는 용량이 작지만 수신 기기 호환을 확인한 경우만 */
+  codec?: "h264" | "hevc"
+  /**
+   * 동영상 포스터(썸네일) 파일 형식. 기본 "webp" (jpg 보다 작음). "jpg" 로 하면 예전처럼 jpg.
+   * onProcessingStart / onImageProcessed 의 thumbnailUri 확장자가 이 값을 따름 (webp 인코딩이 안 되는 드문 경우엔 jpg 로 대신하니, 확장자는 uri 로 확인)
+   */
+  posterFormat?: "webp" | "jpg"
+  /** 전송 전 변환 진행률 (동영상마다 0~1, 1% 이상 바뀔 때·최소 0.1초 간격) */
+  onProgress?: (e: VideoProgressEvent) => void
+  /**
+   * 변환하는 동안 화면 가운데 진행 HUD(취소 버튼 포함)를 띄울지.
+   * 기본: asyncProcessing 이 아니면 true, asyncProcessing: true 면 false —
+   * 이벤트(onProcessingStart / onVideoProgress / onImageProcessed)로 말풍선에 진행 상황을 그리는 앱은 HUD 없이 씁니다.
+   * HUD 가 없을 때 취소는 AttachmentKit.cancelVideoProcessing(index)
+   */
+  showProgressHUD?: boolean
+}
+
+export interface VideoProgressEvent {
+  index: number
+  total: number
+  progress: number
+  /** 어느 보내기의 진행률인지 (onProcessingStart 의 processingId) */
+  processingId?: string
 }
 
 export interface SourceRect {
@@ -33,7 +121,10 @@ export interface GalleryOptions {
   maxSelection?: number
   maxWidth?: number // 최대 width
   maxHeight?: number // 최대 height
+  /** 기본 "photo" = 사진만(동영상 권한도 요청 안 함). "all" = 사진+동영상 날짜순 혼합, "video" = 동영상만 */
   mediaType?: "photo" | "video" | "all"
+  /** 동영상 옵션 (mediaType 이 video/all 일 때) */
+  video?: VideoOptions
   quality?: number
   allItemsText?: string
   selectedItemsText?: string
@@ -61,6 +152,8 @@ export interface GalleryOptions {
   asyncProcessing?: boolean // 완전 비동기 이벤트 리턴 여부
   onSelectionChange?: (event: SelectionChangeEvent) => void
   onImageProcessed?: (event: any) => void
+  /** 처리 시작 (보낸 직후 한 번) — 모든 자리의 미디어 종류·예상 크기·동영상 포스터. ProcessingStartEvent 참고 */
+  onProcessingStart?: (event: ProcessingStartEvent) => void
   /**
    * 갤러리 아래에 첨부 메뉴(갤러리 / 위치 / 파일)를 보여줍니다. 기본 false.
    * 위치 탭: iOS 는 Apple 지도(키 필요 없음), Android 는 Google 지도 — 앱의 AndroidManifest 에
@@ -266,10 +359,27 @@ export interface MapViewerOptions {
   sourceImageUri?: string
   /** 말풍선 이미지 라운드 (dp/pt, 기본 12) */
   sourceCornerRadius?: number
+  /**
+   * 닫기 애니메이션이 "시작"될 때 (durationMs = 닫기 애니메이션 길이). 프로미스는 다 닫힌 뒤에 끝나므로,
+   * 키보드 복귀처럼 닫힘과 동시에 하고 싶은 일은 여기서. Android 는 이 시점에 뷰어 창이 입력 포커스를 내려놓음
+   */
+  onViewerWillClose?: (e: { durationMs: number }) => void
   /** 마커·버튼 색 (기본: setDefaults 의 themeColor) */
   themeColor?: string
   languageCode?: LanguageCode
   appearance?: Appearance
+}
+
+/** 뷰어의 동영상 페이지 정보 (ViewerOptions.videos) */
+export interface ViewerVideo {
+  /** http(s) 또는 file:// */
+  uri: string
+  /** 초. 모르면 생략 (불러온 뒤 채움) */
+  duration?: number
+  /** 절대 경로(file:// 없음). 파일이 있으면 그걸로 재생, 없으면 스트리밍하고 다 받으면 이 경로에 저장 */
+  cacheFile?: string
+  width?: number
+  height?: number
 }
 
 export interface ViewerOptions {
@@ -281,6 +391,12 @@ export interface ViewerOptions {
    * (앱이 캐시를 한 곳에서 관리하기 위한 옵션 — 항목이 null/빈 문자열이면 해당 사진은 기존 방식)
    */
   cacheFiles?: (string | null)[]
+  /**
+   * images 와 같은 순서. 항목이 있으면 그 페이지는 동영상 (null/생략 = 사진) — cacheFiles 와 같은 "평행 배열".
+   * 동영상 페이지에서 images[i] 는 포스터(썸네일) 이미지로 쓰입니다 (열기·닫기 애니메이션, 로딩 중 표시).
+   * 지원: iOS 뷰어, Android 는 useOverlayViewer: true 일 때 (그 외 Android 뷰어는 포스터만 보임)
+   */
+  videos?: (ViewerVideo | null)[]
   initialIndex?: number
   themeColor?: string // Added themeColor for Android
   /**
@@ -414,6 +530,14 @@ export interface MediaGalleryItem {
   isMine?: boolean
   width?: number
   height?: number
+  /** 생략 = 'image'. 'video' 면 imageUri/thumbUri 는 포스터, 재생은 videoUri */
+  mediaType?: 'image' | 'video'
+  /** 동영상 원본 (http(s) 또는 file://) */
+  videoUri?: string
+  /** 동영상 캐시 경로 (ViewerVideo.cacheFile 과 같은 의미) */
+  videoCacheFile?: string
+  /** 초 — 그리드 칸의 "▶ 0:12" 배지 */
+  duration?: number
 }
 
 export interface MediaGalleryDeleteOption {
@@ -533,4 +657,53 @@ export interface MediaGalleryAppendPayload {
 export interface MediaGalleryRemovePayload {
   galleryId: string
   groupIds: string[]
+}
+
+/**
+ * AI 기능 (갤러리의 AI 생성 · 편집 화면의 AI 편집) 설정과 잔액. `AttachmentKit.setAIConfig` 로 넘기며, 넘긴 값만 바뀝니다.
+ * 앱 서버가 진짜 장부이고 모듈은 화면 표시·사용 가능 판단용 사본을 들고 있습니다.
+ * 사용 순서: 구독자의 남은 무료 횟수(freeCount, 예: 월 30회) → 포인트(points, 1회 costPerUse) → 모자라면 충전 안내(onAIChargeRequired).
+ * 성공한 요청만 차감되고(실패·취소·안전 차단은 무료), 차감할 때마다 onAIUsage 가 옵니다.
+ */
+export interface AIConfig {
+  /** AI 기능 on/off. 기본 false — 꺼져 있으면 갤러리·편집 화면에 AI 버튼이 보이지 않음 */
+  enabled?: boolean
+  /** 현재 포인트 */
+  points?: number
+  /** 구독자의 남은 무료 횟수 (예: 월 30회 중 남은 것 — 기간·횟수는 앱/서버가 정함). 0 보다 크면 포인트보다 먼저 씀 */
+  freeCount?: number
+  /** 1회 차감 포인트. 0 이면 과금 없음 (무제한) */
+  costPerUse?: number
+  /** 화질 옵션 "고화질(1K)" 1회 차감 포인트. 생략/null 이면 costPerUse */
+  highQualityCost?: number | null
+  /** 운영: 앱 서버(프록시) 주소. 모듈이 Gemini generateContent 본문을 이 주소로 보내고 서버가 키를 붙여 전달 (헤더 X-AI-Model = 모델 이름) */
+  endpoint?: string | null
+  /** endpoint 로 보낼 때 붙일 헤더 (예: { Authorization: "Bearer …" }) */
+  headers?: Record<string, string>
+  /** 테스트 전용 Gemini 키 (앱에 넣어 배포하지 말 것). endpoint 가 있으면 무시 */
+  apiKey?: string | null
+}
+
+/** AI 를 한 번 성공적으로 썼을 때 (서버에 차감을 반영하는 데 사용) */
+export interface AIUsageEvent {
+  /** "generate" = 갤러리 AI 생성, "edit" = 편집 화면 AI 편집 */
+  kind: "generate" | "edit"
+  /** 무료 횟수를 썼으면 true (이때 pointsDeducted = 0) */
+  usedFreeCount: boolean
+  /** 이번에 차감한 포인트 */
+  pointsDeducted: number
+  /** 고화질(1K)로 만들었는지 */
+  highQuality: boolean
+  /** 차감 후 모듈이 들고 있는 값 */
+  points: number
+  freeCount: number
+}
+
+/** 포인트가 모자라 사용자가 '충전하기'를 눌렀을 때 (모듈은 AI 화면을 닫음 → 앱이 충전 화면으로 안내) */
+export interface AIChargeRequiredEvent {
+  kind: "generate" | "edit"
+  /** 1회에 필요한 포인트 */
+  required: number
+  points: number
+  freeCount: number
 }

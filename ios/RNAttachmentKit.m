@@ -32,6 +32,11 @@ RCT_EXTERN_METHOD(openViewer:(NSDictionary *)options
 RCT_EXTERN_METHOD(closeGallery:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(cancelVideoProcessing:(nonnull NSNumber *)index
+                  processingId:(NSString *)processingId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(injectImageCache:(NSString *)urlString
                   localPath:(NSString *)localPath
                   resolve:(RCTPromiseResolveBlock)resolve
@@ -54,6 +59,10 @@ RCT_EXTERN_METHOD(renderLocationThumbnail:(NSDictionary *)options
                   reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(reverseGeocode:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(setAIConfig:(NSDictionary *)config
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
@@ -114,6 +123,11 @@ RCT_EXTERN_METHOD(openViewer:(NSDictionary *)options
 RCT_EXTERN_METHOD(closeGallery:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(cancelVideoProcessing:(nonnull NSNumber *)index
+                  processingId:(NSString *)processingId
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(injectImageCache:(NSString *)urlString
                   localPath:(NSString *)localPath
                   resolve:(RCTPromiseResolveBlock)resolve
@@ -136,6 +150,10 @@ RCT_EXTERN_METHOD(renderLocationThumbnail:(NSDictionary *)options
                   reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(reverseGeocode:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(setAIConfig:(NSDictionary *)config
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 

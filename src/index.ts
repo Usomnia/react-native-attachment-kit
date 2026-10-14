@@ -1,5 +1,5 @@
 import { NativeModules, Platform, TurboModuleRegistry, NativeEventEmitter, DeviceEventEmitter } from "react-native"
-import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions, MediaGalleryOptions, MediaGalleryAppendPayload, MediaGalleryRemovePayload, Appearance } from "./types"
+import type { ImageResult, GalleryOptions, EditorOptions, SelectionChangeEvent, ViewerOptions, MediaGalleryOptions, MediaGalleryAppendPayload, MediaGalleryRemovePayload, Appearance, AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
 
 const LINKING_ERROR = `The package 'react-native-attachment-kit' doesn't seem to be linked. Make sure: \n\n` + Platform.select({ ios: "- You have run 'pod install'\n", default: "" }) + "- You rebuilt the app after installing the package\n" + "- You are not using Expo Go\n"
 
@@ -78,6 +78,8 @@ function alreadyOpenError(what: string): Error {
  * Android pickImagesPromise) 중복 호출하면 앞 호출의 Promise 가 영영 끝나지 않습니다 → JS 에서 먼저 막습니다.
  */
 let _galleryOpen = false
+/** 어느 openGallery 호출이 _galleryOpen 을 잡고 있는지 — 처리 시작(onProcessingStart)에 먼저 풀고, 늦게 끝난 앞 호출이 새 호출의 잠금을 풀지 않게 */
+let _galleryOpenToken = 0
 /** openEditor 도 Android 가 editImagePromise 하나만 보관하므로 같은 보호가 필요 */
 let _editorOpen = false
 /**
@@ -86,6 +88,8 @@ let _editorOpen = false
  */
 let _asyncImgProcessedSub: { remove: () => void } | null = null
 
+export type { AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
+export type { VideoOptions, VideoProgressEvent, ViewerVideo, ProcessingStartEvent, ProcessingStartItem } from "./types"
 export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
@@ -115,6 +119,23 @@ export interface RNAttachmentKit {
   /** reverseGeocode 캐시 비우기 */
   clearReverseGeocodeCache(): Promise<void>
   closeGallery(): Promise<boolean>
+  /**
+   * processingId: 어느 보내기인지 (onProcessingStart 의 값). 생략하면 가장 최근 보내기
+   *
+   * 보내는 중인 동영상 변환 취소 (HUD 없이 말풍선에서 취소할 때). index 생략 = 남은 동영상 전부.
+   * 취소된 동영상은 onImageProcessed·결과에 { error: "CANCELLED", cancelled: true } 로 오고 나머지는 계속 처리됩니다.
+   * 진행 중인 처리가 없으면 false
+   */
+  cancelVideoProcessing(index?: number, processingId?: string): Promise<boolean>
+  /**
+   * AI 기능 on/off · 포인트 · 무료 횟수 · 1회 차감 포인트 (넘긴 값만 바뀜). 앱 시작 때 한 번, 잔액이 바뀔 때마다(충전·서버 동기화) 다시 호출.
+   * AI 화면이 열려 있으면 바로 반영됩니다.
+   */
+  setAIConfig(config: AIConfig): Promise<void>
+  /** AI 를 한 번 쓸 때마다 (무료 횟수 사용 또는 포인트 차감) — 앱이 서버에 반영. 해제 함수를 돌려줌 */
+  addAIUsageListener(listener: (event: AIUsageEvent) => void): () => void
+  /** 포인트가 모자라 사용자가 '충전하기'를 눌렀을 때 — 앱이 충전 화면으로 안내 (필요하면 closeGallery() 로 시트도 닫기). 해제 함수를 돌려줌 */
+  addAIChargeRequiredListener(listener: (event: AIChargeRequiredEvent) => void): () => void
   addSelectionChangeListener(listener: (event: SelectionChangeEvent) => void): () => void
   getDefaultAnimationConfig(): Promise<{ galleryOpen: number, galleryClose: number, editorOpen: number, editorClose: number, viewerOpen: number, viewerClose: number }>
   injectImageCache(urlString: string, localPath: string): Promise<boolean>
@@ -167,6 +188,22 @@ const AttachmentKit: RNAttachmentKit = {
       throw alreadyOpenError("Gallery")
     }
     _galleryOpen = true
+    const myToken = ++_galleryOpenToken
+    // 갤러리 화면이 닫히고 처리가 시작되면(onProcessingStart) 바로 잠금을 풂 — 동영상을 변환하는 동안에도
+    // 다시 열어 보낼 수 있게. Promise 는 지금처럼 처리가 다 끝나야 resolve
+    let myProcessingId: string | null = null
+    const subscriptionOpenLock = eventEmitter.addListener("onProcessingStart", (e: any) => {
+      if (myProcessingId) return
+      myProcessingId = typeof e?.processingId === "string" ? e.processingId : ""
+      if (_galleryOpenToken === myToken) _galleryOpen = false
+    })
+    /** 이 호출의 이벤트인지 — processingId 가 붙은 이벤트는 내 처리의 것만, 안 붙은(옛 네이티브·사진 1장 편집) 이벤트는 처리 ID 를 모를 때만 */
+    const isMine = (e: any) => {
+      const id = e?.processingId
+      if (typeof id !== "string" || id === "") return !myProcessingId
+      return myProcessingId === id
+    }
+    const mine = <T,>(fn?: (e: T) => void) => fn ? (e: T) => { if (isMine(e)) fn(e) } : undefined
 
     // 콜백 이벤트 임시 리스너 등록
     let subscriptionSelChange: any = null
@@ -182,15 +219,32 @@ const AttachmentKit: RNAttachmentKit = {
           try { _asyncImgProcessedSub.remove() } catch (e) { /* noop */ }
           _asyncImgProcessedSub = null
         }
-        subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", options.onImageProcessed)
+        subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", mine(options.onImageProcessed)!)
         _asyncImgProcessedSub = subscriptionImgProcessed
       } else {
-        subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", options.onImageProcessed)
+        subscriptionImgProcessed = eventEmitter.addListener("onImageProcessed", mine(options.onImageProcessed)!)
       }
     }
     let subscriptionLocation: any = null
     if (options.onLocationSelected) {
       subscriptionLocation = eventEmitter.addListener("onLocationSelected", options.onLocationSelected)
+    }
+    // 동영상 변환 진행률 (video.onProgress)
+    let subscriptionVideoProgress: any = null
+    if (options.video?.onProgress) {
+      subscriptionVideoProgress = eventEmitter.addListener("onVideoProgress", mine(options.video.onProgress)!)
+    }
+    // 처리 시작 (보낸 직후 한 번, 결과보다 먼저)
+    let subscriptionProcessingStart: any = null
+    if (options.onProcessingStart) {
+      // 내 처리 시작만 (앞 보내기의 시작 이벤트는 이 호출 전에 이미 지나감)
+      const onStart = options.onProcessingStart
+      let started = false
+      subscriptionProcessingStart = eventEmitter.addListener("onProcessingStart", (e: any) => {
+        if (started) return
+        started = true
+        onStart(e)
+      })
     }
     let subscriptionFiles: any = null
     if (options.onFilesSelected) {
@@ -201,19 +255,26 @@ const AttachmentKit: RNAttachmentKit = {
 
     try {
       // 이벤트 콜백은 네이티브로 전달하지 않음
-      const { onSelectionChange, onImageProcessed, onLocationSelected, onFilesSelected, ...restOptions } = options
-      const nativeOptions = {
+      const { onSelectionChange, onImageProcessed, onLocationSelected, onFilesSelected, onProcessingStart, video, ...restOptions } = options
+      const nativeOptions: any = {
         themeColor: _defaultThemeColor,
         languageCode: _defaultLanguageCode,
         appearance: _defaultAppearance,
         ...restOptions,
+      }
+      if (video) {
+        // onProgress 콜백은 네이티브로 넘기지 않음
+        const { onProgress, ...videoRest } = video
+        nativeOptions.video = videoRest
       }
       nativeOptions.languageCode = normalizeLanguageCode(nativeOptions.languageCode)
       nativeOptions.appearance = normalizeAppearance(nativeOptions.appearance)
       const result = await RNAttachmentKitModule.openGallery(nativeOptions)
       return result
     } finally {
-      _galleryOpen = false
+      // 처리 시작 때 이미 풀었고 그 뒤 새 호출이 잡았을 수 있음 → 내 잠금일 때만
+      if (_galleryOpenToken === myToken) _galleryOpen = false
+      subscriptionOpenLock.remove()
       // 갤러리가 닫히면 onSelectionChange 리스너 제거
       if (subscriptionSelChange) {
         subscriptionSelChange.remove()
@@ -224,6 +285,12 @@ const AttachmentKit: RNAttachmentKit = {
       }
       if (subscriptionFiles) {
         subscriptionFiles.remove()
+      }
+      if (subscriptionVideoProgress) {
+        subscriptionVideoProgress.remove()
+      }
+      if (subscriptionProcessingStart) {
+        subscriptionProcessingStart.remove()
       }
       // asyncProcessing 모드가 아닐 때만 onImageProcessed 리스너 제거 (async 모드에선 백그라운드 처리를 위해 유지해야 함)
       // 호출부에서 수동으로 제거하거나, 최종 완료 시 정리하는 구조가 필요할 수 있음
@@ -380,7 +447,22 @@ const AttachmentKit: RNAttachmentKit = {
     mergedOptions.addressLanguageCode = options.languageCode || _rawLanguageCode || _defaultLanguageCode
     mergedOptions.languageCode = normalizeLanguageCode(mergedOptions.languageCode)
     mergedOptions.appearance = normalizeAppearance(mergedOptions.appearance)
-    await RNAttachmentKitModule.openMapViewer(mergedOptions)
+    // 함수는 네이티브로 못 넘김 — 닫기 시작은 이벤트로 받음 (Android 는 RCTDeviceEventEmitter 로도 올 수 있어 둘 다 듣고 한 번만)
+    const onWillClose = options.onViewerWillClose
+    delete mergedOptions.onViewerWillClose
+    let willCloseSent = false
+    const willCloseHandler = (e: any) => {
+      if (willCloseSent) return
+      willCloseSent = true
+      onWillClose?.({ durationMs: typeof e?.durationMs === 'number' ? e.durationMs : 0 })
+    }
+    const subs: any[] = [eventEmitter.addListener("onMapViewerWillClose", willCloseHandler)]
+    if (Platform.OS === "android") subs.push(DeviceEventEmitter.addListener("onMapViewerWillClose", willCloseHandler))
+    try {
+      await RNAttachmentKitModule.openMapViewer(mergedOptions)
+    } finally {
+      subs.forEach(s => s.remove())
+    }
   },
 
   updateMapViewerSourceRect: async (rect: import("./types").SourceRect | null): Promise<void> => {
@@ -437,6 +519,35 @@ const AttachmentKit: RNAttachmentKit = {
     }
 
     return RNAttachmentKitModule.closeGallery()
+  },
+
+  cancelVideoProcessing: async (index?: number, processingId?: string): Promise<boolean> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    if (typeof RNAttachmentKitModule.cancelVideoProcessing !== "function") return false   // 옛 네이티브 빌드
+    return RNAttachmentKitModule.cancelVideoProcessing(typeof index === "number" && index >= 0 ? index : -1, processingId ?? "")
+  },
+
+  setAIConfig: async (config: AIConfig): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    if (typeof RNAttachmentKitModule.setAIConfig !== "function") return   // 옛 네이티브 빌드
+    // undefined 는 "바꾸지 않음" 이므로 빼고 보냄 (null 은 "비움")
+    const payload: Record<string, unknown> = {}
+    Object.entries(config ?? {}).forEach(([k, v]) => { if (v !== undefined) payload[k] = v })
+    return RNAttachmentKitModule.setAIConfig(payload)
+  },
+
+  addAIUsageListener: (listener: (event: AIUsageEvent) => void) => {
+    const subscription = eventEmitter.addListener("onAIUsage", listener as any)
+    return () => subscription.remove()
+  },
+
+  addAIChargeRequiredListener: (listener: (event: AIChargeRequiredEvent) => void) => {
+    const subscription = eventEmitter.addListener("onAIChargeRequired", listener as any)
+    return () => subscription.remove()
   },
 
   addSelectionChangeListener: (listener: (event: SelectionChangeEvent) => void) => {

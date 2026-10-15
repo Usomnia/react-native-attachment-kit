@@ -48089,1680 +48089,1701 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 5141,
+      "offset": 5095,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 5171,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7950,
+      "offset": 5223,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8121,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 7999,
+      "offset": 8170,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 8302,
+      "offset": 8473,
       "length": 9,
       "value": "\"yMdHHmm\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8556,
+      "offset": 8727,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8616,
+      "offset": 8787,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 8934,
+      "offset": 9105,
       "length": 6,
       "value": "\"zoom\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9044,
+      "offset": 9215,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9589,
+      "offset": 9760,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9746,
+      "offset": 9917,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10077,
+      "offset": 10248,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10143,
+      "offset": 10314,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 11713,
+      "offset": 11884,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 11891,
+      "offset": 12062,
       "length": 7,
       "value": "\"photo\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 12059,
+      "offset": 12230,
       "length": 3,
       "value": "600"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 12555,
+      "offset": 12726,
       "length": 63,
       "value": "\"📍 [Location] 실시간 위치 공유 — UI만 (미구현)\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 14158,
+      "offset": 14533,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 18778,
+      "offset": 19153,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19806,
+      "offset": 20181,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19928,
+      "offset": 20303,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 20228,
+      "offset": 20603,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 24437,
+      "offset": 24812,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25431,
+      "offset": 25806,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27072,
+      "offset": 27447,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27106,
+      "offset": 27481,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 27212,
+      "offset": 27587,
       "length": 6,
       "value": "\"webp\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 27330,
+      "offset": 27705,
       "length": 5,
       "value": "\"All\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 27379,
+      "offset": 27754,
       "length": 10,
       "value": "\"Selected\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 27430,
+      "offset": 27805,
       "length": 6,
       "value": "\"Done\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 27479,
+      "offset": 27854,
       "length": 9,
       "value": "\"Recents\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 27573,
+      "offset": 27948,
       "length": 4,
       "value": "\"en\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27892,
+      "offset": 28267,
       "length": 3,
       "value": "236"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27896,
+      "offset": 28271,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27908,
+      "offset": 28283,
       "length": 2,
       "value": "73"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27911,
+      "offset": 28286,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27922,
+      "offset": 28297,
       "length": 2,
       "value": "38"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 27925,
+      "offset": 28300,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 27937,
+      "offset": 28312,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 28123,
+      "offset": 28498,
       "length": 3,
       "value": "\"#\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28208,
+      "offset": 28583,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28316,
+      "offset": 28691,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28322,
+      "offset": 28697,
       "length": 4,
       "value": "0xFF"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 28330,
+      "offset": 28705,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28377,
+      "offset": 28752,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28382,
+      "offset": 28757,
       "length": 4,
       "value": "0xFF"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 28390,
+      "offset": 28765,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28442,
+      "offset": 28817,
       "length": 4,
       "value": "0xFF"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 28450,
+      "offset": 28825,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 28521,
+      "offset": 28896,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Array",
-      "offset": 28710,
+      "offset": 29085,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 28802,
+      "offset": 29177,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 28845,
+      "offset": 29220,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29352,
+      "offset": 29727,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29381,
+      "offset": 29756,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Array",
-      "offset": 29509,
+      "offset": 29884,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Dictionary",
-      "offset": 29669,
+      "offset": 30044,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Dictionary",
-      "offset": 29887,
+      "offset": 30262,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Array",
-      "offset": 30053,
+      "offset": 30428,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Array",
-      "offset": 30202,
+      "offset": 30577,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30628,
+      "offset": 31003,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "Array",
-      "offset": 30686,
+      "offset": 31061,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30748,
+      "offset": 31123,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31220,
+      "offset": 31595,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31318,
+      "offset": 31693,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31357,
+      "offset": 31732,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31444,
+      "offset": 31819,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31520,
+      "offset": 31895,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31566,
+      "offset": 31941,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 32656,
+      "offset": 33031,
       "length": 2,
       "value": "17"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 32881,
+      "offset": 33256,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 32947,
+      "offset": 33322,
       "length": 14,
       "value": "\"chevron.down\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33075,
+      "offset": 33450,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33213,
+      "offset": 33588,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33225,
+      "offset": 33600,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33237,
+      "offset": 33612,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33250,
+      "offset": 33625,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 33592,
+      "offset": 33967,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 33689,
-      "length": 3,
-      "value": "0.5"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 34003,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "BooleanLiteral",
       "offset": 34064,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 34384,
-      "length": 2,
-      "value": "17"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 34544,
-      "length": 2,
-      "value": "11"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 34614,
-      "length": 14,
-      "value": "\"chevron.down\""
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "FloatLiteral",
-      "offset": 34864,
       "length": 3,
       "value": "0.5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 34937,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 34946,
-      "length": 1,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 34957,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 34967,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35025,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35034,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35045,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35055,
-      "length": 1,
-      "value": "6"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35115,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35124,
-      "length": 2,
-      "value": "24"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35136,
-      "length": 1,
-      "value": "8"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35146,
-      "length": 2,
-      "value": "24"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 35424,
+      "offset": 34378,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 35485,
+      "offset": 34439,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 35782,
+      "offset": 34759,
+      "length": 2,
+      "value": "17"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 34919,
+      "length": 2,
+      "value": "11"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "StringLiteral",
+      "offset": 34989,
+      "length": 14,
+      "value": "\"chevron.down\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "FloatLiteral",
+      "offset": 35239,
+      "length": 3,
+      "value": "0.5"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35312,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35321,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35332,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35342,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35400,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35409,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35420,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35430,
+      "length": 1,
+      "value": "6"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35490,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35499,
+      "length": 2,
+      "value": "24"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35511,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35521,
+      "length": 2,
+      "value": "24"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 35799,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 35860,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 36157,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 35813,
+      "offset": 36188,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 35972,
+      "offset": 36347,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36028,
+      "offset": 36403,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36078,
+      "offset": 36453,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36753,
+      "offset": 37128,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36756,
+      "offset": 37131,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36768,
+      "offset": 37143,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36771,
+      "offset": 37146,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36782,
+      "offset": 37157,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 36785,
+      "offset": 37160,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 36797,
+      "offset": 37172,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 36947,
+      "offset": 37322,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 37179,
+      "offset": 37554,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 37226,
+      "offset": 37601,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 37316,
+      "offset": 37691,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 37342,
+      "offset": 37717,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 37653,
+      "offset": 38028,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 37696,
+      "offset": 38071,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 37925,
+      "offset": 38300,
       "length": 41,
       "value": "\"사진 접근 권한이 필요합니다\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38068,
+      "offset": 38443,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38128,
+      "offset": 38503,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38159,
+      "offset": 38534,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38348,
+      "offset": 38723,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38407,
+      "offset": 38782,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38434,
+      "offset": 38809,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38579,
+      "offset": 38954,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38638,
+      "offset": 39013,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38665,
+      "offset": 39040,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38825,
+      "offset": 39200,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 38890,
+      "offset": 39265,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 38922,
+      "offset": 39297,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 39072,
+      "offset": 39447,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 39191,
+      "offset": 39566,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 39372,
+      "offset": 39747,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 39466,
+      "offset": 39841,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 39517,
+      "offset": 39892,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 39618,
+      "offset": 39993,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 40117,
+      "offset": 40492,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 40253,
+      "offset": 40628,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 40968,
+      "offset": 41343,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 41005,
+      "offset": 41380,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 41038,
+      "offset": 41413,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41188,
+      "offset": 41563,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 41261,
+      "offset": 41636,
       "length": 11,
       "value": "\"checkmark\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41332,
+      "offset": 41707,
       "length": 2,
       "value": "13"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 41475,
+      "offset": 41850,
       "length": 4,
       "value": "\" 1\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41603,
+      "offset": 41978,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41612,
+      "offset": 41987,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41624,
+      "offset": 41999,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41634,
+      "offset": 42009,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41686,
+      "offset": 42061,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41695,
+      "offset": 42070,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41707,
+      "offset": 42082,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41717,
+      "offset": 42092,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 41785,
+      "offset": 42160,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41844,
+      "offset": 42219,
       "length": 2,
       "value": "38"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 41859,
+      "offset": 42234,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 41929,
+      "offset": 42304,
       "length": 2,
       "value": "38"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 41944,
+      "offset": 42319,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 42275,
+      "offset": 42650,
       "length": 25,
       "value": "\"99 \""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 42299,
+      "offset": 42674,
       "length": 32,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 42426,
+      "offset": 42801,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 42943,
+      "offset": 43318,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 43164,
+      "offset": 43539,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 43462,
+      "offset": 43837,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 43519,
+      "offset": 43894,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 43900,
+      "offset": 44275,
       "length": 24,
       "value": "\"0 \""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "StringLiteral",
-      "offset": 43923,
+      "offset": 44298,
       "length": 19,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 43940,
+      "offset": 44315,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 44029,
+      "offset": 44404,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 44233,
+      "offset": 44608,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 44312,
+      "offset": 44687,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 44391,
+      "offset": 44766,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 45038,
+      "offset": 45413,
       "length": 2,
       "value": "44"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 45258,
+      "offset": 45633,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 45327,
+      "offset": 45702,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 45335,
+      "offset": 45710,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 54726,
+      "offset": 55101,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 54729,
+      "offset": 55104,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 54741,
+      "offset": 55116,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 54744,
+      "offset": 55119,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 54755,
+      "offset": 55130,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 54758,
+      "offset": 55133,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 54770,
+      "offset": 55145,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 56402,
+      "offset": 56777,
       "length": 2,
       "value": "-8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57493,
+      "offset": 57868,
       "length": 2,
       "value": "40"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57592,
+      "offset": 57967,
       "length": 3,
       "value": "-40"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57755,
+      "offset": 58130,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 57863,
+      "offset": 58238,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58047,
+      "offset": 58422,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58083,
+      "offset": 58458,
       "length": 2,
       "value": "-8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58155,
+      "offset": 58530,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58328,
+      "offset": 58703,
       "length": 2,
       "value": "-3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58432,
+      "offset": 58807,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58504,
+      "offset": 58879,
       "length": 2,
       "value": "50"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58748,
+      "offset": 59123,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58827,
+      "offset": 59202,
       "length": 2,
       "value": "36"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58946,
+      "offset": 59321,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 59054,
+      "offset": 59429,
       "length": 3,
       "value": "-16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 59153,
+      "offset": 59528,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 59256,
+      "offset": 59631,
       "length": 2,
       "value": "-8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 59920,
+      "offset": 60295,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 66301,
+      "offset": 66676,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 66304,
+      "offset": 66679,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 66316,
+      "offset": 66691,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 66319,
+      "offset": 66694,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 66330,
+      "offset": 66705,
       "length": 2,
       "value": "29"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 66333,
+      "offset": 66708,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 66345,
+      "offset": 66720,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 67071,
+      "offset": 67446,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 67135,
+      "offset": 67510,
       "length": 4,
       "value": "0.95"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 67148,
+      "offset": 67523,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 67204,
+      "offset": 67579,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 67214,
+      "offset": 67589,
       "length": 3,
       "value": "122"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 67218,
+      "offset": 67593,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 67229,
+      "offset": 67604,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 67239,
+      "offset": 67614,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 78650,
+      "offset": 79025,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 78753,
+      "offset": 79128,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 102325,
+      "offset": 102700,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 138330,
+      "offset": 138705,
       "length": 3,
       "value": "0.4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 138356,
+      "offset": 138731,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 147340,
+      "offset": 147715,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 147962,
+      "offset": 148337,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 150117,
+      "offset": 150492,
       "length": 3,
       "value": "0.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 150159,
+      "offset": 150534,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 150550,
+      "offset": 150925,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 151584,
+      "offset": 151959,
       "length": 3,
       "value": "0.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 152767,
+      "offset": 153142,
       "length": 4,
       "value": "0.25"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 152793,
+      "offset": 153168,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 155841,
+      "offset": 156216,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 156673,
+      "offset": 156976,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 156719,
+      "offset": 158085,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 156769,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 156815,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 156902,
+      "offset": 158131,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 156958,
+      "offset": 158181,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 157011,
+      "offset": 158227,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 160118,
+      "offset": 158314,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 158370,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 158423,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 161530,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 162180,
+      "offset": 163592,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/GalleryViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 178500,
+      "offset": 180493,
       "length": 5,
       "value": "0.967"
     },
@@ -50560,14 +50581,14 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/FilePanelView.swift",
       "kind": "Array",
-      "offset": 19514,
+      "offset": 19665,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/FilePanelView.swift",
       "kind": "StringLiteral",
-      "offset": 19666,
+      "offset": 19931,
       "length": 21,
       "value": "\"rnak.aiworks.thumbs\""
     },

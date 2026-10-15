@@ -7,6 +7,7 @@
 
 import UIKit
 import Photos
+import AVFoundation
 import ImageIO
 import CoreLocation
 import RNAttachmentKit
@@ -1339,7 +1340,10 @@ class RNAttachmentKit: RCTEventEmitter {
                 "width": Int(size.width), "height": Int(size.height),
                 "duration": state.outputDuration(sourceDuration: a.duration),
             ]
-            if let poster = image {
+            // 앞을 잘랐으면 포스터는 잘린 구간의 첫 프레임 (원본 첫 프레임은 결과 영상에 없음 — Android 와 같음)
+            let trimmedStart = state.trimRange(duration: a.duration).map { CMTimeGetSeconds($0.start) } ?? 0
+            let base = trimmedStart > 0.01 ? (Self.videoFrame(a, at: trimmedStart) ?? image) : image
+            if let poster = base {
                 let edited = state.applyEdits(to: poster)
                 if let encoded = VideoExporter.encodePoster(edited, format: videoOptions.posterFormat, quality: 0.8) {
                     let path = (tempDir as NSString).appendingPathComponent("turbo_video_poster_\(Int(Date().timeIntervalSince1970 * 1000))_\(index).\(encoded.fileExtension)")
@@ -1368,6 +1372,28 @@ class RNAttachmentKit: RCTEventEmitter {
     }
 
     /// 동영상 포스터 (긴 변 512, 동기) — 처리 시작 이벤트용
+    /// 동영상의 [seconds] 프레임 (긴 변 ≤ 1024, 회전 반영). 백그라운드 스레드에서만 — 원본을 받는 동안 최대 3초 기다림
+    private static func videoFrame(_ asset: PHAsset, at seconds: Double) -> UIImage? {
+        let o = PHVideoRequestOptions()
+        o.isNetworkAccessAllowed = true
+        o.deliveryMode = .automatic
+        var avAsset: AVAsset?
+        let done = DispatchSemaphore(value: 0)
+        PHImageManager.default().requestAVAsset(forVideo: asset, options: o) { a, _, _ in
+            avAsset = a
+            done.signal()
+        }
+        guard done.wait(timeout: .now() + 3) == .success, let av = avAsset else { return nil }
+        let gen = AVAssetImageGenerator(asset: av)
+        gen.appliesPreferredTrackTransform = true
+        gen.maximumSize = CGSize(width: 1024, height: 1024)
+        // 잘린 구간 밖(앞) 프레임이 나오지 않게 — 뒤로만 조금 허용
+        gen.requestedTimeToleranceBefore = .zero
+        gen.requestedTimeToleranceAfter = CMTime(seconds: 0.1, preferredTimescale: 600)
+        guard let cg = try? gen.copyCGImage(at: CMTime(seconds: seconds, preferredTimescale: 600), actualTime: nil) else { return nil }
+        return UIImage(cgImage: cg)
+    }
+
     private static func requestPoster(_ asset: PHAsset) -> UIImage? {
         let o = PHImageRequestOptions()
         o.isSynchronous = true

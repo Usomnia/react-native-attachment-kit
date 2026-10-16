@@ -58049,1165 +58049,1193 @@
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2794,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
+      "kind": "Array",
+      "offset": 2977,
+      "length": 16,
+      "value": "[\"age\", \"style\"]"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3159,
+      "offset": 3983,
       "length": 18,
       "value": "\"ai_gender_female\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 3182,
+      "offset": 4006,
       "length": 16,
       "value": "\"ai_gender_male\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3292,
+      "offset": 4116,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3296,
+      "offset": 4120,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3300,
+      "offset": 4124,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 3428,
+      "offset": 4252,
       "length": 3,
       "value": "0.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 3496,
+      "offset": 4320,
       "length": 3,
       "value": "0.7"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3535,
+      "offset": 4359,
       "length": 2,
       "value": "13"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 3672,
+      "offset": 4496,
       "length": 2,
       "value": "13"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Dictionary",
-      "offset": 4569,
+      "offset": 5509,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 4744,
+      "offset": 5684,
       "length": 9,
       "value": "\"quality\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 4988,
+      "offset": 5928,
       "length": 7,
       "value": "\"style\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5052,
+      "offset": 5992,
       "length": 26,
       "value": "\"RNAttachmentKit.ai.style\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 5086,
+      "offset": 6026,
       "length": 7,
       "value": "\"style\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 9517,
+      "offset": 10940,
       "length": 36,
       "value": "[\"light\", \"hair\", \"face\", \"quality\"]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 9822,
+      "offset": 11249,
       "length": 7,
       "value": "[\"any\"]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Dictionary",
-      "offset": 10019,
+      "offset": 11446,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 17927,
+      "offset": 19354,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 22262,
+      "offset": 24591,
       "length": 27,
       "value": "\"RNAttachmentKit.ai.gender\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 22326,
+      "offset": 24655,
       "length": 28,
       "value": "\"RNAttachmentKit.ai.country\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 22815,
+      "offset": 25144,
       "length": 4,
       "value": "\"KR\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 25106,
+      "offset": 27439,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 26174,
+      "offset": 28507,
       "length": 25,
       "value": "\"ai_generate_placeholder\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 26202,
+      "offset": 28535,
       "length": 23,
       "value": "\"ai_prompt_placeholder\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 47026,
+      "offset": 49483,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 54935,
+      "offset": 58481,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 56704,
+      "offset": 60250,
       "length": 3,
       "value": "-10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 56839,
+      "offset": 60385,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 72214,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69219,
+      "offset": 73736,
       "length": 2,
       "value": "42"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 69259,
+      "offset": 73776,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69295,
+      "offset": 73812,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69476,
+      "offset": 73993,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69646,
+      "offset": 74163,
       "length": 3,
       "value": "-10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69773,
+      "offset": 74290,
       "length": 3,
       "value": "-10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 69901,
+      "offset": 74418,
       "length": 2,
       "value": "-8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 70042,
+      "offset": 74559,
       "length": 3,
       "value": "-10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 73353,
+      "offset": 77870,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 79502,
+      "offset": 84019,
       "length": 79,
       "value": "[(\"1:1\", 1, 1), (\"3:4\", 3, 4), (\"4:3\", 4, 3), (\"9:16\", 9, 16), (\"16:9\", 16, 9)]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "StringLiteral",
-      "offset": 79614,
+      "offset": 84131,
       "length": 5,
       "value": "\"1:1\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 79688,
+      "offset": 84205,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 83061,
+      "offset": 87578,
       "length": 89,
       "value": "[(0.44, 0.56, 0.62, 0), (0.80, 0.22, 0.26, 0.35), (0.16, 0.20, 0.18, 0.7)]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 87366,
+      "offset": 91883,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87417,
+      "offset": 91934,
       "length": 2,
       "value": "42"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87464,
+      "offset": 91981,
       "length": 3,
       "value": "132"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87615,
+      "offset": 92132,
       "length": 2,
       "value": "48"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87618,
+      "offset": 92135,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87630,
+      "offset": 92147,
       "length": 2,
       "value": "46"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87633,
+      "offset": 92150,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87644,
+      "offset": 92161,
       "length": 2,
       "value": "44"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87647,
+      "offset": 92164,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 87659,
+      "offset": 92176,
       "length": 3,
       "value": "0.6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87707,
+      "offset": 92224,
       "length": 2,
       "value": "22"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87788,
+      "offset": 92305,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87874,
+      "offset": 92391,
       "length": 4,
       "value": "0x3A"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87879,
+      "offset": 92396,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87891,
+      "offset": 92408,
       "length": 4,
       "value": "0x38"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87896,
+      "offset": 92413,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87907,
+      "offset": 92424,
       "length": 4,
       "value": "0x36"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87912,
+      "offset": 92429,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87924,
+      "offset": 92441,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87944,
+      "offset": 92461,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 87954,
+      "offset": 92471,
       "length": 4,
       "value": "0.12"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 88026,
+      "offset": 92543,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88144,
+      "offset": 92661,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88205,
+      "offset": 92722,
       "length": 4,
       "value": "0xF2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88210,
+      "offset": 92727,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88222,
+      "offset": 92739,
       "length": 4,
       "value": "0xF0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88227,
+      "offset": 92744,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88238,
+      "offset": 92755,
       "length": 4,
       "value": "0xED"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88243,
+      "offset": 92760,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88255,
+      "offset": 92772,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 88275,
+      "offset": 92792,
       "length": 3,
       "value": "0.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88287,
+      "offset": 92804,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88455,
+      "offset": 92972,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88465,
+      "offset": 92982,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88477,
+      "offset": 92994,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88488,
+      "offset": 93005,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88545,
+      "offset": 93062,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 88582,
+      "offset": 93099,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 88682,
+      "offset": 93199,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88819,
+      "offset": 93336,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88888,
+      "offset": 93405,
       "length": 4,
       "value": "0x76"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88893,
+      "offset": 93410,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88905,
+      "offset": 93422,
       "length": 4,
       "value": "0x71"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88910,
+      "offset": 93427,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88921,
+      "offset": 93438,
       "length": 4,
       "value": "0x6B"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88926,
+      "offset": 93443,
       "length": 3,
       "value": "255"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88938,
+      "offset": 93455,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 88958,
+      "offset": 93475,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 88968,
+      "offset": 93485,
       "length": 4,
       "value": "0.38"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 89043,
+      "offset": 93560,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89181,
+      "offset": 93698,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 89330,
+      "offset": 93847,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 89486,
+      "offset": 94003,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 89549,
+      "offset": 94066,
       "length": 4,
       "value": "0.01"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 89558,
+      "offset": 94075,
       "length": 4,
       "value": "0.01"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89591,
+      "offset": 94108,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89892,
+      "offset": 94409,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89975,
+      "offset": 94492,
       "length": 3,
       "value": "-10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90055,
+      "offset": 94572,
       "length": 2,
       "value": "-8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90400,
+      "offset": 94917,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90497,
+      "offset": 95014,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90612,
+      "offset": 95129,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90702,
+      "offset": 95219,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90796,
+      "offset": 95313,
       "length": 2,
       "value": "-4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90886,
+      "offset": 95403,
       "length": 2,
       "value": "-3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 90954,
+      "offset": 95471,
       "length": 2,
       "value": "44"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 91023,
+      "offset": 95540,
       "length": 2,
       "value": "36"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 94996,
+      "offset": 99513,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95276,
+      "offset": 99793,
       "length": 2,
       "value": "24"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95400,
+      "offset": 99917,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95413,
+      "offset": 99930,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95442,
+      "offset": 99959,
       "length": 4,
       "value": "1.06"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95455,
+      "offset": 99972,
       "length": 4,
       "value": "1.06"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95495,
+      "offset": 100012,
       "length": 3,
       "value": "-12"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95503,
+      "offset": 100020,
       "length": 3,
       "value": "-12"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95604,
+      "offset": 100121,
       "length": 3,
       "value": "180"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95834,
+      "offset": 100351,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95840,
+      "offset": 100357,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 95873,
+      "offset": 100390,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95879,
+      "offset": 100396,
       "length": 4,
       "value": "15.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95914,
+      "offset": 100431,
       "length": 4,
       "value": "15.5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95923,
+      "offset": 100440,
       "length": 3,
       "value": "5.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95975,
+      "offset": 100492,
       "length": 4,
       "value": "16.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 95984,
+      "offset": 100501,
       "length": 5,
       "value": "6.728"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 96000,
+      "offset": 100517,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96019,
+      "offset": 100536,
       "length": 6,
       "value": "-134.4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96042,
+      "offset": 100559,
       "length": 5,
       "value": "-45.6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 96061,
+      "offset": 100578,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96106,
+      "offset": 100623,
       "length": 4,
       "value": "18.7"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96115,
+      "offset": 100632,
       "length": 3,
       "value": "5.7"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96167,
+      "offset": 100684,
       "length": 6,
       "value": "17.272"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96178,
+      "offset": 100695,
       "length": 3,
       "value": "7.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 96192,
+      "offset": 100709,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96211,
+      "offset": 100728,
       "length": 5,
       "value": "-44.4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96233,
+      "offset": 100750,
       "length": 4,
       "value": "44.4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 96251,
+      "offset": 100768,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96296,
+      "offset": 100813,
       "length": 3,
       "value": "8.2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 96304,
+      "offset": 100821,
       "length": 2,
       "value": "19"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96358,
+      "offset": 100875,
       "length": 4,
       "value": "13.5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96367,
+      "offset": 100884,
       "length": 3,
       "value": "7.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96401,
+      "offset": 100918,
       "length": 4,
       "value": "16.7"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96410,
+      "offset": 100927,
       "length": 4,
       "value": "10.5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96445,
+      "offset": 100962,
       "length": 3,
       "value": "1.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96668,
+      "offset": 101185,
       "length": 3,
       "value": "2.4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96676,
+      "offset": 101193,
       "length": 3,
       "value": "7.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96709,
+      "offset": 101226,
       "length": 3,
       "value": "4.3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96717,
+      "offset": 101234,
       "length": 3,
       "value": "3.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96766,
+      "offset": 101283,
       "length": 3,
       "value": "4.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96774,
+      "offset": 101291,
       "length": 3,
       "value": "3.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96805,
+      "offset": 101322,
       "length": 3,
       "value": "4.6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96813,
+      "offset": 101330,
       "length": 3,
       "value": "2.5"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96857,
+      "offset": 101374,
       "length": 3,
       "value": "6.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96865,
+      "offset": 101382,
       "length": 3,
       "value": "7.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96906,
+      "offset": 101423,
       "length": 3,
       "value": "3.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96914,
+      "offset": 101431,
       "length": 3,
       "value": "6.2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96947,
+      "offset": 101464,
       "length": 3,
       "value": "6.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96955,
+      "offset": 101472,
       "length": 3,
       "value": "6.2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 96996,
+      "offset": 101513,
       "length": 3,
       "value": "8.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 97004,
+      "offset": 101521,
       "length": 3,
       "value": "2.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 97037,
+      "offset": 101554,
       "length": 3,
       "value": "8.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 97045,
+      "offset": 101562,
       "length": 3,
       "value": "7.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 97078,
+      "offset": 101595,
       "length": 3,
       "value": "1.6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 97777,
+      "offset": 102294,
       "length": 99,
       "value": "[\"dog\", \"cat\", \"puppy\", \"kitten\", \"canine\", \"feline\", \"pet\", \"animal\", \"bird\", \"rabbit\", \"hamster\"]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 97912,
+      "offset": 102429,
       "length": 223,
       "value": "[\"food\", \"meal\", \"dish\", \"dessert\", \"cake\", \"drink\", \"beverage\", \"coffee\", \"fruit\", \"bread\", \"pizza\", \"noodle\", \"pasta\", \"sushi\", \"salad\", \"burger\", \"soup\", \"baked_goods\", \"meat\", \"rice\"]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
       "kind": "Array",
-      "offset": 98174,
+      "offset": 102691,
       "length": 245,
       "value": "[\"sky\", \"outdoor\", \"landscape\", \"mountain\", \"beach\", \"sea\", \"ocean\", \"water\", \"cityscape\", \"building\", \"structure\", \"nature\", \"tree\", \"forest\", \"sunset\", \"field\", \"lake\", \"river\", \"snow\", \"cloud\", \"street\"]"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIEditViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 105004,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
@@ -59247,91 +59275,91 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "StringLiteral",
-      "offset": 3261,
+      "offset": 3226,
       "length": 15,
       "value": "\"-aiPublicMode\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "BooleanLiteral",
-      "offset": 3287,
+      "offset": 3252,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "StringLiteral",
-      "offset": 3345,
+      "offset": 3310,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "StringLiteral",
-      "offset": 3434,
+      "offset": 3399,
       "length": 6,
       "value": "\"%02x\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "Array",
-      "offset": 3569,
+      "offset": 3534,
       "length": 698,
       "value": "[\"9ee72b491115202c110090f96f32ea0c45ee5d8845acf0953b89bc1d7766f6eb\", \"133b5322f4d031577fe38e1338e156cb1e4cc6eabc267b3e02258408851b2ebd\", \"9c0362b2e2889bf79b823b5cd72dbb8f26c1b84b65ce08a7218930cc7ac9bb70\", \"5a1cf096c0dfd265c14e8932e4e733f3424576a5a61ec2898aecbc0703c33ac4\", \"66b99ffcf779afd9d661bf3403590aaf143c1cef84a99dba08077b0aca443915\", \"0e438a176a457258e5a22cb9a20690ba05a444e401894d0cb6b265511e75be50\", \"14b1dc713786c9090495a6914b0bacbcc765eeede85effa1ff36d52e05d3e671\"]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "Dictionary",
-      "offset": 9124,
+      "offset": 9089,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "BooleanLiteral",
-      "offset": 16072,
+      "offset": 16037,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "IntegerLiteral",
-      "offset": 16109,
+      "offset": 16074,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "IntegerLiteral",
-      "offset": 16145,
+      "offset": 16110,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "IntegerLiteral",
-      "offset": 16182,
+      "offset": 16147,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "StringLiteral",
-      "offset": 16741,
+      "offset": 16706,
       "length": 35,
       "value": "\"RNAttachmentKit.AIBilling.changed\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "IntegerLiteral",
-      "offset": 19317,
+      "offset": 19282,
       "length": 3,
       "value": "300"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIGemini.swift",
       "kind": "StringLiteral",
-      "offset": 19484,
+      "offset": 19449,
       "length": 39,
       "value": "\"RNAttachmentKit.AIRecentWorks.changed\""
     },
@@ -71294,1435 +71322,1547 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226091,
+      "offset": 226082,
+      "length": 9,
+      "value": "\"fifties\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226097,
+      "length": 7,
+      "value": "\"50대\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226110,
+      "length": 5,
+      "value": "\"50s\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226125,
+      "length": 251,
+      "value": "\"Age: every person is in their fifties (about 50–59), an elegant, attractive and well-kept adult who clearly looks their age — natural fine lines and mature features; do not make them look younger (this overrides any youthful-look wording above).\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226407,
+      "length": 9,
+      "value": "\"sixties\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226422,
+      "length": 7,
+      "value": "\"60대\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226435,
+      "length": 5,
+      "value": "\"60s\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226450,
+      "length": 250,
+      "value": "\"Age: every person is in their sixties (about 60–69), a graceful, healthy and stylish senior who clearly looks their age — natural wrinkles and greying or grey hair; do not make them look younger (this overrides any youthful-look wording above).\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226731,
+      "length": 11,
+      "value": "\"seventies\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226748,
+      "length": 7,
+      "value": "\"70대\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226761,
+      "length": 5,
+      "value": "\"70s\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 226776,
+      "length": 260,
+      "value": "\"Age: every person is in their seventies (about 70–79), a graceful, warm and well-dressed elderly person who clearly looks their age — natural wrinkles and grey or white hair; do not make them look younger (this overrides any youthful-look wording above).\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 227067,
+      "length": 10,
+      "value": "\"eighties\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 227083,
+      "length": 7,
+      "value": "\"80대\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 227096,
+      "length": 5,
+      "value": "\"80s\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 227111,
+      "length": 242,
+      "value": "\"Age: every person is in their eighties (about 80–89), a dignified, gentle elderly person who clearly looks their age — deep natural wrinkles and white hair; do not make them look younger (this overrides any youthful-look wording above).\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
+      "kind": "StringLiteral",
+      "offset": 227393,
       "length": 7,
       "value": "\"style\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226104,
+      "offset": 227406,
       "length": 11,
       "value": "\"스타일\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226121,
+      "offset": 227423,
       "length": 7,
       "value": "\"Style\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226142,
+      "offset": 227444,
       "length": 7,
       "value": "\"photo\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226188,
+      "offset": 227490,
       "length": 7,
       "value": "\"photo\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226201,
+      "offset": 227503,
       "length": 8,
       "value": "\"실사\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226215,
+      "offset": 227517,
       "length": 7,
       "value": "\"Photo\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226232,
+      "offset": 227534,
       "length": 289,
       "value": "\"Image style: photorealistic — a real photograph with true-to-life skin texture, natural lighting, realistic depth of field and real-camera detail. Unless the request above explicitly asks for a different art style, do NOT make it an illustration, cartoon, anime, 3D render or painting.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226552,
+      "offset": 227854,
       "length": 6,
       "value": "\"film\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226564,
+      "offset": 227866,
       "length": 18,
       "value": "\"필름 카메라\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226588,
+      "offset": 227890,
       "length": 13,
       "value": "\"Film camera\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226611,
+      "offset": 227913,
       "length": 201,
       "value": "\"Image style: an analog 35mm film photograph — warm Kodak-Portra-like color, natural film grain, soft contrast and slight vignetting, nostalgic candid feel (still a real photo, not an illustration).\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226843,
+      "offset": 228145,
       "length": 9,
       "value": "\"cartoon\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226858,
+      "offset": 228160,
       "length": 8,
       "value": "\"만화\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226872,
+      "offset": 228174,
       "length": 9,
       "value": "\"Cartoon\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 226891,
+      "offset": 228193,
       "length": 224,
       "value": "\"Image style: render the whole image as a vibrant cartoon \/ comic illustration with clean bold outlines, cel shading and vivid flat colors (an illustration, not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227146,
+      "offset": 228448,
       "length": 9,
       "value": "\"webtoon\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227161,
+      "offset": 228463,
       "length": 8,
       "value": "\"웹툰\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227175,
+      "offset": 228477,
       "length": 9,
       "value": "\"Webtoon\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227194,
+      "offset": 228496,
       "length": 264,
       "value": "\"Image style: render the whole image as a Korean webtoon (manhwa) digital illustration — clean thin lineart, soft cel shading, glossy hair highlights and bright polished colors (an illustration, not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227489,
+      "offset": 228791,
       "length": 7,
       "value": "\"anime\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227502,
+      "offset": 228804,
       "length": 17,
       "value": "\"애니메이션\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227525,
+      "offset": 228827,
       "length": 7,
       "value": "\"Anime\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227542,
+      "offset": 228844,
       "length": 236,
       "value": "\"Image style: render the whole image as a Japanese anime key-visual illustration — expressive anime eyes, crisp cel shading, luminous background art (an illustration, not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227809,
+      "offset": 229111,
       "length": 4,
       "value": "\"3d\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227819,
+      "offset": 229121,
       "length": 14,
       "value": "\"3D 캐릭터\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227839,
+      "offset": 229141,
       "length": 14,
       "value": "\"3D character\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 227863,
+      "offset": 229165,
       "length": 251,
       "value": "\"Image style: render the whole image as a stylized 3D animated-movie character scene — soft rounded features, subsurface skin, global illumination and a high-quality CG render look (not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228145,
+      "offset": 229447,
       "length": 12,
       "value": "\"watercolor\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228163,
+      "offset": 229465,
       "length": 11,
       "value": "\"수채화\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228180,
+      "offset": 229482,
       "length": 12,
       "value": "\"Watercolor\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228202,
+      "offset": 229504,
       "length": 254,
       "value": "\"Image style: render the whole image as a soft watercolor painting on textured cold-press paper — flowing translucent washes, gentle color bleeding and visible paper grain (a painting, not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228487,
+      "offset": 229789,
       "length": 5,
       "value": "\"oil\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228498,
+      "offset": 229800,
       "length": 8,
       "value": "\"유화\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228512,
+      "offset": 229814,
       "length": 14,
       "value": "\"Oil painting\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228536,
+      "offset": 229838,
       "length": 218,
       "value": "\"Image style: render the whole image as a classical oil painting on canvas — rich layered brushstrokes, painterly light and deep colors (a painting, not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228785,
+      "offset": 230087,
       "length": 8,
       "value": "\"sketch\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228799,
+      "offset": 230101,
       "length": 11,
       "value": "\"스케치\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228816,
+      "offset": 230118,
       "length": 8,
       "value": "\"Sketch\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 228834,
+      "offset": 230136,
       "length": 245,
       "value": "\"Image style: render the whole image as a hand-drawn pencil sketch on textured paper with graphite shading, cross-hatching and expressive linework, mostly monochrome (a drawing, not a photograph), even if the request above mentions photography.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229119,
+      "offset": 230421,
       "length": 6,
       "value": "\"shot\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229131,
+      "offset": 230433,
       "length": 8,
       "value": "\"구도\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229145,
+      "offset": 230447,
       "length": 9,
       "value": "\"Framing\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229168,
+      "offset": 230470,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229213,
+      "offset": 230515,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229225,
+      "offset": 230527,
       "length": 8,
       "value": "\"자동\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229239,
+      "offset": 230541,
       "length": 6,
       "value": "\"Auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229255,
+      "offset": 230557,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229288,
+      "offset": 230590,
       "length": 6,
       "value": "\"full\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229300,
+      "offset": 230602,
       "length": 8,
       "value": "\"전신\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229314,
+      "offset": 230616,
       "length": 11,
       "value": "\"Full body\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229335,
+      "offset": 230637,
       "length": 64,
       "value": "\"Framing: a full-body shot showing the person from head to toe.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229430,
+      "offset": 230732,
       "length": 7,
       "value": "\"upper\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229443,
+      "offset": 230745,
       "length": 11,
       "value": "\"상반신\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229460,
+      "offset": 230762,
       "length": 12,
       "value": "\"Upper body\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229482,
+      "offset": 230784,
       "length": 48,
       "value": "\"Framing: an upper-body shot from the waist up.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229561,
+      "offset": 230863,
       "length": 9,
       "value": "\"closeup\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229576,
+      "offset": 230878,
       "length": 21,
       "value": "\"얼굴 클로즈업\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229603,
+      "offset": 230905,
       "length": 15,
       "value": "\"Face close-up\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229628,
+      "offset": 230930,
       "length": 76,
       "value": "\"Framing: a tight head-and-shoulders close-up portrait focused on the face.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229735,
+      "offset": 231037,
       "length": 8,
       "value": "\"selfie\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229749,
+      "offset": 231051,
       "length": 15,
       "value": "\"셀카 구도\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229770,
+      "offset": 231072,
       "length": 8,
       "value": "\"Selfie\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229788,
+      "offset": 231090,
       "length": 103,
       "value": "\"Framing: a handheld smartphone selfie — taken at arm's length or in a mirror, natural selfie angle.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229922,
+      "offset": 231224,
       "length": 9,
       "value": "\"waistup\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229937,
+      "offset": 231239,
       "length": 21,
       "value": "\"상반신 패션컷\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229964,
+      "offset": 231266,
       "length": 18,
       "value": "\"Waist-up fashion\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 229992,
+      "offset": 231294,
       "length": 89,
       "value": "\"Framing: a waist-up fashion shot that clearly shows how the outfit fits, face included.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230112,
+      "offset": 231414,
       "length": 7,
       "value": "\"lower\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230125,
+      "offset": 231427,
       "length": 18,
       "value": "\"하체 코디컷\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230149,
+      "offset": 231451,
       "length": 19,
       "value": "\"Lower-body outfit\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230178,
+      "offset": 231480,
       "length": 144,
       "value": "\"Framing: a fashion outfit shot from the waist down, showing the bottoms (trousers, skirt or shorts) and shoes, like an outfit-of-the-day post.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230353,
+      "offset": 231655,
       "length": 6,
       "value": "\"back\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230365,
+      "offset": 231667,
       "length": 18,
       "value": "\"뒷모습 전신\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230389,
+      "offset": 231691,
       "length": 11,
       "value": "\"Back view\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230410,
+      "offset": 231712,
       "length": 102,
       "value": "\"Framing: a full-body shot from behind, the person glancing back over the shoulder toward the camera.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230543,
+      "offset": 231845,
       "length": 6,
       "value": "\"side\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230555,
+      "offset": 231857,
       "length": 18,
       "value": "\"측면 실루엣\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230579,
+      "offset": 231881,
       "length": 17,
       "value": "\"Side silhouette\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230606,
+      "offset": 231908,
       "length": 113,
       "value": "\"Framing: a full-body side-profile shot showing the person's silhouette and posture, elegant fashion-photo look.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230759,
+      "offset": 232061,
       "length": 7,
       "value": "\"light\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230772,
+      "offset": 232074,
       "length": 19,
       "value": "\"분위기·조명\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230797,
+      "offset": 232099,
       "length": 14,
       "value": "\"Mood & light\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230825,
+      "offset": 232127,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230870,
+      "offset": 232172,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230882,
+      "offset": 232184,
       "length": 8,
       "value": "\"자동\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230896,
+      "offset": 232198,
       "length": 6,
       "value": "\"Auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230912,
+      "offset": 232214,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230945,
+      "offset": 232247,
       "length": 5,
       "value": "\"day\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230956,
+      "offset": 232258,
       "length": 5,
       "value": "\"낮\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230967,
+      "offset": 232269,
       "length": 10,
       "value": "\"Daylight\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 230987,
+      "offset": 232289,
       "length": 43,
       "value": "\"Lighting: bright, clean natural daylight.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231061,
+      "offset": 232363,
       "length": 8,
       "value": "\"golden\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231075,
+      "offset": 232377,
       "length": 14,
       "value": "\"골든아워\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231095,
+      "offset": 232397,
       "length": 13,
       "value": "\"Golden hour\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231118,
+      "offset": 232420,
       "length": 79,
       "value": "\"Lighting: warm golden-hour sunlight with a soft glow and long gentle shadows.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231228,
+      "offset": 232530,
       "length": 6,
       "value": "\"neon\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231240,
+      "offset": 232542,
       "length": 12,
       "value": "\"밤 네온\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231258,
+      "offset": 232560,
       "length": 12,
       "value": "\"Night neon\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231280,
+      "offset": 232582,
       "length": 100,
       "value": "\"Lighting: a night scene lit by colorful neon signs and city lights, cinematic pink and blue tones.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231411,
+      "offset": 232713,
       "length": 6,
       "value": "\"mood\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231423,
+      "offset": 232725,
       "length": 18,
       "value": "\"실내 무드등\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231447,
+      "offset": 232749,
       "length": 11,
       "value": "\"Mood lamp\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231468,
+      "offset": 232770,
       "length": 76,
       "value": "\"Lighting: dim, cozy indoor mood lighting from warm lamps and soft shadows.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231584,
+      "offset": 232886,
       "length": 6,
       "value": "\"hair\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231596,
+      "offset": 232898,
       "length": 8,
       "value": "\"헤어\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231610,
+      "offset": 232912,
       "length": 6,
       "value": "\"Hair\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231630,
+      "offset": 232932,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231675,
+      "offset": 232977,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231687,
+      "offset": 232989,
       "length": 8,
       "value": "\"자동\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231701,
+      "offset": 233003,
       "length": 6,
       "value": "\"Auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231717,
+      "offset": 233019,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231750,
+      "offset": 233052,
       "length": 10,
       "value": "\"straight\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231766,
+      "offset": 233068,
       "length": 15,
       "value": "\"긴 생머리\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231787,
+      "offset": 233089,
       "length": 15,
       "value": "\"Long straight\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231812,
+      "offset": 233114,
       "length": 34,
       "value": "\"Hair: long, sleek straight hair.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231877,
+      "offset": 233179,
       "length": 5,
       "value": "\"bob\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231888,
+      "offset": 233190,
       "length": 8,
       "value": "\"단발\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231902,
+      "offset": 233204,
       "length": 11,
       "value": "\"Short bob\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 231923,
+      "offset": 233225,
       "length": 63,
       "value": "\"Hair: a short bob haircut (for a man: a short, neat haircut).\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232017,
+      "offset": 233319,
       "length": 6,
       "value": "\"wavy\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232029,
+      "offset": 233331,
       "length": 11,
       "value": "\"웨이브\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232046,
+      "offset": 233348,
       "length": 6,
       "value": "\"Wavy\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232062,
+      "offset": 233364,
       "length": 35,
       "value": "\"Hair: soft, voluminous wavy hair.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232137,
+      "offset": 233439,
       "length": 6,
       "value": "\"body\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232149,
+      "offset": 233451,
       "length": 8,
       "value": "\"체형\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232163,
+      "offset": 233465,
       "length": 11,
       "value": "\"Body type\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232188,
+      "offset": 233490,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232233,
+      "offset": 233535,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232245,
+      "offset": 233547,
       "length": 8,
       "value": "\"자동\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232259,
+      "offset": 233561,
       "length": 6,
       "value": "\"Auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232275,
+      "offset": 233577,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232308,
+      "offset": 233610,
       "length": 8,
       "value": "\"skinny\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232322,
+      "offset": 233624,
       "length": 11,
       "value": "\"깡마른\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232339,
+      "offset": 233641,
       "length": 11,
       "value": "\"Very thin\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232360,
+      "offset": 233662,
       "length": 156,
       "value": "\"Body type: very thin and lean, a narrow, delicate frame with slender arms and legs. Keep this body type even if other instructions mention a model figure.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232547,
+      "offset": 233849,
       "length": 6,
       "value": "\"slim\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232559,
+      "offset": 233861,
       "length": 8,
       "value": "\"슬림\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232573,
+      "offset": 233875,
       "length": 6,
       "value": "\"Slim\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232589,
+      "offset": 233891,
       "length": 117,
       "value": "\"Body type: slim and slender, with long legs. Keep this body type even if other instructions mention a model figure.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232737,
+      "offset": 234039,
       "length": 9,
       "value": "\"glamour\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232752,
+      "offset": 234054,
       "length": 11,
       "value": "\"글래머\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232769,
+      "offset": 234071,
       "length": 11,
       "value": "\"Glamorous\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 232790,
+      "offset": 234092,
       "length": 200,
       "value": "\"Body type: a curvy, voluptuous glamour figure with a defined waist (for a man: broad shoulders and a muscular, athletic build). Keep this body type even if other instructions mention a model figure.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233021,
+      "offset": 234323,
       "length": 8,
       "value": "\"chubby\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233035,
+      "offset": 234337,
       "length": 8,
       "value": "\"통통\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233049,
+      "offset": 234351,
       "length": 8,
       "value": "\"Chubby\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233067,
+      "offset": 234369,
       "length": 213,
       "value": "\"Body type: softly chubby and round, a little fuller in the face, arms and waist, cute and healthy-looking (for a man: a soft, stocky build). Keep this body type even if other instructions mention a model figure.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233311,
+      "offset": 234613,
       "length": 6,
       "value": "\"plus\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233323,
+      "offset": 234625,
       "length": 8,
       "value": "\"뚱뚱\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233337,
+      "offset": 234639,
       "length": 11,
       "value": "\"Plus-size\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233358,
+      "offset": 234660,
       "length": 224,
       "value": "\"Body type: plus-size and heavyset, a large, full-figured body with a round face, shown confidently and flatteringly (for a man: a big, heavyset build). Keep this body type even if other instructions mention a model figure.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233622,
+      "offset": 234924,
       "length": 6,
       "value": "\"face\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233634,
+      "offset": 234936,
       "length": 8,
       "value": "\"얼굴\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233648,
+      "offset": 234950,
       "length": 6,
       "value": "\"Face\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233668,
+      "offset": 234970,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233713,
+      "offset": 235015,
       "length": 6,
       "value": "\"auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233725,
+      "offset": 235027,
       "length": 8,
       "value": "\"자동\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233739,
+      "offset": 235041,
       "length": 6,
       "value": "\"Auto\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233755,
+      "offset": 235057,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233788,
+      "offset": 235090,
       "length": 6,
       "value": "\"show\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233800,
+      "offset": 235102,
       "length": 15,
       "value": "\"얼굴 보임\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233821,
+      "offset": 235123,
       "length": 14,
       "value": "\"Face visible\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233845,
+      "offset": 235147,
       "length": 51,
       "value": "\"Face: clearly visible, looking toward the camera.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233927,
+      "offset": 235229,
       "length": 6,
       "value": "\"hide\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233939,
+      "offset": 235241,
       "length": 18,
       "value": "\"폰으로 가림\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233963,
+      "offset": 235265,
       "length": 17,
       "value": "\"Hidden by phone\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 233990,
+      "offset": 235292,
       "length": 114,
       "value": "\"Face: a mirror selfie where the smartphone held up in front covers most of the face, so the face is not visible.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234135,
+      "offset": 235437,
       "length": 8,
       "value": "\"mosaic\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234149,
+      "offset": 235451,
       "length": 14,
       "value": "\"모자이크\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234169,
+      "offset": 235471,
       "length": 8,
       "value": "\"Mosaic\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234187,
+      "offset": 235489,
       "length": 142,
       "value": "\"Face: the face is hidden behind a square pixelated mosaic censor block (coarse pixels covering the whole face), the rest of the photo sharp.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234360,
+      "offset": 235662,
       "length": 6,
       "value": "\"blur\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234372,
+      "offset": 235674,
       "length": 8,
       "value": "\"블러\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234386,
+      "offset": 235688,
       "length": 6,
       "value": "\"Blur\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234402,
+      "offset": 235704,
       "length": 119,
       "value": "\"Face: the face is heavily blurred out with a soft round blur so it cannot be recognized, the rest of the photo sharp.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234552,
+      "offset": 235854,
       "length": 9,
       "value": "\"sticker\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234567,
+      "offset": 235869,
       "length": 21,
       "value": "\"스티커로 가림\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234594,
+      "offset": 235896,
       "length": 9,
       "value": "\"Sticker\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234613,
+      "offset": 235915,
       "length": 125,
       "value": "\"Face: the face is covered by a cute round decorative sticker (like a heart or smiley sticker), the rest of the photo sharp.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234778,
+      "offset": 236080,
       "length": 9,
       "value": "\"quality\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234793,
+      "offset": 236095,
       "length": 8,
       "value": "\"화질\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234807,
+      "offset": 236109,
       "length": 9,
       "value": "\"Quality\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234830,
+      "offset": 236132,
       "length": 5,
       "value": "\"low\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234874,
+      "offset": 236176,
       "length": 5,
       "value": "\"low\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234885,
+      "offset": 236187,
       "length": 17,
       "value": "\"저화질 (512)\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234908,
+      "offset": 236210,
       "length": 16,
       "value": "\"Standard (512)\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234934,
+      "offset": 236236,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234967,
+      "offset": 236269,
       "length": 6,
       "value": "\"high\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 234979,
+      "offset": 236281,
       "length": 16,
       "value": "\"고화질 (1K)\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 235001,
+      "offset": 236303,
       "length": 11,
       "value": "\"High (1K)\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 235022,
+      "offset": 236324,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "Array",
-      "offset": 236182,
+      "offset": 237484,
       "length": 2170,
       "value": "[(\"pose\", [\"standing with the weight shifted onto one hip, one hand resting on the waist\", \"walking toward the camera mid-stride, hair moving naturally\", \"turned away in a rear three-quarter view, looking back over the shoulder\", \"sitting with legs elegantly crossed, leaning slightly forward\", \"sitting on an edge with knees together and feet apart, playful\", \"leaning casually against a wall, railing or doorframe\", \"lying on the side, propped up on one elbow\", \"lying on the stomach, chin resting on the hands, feet raised behind\", \"kneeling upright with a straight back and chest lifted\", \"reclining back on both hands with legs extended\", \"both arms raised with hands running through the hair\", \"one hand touching the hair, head tilted, soft gaze\", \"in side profile, back gently arched, chin lifted\", \"crouching low in a stylish fashion squat\", \"stretching both arms overhead, body elongated\", \"sitting and hugging the knees, cozy and candid\", \"leaning forward toward the camera with hands on the knees\", \"twisting at the waist to glance at the camera\", \"standing with one knee bent and the heel lifted\", \"a candid mid-laugh moment, looking away from the camera\", \"seated on the floor with legs folded to one side\", \"lying on the back with hair spread out, looking up at the camera\", \"adjusting sunglasses or an accessory, caught in motion\", \"leaning on one arm with the body angled in a relaxed S-curve\"]), (\"color\", [\"red\", \"white\", \"black\", \"emerald green\", \"cobalt blue\", \"hot pink\", \"lilac\", \"mustard yellow\", \"coral\", \"champagne gold\", \"baby blue\", \"burgundy\", \"olive green\", \"leopard print\", \"polka dot\", \"pastel stripes\", \"neon lime\", \"chocolate brown\", \"sky blue\", \"ivory with gold accents\"]), (\"angle\", [\"eye level\", \"a slightly high angle\", \"a low angle looking up\", \"a top-down overhead angle\", \"a side angle\", \"a three-quarter angle\", \"a candid telephoto from a distance\", \"a close handheld angle\"]), (\"expression\", [\"a soft, warm smile\", \"a confident, direct gaze\", \"a playful laugh\", \"a dreamy look into the distance\", \"a subtle, confident half-smile\", \"a bright, cheerful grin\", \"a calm, elegant expression\"])]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "Array",
-      "offset": 238516,
+      "offset": 239818,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "Dictionary",
-      "offset": 240712,
+      "offset": 242014,
       "length": 159,
       "value": "[(\"패션|Style\", \"fashion\"), (\"셀카 구도|Selfie\", \"framing\"), (\"도시 야경|City night\", \"view\"), (\"피부 매끈하게|Smooth skin\", \"texture\")]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 272771,
+      "offset": 274073,
       "length": 263,
       "value": "\"Edit the provided photo as instructed below. Keep the same people with identical faces, facial features, identity, skin tone and body shape, keep the composition, and leave everything not mentioned unchanged, unless the instruction explicitly asks to change it.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 273062,
+      "offset": 274364,
       "length": 364,
       "value": "\"This is a real person's photo: everyday fashion such as mini skirts, skinny jeans, crop tops or fitted dresses is fine, but never show them in underwear, lingerie or swimwear, never make clothing see-through, never show nudity, never enlarge the chest, buttocks or hips, and no suggestive or sexual poses or framing — even if the instruction above asks for it.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 273530,
+      "offset": 274832,
       "length": 58,
       "value": "\"Apply all of the following edits together in one result:\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 273623,
+      "offset": 274925,
       "length": 44,
       "value": "\"Apply the following settings to the photo.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 273763,
+      "offset": 275065,
       "length": 637,
       "value": "\"You help users edit their photos. Look at the attached photo and reply in JSON only. \"tags\": which of person, pet, food, scenery appear. \"suggestions\": 6 short, specific edits tailored to THIS photo that would clearly improve it or make it fun (e.g. fixing what looks off, a better background, lighting, season, outfit, removing distractions, an art style). Each has \"label\" — at most 14 characters, written in {LANG} — and \"prompt\" — a clear English instruction for an image-editing model. Never suggest removing or reducing clothing, revealing or sexy outfits, body exaggeration, or changing someone's face or identity.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 274542,
+      "offset": 275844,
       "length": 557,
       "value": "\"Celebrity-level looks (very important): every person in the image must look like a famous top actress\/actor or top fashion model — a strikingly beautiful (for a man: strikingly handsome), refined face with harmonious, symmetrical proportions, large clear expressive eyes, a defined nose bridge, a well-shaped jawline, flawless glowing skin, professionally styled hair and polished natural makeup, magazine-cover visual quality. Never an ordinary or plain-looking person. Keep the stated nationality with natural, flattering features of that nationality.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 275128,
+      "offset": 276430,
       "length": 107,
       "value": "\"Reminder: the person must have celebrity-level, magazine-cover beauty — not an ordinary-looking person.\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "StringLiteral",
-      "offset": 275854,
+      "offset": 277326,
       "length": 297,
       "value": "\"Important: create a safe, tasteful image — every person is a clearly adult, fully and modestly dressed, in a natural non-suggestive pose; if any detail above could be unsafe, replace it with a modest, elegant alternative (for example a stylish everyday outfit instead of swimwear or lingerie).\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "IntegerLiteral",
-      "offset": 276912,
+      "offset": 278384,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AIPromptExamples.swift",
       "kind": "BooleanLiteral",
-      "offset": 276950,
+      "offset": 278422,
       "length": 5,
       "value": "false"
     },

@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.8 — 2026-10-16
+
+- **AI screens are the same in every app (iOS + Android)**. Generate: woman / man, country, age (up to the 80s), style, situation, aspect ratio + Create, sample chips and the chat input; chat text is sent together with the chosen settings, and tapping a sample shows a summary of the settings before creating. The glamour situations / samples and the detail options were removed from the generate screen. Edit: the full editing screen everywhere. Generated and edited images are stored for the gallery's "AI 이미지" tab in every app.
+- iOS: the "AI 이미지" tab expands / collapses the sheet like the gallery grid.
+- iOS: an edited (trimmed) video's first poster (`onProcessingStart` `thumbnailUri`) is taken from the trimmed start, with crop and drawing applied.
+- iOS: closing the AI screen right after using a menu no longer leaves a stray button over the gallery.
+- Android image viewer: video controls no longer flash on photo pages while the viewer opens.
+
 ## 1.0.6 — 2026-10-14
 
 - **Video in the picker, editor and viewer (iOS + Android)**: `openGallery({ mediaType: "all" | "video", video })` picks videos; the editor gets video pages (trim, mute, quality, crop, drawing/stickers/text, pre-encoding); `openViewer({ images, videos })` plays videos (progress pill, mute/options, remote video cache, pinch zoom). Sending progress is reported as events. `video.posterFormat` (`"webp"` default / `"jpg"`). Video limits are checked before sending.

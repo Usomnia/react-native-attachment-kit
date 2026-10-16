@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		RhTH3FdNHWutYB3O0httBcss21E=
+		MRss66st77g0KhHxCBbJQfKPil4=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		QUy6zsiWy7oaydLEKqcb7uaVrlI=
+		FC2zf1jZnueKAakmwRvTrB9xiFk=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -46,11 +46,11 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		u0yxuF3isfRliH8/kEIqDqSXSgE=
+		vxYcaOMhuUnqhRHLBIJ08g7Poz8=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		QUy6zsiWy7oaydLEKqcb7uaVrlI=
+		FC2zf1jZnueKAakmwRvTrB9xiFk=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		OZl+w0k09pQNkch1T8kQk8E5IA0=
+		H6BZLJRWSEbtZxoVbtor+kQqH4A=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -227,7 +227,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			0N1A4LGshpc4ca3QAtjAqMx7M6KC4+eiQAKHcKRnUB4=
+			PN8SGeEYmroH8IKhC4cAPpqrFa8xoBCtF2CRXH0MgEA=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -262,7 +262,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4DH8F+t6Fb8fR5v/5kcLRKd7ZlY/LdC/Ww7Jjyw2n98=
+			qtO0CZnvzwP16BEJ2c8k4epzursuYOewuXDMvEuLD3k=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -290,14 +290,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yFpJ4d8v3WBUYZ/CYO4Hx3lgbUD7eRTg6VaeXLFTloo=
+			QYe4TAel3zohjG3Va4rjTXrpDxq7B321XftFkE+yV08=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4DH8F+t6Fb8fR5v/5kcLRKd7ZlY/LdC/Ww7Jjyw2n98=
+			qtO0CZnvzwP16BEJ2c8k4epzursuYOewuXDMvEuLD3k=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -325,7 +325,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/ThFnw5uuJty5mLgTL69s7yjMzh8fdCur5sTt+9gl9k=
+			ThGXvJl+h56CfaVaUxPIvX289ZySMuF5rCfa478xQRo=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

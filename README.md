@@ -463,7 +463,7 @@ A native grid built for thousands of photos. It opens like the picker (same bott
 
 ### AI (generate & edit)
 
-The gallery's ✦ button (AI image generation) and the editor's 6th tool **AI** (AI photo editing) use Google Gemini. They are **off until you call `setAIConfig({ enabled: true, ... })`**. In apps other than ZemTalk the AI screens are chat-only: generate shows an aspect-ratio bar and the chat input, edit shows the photo and the chat input, and the text is sent to the model as typed. The style/option menus, sample prompts, recommendation chips and recent works are ZemTalk-only.
+The gallery's ✦ button (AI image generation) and the editor's 6th tool **AI** (AI photo editing) use Google Gemini. They are **off until you call `setAIConfig({ enabled: true, ... })`**. The screens are the same in every app. Generate has woman / man, country, age, style and situation pickers, an aspect-ratio bar, sample chips and the chat input; chat text is sent together with the chosen settings. Edit is the full editing screen: edit choices, options, recommendation chips and the chat input. Generated and edited images are kept on the device and listed in the gallery's "AI 이미지" tab.
 
 ```ts
 await AttachmentKit.setAIConfig({

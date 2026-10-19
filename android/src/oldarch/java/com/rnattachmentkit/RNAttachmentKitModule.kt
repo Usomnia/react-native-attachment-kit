@@ -58,10 +58,13 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         val maxWidth: Int, val maxHeight: Int, val outputFormat: String,
         val videoOptions: com.rnattachmentkit.VideoExportOptions,
         val states: Map<String, com.rnattachmentkit.VideoEditState>,
-        val showHUD: Boolean, val themeColor: Int?, val language: String
+        val showHUD: Boolean, val themeColor: Int?, val language: String,
+        val thumbnail: com.rnattachmentkit.PhotoThumbnail.Options?
     )
     private fun sendSnapshot() = SendSnapshot(maxWidth, maxHeight, outputFormat, videoOptions, HashMap(lastVideoEditStates),
-        showVideoHUD, lastThemeColorInt, lastLanguageCode)
+        showVideoHUD, lastThemeColorInt, lastLanguageCode, thumbnailOptions)
+    /** 사진 썸네일 (GalleryOptions.thumbnail / EditorOptions.thumbnail). null 이면 만들지 않음 (기존과 같음) */
+    private var thumbnailOptions: com.rnattachmentkit.PhotoThumbnail.Options? = null
     /** 동영상 변환 진행 HUD — video.showProgressHUD, 없으면 asyncProcessing 이 아닐 때만 (이벤트로 말풍선에 그리는 앱은 HUD 없이) */
     private var showVideoHUD = true
     /** 시트가 닫힐 때 넘겨받은 동영상 편집 상태 (원본 uri 문자열 → 품질·음소거) */
@@ -180,6 +183,9 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         
         if (options.hasKey("maxWidth")) maxWidth = options.getInt("maxWidth")
         if (options.hasKey("maxHeight")) maxHeight = options.getInt("maxHeight")
+        thumbnailOptions = com.rnattachmentkit.PhotoThumbnail.parse(
+            if (options.hasKey("thumbnail") && !options.isNull("thumbnail")) options.getMap("thumbnail")?.toHashMap() else null
+        )
         
         editImagePromise = promise
 
@@ -287,6 +293,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             ?.lowercase()?.takeIf { it == "video" || it == "all" } ?: "photo"
         videoOptions = com.rnattachmentkit.VideoExportOptions.fromMap(
             if (options.hasKey("video") && !options.isNull("video")) options.getMap("video")?.toHashMap() else null
+        )
+        // 사진 썸네일 (동영상 포스터 규칙은 그대로 — video.posterFormat, 긴 변 512)
+        thumbnailOptions = com.rnattachmentkit.PhotoThumbnail.parse(
+            if (options.hasKey("thumbnail") && !options.isNull("thumbnail")) options.getMap("thumbnail")?.toHashMap() else null
         )
         run {
             val async = options.hasKey("asyncProcessing") && !options.isNull("asyncProcessing") && options.getBoolean("asyncProcessing")
@@ -536,6 +546,14 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
 
     @ReactMethod
     override fun openViewer(options: ReadableMap, promise: Promise) {
+        // 동영상 페이지는 라이선스 키가 있어야
+        if (!LicenseGate.isLicensed && options.hasKey("videos")) {
+            val va = options.getArray("videos")
+            val anyVideo = va != null && (0 until va.size()).any { i ->
+                va.getType(i) == com.facebook.react.bridge.ReadableType.Map && va.getMap(i)?.let { it.hasKey("uri") && !it.isNull("uri") && !it.getString("uri").isNullOrEmpty() } == true
+            }
+            if (anyVideo) { promise.reject(LicenseGate.ERROR_CODE, LicenseGate.ERROR_MESSAGE); return }
+        }
         val activity = getCurrentActivity()
         if (activity == null) {
             promise.reject(E_NO_ACTIVITY, "Activity doesn't exist")
@@ -948,6 +966,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         val showVideoHUD = snap.showHUD
         val lastThemeColorInt = snap.themeColor
         val lastLanguageCode = snap.language
+        val thumbnailOptions = snap.thumbnail
         val processingId = java.util.UUID.randomUUID().toString()
         val results = mutableListOf<com.facebook.react.bridge.WritableMap>()
         val contentResolver = reactApplicationContext.contentResolver
@@ -1196,6 +1215,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                             FileOutputStream(tempFile).use { out ->
                                 processedBitmap.compress(compressFormat, 85, out)
                             }
+                            // 썸네일: 같은 비트맵(방향·크롭·그리기 반영)에서 — 원본을 다시 읽지 않음
+                            val thumb = thumbnailOptions?.let {
+                                com.rnattachmentkit.PhotoThumbnail.make(processedBitmap, it, reactApplicationContext.cacheDir, currentIndex)
+                            }
                             
                             val finalWidth = processedBitmap.width
                             val finalHeight = processedBitmap.height
@@ -1221,6 +1244,12 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                                     putString("originalUri", uri.toString())
                                     putInt("originalWidth", originalWidth)
                                     putInt("originalHeight", originalHeight)
+                                    if (thumb != null) {
+                                        putString("thumbnailUri", Uri.fromFile(thumb.file).toString())
+                                        putInt("thumbnailWidth", thumb.width)
+                                        putInt("thumbnailHeight", thumb.height)
+                                        putDouble("thumbnailFileSize", thumb.fileSize.toDouble())
+                                    }
                                 }
                             }
                             val imageInfo = createImageInfo()
@@ -1327,6 +1356,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             return
         }
         val o: Map<String, Any?> = options.toHashMap()
+        // 동영상 항목은 라이선스 키가 있어야
+        if (!LicenseGate.isLicensed && MediaGalleryItem.listFrom(o["items"]).any { it.isVideo }) {
+            promise.reject(LicenseGate.ERROR_CODE, LicenseGate.ERROR_MESSAGE); return
+        }
         com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
             try {
                 val systemDark = (activity.resources.configuration.uiMode and
@@ -1412,6 +1445,9 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             p["nextCursor"] as? String,
             p["hasMore"] as? Boolean ?: false
         )
+        if (!LicenseGate.isLicensed && page.items.any { it.isVideo }) {
+            promise.reject(LicenseGate.ERROR_CODE, LicenseGate.ERROR_MESSAGE); return
+        }
         com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
             mediaGalleries[galleryId]?.store?.appendExternal(page)
             promise.resolve(null)
@@ -1488,6 +1524,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
 
     @ReactMethod
     fun openMapViewer(options: ReadableMap, promise: Promise) {
+        // 위치 기능은 라이선스 키가 있어야
+        if (!LicenseGate.isLicensed) { promise.reject(LicenseGate.ERROR_CODE, LicenseGate.ERROR_MESSAGE); return }
         val activity = getCurrentActivity() as? FragmentActivity
         if (activity == null) {
             promise.reject("NO_ACTIVITY", "Activity is not a FragmentActivity")
@@ -1571,6 +1609,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
      */
     @ReactMethod
     fun renderLocationThumbnail(options: ReadableMap, promise: Promise) {
+        // 위치 기능은 라이선스 키가 있어야
+        if (!LicenseGate.isLicensed) { promise.reject(LicenseGate.ERROR_CODE, LicenseGate.ERROR_MESSAGE); return }
         fun str(key: String) = if (options.hasKey(key) && !options.isNull(key)) options.getString(key) else null
         fun num(key: String) = if (options.hasKey(key) && !options.isNull(key)) options.getDouble(key) else null
         val lat = num("latitude")
@@ -1672,6 +1712,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
 
     @ReactMethod
     fun setAIConfig(config: ReadableMap, promise: Promise) {
+        // 라이선스 키가 없어도 설정은 받아 둠 (AI 버튼은 보이고, 누르면 "라이선스 필요" 안내)
+        if (!LicenseGate.isLicensed && config.hasKey("enabled") && !config.isNull("enabled") && config.getBoolean("enabled")) {
+            android.util.Log.w("RNAttachmentKit", "AI needs a license key — the AI buttons show a license notice until init() gets a valid key")
+        }
         AIBilling.apply(config.toHashMap())
         val ctx = reactApplicationContext
         fun emit(name: String, body: Map<String, Any>) {
@@ -1690,6 +1734,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
 
     @ReactMethod
     fun reverseGeocode(options: ReadableMap, promise: Promise) {
+        // 위치 기능은 라이선스 키가 있어야
+        if (!LicenseGate.isLicensed) { promise.reject(LicenseGate.ERROR_CODE, LicenseGate.ERROR_MESSAGE); return }
         val lat = if (options.hasKey("latitude") && !options.isNull("latitude")) options.getDouble("latitude") else Double.NaN
         val lng = if (options.hasKey("longitude") && !options.isNull("longitude")) options.getDouble("longitude") else Double.NaN
         val lang = if (options.hasKey("languageCode") && !options.isNull("languageCode")) options.getString("languageCode") else null

@@ -57,6 +57,8 @@ class RNAttachmentKit: RCTEventEmitter {
     /// 동영상 변환 진행 HUD 를 띄울지 — video.showProgressHUD, 없으면 asyncProcessing 이 아닐 때만
     /// (앱이 onProcessingStart / onVideoProgress / onImageProcessed 로 말풍선에 진행 상황을 그리는 구조면 HUD 없이)
     private var galleryShowsVideoHUD = true
+    /// 사진 썸네일 (GalleryOptions.thumbnail). nil 이면 만들지 않음 (기존과 같음)
+    private var galleryThumbnail: PhotoThumbnailOptions?
     
     // MARK: - Module Setup
     
@@ -240,6 +242,9 @@ class RNAttachmentKit: RCTEventEmitter {
     func openMapViewer(_ options: NSDictionary,
                        resolve: @escaping RCTPromiseResolveBlock,
                        reject: @escaping RCTPromiseRejectBlock) -> Void {
+        guard LicenseGate.isLicensed else {
+            reject(LicenseGate.errorCode, LicenseGate.errorMessage, nil); return
+        }
         guard let lat = RNAttachmentKit.cgFloat(options["latitude"]),
               let lng = RNAttachmentKit.cgFloat(options["longitude"]) else {
             reject("ERROR", "latitude and longitude are required", nil)
@@ -308,6 +313,9 @@ class RNAttachmentKit: RCTEventEmitter {
     func renderLocationThumbnail(_ options: NSDictionary,
                                  resolve: @escaping RCTPromiseResolveBlock,
                                  reject: @escaping RCTPromiseRejectBlock) -> Void {
+        guard LicenseGate.isLicensed else {
+            reject(LicenseGate.errorCode, LicenseGate.errorMessage, nil); return
+        }
         guard let lat = RNAttachmentKit.cgFloat(options["latitude"]),
               let lng = RNAttachmentKit.cgFloat(options["longitude"]),
               let w = RNAttachmentKit.cgFloat(options["width"]), w > 0 else {
@@ -366,6 +374,9 @@ class RNAttachmentKit: RCTEventEmitter {
     func reverseGeocode(_ options: NSDictionary,
                         resolve: @escaping RCTPromiseResolveBlock,
                         reject: @escaping RCTPromiseRejectBlock) -> Void {
+        guard LicenseGate.isLicensed else {
+            reject(LicenseGate.errorCode, LicenseGate.errorMessage, nil); return
+        }
         let lat = (options["latitude"] as? NSNumber)?.doubleValue ?? .nan
         let lng = (options["longitude"] as? NSNumber)?.doubleValue ?? .nan
         let lang = (options["languageCode"] as? String).flatMap { $0.isEmpty ? nil : $0 } ?? "en"
@@ -383,6 +394,10 @@ class RNAttachmentKit: RCTEventEmitter {
                      resolve: @escaping RCTPromiseResolveBlock,
                      reject: @escaping RCTPromiseRejectBlock) -> Void {
         let dict = config as? [String: Any] ?? [:]
+        // 라이선스 키가 없어도 설정은 받아 둠 (AI 버튼은 보이고, 누르면 "라이선스 필요" 안내)
+        if !LicenseGate.isLicensed, (dict["enabled"] as? Bool) == true {
+            NSLog("[RNAttachmentKit] AI needs a license key — the AI buttons show a license notice until init() gets a valid key")
+        }
         DispatchQueue.main.async {
             AIBilling.apply(dict)
             AIBilling.onUsage = { [weak self] body in self?.sendEvent(withName: "onAIUsage", body: body) }
@@ -421,6 +436,10 @@ class RNAttachmentKit: RCTEventEmitter {
         let cacheFiles: [String]? = (options["cacheFiles"] as? [Any])?.map { ($0 as? String) ?? "" }
         // videos: images 와 같은 순서. 항목이 있으면 그 페이지는 동영상 (images[i] 는 포스터)
         let viewerVideos: [ViewerVideoItem?] = (options["videos"] as? [Any])?.map { ViewerVideoItem(dictionary: $0) } ?? []
+        // 동영상 페이지는 라이선스 키가 있어야
+        if !LicenseGate.isLicensed, viewerVideos.contains(where: { $0 != nil }) {
+            reject(LicenseGate.errorCode, LicenseGate.errorMessage, nil); return
+        }
         let themeColorHex = options["themeColor"] as? String
         let languageCode = options["languageCode"] as? String ?? "en"
         let viewerTitle = options["title"] as? String
@@ -679,9 +698,10 @@ class RNAttachmentKit: RCTEventEmitter {
         var parsedMaxHeight: Int? = nil
         if let maxW = options["maxWidth"] as? Int { parsedMaxWidth = maxW }
         if let maxH = options["maxHeight"] as? Int { parsedMaxHeight = maxH }
+        let parsedThumbnail = PhotoThumbnailOptions(options["thumbnail"])
         
         DispatchQueue.main.async {
-            guard let rootViewController = self.getRootViewController() else {
+            guard self.getRootViewController() != nil else {
                 reject("ERROR", "Unable to get root view controller", nil)
                 return
             }
@@ -716,7 +736,7 @@ class RNAttachmentKit: RCTEventEmitter {
                 
                 editorVC.onConfirm = { [weak self, weak editorVC] (editedAsset, editedImage, filterState, caption) in
                     editorVC?.dismiss(animated: true) {
-                        self?.processEditorResult(asset: editedAsset, croppedImage: editedImage, filterState: filterState, caption: caption, galleryVC: nil, targetMaxWidth: parsedMaxWidth, targetMaxHeight: parsedMaxHeight, resolve: { resultArr in
+                        self?.processEditorResult(asset: editedAsset, croppedImage: editedImage, filterState: filterState, caption: caption, galleryVC: nil, targetMaxWidth: parsedMaxWidth, targetMaxHeight: parsedMaxHeight, thumbnail: parsedThumbnail, resolve: { resultArr in
                             if let arr = resultArr as? [[String: Any]], let first = arr.first {
                                 resolve(first)
                             } else {
@@ -732,11 +752,7 @@ class RNAttachmentKit: RCTEventEmitter {
                     }
                 }
                 
-                var topController = rootViewController
-                while let presented = topController.presentedViewController {
-                    topController = presented
-                }
-                topController.present(editorVC, animated: true)
+                self.presentOnTop(editorVC, reject: reject)
                 
             } else {
                 guard let url = URL(string: uri) ?? URL(string: "file://" + uri.replacingOccurrences(of: "file://", with: "")) else {
@@ -760,7 +776,7 @@ class RNAttachmentKit: RCTEventEmitter {
                             
                             editorVC.onConfirm = { [weak self, weak editorVC] (editedAsset, editedImage, filterState, caption) in
                                 editorVC?.dismiss(animated: true) {
-                                    self?.processEditorResult(asset: editedAsset, croppedImage: editedImage, filterState: filterState, caption: caption, galleryVC: nil, targetMaxWidth: parsedMaxWidth, targetMaxHeight: parsedMaxHeight, resolve: { resultArr in
+                                    self?.processEditorResult(asset: editedAsset, croppedImage: editedImage, filterState: filterState, caption: caption, galleryVC: nil, targetMaxWidth: parsedMaxWidth, targetMaxHeight: parsedMaxHeight, thumbnail: parsedThumbnail, resolve: { resultArr in
                                         var resultDict = (resultArr as? [[String: Any]])?.first ?? (resultArr as? [String: Any]) ?? [:]
                                         // For remote URLs, we preserve originalUri if editedFileUri isn't provided
                                         let originalRemoteUrl = (options["editedFileUri"] as? String) ?? uri
@@ -776,11 +792,7 @@ class RNAttachmentKit: RCTEventEmitter {
                                 }
                             }
                             
-                            var topController = rootViewController
-                            while let presented = topController.presentedViewController {
-                                topController = presented
-                            }
-                            topController.present(editorVC, animated: true)
+                            self.presentOnTop(editorVC, reject: reject)
                         }
                     } else {
                         DispatchQueue.main.async {
@@ -868,6 +880,8 @@ class RNAttachmentKit: RCTEventEmitter {
             // maxWidth, maxHeight 옵션 (미설정 또는 0이면 원본 크기 유지)
             galleryVC.maxWidth = (options["maxWidth"] as? Int) ?? 0
             galleryVC.maxHeight = (options["maxHeight"] as? Int) ?? 0
+            // 사진 썸네일 (동영상 포스터 규칙은 그대로 — video.posterFormat, 긴 변 512)
+            self.galleryThumbnail = PhotoThumbnailOptions(options["thumbnail"])
 
             // outputFormat: "webp" | "jpg" | "png" (기본값: "webp")
             let fmt = (options["outputFormat"] as? String)?.lowercased() ?? "webp"
@@ -973,6 +987,7 @@ class RNAttachmentKit: RCTEventEmitter {
             // 동영상: mediaType "photo"(기본) | "video" | "all" + video 옵션 (지시서 3-1)
             let mediaTypeOption = (options["mediaType"] as? String)?.lowercased() ?? "photo"
             galleryVC.mediaType = ["photo", "video", "all"].contains(mediaTypeOption) ? mediaTypeOption : "photo"
+            // 동영상은 라이선스 키가 있어야 — 없으면 갤러리가 사진만 보여 줌 (GalleryBaseViewController.viewDidLoad)
             let videoOptions = VideoExportOptions(dictionary: options["video"] as? [String: Any])
             let asyncProcessing = options["asyncProcessing"] as? Bool ?? false
             self.galleryShowsVideoHUD = ((options["video"] as? [String: Any])?["showProgressHUD"] as? Bool) ?? !asyncProcessing
@@ -1004,6 +1019,7 @@ class RNAttachmentKit: RCTEventEmitter {
             let galleryFormat    = galleryVC.outputFormat   // "webp" | "jpg" | "png"
             let galleryAccent    = galleryVC.parsedThemeColor
             let galleryLanguage  = galleryVC.languageCode
+            let galleryThumb     = self.galleryThumbnail
             galleryVC.onImagesSelected = { [weak self, weak galleryVC] selectedImages in
                 guard let self = self else { resolve([]); return }
 
@@ -1176,6 +1192,9 @@ class RNAttachmentKit: RCTEventEmitter {
                                     result["fileExtension"] = meta.fileExtension
                                     result["fileSize"]      = meta.fileSize
                                 }
+                                // 썸네일: 같은 비트맵(방향·크롭·그리기 반영)에서
+                                result.merge(self.makePhotoThumbnail(targetImage, options: galleryThumb, index: index,
+                                                                     timestamp: timestamp, tempDir: tempDir)) { $1 }
 
                                 resultsLock.lock()
                                 results.append(result)
@@ -1227,6 +1246,9 @@ class RNAttachmentKit: RCTEventEmitter {
                                     result["fileExtension"] = meta.fileExtension
                                     result["fileSize"]      = meta.fileSize
                                 }
+                                // 썸네일: 같은 비트맵(방향·크롭·그리기 반영)에서
+                                result.merge(self.makePhotoThumbnail(targetImage, options: galleryThumb, index: index,
+                                                                     timestamp: timestamp, tempDir: tempDir)) { $1 }
 
                                 resultsLock.lock()
                                 results.append(result)
@@ -1621,6 +1643,66 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
 
+    // MARK: - Photo thumbnail (GalleryOptions.thumbnail / EditorOptions.thumbnail)
+
+    /// 결과 크기와 원본에서 잘라 쓸 영역 (픽셀). Android PhotoThumbnail.layout 과 같은 계산
+    ///  - fit: ratio = min(maxW/w, maxH/h, 1) → round(w·ratio) × round(h·ratio), 자르지 않음
+    ///  - cover: 상자 비율로 가운데를 자른 뒤 maxW×maxH 로 줄임. 원본이 상자보다 작으면 확대하지 않고 자른 크기 그대로
+    static func photoThumbnailLayout(width w: Int, height h: Int, options o: PhotoThumbnailOptions) -> (crop: CGRect, size: CGSize) {
+        let dw = Double(w), dh = Double(h)
+        if !o.cover {
+            let r = min(Double(o.maxWidth) / dw, Double(o.maxHeight) / dh, 1)
+            return (CGRect(x: 0, y: 0, width: w, height: h),
+                    CGSize(width: max(1, (dw * r).rounded()), height: max(1, (dh * r).rounded())))
+        }
+        let aspect = Double(o.maxWidth) / Double(o.maxHeight)
+        let cropW: Double, cropH: Double
+        if dw / dh > aspect { cropH = dh; cropW = dh * aspect } else { cropW = dw; cropH = dw / aspect }
+        let left = ((dw - cropW) / 2).rounded(), top = ((dh - cropH) / 2).rounded()
+        let crop = CGRect(x: left, y: top, width: min(dw - left, cropW.rounded()), height: min(dh - top, cropH.rounded()))
+        let size = cropW > Double(o.maxWidth)
+            ? CGSize(width: o.maxWidth, height: o.maxHeight)
+            : CGSize(width: max(1, cropW.rounded()), height: max(1, cropH.rounded()))
+        return (crop, size)
+    }
+
+    /// 사진 썸네일을 만들어 결과에 넣을 필드(thumbnailUri/Width/Height/FileSize)를 돌려줌. options 가 없거나 실패하면 빈 딕셔너리.
+    /// image 는 결과 사진(uri)을 만든 것과 같은 UIImage — 원본을 다시 읽지 않음. 새로 그려 인코딩하므로 EXIF·GPS 는 들어가지 않음
+    private func makePhotoThumbnail(_ image: UIImage, options: PhotoThumbnailOptions?, index: Int,
+                                    timestamp: Int, tempDir: String) -> [String: Any] {
+        guard let o = options else { return [:] }
+        // 방향(imageOrientation) 반영된 픽셀 크기
+        let w = Int((image.size.width * image.scale).rounded()), h = Int((image.size.height * image.scale).rounded())
+        guard w > 0, h > 0 else { return [:] }
+        let (crop, size) = Self.photoThumbnailLayout(width: w, height: h, options: o)
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        format.opaque = false
+        format.preferredRange = .standard
+        let sx = size.width / crop.width, sy = size.height / crop.height
+        let thumb = UIGraphicsImageRenderer(size: size, format: format).image { ctx in
+            ctx.cgContext.interpolationQuality = .high
+            image.draw(in: CGRect(x: -crop.minX * sx, y: -crop.minY * sy, width: CGFloat(w) * sx, height: CGFloat(h) * sy))
+        }
+        // 색 프로필(sRGB ICC, 약 3KB)을 붙이지 않도록 장치 RGB 로 태그 — 수 KB 짜리 썸네일에선 용량의 절반 가까이라.
+        // 프로필이 없는 이미지는 sRGB 로 읽히므로 색은 같음
+        let untagged = thumb.cgImage.flatMap { $0.copy(colorSpace: CGColorSpaceCreateDeviceRGB()) }.map { UIImage(cgImage: $0) } ?? thumb
+        // webp 인코딩이 안 되면 jpg 로
+        var data: Data? = nil
+        var ext = "jpg"
+        if o.format == "webp", let d = encodeWebP(image: untagged, quality: o.quality) { data = d; ext = "webp" }
+        if data == nil { data = untagged.jpegData(compressionQuality: o.quality); ext = "jpg" }
+        guard let bytes = data else { return [:] }
+        let url = URL(fileURLWithPath: (tempDir as NSString).appendingPathComponent("turbo_picker_thumb_\(timestamp)_\(index).\(ext)"))
+        do { try bytes.write(to: url, options: [.atomic]) } catch { return [:] }
+        return [
+            "thumbnailUri": url.absoluteString,
+            "thumbnailWidth": Int(size.width),
+            "thumbnailHeight": Int(size.height),
+            "thumbnailFileSize": bytes.count,
+        ]
+    }
+
     /// 이미지를 지정 포맷으로 저장하고 file:// URI 반환
     /// - Parameters:
     ///   - image: 저장할 UIImage
@@ -1686,6 +1768,36 @@ class RNAttachmentKit: RCTEventEmitter {
         return (fileName, fileExtension, fileSize)
     }
     
+    /// 맨 위 컨트롤러에 present. 맨 위가 닫히거나 열리는 중이면(예: openGallery 가 끝난 직후 갤러리 시트가
+    /// 닫히는 애니메이션) UIKit 이 present 를 조용히 버리므로, 전환이 끝난 뒤 다시 시도합니다.
+    /// 끝내 present 되지 않으면 reject — 안 그러면 JS 약속이 안 풀리고 _editorOpen 가드에 계속 막힙니다.
+    private func presentOnTop(_ vc: UIViewController, reject: @escaping RCTPromiseRejectBlock, attempt: Int = 0) {
+        guard let top = getRootViewController() else {
+            reject("E_NO_ROOT", "Unable to get root view controller", nil)
+            return
+        }
+        if (top.isBeingDismissed || top.isBeingPresented) && attempt < 20 {
+            let retry: () -> Void = { [weak self] in
+                guard let self = self else {
+                    reject("E_PRESENT_FAILED", "Module deallocated", nil)
+                    return
+                }
+                self.presentOnTop(vc, reject: reject, attempt: attempt + 1)
+            }
+            if let coordinator = top.transitionCoordinator {
+                coordinator.animate(alongsideTransition: nil) { _ in DispatchQueue.main.async(execute: retry) }
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: retry)
+            }
+            return
+        }
+        top.present(vc, animated: true)
+        // present 가 받아들여지면 presentingViewController 가 바로 잡힘. nil 이면 UIKit 이 거부한 것
+        if vc.presentingViewController == nil {
+            reject("E_PRESENT_FAILED", "Unable to present \(type(of: vc)) on \(type(of: top))", nil)
+        }
+    }
+
     private func getRootViewController() -> UIViewController? {
         var rootViewController: UIViewController?
         
@@ -1806,7 +1918,7 @@ class RNAttachmentKit: RCTEventEmitter {
     }
 
     
-    private func processEditorResult(asset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String, galleryVC: GalleryViewController?, targetMaxWidth: Int? = nil, targetMaxHeight: Int? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    private func processEditorResult(asset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String, galleryVC: GalleryViewController?, targetMaxWidth: Int? = nil, targetMaxHeight: Int? = nil, thumbnail: PhotoThumbnailOptions? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         let tempDir = prepareCacheDirectory()
         // 동영상 1장 편집 → 전송: 편집 화면에서 고른 품질·음소거로 VideoExporter (사진 경로와 같은 결과 형태)
         if let phAsset = asset, phAsset.mediaType == .video {
@@ -1816,6 +1928,8 @@ class RNAttachmentKit: RCTEventEmitter {
         let maxWidth = targetMaxWidth ?? galleryVC?.maxWidth ?? 1024
         let maxHeight = targetMaxHeight ?? galleryVC?.maxHeight ?? 1024
         let format = galleryVC?.outputFormat ?? "webp"
+        // openEditor 는 자기 옵션, 갤러리 편집 경로는 openGallery 의 thumbnail
+        let thumbOptions = thumbnail ?? (galleryVC != nil ? galleryThumbnail : nil)
         
         DispatchQueue.global(qos: .userInitiated).async {
             let photoManager = PhotoManager.shared
@@ -1901,6 +2015,9 @@ class RNAttachmentKit: RCTEventEmitter {
                 result["fileExtension"] = finalMeta.fileExtension
                 result["fileSize"] = finalMeta.fileSize
             }
+            // 썸네일: 크롭·그리기·필터가 반영된 결과(uri 와 같은 비트맵)에서
+            result.merge(self.makePhotoThumbnail(finalImageForFormat, options: thumbOptions, index: 0,
+                                                 timestamp: timestamp, tempDir: tempDir)) { $1 }
             
             DispatchQueue.main.async {
                 self.currentGalleryVC = nil
@@ -1916,6 +2033,7 @@ class RNAttachmentKit: RCTEventEmitter {
         let maxWidth = galleryVC.maxWidth
         let maxHeight = galleryVC.maxHeight
         let format = galleryVC.outputFormat
+        let thumbOptions = galleryThumbnail
         
         DispatchQueue.global(qos: .userInitiated).async {
             let photoManager = PhotoManager.shared
@@ -1962,7 +2080,8 @@ class RNAttachmentKit: RCTEventEmitter {
                         result["fileSize"] = meta.fileSize
                     }
                     
-                    if (maxWidth > 0 || maxHeight > 0), let resizedImage = self.resizeImage(finalImage, maxWidth: maxWidth, maxHeight: maxHeight) {
+                    let resizedForThumb = (maxWidth > 0 || maxHeight > 0) ? self.resizeImage(finalImage, maxWidth: maxWidth, maxHeight: maxHeight) : nil
+                    if let resizedImage = resizedForThumb {
                         if let resizedUri = self.saveImage(resizedImage, format: format, prefix: "resized", index: index, timestamp: timestamp, tempDir: tempDir) {
                             result["uri"] = resizedUri
                             result["width"] = Int(resizedImage.size.width)
@@ -1973,6 +2092,8 @@ class RNAttachmentKit: RCTEventEmitter {
                             result["fileSize"] = resizedMeta.fileSize
                         }
                     }
+                    result.merge(self.makePhotoThumbnail(resizedForThumb ?? finalImage, options: thumbOptions, index: index,
+                                                         timestamp: timestamp, tempDir: tempDir)) { $1 }
                     
                     resultsLock.lock()
                     results.append(result)
@@ -2018,6 +2139,29 @@ class RNAttachmentKit: RCTEventEmitter {
     }
 }
 
+/// GalleryOptions.thumbnail / EditorOptions.thumbnail
+struct PhotoThumbnailOptions {
+    let maxWidth: Int
+    let maxHeight: Int
+    /// true = "cover" (상자를 꽉 채우고 가운데 기준으로 자름), false = "fit"
+    let cover: Bool
+    let quality: CGFloat
+    /// "webp" | "jpg"
+    let format: String
+
+    /// RN 옵션 → 값. maxWidth 가 없거나 0 이하면 nil (썸네일 안 만듦)
+    init?(_ raw: Any?) {
+        guard let d = raw as? NSDictionary, let mw = (d["maxWidth"] as? NSNumber)?.intValue, mw > 0 else { return nil }
+        maxWidth = mw
+        let mh = (d["maxHeight"] as? NSNumber)?.intValue ?? 0
+        maxHeight = mh > 0 ? mh : mw
+        cover = (d["mode"] as? String)?.lowercased() == "cover"
+        quality = CGFloat(min(max((d["quality"] as? NSNumber)?.doubleValue ?? 0.8, 0), 1))
+        let f = (d["format"] as? String)?.lowercased()
+        format = (f == "jpg" || f == "jpeg") ? "jpg" : "webp"
+    }
+}
+
 // MARK: - UIColor Extension for Hex Support
 extension UIColor {
     convenience init?(hexString: String) {
@@ -2059,6 +2203,10 @@ extension RNAttachmentKit {
                           resolve: @escaping RCTPromiseResolveBlock,
                           reject: @escaping RCTPromiseRejectBlock) -> Void {
         let o = options as? [String: Any] ?? [:]
+        // 동영상 항목은 라이선스 키가 있어야
+        if !LicenseGate.isLicensed, (o["items"] as? [[String: Any]] ?? []).compactMap({ MediaGalleryItem(dictionary: $0) }).contains(where: { $0.isVideo }) {
+            reject(LicenseGate.errorCode, LicenseGate.errorMessage, nil); return
+        }
         DispatchQueue.main.async {
             let config = MediaGalleryConfig(dictionary: o)
             let galleryId = config.galleryId
@@ -2140,6 +2288,9 @@ extension RNAttachmentKit {
         let galleryId = p["galleryId"] as? String ?? ""
         let raw = p["items"] as? [[String: Any]] ?? []
         let items = raw.compactMap { MediaGalleryItem(dictionary: $0) }
+        if !LicenseGate.isLicensed, items.contains(where: { $0.isVideo }) {
+            reject(LicenseGate.errorCode, LicenseGate.errorMessage, nil); return
+        }
         let page = MediaGalleryPage(items: items, nextCursor: p["nextCursor"] as? String,
                                     hasMore: (p["hasMore"] as? NSNumber)?.boolValue ?? false)
         DispatchQueue.main.async {

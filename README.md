@@ -98,7 +98,7 @@ Enable on the key: **Maps SDK for Android**, and **Places API (New)** for place 
 import AttachmentKit from 'react-native-attachment-kit'
 
 // Once at app start
-await AttachmentKit.init('YOUR_LICENSE_KEY', {   // '' = evaluation (editor watermark)
+await AttachmentKit.init('YOUR_LICENSE_KEY', {   // '' = evaluation: photos only (editor watermark; no location / video / AI)
   languageCode: 'ko',      // any app language code; see Localization
   themeColor: '#10b981',
   appearance: 'system',    // 'system' | 'light' | 'dark'
@@ -147,6 +147,7 @@ Opens the gallery bottom sheet. Resolves with the picked images (`[]` when the u
 | `profileMode` | `boolean` | `false` | 1:1 (circle) crop for profile photos. |
 | `maxWidth` / `maxHeight` | `number` | `1024` | Output images are scaled down to fit. |
 | `outputFormat` | `'webp' \| 'jpg' \| 'png'` | `'webp'` | Output file format. (Not in the TS type yet — pass it with a cast.) |
+| `thumbnail` | `ThumbnailOptions` | — | Also make a small photo thumbnail for each photo — see [Photo thumbnails](#photo-thumbnails). Omitted: no photo thumbnail (same as before). |
 | `themeColor` / `languageCode` / `appearance` | | defaults | Per-call overrides. |
 | `doneButtonText` / `allItemsText` / `selectedItemsText` / `recentsAlbumText` | `string` | translated | Label overrides. |
 | `asyncProcessing` | `boolean` | `false` | Event-driven sending: each item is delivered through `onImageProcessed` as soon as it is ready (the Promise still resolves with everything at the end), and videos show no progress HUD — draw progress in your own UI. See [Sending progress](#sending-progress-events). |
@@ -172,6 +173,32 @@ Opens the gallery bottom sheet. Resolves with the picked images (`[]` when the u
 | `type` | `string` | MIME type. |
 | `caption?` | `string` | Caption typed in the editor. |
 | `fileName?` / `fileExtension?` / `fileSize?` | | Output file info (bytes). |
+| `thumbnailUri?` / `thumbnailWidth?` / `thumbnailHeight?` | | Photo: the thumbnail when the `thumbnail` option is set. Video: the poster (always, see `video.posterFormat`). |
+| `thumbnailFileSize?` | `number` | Photo thumbnail file size (bytes). |
+
+#### Photo thumbnails
+
+Pass `thumbnail` to `openGallery` (or `openEditor`) to get a small thumbnail next to each photo — e.g. to upload both the full image and a list-size image in one request.
+
+```ts
+// Profile avatar: exactly 200×200, center-cropped
+await AttachmentKit.openGallery({ maxWidth: 512, maxHeight: 512, thumbnail: { maxWidth: 200, mode: 'cover' } })
+// Moments list: keep the aspect ratio, longest side ≤ 360
+await AttachmentKit.openGallery({ maxSelection: 10, thumbnail: { maxWidth: 360 } })
+```
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `maxWidth` | `number` (px) | **required** | Box width. |
+| `maxHeight` | `number` (px) | `maxWidth` | Box height. |
+| `mode` | `'fit' \| 'cover'` | `'fit'` | `'fit'`: keep the aspect ratio inside the box. `'cover'`: fill the box and crop the center → exactly `maxWidth × maxHeight`. |
+| `quality` | `number` 0–1 | `0.8` | Encoding quality. |
+| `format` | `'webp' \| 'jpg'` | `'webp'` | Falls back to jpg if webp encoding fails (check the extension of `thumbnailUri`). |
+
+- Made from the same image as `uri` (orientation, crop, drawing and filter applied) — the original is not decoded again. No EXIF / GPS is written.
+- Never enlarged: a 100×80 photo gives 100×80 with `{ maxWidth: 360 }` and 80×80 with `{ maxWidth: 200, mode: 'cover' }`. iOS and Android give the same size.
+- Also in `onImageProcessed` (`image.thumbnailUri` …). Video posters keep their own rules (longest side 512, `video.posterFormat`) and ignore this option.
+- Files: `turbo_picker_thumb_<time>_<index>.webp` next to the output photo; deleted after 24 h like the other temp files.
 
 #### `closeGallery(): Promise<boolean>`
 Closes the picker from code. `true` if it was open.
@@ -262,6 +289,7 @@ Both callbacks fire before `openGallery` resolves; their listeners are removed w
 | `uri` | `string` | Image to edit (`originalUri` from a picker result). |
 | `editedFileUri?` | `string` | A previous edit to continue from. |
 | `maxWidth` / `maxHeight` | `number` | Output bounds. |
+| `thumbnail?` | `ThumbnailOptions` | Also make a thumbnail of the edited result (crop and drawing applied). See [Photo thumbnails](#photo-thumbnails). |
 | `themeColor` / `appearance` | | Per-call overrides. |
 | `openDuration` / `closeDuration` | `number` (ms) | Animation durations. |
 
@@ -562,6 +590,7 @@ app.post('/ai/generate', auth, express.json({ limit: '20mb' }), async (req, res)
 |---|---|---|---|
 | Files from the File tab | `tmp/AttachmentKitFiles/<uuid>/<name>` | `cache/AttachmentKitFiles/<uuid>/<name>` | Deleted after 24 h (next gallery open); the OS may purge earlier — copy/upload promptly. |
 | Location snapshots | `tmp/AttachmentKitLocation/` | `cache/AttachmentKitLocation/` | Deleted after 24 h. |
+| Photo thumbnails (`thumbnail` option) | `Library/Caches/RNAttachmentKit/turbo_picker_thumb_*` | `cache/turbo_picker_thumb_*` | Deleted after 24 h (next gallery open). |
 | Location thumbnails | `Library/Caches/RNAttachmentKit/LocationThumbs/` | `cache/RNAttachmentKitLocationThumbs/` | 300 max → 250, least recently used. `clearLocationThumbnailCache()`. |
 | Reverse-geocode results | `Library/Caches/RNAttachmentKit/Geocode/` | `cache/RNAttachmentKitGeocode/` | 1000 max → 800, least recently used. `clearReverseGeocodeCache()`. |
 
@@ -569,7 +598,16 @@ app.post('/ai/generate', auth, express.json({ limit: '20mb' }), async (req, res)
 
 ## 📜 License & Contact
 
-`react-native-attachment-kit` is released under the **MIT License**. Removing the editor watermark requires a license key passed to `init()`.
+`react-native-attachment-kit` is released under the **MIT License**. A license key passed to `init()` (one key per app ID — bundle ID / package name) removes the editor watermark and unlocks location, video and AI.
+
+Without a valid key (evaluation), only photos work: picking, editing (with watermark) and viewing.
+
+| Feature | Without a license key |
+|---|---|
+| Attach menu Location tab, ✦ AI generate, editor AI tool, "AI 이미지" tab | Visible; tapping shows a "License required" notice |
+| `openGallery({ mediaType: 'video' \| 'all' })` | Photos only; holding the shutter to record shows the notice |
+| `openMapViewer`, `renderLocationThumbnail`, `reverseGeocode`, `openViewer` with `videos`, `openMediaGallery` / `appendGalleryItems` with video items | Rejected with `E_LICENSE_REQUIRED` |
+| `setAIConfig` | Accepted (the AI buttons appear and show the notice) |
 
 🛒 **License**: [https://license.rnturboimagepicker.usomnia.co.kr](https://license.rnturboimagepicker.usomnia.co.kr)
 📧 **Contact**: [contact@usomnia.co.kr](mailto:contact@usomnia.co.kr)

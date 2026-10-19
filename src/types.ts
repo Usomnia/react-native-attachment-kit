@@ -24,10 +24,15 @@ export interface ImageResult {
   mediaType?: "image" | "video"
   /** 동영상: 길이(초, 소수) */
   duration?: number
-  /** 동영상: 포스터 썸네일 file:// (video.posterFormat 형식 — 기본 webp, 긴 변 512) */
+  /**
+   * 사진: thumbnail 옵션을 줬을 때 썸네일 file:// (uri 와 같은 결과 사진에서 만듦 — 방향·크롭·그리기 반영, EXIF 없음).
+   * 동영상: 포스터 썸네일 (video.posterFormat 형식 — 기본 webp, 긴 변 512. thumbnail 옵션과 무관)
+   */
   thumbnailUri?: string
   thumbnailWidth?: number
   thumbnailHeight?: number
+  /** 사진 썸네일 파일 크기 (bytes) — thumbnail 옵션을 줬을 때만 */
+  thumbnailFileSize?: number
   /** 동영상: 전송본 코덱·평균 비트레이트(bps) */
   videoCodec?: "h264" | "hevc" | string
   videoBitrate?: number
@@ -68,6 +73,27 @@ export interface ProcessingStartItem {
   thumbnailUri?: string
   thumbnailWidth?: number
   thumbnailHeight?: number
+}
+
+/**
+ * 사진 썸네일 옵션 (GalleryOptions.thumbnail / EditorOptions.thumbnail).
+ * 결과 사진(uri)을 만든 같은 이미지에서 만들어 ImageResult.thumbnailUri/Width/Height/FileSize 로 돌려줍니다 (onImageProcessed 에도).
+ */
+export interface ThumbnailOptions {
+  /** 썸네일 최대 가로(px). mode "cover" 면 결과 가로가 정확히 이 값 (원본이 더 작으면 확대하지 않음) */
+  maxWidth: number
+  /** 썸네일 최대 세로(px). 생략하면 maxWidth 와 같음 */
+  maxHeight?: number
+  /**
+   * "fit"(기본): 원본 비율 유지, maxWidth×maxHeight 상자 안에 맞춤 (예: 모먼트 목록)
+   * "cover": 상자를 꽉 채우고 넘치는 부분은 가운데 기준으로 잘라냄 → 결과가 정확히 maxWidth×maxHeight (예: 프로필 아바타).
+   *          원본이 상자보다 작으면 확대하지 않고 상자 비율로 가운데만 자름 (100×80 사진 + 200×200 → 80×80)
+   */
+  mode?: "fit" | "cover"
+  /** 0~1, 기본 0.8 */
+  quality?: number
+  /** 기본 "webp". webp 인코딩이 안 되는 드문 경우 jpg 로 대신 (확장자는 thumbnailUri 로 확인) */
+  format?: "webp" | "jpg"
 }
 
 /** 동영상 옵션 (GalleryOptions.video). mediaType 이 "video"/"all" 일 때만 의미 */
@@ -125,6 +151,11 @@ export interface GalleryOptions {
   mediaType?: "photo" | "video" | "all"
   /** 동영상 옵션 (mediaType 이 video/all 일 때) */
   video?: VideoOptions
+  /**
+   * 사진 썸네일도 함께 만들기. 생략하면 지금처럼 사진 썸네일 없음.
+   * 동영상 포스터는 이 옵션과 무관하게 기존 규칙 그대로 (video.posterFormat, 긴 변 512)
+   */
+  thumbnail?: ThumbnailOptions
   quality?: number
   allItemsText?: string
   selectedItemsText?: string
@@ -506,6 +537,8 @@ export interface EditorOptions {
   appearance?: Appearance
   maxWidth?: number // 최대 width
   maxHeight?: number // 최대 height
+  /** 편집 결과 사진의 썸네일도 함께 만들기 (크롭·그리기 반영된 결과 기준) */
+  thumbnail?: ThumbnailOptions
   openDuration?: number
   closeDuration?: number
 }

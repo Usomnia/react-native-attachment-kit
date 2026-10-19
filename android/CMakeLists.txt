@@ -3,6 +3,9 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 project(react_codegen_RNAttachmentKitSpec)
 
+# Android 15+ 16KB 페이지 기기 지원 (Google Play: targetSdk 35+ 업데이트 필수). NDK r27 이하는 기본이 4KB 정렬이라 명시
+string(APPEND CMAKE_SHARED_LINKER_FLAGS " -Wl,-z,max-page-size=16384")
+
 set(GENERATED_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build/generated/source/codegen/jni")
 
 if(NOT COMMAND target_compile_reactnative_options)

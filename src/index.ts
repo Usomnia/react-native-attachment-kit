@@ -89,7 +89,7 @@ let _editorOpen = false
 let _asyncImgProcessedSub: { remove: () => void } | null = null
 
 export type { AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
-export type { VideoOptions, VideoProgressEvent, ViewerVideo, ProcessingStartEvent, ProcessingStartItem } from "./types"
+export type { VideoOptions, VideoProgressEvent, ViewerVideo, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions } from "./types"
 export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 

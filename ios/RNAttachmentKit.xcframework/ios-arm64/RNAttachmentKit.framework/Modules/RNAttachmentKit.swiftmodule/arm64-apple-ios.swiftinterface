@@ -47,9 +47,13 @@ import _SwiftConcurrencyShims
   }
   @_Concurrency.MainActor @preconcurrency public var onLocationSelected: ((RNAttachmentKit.AttachLocationResult) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var capturesLocationImage: Swift.Bool
-  @_Concurrency.MainActor @preconcurrency public var mediaType: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var mediaType: Swift.String {
+    get
+    set
+  }
   @_Concurrency.MainActor @preconcurrency public var maxVideoDurationSec: Swift.Double
   @_Concurrency.MainActor @preconcurrency public var videoExportOptions: RNAttachmentKit.VideoExportOptions
+  @_Concurrency.MainActor @preconcurrency public var videoLockedByLicense: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public func releaseAfterReturn(discardPreparedVideos: Swift.Bool = true)
   @_Concurrency.MainActor @preconcurrency public var onFilesSelected: (([RNAttachmentKit.AttachFileResult]) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var onFilesSelectedWithFailures: (([RNAttachmentKit.AttachFileResult], [RNAttachmentKit.AttachFileFailure]) -> Swift.Void)?
@@ -391,6 +395,13 @@ extension RNAttachmentKit.GalleryBaseViewController : UIKit.UIAdaptivePresentati
   public func initialize(with key: Swift.String) -> Swift.Bool
   public func isValidLicense() -> Swift.Bool
   @objc deinit
+}
+public enum LicenseGate {
+  public static var isLicensed: Swift.Bool {
+    get
+  }
+  public static let errorCode: Swift.String
+  public static let errorMessage: Swift.String
 }
 @_hasMissingDesignatedInitializers public class ViewerImageCache {
   public static let shared: RNAttachmentKit.ViewerImageCache

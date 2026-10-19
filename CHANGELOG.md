@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.10 — 2026-10-19
+
+- iOS: photos just saved from another app (e.g. KakaoTalk) now show at the top of "최근 항목". Recents is ordered by when photos were added (like the Photos app and the Android picker) instead of capture date — a saved photo keeps its original EXIF date and used to land far down the list.
+
+## 1.0.9 — 2026-10-19
+
+- **Location, video and AI need a license key** (`init`). Without one only photos work (pick, edit with watermark, view): the Location tab, AI buttons and video recording show a "License required" notice, `mediaType` video/all shows photos only, and `openMapViewer` / `renderLocationThumbnail` / `reverseGeocode` / video viewer APIs reject with `E_LICENSE_REQUIRED`.
+- Photo thumbnails: `thumbnail` option for `openGallery` / `openEditor`.
+- Android: 16 KB page size support; Back closes the overlay viewer; Android 14+ "Allow limited access" works in the picker.
+
 ## 1.0.8 — 2026-10-16
 
 - **AI screens are the same in every app (iOS + Android)**. Generate: woman / man, country, age (up to the 80s), style, situation, aspect ratio + Create, sample chips and the chat input; chat text is sent together with the chosen settings, and tapping a sample shows a summary of the settings before creating. The glamour situations / samples and the detail options were removed from the generate screen. Edit: the full editing screen everywhere. Generated and edited images are stored for the gallery's "AI 이미지" tab in every app.

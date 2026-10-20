@@ -432,6 +432,7 @@ public enum LicenseGate {
   @_Concurrency.MainActor @preconcurrency public var placeholderImages: [Swift.String]?
   @_Concurrency.MainActor @preconcurrency public var cacheFiles: [Swift.String]?
   @_Concurrency.MainActor @preconcurrency public var showActionButtons: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var showDeleteButton: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var saveAllText: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var saveOneText: Swift.String?
   @_Concurrency.MainActor @preconcurrency public var shareAllText: Swift.String?

@@ -506,7 +506,11 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             }
 
             val permissionsToRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE && permission == Manifest.permission.READ_MEDIA_IMAGES) {
-                if (ContextCompat.checkSelfPermission(fragmentActivity, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED) == PackageManager.PERMISSION_GRANTED) {
+                // 일부만 허용한 사용자는 열 때마다 사진 선택 창을 다시 띄우지 않으려고 바로 엶.
+                //   단 동영상도 보여야 하는데 READ_MEDIA_VIDEO 를 한 번도 묻지 않았으면 한 번은 물어봄 — 예전엔 사진 전용으로
+                //   권한을 받은 사용자(예: 가입 때 프로필 사진)가 여기서 바로 열려 동영상 권한을 영영 묻지 않아 동영상이 안 보였음
+                if (ContextCompat.checkSelfPermission(fragmentActivity, Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED) == PackageManager.PERMISSION_GRANTED &&
+                    (mediaType == "photo" || ContextCompat.checkSelfPermission(fragmentActivity, Manifest.permission.READ_MEDIA_VIDEO) == PackageManager.PERMISSION_GRANTED || wasVideoPermissionAsked())) {
                     showSheet()
                     return
                 }
@@ -515,6 +519,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                 mediaPermissions
             }
 
+            if (permissionsToRequest.contains(Manifest.permission.READ_MEDIA_VIDEO)) markVideoPermissionAsked()
             permissionAwareActivity.requestPermissions(permissionsToRequest, 100, object : PermissionListener {
                 override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray): Boolean {
                     if (requestCode == 100 && grantResults != null) {
@@ -536,6 +541,11 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             })
         }
     }
+
+    // 동영상 권한(READ_MEDIA_VIDEO)을 한 번 물어봤는지 — 물어본 뒤 거절했으면 다시 묻지 않음 (Android 14+ 일부 허용 경로)
+    private fun mediaPermPrefs() = reactApplicationContext.getSharedPreferences("rnak_media_perm", android.content.Context.MODE_PRIVATE)
+    private fun wasVideoPermissionAsked(): Boolean = mediaPermPrefs().getBoolean("video_asked", false)
+    private fun markVideoPermissionAsked() { mediaPermPrefs().edit().putBoolean("video_asked", true).apply() }
 
     override fun openViewer(options: ReadableMap, promise: Promise) {
         // 동영상 페이지는 라이선스 키가 있어야
@@ -688,6 +698,7 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     // 상단바 저장/공유/삭제 버튼과 그 문구들 (iOS와 동일한 옵션 키). 문구를 안 넘기면
                     // 네이티브 쪽 로케일 리소스(values-ko/ja/zh, 그 외 en)가 자동 적용됩니다.
                     putBoolean("showActionButtons", !options.hasKey("showActionButtons") || options.getBoolean("showActionButtons"))
+                    putBoolean("showDeleteButton", !options.hasKey("showDeleteButton") || options.getBoolean("showDeleteButton"))
                     for (key in listOf(
                         "saveAllText", "saveOneText", "shareAllText", "shareOneText", "actionCancelText",
                         "deleteConfirmTitle", "deleteConfirmMessage", "deleteConfirmGroupMessage", "deleteButtonText"

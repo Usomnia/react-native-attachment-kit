@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.11 — 2026-10-20
+
+- Viewer: `showDeleteButton` option (iOS + Android) — hides only the trash icon in the top bar (default `true`; save / share stay).
+- Android: the gallery camera cell's "Tap to allow camera" is localized (59 languages).
+- Android: the picker asks for video permission once when only "selected photos" access was granted (Android 14+).
+
 ## 1.0.10 — 2026-10-19
 
 - iOS: photos just saved from another app (e.g. KakaoTalk) now show at the top of "최근 항목". Recents is ordered by when photos were added (like the Photos app and the Android picker) instead of capture date — a saved photo keeps its original EXIF date and used to land far down the list.

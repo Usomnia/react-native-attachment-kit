@@ -448,6 +448,7 @@ class RNAttachmentKit: RCTEventEmitter {
         // 저장/공유/삭제 상단바 버튼 - 사용자가 준 스크린샷(전체 저장/이 사진만 저장 등)에
         // 맞춘 기본 한국어 문구가 있으므로, JS에서 안 넘기면 그 기본값을 그대로 씁니다.
         let showActionButtons = (options["showActionButtons"] as? Bool) ?? true
+        let showDeleteButton = (options["showDeleteButton"] as? Bool) ?? true
         let saveAllText = options["saveAllText"] as? String
         let saveOneText = options["saveOneText"] as? String
         let shareAllText = options["shareAllText"] as? String
@@ -528,6 +529,7 @@ class RNAttachmentKit: RCTEventEmitter {
                 viewerVC.themeColor = color
             }
             viewerVC.showActionButtons = showActionButtons
+            viewerVC.showDeleteButton = showDeleteButton
             if let saveAllText = saveAllText { viewerVC.saveAllText = saveAllText }
             if let saveOneText = saveOneText { viewerVC.saveOneText = saveOneText }
             if let shareAllText = shareAllText { viewerVC.shareAllText = shareAllText }

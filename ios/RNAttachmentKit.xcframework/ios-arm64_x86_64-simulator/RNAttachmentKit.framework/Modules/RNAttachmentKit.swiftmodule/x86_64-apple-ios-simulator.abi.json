@@ -20925,6 +20925,95 @@
           },
           {
             "kind": "Var",
+            "name": "showDeleteButton",
+            "printedName": "showDeleteButton",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvp",
+            "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvg",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvs",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvM",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC16showDeleteButtonSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "saveAllText",
             "printedName": "saveAllText",
             "children": [
@@ -56443,582 +56532,589 @@
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 20018,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "Array",
-      "offset": 21096,
+      "offset": 21241,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27293,
+      "offset": 27438,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27328,
+      "offset": 27473,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27377,
+      "offset": 27522,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27562,
+      "offset": 27707,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 27720,
+      "offset": 27865,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 27760,
+      "offset": 27905,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 27852,
+      "offset": 27997,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 28040,
+      "offset": 28185,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 28087,
+      "offset": 28232,
       "length": 7,
       "value": "\"xmark\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 28638,
+      "offset": 28783,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 28776,
+      "offset": 28921,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29304,
+      "offset": 29449,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 29846,
+      "offset": 29991,
       "length": 23,
       "value": "\"square.and.arrow.down\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 29972,
+      "offset": 30117,
       "length": 21,
       "value": "\"square.and.arrow.up\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 30097,
+      "offset": 30242,
       "length": 7,
       "value": "\"trash\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30313,
+      "offset": 30458,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 30453,
+      "offset": 30598,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30633,
+      "offset": 30778,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 30791,
+      "offset": 30936,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 30831,
+      "offset": 30976,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 30923,
+      "offset": 31068,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31164,
+      "offset": 31309,
       "length": 2,
       "value": "50"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31176,
+      "offset": 31321,
       "length": 2,
       "value": "65"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31221,
+      "offset": 31366,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31259,
+      "offset": 31404,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31309,
+      "offset": 31454,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31318,
+      "offset": 31463,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31330,
+      "offset": 31475,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31340,
+      "offset": 31485,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31486,
+      "offset": 31631,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31572,
+      "offset": 31717,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 31702,
+      "offset": 31847,
       "length": 15,
       "value": "\"ThumbnailCell\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 31886,
+      "offset": 32031,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31943,
+      "offset": 32088,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 32108,
+      "offset": 32253,
       "length": 20,
       "value": "\"photo.on.rectangle\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 32315,
+      "offset": 32460,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 32556,
+      "offset": 32701,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 33053,
+      "offset": 33198,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 34031,
+      "offset": 34176,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "Dictionary",
-      "offset": 42918,
+      "offset": 43113,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 42958,
+      "offset": 43153,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 44852,
+      "offset": 45047,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 48555,
+      "offset": 48750,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 66229,
+      "offset": 66424,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82306,
+      "offset": 82501,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82315,
+      "offset": 82510,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82327,
+      "offset": 82522,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82337,
+      "offset": 82532,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 83072,
+      "offset": 83267,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 83161,
+      "offset": 83356,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 83205,
+      "offset": 83400,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 83524,
+      "offset": 83719,
       "length": 4,
       "value": "0.08"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 83537,
+      "offset": 83732,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 83559,
+      "offset": 83754,
       "length": 3,
       "value": "0.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 83571,
+      "offset": 83766,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 83699,
+      "offset": 83894,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 83750,
+      "offset": 83945,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 83984,
+      "offset": 84179,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 84034,
+      "offset": 84229,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 84093,
+      "offset": 84288,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 84096,
+      "offset": 84291,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 84110,
+      "offset": 84305,
       "length": 3,
       "value": "185"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 84114,
+      "offset": 84309,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 84127,
+      "offset": 84322,
       "length": 3,
       "value": "129"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 84131,
+      "offset": 84326,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 84145,
+      "offset": 84340,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 84203,
+      "offset": 84398,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 84240,
+      "offset": 84435,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 84425,
+      "offset": 84620,
       "length": 1,
       "value": "2"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 84522,
-      "length": 1,
-      "value": "2"
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
-      "kind": "IntegerLiteral",
-      "offset": 84621,
-      "length": 2,
-      "value": "-2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
       "offset": 84717,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 84816,
       "length": 2,
       "value": "-2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89058,
+      "offset": 84912,
+      "length": 2,
+      "value": "-2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 89253,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 89061,
+      "offset": 89256,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89075,
+      "offset": 89270,
       "length": 3,
       "value": "185"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 89079,
+      "offset": 89274,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 89092,
+      "offset": 89287,
       "length": 3,
       "value": "129"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 89096,
+      "offset": 89291,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 89110,
+      "offset": 89305,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 89710,
+      "offset": 89905,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 95898,
+      "offset": 96093,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 100522,
+      "offset": 100717,
       "length": 5,
       "value": "false"
     },

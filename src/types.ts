@@ -449,6 +449,12 @@ export interface ViewerOptions {
    * 상단바에 저장/공유/삭제 아이콘 3개를 표시할지 여부. 기본값 true.
    */
   showActionButtons?: boolean
+  /**
+   * 상단바 삭제(휴지통) 아이콘만 따로 숨김. 기본값 true. onImageDeleted 로 실제 삭제를 처리하지 않는 화면
+   * (다른 사람 프로필 사진 등)에서는 false 로 — 눌러도 아무것도 지워지지 않는데 지울 수 있는 것처럼 보이지 않게.
+   * showActionButtons 가 false 면 이 값과 상관없이 숨김.
+   */
+  showDeleteButton?: boolean
   /** 여러 장(묶음사진)일 때 저장 액션시트에 쓰는 문구들 - 기본값은 한국어. */
   saveAllText?: string
   saveOneText?: string

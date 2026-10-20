@@ -30,7 +30,7 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		0uED/h/G0QDX8IhnS1pa6h2XOTg=
+		crMQm2au5Vt2NWQBMM53c3z3j/0=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		t2/USjE9i9k1KxN5cHUKo3PXcno=
+		zeVIRfZQVfhWjkzsme2X1dbQPEo=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -242,7 +242,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			7+cSX1FoylHdBFTB9PsMYx8HQS/h9AooY5SDnZBF1d4=
+			IVlLsYV4940F0HxiWRoLq8zoPnvOyx5/U1QcCDkA77s=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
@@ -270,7 +270,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dF2sxAihnKK9nenRuNzPwjZsUhBE1IwkV+Up47ATPWg=
+			cwxTIHpVzB1MP8gJ2ludrx960I5wYYsjzusw8Y1Cc20=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

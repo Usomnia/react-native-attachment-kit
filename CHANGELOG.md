@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.12 — 2026-10-20
+
+- Album picker ("최근 항목 ⌄"): fixed crashes on fast repeated taps and on first use (iOS + Android); on iOS the popup no longer opens empty right after granting photo access.
+
 ## 1.0.11 — 2026-10-20
 
 - Viewer: `showDeleteButton` option (iOS + Android) — hides only the trash icon in the top bar (default `true`; save / share stay).

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.14 — 2026-10-21
+
+- No code changes from 1.0.13. Published automatically by GitHub Actions (npm trusted publishing).
+
 ## 1.0.13 — 2026-10-21
 
 - iOS: fixed a crash when closing the picker (`-[AVCaptureSession stopRunning]` exception). The full-screen camera's front/back flip now runs on the same camera session queue as the gallery camera, so stopping the camera can no longer overlap a session reconfiguration.

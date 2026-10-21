@@ -47181,203 +47181,203 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "StringLiteral",
-      "offset": 2206,
+      "offset": 2583,
       "length": 25,
       "value": "\"com.camera.sessionQueue\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "StringLiteral",
-      "offset": 9222,
+      "offset": 9599,
       "length": 27,
       "value": "\"RNAttachmentKitEditorPeek\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 9290,
+      "offset": 9667,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 27934,
+      "offset": 28311,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 28109,
+      "offset": 28486,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 30128,
+      "offset": 30505,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 30277,
+      "offset": 30654,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 30402,
+      "offset": 30779,
       "length": 2,
       "value": "13"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 30557,
+      "offset": 30934,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 30865,
+      "offset": 31242,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 31029,
+      "offset": 31406,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "StringLiteral",
-      "offset": 31203,
+      "offset": 31580,
       "length": 15,
       "value": "\"-cameraTiming\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 31263,
+      "offset": 31640,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 31300,
+      "offset": 31677,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "StringLiteral",
-      "offset": 32286,
+      "offset": 32663,
       "length": 12,
       "value": "\"cam.timing\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 51071,
+      "offset": 51448,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 58391,
+      "offset": 58768,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 58406,
+      "offset": 58783,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 58629,
+      "offset": 59006,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 58661,
+      "offset": 59038,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "FloatLiteral",
-      "offset": 58786,
+      "offset": 59163,
       "length": 4,
       "value": "0.01"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 58979,
+      "offset": 59356,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 59017,
+      "offset": 59394,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 60153,
+      "offset": 60530,
       "length": 4,
       "value": "1080"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 60199,
+      "offset": 60576,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 60225,
+      "offset": 60602,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 60251,
+      "offset": 60628,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "IntegerLiteral",
-      "offset": 66481,
+      "offset": 66858,
       "length": 2,
       "value": "30"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraPreviewView.swift",
       "kind": "BooleanLiteral",
-      "offset": 67691,
+      "offset": 68068,
       "length": 4,
       "value": "true"
     },
@@ -47831,575 +47831,568 @@
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
-      "kind": "StringLiteral",
-      "offset": 8694,
-      "length": 22,
-      "value": "\"com.overlay.camera.q\""
-    },
-    {
-      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 8865,
+      "offset": 8761,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 9002,
+      "offset": 8898,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9159,
+      "offset": 9055,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9385,
+      "offset": 9281,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 9395,
+      "offset": 9291,
       "length": 4,
       "value": "0.15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9432,
+      "offset": 9328,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9453,
+      "offset": 9349,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9604,
+      "offset": 9500,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 9642,
+      "offset": 9538,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 9804,
+      "offset": 9700,
       "length": 8,
       "value": "\"사진\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 9992,
+      "offset": 9888,
       "length": 8,
       "value": "\"사진\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10071,
+      "offset": 9967,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10150,
+      "offset": 10046,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10326,
+      "offset": 10222,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 10388,
+      "offset": 10284,
       "length": 7,
       "value": "\"xmark\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10512,
+      "offset": 10408,
       "length": 4,
       "value": "0.15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10525,
+      "offset": 10421,
       "length": 4,
       "value": "0.85"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10588,
+      "offset": 10484,
       "length": 2,
       "value": "28"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 10882,
+      "offset": 10778,
       "length": 3,
       "value": "4.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 10923,
+      "offset": 10819,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 11529,
+      "offset": 11425,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 11591,
+      "offset": 11487,
       "length": 36,
       "value": "\"arrow.triangle.2.circlepath.camera\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 11744,
+      "offset": 11640,
       "length": 4,
       "value": "0.15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 11757,
+      "offset": 11653,
       "length": 4,
       "value": "0.85"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 11820,
+      "offset": 11716,
       "length": 2,
       "value": "28"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15323,
+      "offset": 15219,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15807,
+      "offset": 15703,
       "length": 3,
       "value": "120"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 15982,
+      "offset": 15878,
       "length": 4,
       "value": "0.35"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16020,
+      "offset": 15916,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 16081,
+      "offset": 15977,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16122,
+      "offset": 16018,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 23196,
+      "offset": 23092,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 23404,
+      "offset": 23300,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 23514,
+      "offset": 23410,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27785,
+      "offset": 27681,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29079,
+      "offset": 28975,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29085,
+      "offset": 28981,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29210,
+      "offset": 29106,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29226,
+      "offset": 29122,
       "length": 2,
       "value": "85"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 29252,
+      "offset": 29148,
       "length": 3,
       "value": "4.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 29258,
+      "offset": 29154,
       "length": 3,
       "value": "3.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29341,
+      "offset": 29237,
       "length": 2,
       "value": "64"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29452,
+      "offset": 29348,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29457,
+      "offset": 29353,
       "length": 2,
       "value": "80"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29462,
+      "offset": 29358,
       "length": 2,
       "value": "44"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29726,
+      "offset": 29622,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29771,
+      "offset": 29667,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 74288,
+      "offset": 74338,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74357,
+      "offset": 74407,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 74406,
+      "offset": 74456,
       "length": 3,
       "value": "0.2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74504,
+      "offset": 74554,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 74656,
+      "offset": 74706,
       "length": 4,
       "value": "0.72"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 74665,
+      "offset": 74715,
       "length": 4,
       "value": "0.72"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 74755,
+      "offset": 74805,
       "length": 3,
       "value": "1.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 74763,
+      "offset": 74813,
       "length": 3,
       "value": "1.1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74817,
+      "offset": 74867,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74866,
+      "offset": 74916,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74870,
+      "offset": 74920,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74918,
+      "offset": 74968,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 74922,
+      "offset": 74972,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 75113,
+      "offset": 75163,
       "length": 4,
       "value": "0.35"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 75120,
+      "offset": 75170,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 75228,
+      "offset": 75278,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 75676,
+      "offset": 75726,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 81145,
+      "offset": 81195,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82743,
+      "offset": 82793,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82747,
+      "offset": 82797,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 82829,
+      "offset": 82879,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 82839,
+      "offset": 82889,
       "length": 4,
       "value": "0.38"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "StringLiteral",
-      "offset": 85463,
+      "offset": 85513,
       "length": 14,
       "value": "\"sun.max.fill\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 85537,
+      "offset": 85587,
       "length": 2,
       "value": "20"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 85679,
+      "offset": 85729,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 85691,
+      "offset": 85741,
       "length": 4,
       "value": "0.83"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 85703,
+      "offset": 85753,
       "length": 3,
       "value": "0.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 85715,
+      "offset": 85765,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 85755,
+      "offset": 85805,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "Array",
-      "offset": 87369,
+      "offset": 87419,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87405,
+      "offset": 87455,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 87435,
+      "offset": 87485,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 94281,
+      "offset": 94331,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/CameraFullscreenViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 94291,
+      "offset": 94341,
       "length": 4,
       "value": "0.14"
     },

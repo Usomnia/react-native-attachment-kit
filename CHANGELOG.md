@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.13 — 2026-10-21
+
+- iOS: fixed a crash when closing the picker (`-[AVCaptureSession stopRunning]` exception). The full-screen camera's front/back flip now runs on the same camera session queue as the gallery camera, so stopping the camera can no longer overlap a session reconfiguration.
+
 ## 1.0.12 — 2026-10-20
 
 - Album picker ("최근 항목 ⌄"): fixed crashes on fast repeated taps and on first use (iOS + Android); on iOS the popup no longer opens empty right after granting photo access.

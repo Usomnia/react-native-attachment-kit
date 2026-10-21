@@ -1,28 +1,68 @@
-name: Publish to NPM
+# npm 자동 배포 — develop 에 푸시하면 package.json 버전이 npm 에 아직 없을 때만 배포하고 v<버전> 태그를 붙임.
+# 버전을 올리지 않은 커밋은 건너뜀. 키(NPM_TOKEN) 없이 npm trusted publishing(OIDC) 으로 배포:
+#   npmjs.com > react-native-attachment-kit > Settings > Trusted Publisher > GitHub Actions
+#   (Organization or user: Usomnia / Repository: react-native-attachment-kit / Workflow filename: publish.yml)
+# 공개 저장소 + GitHub 기본 러너라 비용 없음. Actions 탭에서 수동 실행(workflow_dispatch)도 가능.
+name: Publish to npm
 
 on:
   push:
     branches:
-      - main
-      - master
-    tags:
-      - 'v*'
+      - develop
+  workflow_dispatch:
+
+# 같은 커밋들이 겹쳐 두 번 배포하지 않게 한 번에 하나씩
+concurrency:
+  group: npm-publish
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # 배포 뒤 v<버전> 태그 푸시
+  id-token: write   # npm trusted publishing (OIDC) + provenance
 
 jobs:
-  build-and-publish:
+  publish:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          registry-url: 'https://registry.npmjs.org/'
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
 
-      - name: Publish to NPM
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # trusted publishing 은 npm 11.5.1 이상이 필요
+      - name: Update npm
+        run: npm install -g npm@latest
+
+      - name: Check version
+        id: version
+        run: |
+          NAME=$(node -p "require('./package.json').name")
+          VERSION=$(node -p "require('./package.json').version")
+          echo "name=$NAME" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+            echo "$NAME@$VERSION is already on npm — skipping"
+          else
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+            echo "$NAME@$VERSION is not on npm yet — publishing"
+          fi
+
+      - name: Publish
+        if: steps.version.outputs.publish == 'true'
+        run: npm publish --access public
+
+      - name: Tag v${{ steps.version.outputs.version }}
+        if: steps.version.outputs.publish == 'true'
+        run: |
+          TAG="v${{ steps.version.outputs.version }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "$TAG already exists"
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi

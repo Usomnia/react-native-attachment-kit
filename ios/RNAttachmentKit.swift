@@ -1364,9 +1364,10 @@ class RNAttachmentKit: RCTEventEmitter {
                 "width": Int(size.width), "height": Int(size.height),
                 "duration": state.outputDuration(sourceDuration: a.duration),
             ]
-            // 앞을 잘랐으면 포스터는 잘린 구간의 첫 프레임 (원본 첫 프레임은 결과 영상에 없음 — Android 와 같음)
+            // 포스터는 보낼 영상의 첫 프레임 — 앞을 잘랐으면 잘린 구간의 첫 프레임 (원본 첫 프레임은 결과 영상에 없음 — Android 와 같음).
+            // 자르지 않았을 때도 갤러리 썸네일(사진 앱이 정한 대표 화면 — 첫 화면이 아닐 수 있음)이 아니라 0초 프레임을 씀. 못 읽으면 갤러리 썸네일
             let trimmedStart = state.trimRange(duration: a.duration).map { CMTimeGetSeconds($0.start) } ?? 0
-            let base = trimmedStart > 0.01 ? (Self.videoFrame(a, at: trimmedStart) ?? image) : image
+            let base = Self.videoFrame(a, at: trimmedStart) ?? image
             if let poster = base {
                 let edited = state.applyEdits(to: poster)
                 if let encoded = VideoExporter.encodePoster(edited, format: videoOptions.posterFormat, quality: 0.8) {

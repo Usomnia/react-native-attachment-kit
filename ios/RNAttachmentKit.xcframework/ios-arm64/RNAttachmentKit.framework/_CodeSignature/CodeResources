@@ -30,23 +30,23 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		zRJUXjLcAmfr9iFAdEo/gcrXDSY=
+		3YLnU14QXPbjfWsJRZRV0hPyBCo=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		hxSasqltutoT70pctZ8VFYSVqqU=
+		FxbVGfYJF2BTZnkXx/Dv8OUa3tM=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		tqlS8y12x4nK+tCkxgNoDxCB6Rw=
+		yvhxUG1MJPJxCsDl2cNMkmSwpAU=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		hxSasqltutoT70pctZ8VFYSVqqU=
+		FxbVGfYJF2BTZnkXx/Dv8OUa3tM=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		CbSboNKY4KmS5GPRZqZuJBPpZRw=
+		zOzriNs6xwFA6bOG1kpW9y936fE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -242,35 +242,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dd6AouspiI0JseBcwY9DDycBMfZNckA2VmFi32UwxQ4=
+			ADHJT9QPXprv8J1sobV6qrMyhgXIliRz06k+B/h3Ey0=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TTbwfhUqeBUkWun4e2fJRUKAA27J1MaO7NJp6nEDPMI=
+			E0EFeQOXirL6MkDaEbfw8YMNoi/tazTiYFADfew5ofo=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y7/ioYZq5sXdVKiX3y3g2V+P2w6yZkkp0tL5R7KXk1s=
+			4ZHq7RF2EnXi5e5ma7Z0yLt7CdWiXv25XkUfWF4eLyk=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TTbwfhUqeBUkWun4e2fJRUKAA27J1MaO7NJp6nEDPMI=
+			E0EFeQOXirL6MkDaEbfw8YMNoi/tazTiYFADfew5ofo=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TnwZqb5tEEE2HGPV5RWhq6AP+u2DSQp3Mcf3SngCVg8=
+			NHS9p3j2hBxd4aL7jUV2OzpCkBvsYJ4I3LBl00xO3Rs=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

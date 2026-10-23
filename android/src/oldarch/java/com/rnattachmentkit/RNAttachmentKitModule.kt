@@ -708,6 +708,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     // 네이티브 쪽 로케일 리소스(values-ko/ja/zh, 그 외 en)가 자동 적용됩니다.
                     putBoolean("showActionButtons", !options.hasKey("showActionButtons") || options.getBoolean("showActionButtons"))
                     putBoolean("showDeleteButton", !options.hasKey("showDeleteButton") || options.getBoolean("showDeleteButton"))
+                    // 처음에 상단바·하단바·동영상 조작 UI 를 숨긴 채로 엶 (탭하면 보임)
+                    putBoolean("startWithUiHidden", options.hasKey("startWithUiHidden") && options.getBoolean("startWithUiHidden"))
                     for (key in listOf(
                         "saveAllText", "saveOneText", "shareAllText", "shareOneText", "actionCancelText",
                         "deleteConfirmTitle", "deleteConfirmMessage", "deleteConfirmGroupMessage", "deleteButtonText"

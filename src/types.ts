@@ -455,6 +455,11 @@ export interface ViewerOptions {
    * showActionButtons 가 false 면 이 값과 상관없이 숨김.
    */
   showDeleteButton?: boolean
+  /**
+   * 상단바·하단바·동영상 조작 UI 를 숨긴 채로 엶. 기본값 false. 화면을 탭하면 보이고, 동영상 재생 중이면 3초 뒤 다시 숨김.
+   * 숨긴 동안에도 동영상이 멈추면 ▶, 받는 중·로딩 중이면 로딩 표시는 보임. (Android 는 useOverlayViewer 뷰어에서만)
+   */
+  startWithUiHidden?: boolean
   /** 여러 장(묶음사진)일 때 저장 액션시트에 쓰는 문구들 - 기본값은 한국어. */
   saveAllText?: string
   saveOneText?: string

@@ -449,6 +449,7 @@ class RNAttachmentKit: RCTEventEmitter {
         // 맞춘 기본 한국어 문구가 있으므로, JS에서 안 넘기면 그 기본값을 그대로 씁니다.
         let showActionButtons = (options["showActionButtons"] as? Bool) ?? true
         let showDeleteButton = (options["showDeleteButton"] as? Bool) ?? true
+        let startWithUiHidden = (options["startWithUiHidden"] as? Bool) ?? false
         let saveAllText = options["saveAllText"] as? String
         let saveOneText = options["saveOneText"] as? String
         let shareAllText = options["shareAllText"] as? String
@@ -530,6 +531,7 @@ class RNAttachmentKit: RCTEventEmitter {
             }
             viewerVC.showActionButtons = showActionButtons
             viewerVC.showDeleteButton = showDeleteButton
+            viewerVC.startWithUiHidden = startWithUiHidden
             if let saveAllText = saveAllText { viewerVC.saveAllText = saveAllText }
             if let saveOneText = saveOneText { viewerVC.saveOneText = saveOneText }
             if let shareAllText = shareAllText { viewerVC.shareAllText = shareAllText }

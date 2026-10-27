@@ -46,8 +46,6 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
     private var lastMaxSelection: Int = 10
     private var lastThemeColorInt: Int? = null
     private var lastLanguageCode: String = "en"
-    @Volatile private var currentVideoExporter: com.rnattachmentkit.VideoExporter? = null
-    @Volatile private var videoCancelled = false
     /** 진행 중인 전송 처리 (processingId → 작업). 보내는 중에 갤러리를 다시 열어 또 보낼 수 있어 여러 개일 수 있음 */
     private val activeProcessingJobs = java.util.concurrent.ConcurrentHashMap<String, com.rnattachmentkit.ProcessingJob>()
     /** 가장 최근에 시작한 처리 (cancelVideoProcessing 에 processingId 가 없을 때) */
@@ -969,374 +967,93 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         }
     }
 
+    /** 고른 뒤 처리 — com.rnattachmentkit.AttachmentProcessor (앱 네이티브 화면과 같은 코드). 여기선 RN 이벤트·HUD 만 */
     private suspend fun processImages(uris: List<Uri>, snap: SendSnapshot): List<com.facebook.react.bridge.WritableMap> = withContext(Dispatchers.IO) {
-        // 보낸 순간의 설정 (모듈 필드와 같은 이름으로 가림 — 아래 코드는 그대로)
-        val maxWidth = snap.maxWidth
-        val maxHeight = snap.maxHeight
-        val outputFormat = snap.outputFormat
-        val videoOptions = snap.videoOptions
-        val lastVideoEditStates = snap.states
-        val showVideoHUD = snap.showHUD
-        val lastThemeColorInt = snap.themeColor
-        val lastLanguageCode = snap.language
-        val thumbnailOptions = snap.thumbnail
         val processingId = java.util.UUID.randomUUID().toString()
-        val results = mutableListOf<com.facebook.react.bridge.WritableMap>()
-        val contentResolver = reactApplicationContext.contentResolver
         val totalCount = uris.size
-        var currentIndex = 0
-
-        // 동영상이 섞여 있으면 진행 HUD 를 띄우고, 동영상은 VideoExporter 로 (사진 처리와 같은 루프)
-        val isVideoUri: (Uri) -> Boolean = { u ->
-            u.toString().contains("/video/") || (try { contentResolver.getType(u)?.startsWith("video/") == true } catch (_: Exception) { false })
-        }
-        val hasVideo = uris.any(isVideoUri)
-        videoCancelled = false
+        val options = com.rnattachmentkit.AttachmentProcessor.Options(
+            maxWidth = snap.maxWidth, maxHeight = snap.maxHeight, outputFormat = snap.outputFormat,
+            thumbnail = snap.thumbnail, videoOptions = snap.videoOptions,
+        )
+        val hasVideo = uris.any { com.rnattachmentkit.AttachmentProcessor.isVideoUri(reactApplicationContext, it) }
+        // 앱의 cancelVideoProcessing(index) → job.cancel, HUD 의 취소 → job.abort (전체 취소)
         val job = com.rnattachmentkit.ProcessingJob()
         activeProcessingJobs[processingId] = job
         lastProcessingId = processingId
-        // ✅ 처리 시작: 모든 자리(사진·동영상)를 먼저 알림 → 앱이 말풍선을 바로 만들고 진행률을 그림
-        try {
-            val items = Arguments.createArray()
-            uris.forEachIndexed { i, u ->
-                val it0 = if (isVideoUri(u)) {
-                    val st = lastVideoEditStates[u.toString()] ?: com.rnattachmentkit.VideoEditState(qualityHeight = videoOptions.defaultQuality)
-                    com.rnattachmentkit.MediaProcessing.videoItem(reactApplicationContext, i, u, st, videoOptions)
-                } else {
-                    com.rnattachmentkit.MediaProcessing.imageItem(reactApplicationContext, i, u, maxWidth, maxHeight)
-                }
-                items.pushMap(Arguments.createMap().apply {
-                    putInt("index", it0.index)
-                    putString("mediaType", if (it0.isVideo) "video" else "image")
-                    putString("originalUri", it0.originalUri)
-                    putInt("width", it0.width)
-                    putInt("height", it0.height)
-                    it0.durationSec?.let { d -> putDouble("duration", d) }
-                    it0.thumbnailUri?.let { t ->
-                        putString("thumbnailUri", t)
-                        putInt("thumbnailWidth", it0.thumbnailWidth)
-                        putInt("thumbnailHeight", it0.thumbnailHeight)
-                    }
-                })
-            }
-            emitGalleryEvent("onProcessingStart", Arguments.createMap().apply {
-                putString("processingId", processingId)
-                putInt("total", totalCount)
-                putArray("items", items)
-            })
-        } catch (e: Exception) {
-            android.util.Log.w("RNAttachmentKit", "onProcessingStart failed: ${e.message}")
-        }
         var hud: com.rnattachmentkit.VideoExportHUD? = null
-        if (hasVideo && showVideoHUD) {
+        if (hasVideo && snap.showHUD) {
             withContext(Dispatchers.Main) {
                 val act = getCurrentActivity() ?: return@withContext
-                hud = com.rnattachmentkit.VideoExportHUD(act, lastThemeColorInt, lastLanguageCode).also { h ->
-                    h.onCancel = {
-                        videoCancelled = true
-                        currentVideoExporter?.cancel()
-                    }
+                hud = com.rnattachmentkit.VideoExportHUD(act, snap.themeColor, snap.language).also { h ->
+                    h.onCancel = { job.abort() }
                     h.show()
                 }
             }
         }
-        val videoFiles = mutableListOf<File>()
-
+        val main = android.os.Handler(android.os.Looper.getMainLooper())
+        val emitter = { reactApplicationContext.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java) }
         try {
-        for (uri in uris) {
-            if (videoCancelled) throw com.rnattachmentkit.VideoExporter.CancelledException()
-            if (isVideoUri(uri)) {
-                val idx = currentIndex
-                val exporter = com.rnattachmentkit.VideoExporter(reactApplicationContext)
-                currentVideoExporter = exporter
-                val cancelledMap = {
-                    WritableNativeMap().apply {
-                        putString("originalUri", uri.toString())
-                        putString("mediaType", "video")
-                        putString("error", "CANCELLED")
-                        putBoolean("cancelled", true)
+            com.rnattachmentkit.AttachmentProcessor.process(reactApplicationContext, uris, snap.states, options, job,
+                object : com.rnattachmentkit.AttachmentProcessor.Listener {
+                    // ✅ 처리 시작: 모든 자리(사진·동영상)를 먼저 알림 → 앱이 말풍선을 바로 만들고 진행률을 그림
+                    override fun onStart(items: List<com.rnattachmentkit.MediaProcessing.StartItem>) {
+                        val arr = Arguments.createArray()
+                        items.forEach { it0 ->
+                            arr.pushMap(Arguments.createMap().apply {
+                                putInt("index", it0.index)
+                                putString("mediaType", if (it0.isVideo) "video" else "image")
+                                putString("originalUri", it0.originalUri)
+                                putInt("width", it0.width)
+                                putInt("height", it0.height)
+                                it0.durationSec?.let { d -> putDouble("duration", d) }
+                                it0.thumbnailUri?.let { t ->
+                                    putString("thumbnailUri", t)
+                                    putInt("thumbnailWidth", it0.thumbnailWidth)
+                                    putInt("thumbnailHeight", it0.thumbnailHeight)
+                                }
+                            })
+                        }
+                        emitGalleryEvent("onProcessingStart", Arguments.createMap().apply {
+                            putString("processingId", processingId)
+                            putInt("total", totalCount)
+                            putArray("items", arr)
+                        })
                     }
-                }
-                val resultMap = try {
-                    // 앱이 이미 취소한 동영상은 건너뜀
-                    if (job.isCancelled(idx)) throw com.rnattachmentkit.VideoExporter.CancelledException()
-                    job.begin(idx, exporter)
-                    val state = lastVideoEditStates[uri.toString()] ?: com.rnattachmentkit.VideoEditState(qualityHeight = videoOptions.defaultQuality)
-                    val throttle = com.rnattachmentkit.ProgressThrottle()
-                    val onProgress: (Float) -> Unit = { p ->
-                        hud?.let { h -> android.os.Handler(android.os.Looper.getMainLooper()).post { h.update(p, idx, totalCount) } }
-                        if (throttle.shouldSend(p)) emitGalleryEvent("onVideoProgress", Arguments.createMap().apply {
-                            putInt("index", idx); putInt("total", totalCount); putDouble("progress", p.toDouble())
+
+                    override fun onVideoProgress(index: Int, progress: Float) {
+                        hud?.let { h -> main.post { h.update(progress, index, totalCount) } }
+                        emitGalleryEvent("onVideoProgress", Arguments.createMap().apply {
+                            putInt("index", index); putInt("total", totalCount); putDouble("progress", progress.toDouble())
                             putString("processingId", processingId)
                         })
                     }
-                    // 편집 화면에서 미리 만들어 둔 파일이 있으면(또는 만드는 중이면 끝나고) 그대로 씀
-                    // 기다리는 동안 앱(X)이나 HUD 가 취소하면 바로 멈춤 (전엔 미리 만들기가 끝날 때까지 못 빠져나왔음)
-                    val stop = { videoCancelled || job.isCancelled(idx) }
-                    val res = com.rnattachmentkit.VideoPrepareManager.takeReady(uri, state, onProgress, stop)
-                        ?: run {
-                            if (stop()) throw com.rnattachmentkit.VideoExporter.CancelledException()
-                            exporter.export(uri, state, videoOptions, reactApplicationContext.cacheDir, "turbo_video_${System.currentTimeMillis()}_$idx", onProgress)
-                        }
-                    withContext(Dispatchers.Main) { hud?.update(1f, idx, totalCount) }
-                    // 미리 만든 파일을 기다리는 동안 취소됐으면 결과를 쓰지 않음
-                    if (job.isCancelled(idx)) throw com.rnattachmentkit.VideoExporter.CancelledException()
-                    videoFiles += res.file
-                    res.thumbnailFile?.let { videoFiles += it }
-                    WritableNativeMap().apply {
-                        putString("uri", Uri.fromFile(res.file).toString())
-                        putString("originalUri", uri.toString())
-                        putString("mediaType", "video")
-                        putString("type", "video/mp4")
-                        putInt("width", res.width)
-                        putInt("height", res.height)
-                        putDouble("duration", res.durationMs / 1000.0)
-                        putDouble("fileSize", res.fileSize.toDouble())
-                        putString("fileName", res.file.name)
-                        putString("fileExtension", "mp4")
-                        putString("videoCodec", res.codec)
-                        putInt("videoBitrate", res.bitrate)
-                        putBoolean("edited", res.edited)
-                        if (res.thumbnailFile != null) {
-                            putString("thumbnailUri", Uri.fromFile(res.thumbnailFile).toString())
-                            putInt("thumbnailWidth", res.thumbnailWidth)
-                            putInt("thumbnailHeight", res.thumbnailHeight)
-                        }
-                    }
-                } catch (e: com.rnattachmentkit.VideoExporter.CancelledException) {
-                    // 앱이 이 동영상만 취소 → 나머지는 계속. HUD 취소면 전체 취소
-                    if (job.isCancelled(idx) && !videoCancelled) cancelledMap() else throw e
-                } catch (e: Exception) {
-                    // 취소하면서 변환기가 다른 예외로 끝날 수도 있음 → 취소로 처리
-                    if (job.isCancelled(idx) && !videoCancelled) cancelledMap() else {
-                        android.util.Log.w("RNAttachmentKit", "video export failed: ${e.message}", e)
-                        WritableNativeMap().apply {
-                            putString("originalUri", uri.toString())
-                            putString("mediaType", "video")
-                            putString("error", e.message ?: "export failed")
-                        }
-                    }
-                } finally {
-                    currentVideoExporter = null
-                    job.end()
-                }
-                results.add(resultMap)
-                try {
-                    val copy = WritableNativeMap().apply { merge(resultMap) }
-                    reactApplicationContext.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                        .emit("onImageProcessed", WritableNativeMap().apply {
-                            putInt("total", totalCount); putInt("index", idx); putMap("image", copy)
-                            putString("processingId", processingId)
-                        })
-                } catch (_: Exception) {}
-                currentIndex++
-                continue
-            }
-            try {
-                // 1. Get EXIF Orientation
-                var orientation = android.media.ExifInterface.ORIENTATION_NORMAL
-                try {
-                    contentResolver.openInputStream(uri)?.use { exifInputStream ->
-                        val exif = android.media.ExifInterface(exifInputStream)
-                        orientation = exif.getAttributeInt(android.media.ExifInterface.TAG_ORIENTATION, android.media.ExifInterface.ORIENTATION_NORMAL)
-                    }
-                } catch (e: Exception) {}
 
-                contentResolver.openInputStream(uri)?.use { inputStream ->
-                    // Get original image dimensions
-                    val originalOptions = BitmapFactory.Options().apply {
-                        inJustDecodeBounds = true
+                    override fun onItem(result: com.rnattachmentkit.AttachmentProcessor.Result) {
+                        if (result.isVideo) hud?.let { h -> main.post { h.update(1f, result.index, totalCount) } }
+                        try {
+                            emitter().emit("onImageProcessed", WritableNativeMap().apply {
+                                putInt("total", totalCount); putInt("index", result.index); putMap("image", toWritableMap(result))
+                                putString("processingId", processingId)
+                            })
+                        } catch (_: Exception) {}
                     }
-                    BitmapFactory.decodeStream(inputStream, null, originalOptions)
-                    
-                    var originalWidth = originalOptions.outWidth
-                    var originalHeight = originalOptions.outHeight
-                    
-                    // Swap width and height if rotated by 90 or 270 degrees
-                    if (orientation == android.media.ExifInterface.ORIENTATION_ROTATE_90 || orientation == android.media.ExifInterface.ORIENTATION_ROTATE_270) {
-                        val temp = originalWidth
-                        originalWidth = originalHeight
-                        originalHeight = temp
-                    }
-                    
-                    // Load and resize image
-                    contentResolver.openInputStream(uri)?.use { resizedInputStream ->
-                        // Initial decode for sizing
-                        val decodeOptions = BitmapFactory.Options().apply {
-                            inSampleSize = calculateInSampleSize(originalWidth, originalHeight, maxWidth, maxHeight)
-                        }
-                        var bitmap = BitmapFactory.decodeStream(resizedInputStream, null, decodeOptions)
-                        
-                        if (bitmap != null) {
-                            // Apply EXIF Rotation
-                            val matrix = android.graphics.Matrix()
-                            when (orientation) {
-                                android.media.ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90f)
-                                android.media.ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180f)
-                                android.media.ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270f)
-                                android.media.ExifInterface.ORIENTATION_FLIP_HORIZONTAL -> matrix.postScale(-1f, 1f)
-                                android.media.ExifInterface.ORIENTATION_FLIP_VERTICAL -> matrix.postScale(1f, -1f)
-                            }
-                            
-                            if (!matrix.isIdentity) {
-                                val rotatedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-                                if (rotatedBitmap != bitmap) {
-                                    bitmap.recycle()
-                                    bitmap = rotatedBitmap
-                                }
-                            }
-
-                            // Precise resize if needed
-                            val finalBitmap = if (bitmap.width > maxWidth || bitmap.height > maxHeight) {
-                                resizeBitmap(bitmap, maxWidth, maxHeight)
-                            } else {
-                                bitmap
-                            }
-                            
-                            val processedBitmap = ImageProcessor.applyWatermarkIfNeeded(reactApplicationContext, finalBitmap)
-                            
-                            // Determine format and extension
-                            val compressFormat: Bitmap.CompressFormat
-                            val extension: String
-                            val mimeType: String
-                            
-                            when (outputFormat) {
-                                "png" -> {
-                                    compressFormat = Bitmap.CompressFormat.PNG
-                                    extension = "png"
-                                    mimeType = "image/png"
-                                }
-                                "jpg", "jpeg" -> {
-                                    compressFormat = Bitmap.CompressFormat.JPEG
-                                    extension = "jpg"
-                                    mimeType = "image/jpeg"
-                                }
-                                else -> { // webp
-                                    compressFormat = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                                        Bitmap.CompressFormat.WEBP_LOSSY
-                                    } else {
-                                        @Suppress("DEPRECATION")
-                                        Bitmap.CompressFormat.WEBP
-                                    }
-                                    extension = "webp"
-                                    mimeType = "image/webp"
-                                }
-                            }
-
-                            // Save to temporary file
-                            val tempFile = File.createTempFile("turbo_edited_${System.currentTimeMillis()}_", ".$extension", reactApplicationContext.cacheDir)
-                            FileOutputStream(tempFile).use { out ->
-                                processedBitmap.compress(compressFormat, 85, out)
-                            }
-                            // 썸네일: 같은 비트맵(방향·크롭·그리기 반영)에서 — 원본을 다시 읽지 않음
-                            val thumb = thumbnailOptions?.let {
-                                com.rnattachmentkit.PhotoThumbnail.make(processedBitmap, it, reactApplicationContext.cacheDir, currentIndex)
-                            }
-                            
-                            val finalWidth = processedBitmap.width
-                            val finalHeight = processedBitmap.height
-
-                            // Cleanup
-                            if (bitmap != processedBitmap) {
-                                bitmap.recycle()
-                            }
-                            if (finalBitmap != processedBitmap && finalBitmap != bitmap) {
-                                finalBitmap.recycle()
-                            }
-                            processedBitmap.recycle()
-                            
-                            val createImageInfo = {
-                                WritableNativeMap().apply {
-                                    putString("uri", Uri.fromFile(tempFile).toString())
-                                    putInt("width", finalWidth)
-                                    putInt("height", finalHeight)
-                                    putString("type", mimeType)
-                                    putString("fileName", tempFile.name)
-                                    putString("fileExtension", extension)
-                                    putDouble("fileSize", tempFile.length().toDouble())
-                                    putString("originalUri", uri.toString())
-                                    putInt("originalWidth", originalWidth)
-                                    putInt("originalHeight", originalHeight)
-                                    if (thumb != null) {
-                                        putString("thumbnailUri", Uri.fromFile(thumb.file).toString())
-                                        putInt("thumbnailWidth", thumb.width)
-                                        putInt("thumbnailHeight", thumb.height)
-                                        putDouble("thumbnailFileSize", thumb.fileSize.toDouble())
-                                    }
-                                }
-                            }
-                            val imageInfo = createImageInfo()
-                            results.add(imageInfo)
-
-                            try {
-                                val eventMap = WritableNativeMap().apply {
-                                    putInt("total", totalCount)
-                                    putInt("index", currentIndex)
-                                    putString("processingId", processingId)
-                                    putMap("image", createImageInfo())
-                                }
-                                reactApplicationContext.getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                                    .emit("onImageProcessed", eventMap)
-                            } catch (e: Exception) { }
-                        }
-                    }
-                }
-                currentIndex++
-            } catch (e: Exception) {
-                currentIndex++
-                // Skip failed images
-                continue
-            }
-        }
-        } catch (e: com.rnattachmentkit.VideoExporter.CancelledException) {
-            // 취소: 지금까지 만든 동영상 파일은 지움
-            videoFiles.forEach { try { it.delete() } catch (_: Exception) {} }
-            throw e
+                }).map { toWritableMap(it) }
         } finally {
             activeProcessingJobs.remove(processingId)
             if (hud != null) withContext(Dispatchers.Main) { hud?.dismiss() }
         }
-
-        results
     }
-    
-    private fun calculateInSampleSize(
-        reqWidth: Int,
-        reqHeight: Int,
-        maxWidth: Int,
-        maxHeight: Int
-    ): Int {
-        var inSampleSize = 1
-        
-        if (reqHeight > maxHeight || reqWidth > maxWidth) {
-            val halfHeight = reqHeight / 2
-            val halfWidth = reqWidth / 2
-            
-            while ((halfHeight / inSampleSize) >= maxHeight && (halfWidth / inSampleSize) >= maxWidth) {
-                inSampleSize *= 2
+
+    /** AttachmentProcessor.Result → RN 결과 맵 (예전 브릿지와 같은 필드·타입) */
+    private fun toWritableMap(r: com.rnattachmentkit.AttachmentProcessor.Result): WritableMap = WritableNativeMap().apply {
+        r.toMap().forEach { (k, v) ->
+            when (v) {
+                is Boolean -> putBoolean(k, v)
+                is Int -> putInt(k, v)
+                is Number -> putDouble(k, v.toDouble())
+                else -> putString(k, v.toString())
             }
         }
-        
-        return inSampleSize
-    }
-    
-    private fun resizeBitmap(bitmap: Bitmap, maxWidth: Int, maxHeight: Int): Bitmap {
-        val width = bitmap.width
-        val height = bitmap.height
-        
-        val ratioBitmap = width.toFloat() / height.toFloat()
-        val ratioMax = maxWidth.toFloat() / maxHeight.toFloat()
-        
-        var finalWidth = maxWidth
-        var finalHeight = maxHeight
-        
-        if (ratioMax > ratioBitmap) {
-            finalWidth = (maxHeight * ratioBitmap).toInt()
-        } else {
-            finalHeight = (maxWidth / ratioBitmap).toInt()
-        }
-        
-        return Bitmap.createScaledBitmap(bitmap, finalWidth, finalHeight, true)
     }
 
 

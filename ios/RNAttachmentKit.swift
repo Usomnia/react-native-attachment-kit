@@ -51,7 +51,7 @@ class RNAttachmentKit: RCTEventEmitter {
     /// 열려 있는 미디어 갤러리 (galleryId → 화면)
     fileprivate var mediaGalleries: [String: MediaGalleryViewController] = [:]
     /// 진행 중인 전송 처리 (processingId → 작업, 메인 스레드에서만). 보내는 중에 갤러리를 다시 열어 또 보낼 수 있어 여러 개일 수 있음
-    private var processingJobs: [String: MediaProcessingJob] = [:]
+    private var processingJobs: [String: AttachmentProcessingJob] = [:]
     /// 가장 최근에 시작한 처리 (cancelVideoProcessing 에 processingId 가 없을 때)
     private var lastProcessingId: String?
     /// 동영상 변환 진행 HUD 를 띄울지 — video.showProgressHUD, 없으면 asyncProcessing 이 아닐 때만
@@ -1033,255 +1033,62 @@ class RNAttachmentKit: RCTEventEmitter {
                     return
                 }
 
-                var results: [[String: Any]] = []
-                let tempDir    = self.prepareCacheDirectory()
-                let maxWidth   = galleryMaxWidth
-                let maxHeight  = galleryMaxHeight
-                let format     = galleryFormat
-                let mimeType   = self.mimeType(for: format)
-                let needResize = (maxWidth > 0 || maxHeight > 0)
+                let processingOptions = AttachmentProcessingOptions(maxWidth: galleryMaxWidth, maxHeight: galleryMaxHeight,
+                                                                    outputFormat: galleryFormat, thumbnail: galleryThumb,
+                                                                    video: videoOptions)
                 let total      = selectedImages.count
-
-                let resultsLock = NSLock()
-                // 처리한 이미지는 바로 놓아 주도록 (전체 UIImage 배열을 끝까지 들고 있지 않게) 옵셔널 배열로 옮김
-                var pending: [(PHAsset?, UIImage)?] = selectedImages.map { $0 }
 
                 // 동영상이 섞여 있으면 변환 진행 표시 (갤러리가 닫힌 뒤에도 보이게 키 윈도우에) + 취소
                 let hasVideo = selectedImages.contains { $0.0?.mediaType == .video }
                 // 편집 화면에서 고른 품질·음소거 (없으면 기본 품질)
                 let videoStates = galleryVC?.videoEditStates ?? [:]
                 var hud: VideoExportHUD?
-                var currentExporter: VideoExporter?
-                var cancelledAll = false
-                let exporterLock = NSLock()
-                // 앱이 동영상 하나(또는 전부)를 취소할 수 있게 (cancelVideoProcessing)
-                let job = MediaProcessingJob()
+                // 앱이 동영상 하나(또는 전부)를 취소할 수 있게 (cancelVideoProcessing). HUD 의 취소는 전체 중단(abort)
+                let job = AttachmentProcessingJob()
                 let processingId = UUID().uuidString
                 self.processingJobs[processingId] = job
                 self.lastProcessingId = processingId
-                // 처리 시작 이벤트용 — 고른 순서의 원본(사진은 편집 결과) 크기·포스터
-                let startItems = selectedImages.map { ($0.0, $0.1) }
                 if hasVideo && self.galleryShowsVideoHUD {
                     hud = VideoExportHUD.show(accent: galleryAccent, languageCode: galleryLanguage)
-                    hud?.onCancel = {
-                        exporterLock.lock(); cancelledAll = true; currentExporter?.cancel(); exporterLock.unlock()
-                    }
+                    hud?.onCancel = { job.abort() }
                 }
 
+                // 고르기·가공은 AttachmentProcessor (앱의 네이티브 화면과 같은 코드)
                 DispatchQueue.global(qos: .userInitiated).async {
-                    // ✅ 처리 시작: 모든 자리(사진·동영상)를 먼저 알림 → 앱이 말풍선을 바로 만들고 진행률을 그림
-                    self.sendEvent(withName: "onProcessingStart", body: [
-                        "processingId": processingId,
-                        "total": total,
-                        "items": startItems.enumerated().map { i, pair in
-                            self.processingStartItem(index: i, asset: pair.0, image: pair.1, videoStates: videoStates,
-                                                     videoOptions: videoOptions, maxWidth: maxWidth, maxHeight: maxHeight,
-                                                     tempDir: tempDir)
+                    let (results, aborted) = AttachmentProcessor.process(
+                        selectedImages, videoStates: videoStates, options: processingOptions, job: job,
+                        onStart: { items in
+                            // ✅ 처리 시작: 모든 자리(사진·동영상)를 먼저 알림 → 앱이 말풍선을 바로 만들고 진행률을 그림
+                            self.sendEvent(withName: "onProcessingStart", body: [
+                                "processingId": processingId,
+                                "total": total,
+                                "items": items.map { $0.dictionary },
+                            ])
                         },
-                    ])
-                    for index in 0..<total {
-                        guard let pair = pending[index] else { continue }
-                        pending[index] = nil
-                        exporterLock.lock(); let stop = cancelledAll; exporterLock.unlock()
-                        if stop { break }
-                        autoreleasepool {
-                            let (asset, image) = pair
-                            let timestamp    = Int(Date().timeIntervalSince1970 * 1000)
-                            let originalSize = image.size
-
-                            if let phAsset = asset, phAsset.mediaType == .video {
-                                // ✅ 동영상: VideoExporter 로 전송용 mp4 (+ 썸네일·메타). image 는 포스터(목록용)
-                                let exporter = VideoExporter()
-                                exporterLock.lock(); currentExporter = exporter; exporterLock.unlock()
-                                let base = "turbo_video_\(timestamp)_\(index)"
-                                var result: [String: Any] = [
-                                    "originalUri":    "ph://\(phAsset.localIdentifier)",
-                                    "originalWidth":  phAsset.pixelWidth,
-                                    "originalHeight": phAsset.pixelHeight,
-                                    "mediaType":      "video",
-                                    "type":           "video/mp4",
-                                    "duration":       phAsset.duration,
-                                ]
-                                do {
-                                    // 앱이 이미 취소한 동영상은 건너뜀 (결과에 cancelled 로)
-                                    if job.isCancelled(index) { throw VideoExporter.ExportError.cancelled }
-                                    job.begin(index: index, exporter: exporter)
-                                    let state = videoStates[phAsset.localIdentifier] ?? VideoEditState.defaultState(for: phAsset, options: videoOptions)
-                                    let throttle = ProgressThrottle()
-                                    let onProgress: (Double) -> Void = { p in
-                                        // 프레임마다 메인으로 보내지 않고 1%·0.1초 단위로만 (HUD 표시는 정수 % 라 같음)
-                                        guard throttle.shouldSend(p) else { return }
-                                        DispatchQueue.main.async { hud?.update(progress: p, index: index, total: total) }
-                                        self.sendEvent(withName: "onVideoProgress", body: ["index": index, "total": total, "progress": p, "processingId": processingId])
-                                    }
-                                    // 편집 화면에서 미리 만들어 둔 파일이 있으면(또는 만드는 중이면 끝나고) 그대로 씀
-                                    let r: VideoExportResult
-                                    // 기다리는 동안 앱(X)이나 HUD 가 취소하면 바로 멈춤 (전엔 미리 만들기가 끝날 때까지 못 빠져나왔음)
-                                    let stop = { () -> Bool in
-                                        exporterLock.lock(); let all = cancelledAll; exporterLock.unlock()
-                                        return all || job.isCancelled(index)
-                                    }
-                                    if let ready = VideoPrepareManager.shared.takeReady(asset: phAsset, state: state, progress: onProgress, isCancelled: stop) {
-                                        r = ready; onProgress(1)
-                                    } else {
-                                        if stop() { throw VideoExporter.ExportError.cancelled }
-                                        r = try exporter.export(asset: phAsset, state: state,
-                                                                options: videoOptions, outputDir: URL(fileURLWithPath: tempDir), baseName: base, progress: onProgress)
-                                    }
-                                    // 미리 만든 파일을 기다리는 동안 취소됐으면 결과를 쓰지 않음
-                                    if job.isCancelled(index) { throw VideoExporter.ExportError.cancelled }
-                                    result["uri"]           = "file://" + r.url.path
-                                    result["width"]         = r.width
-                                    result["height"]        = r.height
-                                    result["duration"]      = r.duration
-                                    result["fileSize"]      = r.fileSize
-                                    result["fileName"]      = r.url.lastPathComponent
-                                    result["fileExtension"] = "mp4"
-                                    result["videoCodec"]    = r.codec
-                                    result["videoBitrate"]  = r.bitrate
-                                    result["edited"]        = !r.passthrough
-                                    if let t = r.thumbnailURL {
-                                        result["thumbnailUri"]    = "file://" + t.path
-                                        result["thumbnailWidth"]  = r.thumbnailWidth
-                                        result["thumbnailHeight"] = r.thumbnailHeight
-                                    }
-                                } catch VideoExporter.ExportError.cancelled where job.isCancelled(index) {
-                                    // 앱이 이 동영상만 취소 → 나머지는 계속
-                                    result["error"] = "CANCELLED"
-                                    result["cancelled"] = true
-                                } catch VideoExporter.ExportError.cancelled {
-                                    // HUD 의 취소 → 전체 취소 (Promise reject)
-                                    job.end()
-                                    exporterLock.lock(); cancelledAll = true; exporterLock.unlock()
-                                    return
-                                } catch {
-                                    result["error"] = error.localizedDescription
-                                }
-                                job.end()
-                                exporterLock.lock(); currentExporter = nil; exporterLock.unlock()
-
-                                resultsLock.lock()
-                                results.append(result)
-                                let currentResult = result
-                                resultsLock.unlock()
-                                self.sendEvent(withName: "onImageProcessed", body: ["index": index, "total": total, "image": currentResult, "processingId": processingId])
-                            } else if let phAsset = asset {
-                                // ✅ 1순위: PHAsset
-                                let originalUri = "ph://\(phAsset.localIdentifier)"
-
-                                var targetImage: UIImage
-                                if needResize, let resized = self.resizeImage(image, maxWidth: maxWidth, maxHeight: maxHeight) {
-                                    targetImage = resized
-                                } else {
-                                    targetImage = image
-                                }
-                                targetImage = ImageProcessor.shared.applyWatermarkIfNeeded(targetImage)
-
-                                var result: [String: Any] = [
-                                    "originalUri":    originalUri,
-                                    "originalWidth":  Int(originalSize.width),
-                                    "originalHeight": Int(originalSize.height),
-                                    "type": mimeType
-                                ]
-
-                                if let savedUri = self.saveImage(targetImage, format: format,
-                                                                 prefix: "resized",
-                                                                 index: index, timestamp: timestamp,
-                                                                 tempDir: tempDir) {
-                                    result["uri"]           = savedUri
-                                    result["width"]         = Int(targetImage.size.width)
-                                    result["height"]        = Int(targetImage.size.height)
-                                    let meta = self.fileMetadata(fromPath: savedUri)
-                                    result["fileName"]      = meta.fileName
-                                    result["fileExtension"] = meta.fileExtension
-                                    result["fileSize"]      = meta.fileSize
-                                }
-                                // 썸네일: 같은 비트맵(방향·크롭·그리기 반영)에서
-                                result.merge(self.makePhotoThumbnail(targetImage, options: galleryThumb, index: index,
-                                                                     timestamp: timestamp, tempDir: tempDir)) { $1 }
-
-                                resultsLock.lock()
-                                results.append(result)
-                                let currentResult = result
-                                resultsLock.unlock()
-                                
-                                self.sendEvent(withName: "onImageProcessed", body: [
-                                    "index": index,
-                                    "total": total,
-                                    "image": currentResult,
-                                    "processingId": processingId
-                                ])
-                            } else {
-                                // ✅ 2순위: 카메라 촬영본
-                                guard let originalFilePath = self.saveOriginalImageAsJPEG(
-                                        image, index: index, timestamp: timestamp, tempDir: tempDir) else {
-                                    return
-                                }
-
-                                var targetImage: UIImage
-                                if needResize, let resized = self.resizeImage(image, maxWidth: maxWidth, maxHeight: maxHeight) {
-                                    targetImage = resized
-                                } else {
-                                    targetImage = image
-                                }
-                                targetImage = ImageProcessor.shared.applyWatermarkIfNeeded(targetImage)
-
-                                var result: [String: Any] = [
-                                    "originalUri":     originalFilePath,
-                                    "originalFileUri": originalFilePath,
-                                    "originalWidth":   Int(originalSize.width),
-                                    "originalHeight":  Int(originalSize.height),
-                                    "type": mimeType
-                                ]
-                                let origMeta = self.fileMetadata(fromPath: originalFilePath)
-                                result["fileName"]      = origMeta.fileName
-                                result["fileExtension"] = origMeta.fileExtension
-                                result["fileSize"]      = origMeta.fileSize
-
-                                if let savedUri = self.saveImage(targetImage, format: format,
-                                                                 prefix: "resized",
-                                                                 index: index, timestamp: timestamp,
-                                                                 tempDir: tempDir) {
-                                    result["uri"]           = savedUri
-                                    result["width"]         = Int(targetImage.size.width)
-                                    result["height"]        = Int(targetImage.size.height)
-                                    let meta = self.fileMetadata(fromPath: savedUri)
-                                    result["fileName"]      = meta.fileName
-                                    result["fileExtension"] = meta.fileExtension
-                                    result["fileSize"]      = meta.fileSize
-                                }
-                                // 썸네일: 같은 비트맵(방향·크롭·그리기 반영)에서
-                                result.merge(self.makePhotoThumbnail(targetImage, options: galleryThumb, index: index,
-                                                                     timestamp: timestamp, tempDir: tempDir)) { $1 }
-
-                                resultsLock.lock()
-                                results.append(result)
-                                let currentResult = result
-                                resultsLock.unlock()
-                                
-                                self.sendEvent(withName: "onImageProcessed", body: [
-                                    "index": index,
-                                    "total": total,
-                                    "image": currentResult,
-                                    "processingId": processingId
-                                ])
-                            }
-                        } // end autoreleasepool
-                    } // end for
+                        onVideoProgress: { index, p in
+                            DispatchQueue.main.async { hud?.update(progress: p, index: index, total: total) }
+                            self.sendEvent(withName: "onVideoProgress", body: ["index": index, "total": total, "progress": p, "processingId": processingId])
+                        },
+                        onItem: { r in
+                            self.sendEvent(withName: "onImageProcessed", body: [
+                                "index": r.index,
+                                "total": total,
+                                "image": r.dictionary,
+                                "processingId": processingId
+                            ])
+                        })
 
                     DispatchQueue.main.async {
                         hud?.dismiss()
                         // 처리하는 동안 새 갤러리가 열렸을 수 있음 → 내 갤러리일 때만 비움
                         if self.currentGalleryVC == nil || self.currentGalleryVC === galleryVC { self.currentGalleryVC = nil }
                         self.processingJobs[processingId] = nil
-                        exporterLock.lock(); let wasCancelled = cancelledAll; exporterLock.unlock()
-                        if wasCancelled {
+                        if aborted {
                             // 변환 취소: 이미 만든 파일은 버림
-                            results.compactMap { ($0["uri"] as? String)?.replacingOccurrences(of: "file://", with: "") }
-                                .forEach { try? FileManager.default.removeItem(atPath: $0) }
+                            results.compactMap { $0.path }.forEach { try? FileManager.default.removeItem(atPath: $0) }
                             reject("CANCELLED", "User cancelled video conversion", nil)
                         } else {
-                            resolve(results)
+                            resolve(results.map { $0.dictionary })
                         }
                         // 결과를 넘긴 뒤: 갤러리의 PHCachingImageManager 캐시·콜백 해제 (닫힘 애니메이션에는 영향 없음).
                         // 새 갤러리가 열려 있으면 그 화면이 미리 인코딩 중인 파일은 건드리지 않음
@@ -1354,86 +1161,6 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
 
-    /// onProcessingStart 의 한 자리: 사진은 예상 결과 크기, 동영상은 예상 결과 크기·길이(구간 반영)·포스터(크롭·그리기 반영 jpg)
-    private func processingStartItem(index: Int, asset: PHAsset?, image: UIImage?, videoStates: [String: VideoEditState],
-                                     videoOptions: VideoExportOptions, maxWidth: Int, maxHeight: Int, tempDir: String) -> [String: Any] {
-        if let a = asset, a.mediaType == .video {
-            let state = videoStates[a.localIdentifier] ?? VideoEditState.defaultState(for: a, options: videoOptions)
-            let d = CGSize(width: a.pixelWidth, height: a.pixelHeight)
-            let size = VideoExporter.predictedOutputSize(displaySize: d, state: state, options: videoOptions, sourceDuration: a.duration)
-            var item: [String: Any] = [
-                "index": index, "mediaType": "video", "originalUri": "ph://\(a.localIdentifier)",
-                "width": Int(size.width), "height": Int(size.height),
-                "duration": state.outputDuration(sourceDuration: a.duration),
-            ]
-            // 포스터는 보낼 영상의 첫 프레임 — 앞을 잘랐으면 잘린 구간의 첫 프레임 (원본 첫 프레임은 결과 영상에 없음 — Android 와 같음).
-            // 자르지 않았을 때도 갤러리 썸네일(사진 앱이 정한 대표 화면 — 첫 화면이 아닐 수 있음)이 아니라 0초 프레임을 씀. 못 읽으면 갤러리 썸네일
-            let trimmedStart = state.trimRange(duration: a.duration).map { CMTimeGetSeconds($0.start) } ?? 0
-            let base = Self.videoFrame(a, at: trimmedStart) ?? image
-            if let poster = base {
-                let edited = state.applyEdits(to: poster)
-                if let encoded = VideoExporter.encodePoster(edited, format: videoOptions.posterFormat, quality: 0.8) {
-                    let path = (tempDir as NSString).appendingPathComponent("turbo_video_poster_\(Int(Date().timeIntervalSince1970 * 1000))_\(index).\(encoded.fileExtension)")
-                    if (try? encoded.data.write(to: URL(fileURLWithPath: path))) != nil {
-                        item["thumbnailUri"] = "file://" + path
-                        item["thumbnailWidth"] = Int(edited.size.width * edited.scale)
-                        item["thumbnailHeight"] = Int(edited.size.height * edited.scale)
-                    }
-                }
-            }
-            return item
-        }
-        // 사진: 리사이즈 규칙(resizeImage)과 같은 예상 크기 (resizeImage 처럼 image.size 기준)
-        var w = image?.size.width ?? CGFloat(asset?.pixelWidth ?? 0)
-        var h = image?.size.height ?? CGFloat(asset?.pixelHeight ?? 0)
-        if w > 0, h > 0 {
-            var ratio: CGFloat = 1
-            if maxWidth > 0 && maxHeight > 0 { ratio = min(CGFloat(maxWidth) / w, CGFloat(maxHeight) / h, 1) }
-            else if maxWidth > 0 { ratio = min(CGFloat(maxWidth) / w, 1) }
-            else if maxHeight > 0 { ratio = min(CGFloat(maxHeight) / h, 1) }
-            w *= ratio; h *= ratio
-        }
-        var item: [String: Any] = ["index": index, "mediaType": "image", "width": Int(w.rounded()), "height": Int(h.rounded())]
-        if let a = asset { item["originalUri"] = "ph://\(a.localIdentifier)" }
-        return item
-    }
-
-    /// 동영상 포스터 (긴 변 512, 동기) — 처리 시작 이벤트용
-    /// 동영상의 [seconds] 프레임 (긴 변 ≤ 1024, 회전 반영). 백그라운드 스레드에서만 — 원본을 받는 동안 최대 3초 기다림
-    private static func videoFrame(_ asset: PHAsset, at seconds: Double) -> UIImage? {
-        let o = PHVideoRequestOptions()
-        o.isNetworkAccessAllowed = true
-        o.deliveryMode = .automatic
-        var avAsset: AVAsset?
-        let done = DispatchSemaphore(value: 0)
-        PHImageManager.default().requestAVAsset(forVideo: asset, options: o) { a, _, _ in
-            avAsset = a
-            done.signal()
-        }
-        guard done.wait(timeout: .now() + 3) == .success, let av = avAsset else { return nil }
-        let gen = AVAssetImageGenerator(asset: av)
-        gen.appliesPreferredTrackTransform = true
-        gen.maximumSize = CGSize(width: 1024, height: 1024)
-        // 잘린 구간 밖(앞) 프레임이 나오지 않게 — 뒤로만 조금 허용
-        gen.requestedTimeToleranceBefore = .zero
-        gen.requestedTimeToleranceAfter = CMTime(seconds: 0.1, preferredTimescale: 600)
-        guard let cg = try? gen.copyCGImage(at: CMTime(seconds: seconds, preferredTimescale: 600), actualTime: nil) else { return nil }
-        return UIImage(cgImage: cg)
-    }
-
-    private static func requestPoster(_ asset: PHAsset) -> UIImage? {
-        let o = PHImageRequestOptions()
-        o.isSynchronous = true
-        o.deliveryMode = .highQualityFormat
-        o.resizeMode = .fast
-        o.isNetworkAccessAllowed = true
-        var out: UIImage?
-        PHImageManager.default().requestImage(for: asset, targetSize: CGSize(width: 512, height: 512), contentMode: .aspectFit, options: o) { img, _ in
-            out = img
-        }
-        return out
-    }
-
     @objc
     func closeGallery(_ resolve: @escaping RCTPromiseResolveBlock,
                       reject: @escaping RCTPromiseRejectBlock) -> Void {
@@ -1470,309 +1197,8 @@ class RNAttachmentKit: RCTEventEmitter {
     
     // MARK: - Private Methods
 
-    /// iOS가 저장 공간 부족 시 자동으로 정리하는 캐시 디렉토리
-    /// picker 결과물은 일시적으로만 필요하므로 cache 사용
-    private var cacheDirectory: String {
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
-            .first?.appendingPathComponent("RNAttachmentKit").path
-            ?? NSTemporaryDirectory()
-    }
+    // 사진 리사이즈·저장·썸네일·임시 폴더는 AttachmentProcessor (프레임워크 공개 API — 앱 네이티브 화면과 같은 코드)
 
-    /// 캐시 디렉토리 준비 (없으면 생성)
-    private func prepareCacheDirectory() -> String {
-        let dir = cacheDirectory
-        if !FileManager.default.fileExists(atPath: dir) {
-            try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
-        }
-        return dir
-    }
-
-    // 이미지 리사이징 (비율 유지)
-    private func resizeImage(_ image: UIImage, maxWidth: Int, maxHeight: Int) -> UIImage? {
-        let originalSize = image.size
-        var targetSize = originalSize
-        
-        // maxWidth와 maxHeight 둘 다 사용 (기본값 500이므로 항상 리사이징)
-        if maxWidth > 0 && maxHeight > 0 {
-            // 둘 다 설정된 경우: 더 작은 비율로 리사이징
-            let widthRatio = CGFloat(maxWidth) / originalSize.width
-            let heightRatio = CGFloat(maxHeight) / originalSize.height
-            let ratio = min(widthRatio, heightRatio, 1.0) // 1.0 이상이면 리사이징 안 함
-            
-            if ratio < 1.0 {
-                targetSize = CGSize(width: originalSize.width * ratio, height: originalSize.height * ratio)
-            }
-        } else if maxWidth > 0 && originalSize.width > CGFloat(maxWidth) {
-            // maxWidth만 설정된 경우
-            let ratio = CGFloat(maxWidth) / originalSize.width
-            targetSize = CGSize(width: CGFloat(maxWidth), height: originalSize.height * ratio)
-        } else if maxHeight > 0 && originalSize.height > CGFloat(maxHeight) {
-            // maxHeight만 설정된 경우
-            let ratio = CGFloat(maxHeight) / originalSize.height
-            targetSize = CGSize(width: originalSize.width * ratio, height: CGFloat(maxHeight))
-        } else {
-            // 리사이징 불필요
-            return nil
-        }
-        
-        // 같은 크기면 리사이징 안 함
-        if targetSize.width >= originalSize.width && targetSize.height >= originalSize.height {
-            return nil
-        }
-        
-        // 이미지 리사이징 (UIGraphicsImageRenderer 방식 - 메모리 최적화)
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = 1.0 // 실제 픽셀 크기로 저장하기 위함
-        format.opaque = false
-        if #available(iOS 12.0, *) {
-            format.preferredRange = .standard // 광색역 대신 표준 색역 사용으로 메모리 절약
-        }
-        
-        let renderer = UIGraphicsImageRenderer(size: targetSize, format: format)
-        return renderer.image { _ in
-            image.draw(in: CGRect(origin: .zero, size: targetSize))
-        }
-    }
-    
-    // ✅ 2순위: 원본 이미지를 JPEG으로 저장 (WebP 인코딩 없음 → 빠름)
-    // 카메라 촬영본 및 에디터 결과물에 사용
-    private func saveOriginalImageAsJPEG(_ image: UIImage, index: Int, timestamp: Int, tempDir: String) -> String? {
-        let fileName = "turbo_picker_original_\(timestamp)_\(index).jpg"
-        let filePath = (tempDir as NSString).appendingPathComponent(fileName)
-        let fileURL = URL(fileURLWithPath: filePath)
-
-        if let jpegData = image.jpegData(compressionQuality: 0.9) {
-            do {
-                try jpegData.write(to: fileURL, options: [.atomic])
-                return fileURL.absoluteString
-            } catch {
-                print("❌ [TurboImagePicker] JPEG 원본 이미지 저장 실패: \(error)")
-            }
-        }
-        return nil
-    }
-    
-    // 리사이즈된 이미지 저장 (WebP 포맷)
-    private func saveResizedImage(_ image: UIImage, index: Int, timestamp: Int, tempDir: String) -> String? {
-        let fileName = "turbo_picker_resized_\(timestamp)_\(index).webp"
-        let filePath = (tempDir as NSString).appendingPathComponent(fileName)
-        let fileURL = URL(fileURLWithPath: filePath)
-        
-        if let data = encodeWebP(image: image, quality: 0.85) {
-            do {
-                try data.write(to: fileURL, options: [.atomic])
-                return fileURL.absoluteString
-            } catch {
-                print("❌ [TurboImagePicker] WebP 리사이즈 이미지 저장 실패: \(error)")
-            }
-        }
-        // Fallback to JPEG
-        if let jpegData = image.jpegData(compressionQuality: 0.85) {
-            let fallbackPath = (tempDir as NSString).appendingPathComponent("turbo_picker_resized_\(timestamp)_\(index).jpg")
-            let fallbackURL = URL(fileURLWithPath: fallbackPath)
-            do {
-                try jpegData.write(to: fallbackURL, options: [.atomic])
-                return fallbackURL.absoluteString
-            } catch {}
-        }
-        return nil
-    }
-    // WebP 인코딩 - iOS 16+ 네이티브 CGImageDestination 사용 또는 런타임 Fallback
-    private func encodeWebP(image: UIImage, quality: CGFloat) -> Data? {
-        if #available(iOS 16.0, *) {
-            if let cgImage = image.cgImage {
-                let data = NSMutableData()
-                if let destination = CGImageDestinationCreateWithData(data as CFMutableData, "public.webp" as CFString, 1, nil) {
-                    let options: [CFString: Any] = [kCGImageDestinationLossyCompressionQuality: quality]
-                    CGImageDestinationAddImage(destination, cgImage, options as CFDictionary)
-                    if CGImageDestinationFinalize(destination) {
-                        #if DEBUG
-                        NSLog("✅ [encodeWebP] iOS 16 네이티브 WebP 인코딩 성공 - %d bytes", data.length)
-                        #endif
-                        return data as Data
-                    }
-                }
-            }
-        }
-        
-        #if DEBUG
-        NSLog("🟣 [encodeWebP] SDImageWebPCoder 런타임 폴백 시도")
-        #endif
-        // iOS 14, 15이거나 네이티브 실패 시 SDImageWebPCoder 런타임 호출
-        if let coderClass = NSClassFromString("SDImageWebPCoder") as? NSObject.Type {
-            if coderClass.responds(to: NSSelectorFromString("sharedCoder")) {
-                let sharedCoder = coderClass.perform(NSSelectorFromString("sharedCoder")).takeUnretainedValue()
-                let encodeSel = NSSelectorFromString("encodedDataWithImage:format:options:")
-                
-                if sharedCoder.responds(to: encodeSel),
-                   let method = class_getInstanceMethod(type(of: sharedCoder), encodeSel) {
-                    
-                    // ObjC method signature: - (NSData *)encodedDataWithImage:(UIImage *)image format:(NSInteger)format options:(NSDictionary *)options
-                    typealias EncodeFunc = @convention(c) (AnyObject, Selector, UIImage?, Int, [String: Any]?) -> Data?
-                    let implementation = method_getImplementation(method)
-                    let encode = unsafeBitCast(implementation, to: EncodeFunc.self)
-                    
-                    // format: 3 (SDImageFormatWebP)
-                    let options: [String: Any] = ["encodeCompressionQuality": quality]
-                    if let data = encode(sharedCoder, encodeSel, image, 3, options) {
-                        #if DEBUG
-                        NSLog("✅ [encodeWebP] SDImageWebPCoder 런타임 인코딩 성공 - %d bytes", data.count)
-                        #endif
-                        return data
-                    } else {
-                        NSLog("❌ [encodeWebP] SDImageWebPCoder 런타임 인코딩 실패 (nil 반환)")
-                    }
-                } else {
-                    NSLog("❌ [encodeWebP] SDImageWebPCoder에 encodedDataWithImage:format:options: 메서드가 없습니다.")
-                }
-            } else {
-                NSLog("❌ [encodeWebP] SDImageWebPCoder에 sharedCoder가 없습니다.")
-            }
-        } else {
-            NSLog("❌ [encodeWebP] SDImageWebPCoder 클래스를 찾을 수 없습니다.")
-        }
-
-        NSLog("❌ [encodeWebP] 모든 WebP 인코딩 실패 → nil 반환")
-        return nil
-    }
-
-
-    // MARK: - Format-aware save helpers
-
-    /// outputFormat("webp"|"jpg"|"png")에 맞는 MIME 타입 반환
-    private func mimeType(for format: String) -> String {
-        switch format {
-        case "png":  return "image/png"
-        case "jpg":  return "image/jpeg"
-        default:     return "image/webp"
-        }
-    }
-
-    // MARK: - Photo thumbnail (GalleryOptions.thumbnail / EditorOptions.thumbnail)
-
-    /// 결과 크기와 원본에서 잘라 쓸 영역 (픽셀). Android PhotoThumbnail.layout 과 같은 계산
-    ///  - fit: ratio = min(maxW/w, maxH/h, 1) → round(w·ratio) × round(h·ratio), 자르지 않음
-    ///  - cover: 상자 비율로 가운데를 자른 뒤 maxW×maxH 로 줄임. 원본이 상자보다 작으면 확대하지 않고 자른 크기 그대로
-    static func photoThumbnailLayout(width w: Int, height h: Int, options o: PhotoThumbnailOptions) -> (crop: CGRect, size: CGSize) {
-        let dw = Double(w), dh = Double(h)
-        if !o.cover {
-            let r = min(Double(o.maxWidth) / dw, Double(o.maxHeight) / dh, 1)
-            return (CGRect(x: 0, y: 0, width: w, height: h),
-                    CGSize(width: max(1, (dw * r).rounded()), height: max(1, (dh * r).rounded())))
-        }
-        let aspect = Double(o.maxWidth) / Double(o.maxHeight)
-        let cropW: Double, cropH: Double
-        if dw / dh > aspect { cropH = dh; cropW = dh * aspect } else { cropW = dw; cropH = dw / aspect }
-        let left = ((dw - cropW) / 2).rounded(), top = ((dh - cropH) / 2).rounded()
-        let crop = CGRect(x: left, y: top, width: min(dw - left, cropW.rounded()), height: min(dh - top, cropH.rounded()))
-        let size = cropW > Double(o.maxWidth)
-            ? CGSize(width: o.maxWidth, height: o.maxHeight)
-            : CGSize(width: max(1, cropW.rounded()), height: max(1, cropH.rounded()))
-        return (crop, size)
-    }
-
-    /// 사진 썸네일을 만들어 결과에 넣을 필드(thumbnailUri/Width/Height/FileSize)를 돌려줌. options 가 없거나 실패하면 빈 딕셔너리.
-    /// image 는 결과 사진(uri)을 만든 것과 같은 UIImage — 원본을 다시 읽지 않음. 새로 그려 인코딩하므로 EXIF·GPS 는 들어가지 않음
-    private func makePhotoThumbnail(_ image: UIImage, options: PhotoThumbnailOptions?, index: Int,
-                                    timestamp: Int, tempDir: String) -> [String: Any] {
-        guard let o = options else { return [:] }
-        // 방향(imageOrientation) 반영된 픽셀 크기
-        let w = Int((image.size.width * image.scale).rounded()), h = Int((image.size.height * image.scale).rounded())
-        guard w > 0, h > 0 else { return [:] }
-        let (crop, size) = Self.photoThumbnailLayout(width: w, height: h, options: o)
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = 1
-        format.opaque = false
-        format.preferredRange = .standard
-        let sx = size.width / crop.width, sy = size.height / crop.height
-        let thumb = UIGraphicsImageRenderer(size: size, format: format).image { ctx in
-            ctx.cgContext.interpolationQuality = .high
-            image.draw(in: CGRect(x: -crop.minX * sx, y: -crop.minY * sy, width: CGFloat(w) * sx, height: CGFloat(h) * sy))
-        }
-        // 색 프로필(sRGB ICC, 약 3KB)을 붙이지 않도록 장치 RGB 로 태그 — 수 KB 짜리 썸네일에선 용량의 절반 가까이라.
-        // 프로필이 없는 이미지는 sRGB 로 읽히므로 색은 같음
-        let untagged = thumb.cgImage.flatMap { $0.copy(colorSpace: CGColorSpaceCreateDeviceRGB()) }.map { UIImage(cgImage: $0) } ?? thumb
-        // webp 인코딩이 안 되면 jpg 로
-        var data: Data? = nil
-        var ext = "jpg"
-        if o.format == "webp", let d = encodeWebP(image: untagged, quality: o.quality) { data = d; ext = "webp" }
-        if data == nil { data = untagged.jpegData(compressionQuality: o.quality); ext = "jpg" }
-        guard let bytes = data else { return [:] }
-        let url = URL(fileURLWithPath: (tempDir as NSString).appendingPathComponent("turbo_picker_thumb_\(timestamp)_\(index).\(ext)"))
-        do { try bytes.write(to: url, options: [.atomic]) } catch { return [:] }
-        return [
-            "thumbnailUri": url.absoluteString,
-            "thumbnailWidth": Int(size.width),
-            "thumbnailHeight": Int(size.height),
-            "thumbnailFileSize": bytes.count,
-        ]
-    }
-
-    /// 이미지를 지정 포맷으로 저장하고 file:// URI 반환
-    /// - Parameters:
-    ///   - image: 저장할 UIImage
-    ///   - format: "webp" | "jpg" | "png"
-    ///   - prefix: 파일명 prefix (e.g. "resized", "original")
-    ///   - index: 배치 내 인덱스
-    ///   - timestamp: 타임스탬프(ms)
-    ///   - tempDir: 저장 디렉토리 경로
-    private func saveImage(_ image: UIImage, format: String,
-                           prefix: String, index: Int,
-                           timestamp: Int, tempDir: String, forceJPEG: Bool = false) -> String? {
-        let ext: String
-        let data: Data?
-
-        let actualFormat = forceJPEG ? "jpg" : format
-
-        switch actualFormat {
-        case "png":
-            ext = "png"
-            data = image.pngData()
-        case "jpg":
-            ext = "jpg"
-            data = image.jpegData(compressionQuality: 0.9)
-        default: // "webp"
-            ext = "webp"
-            data = encodeWebP(image: image, quality: 0.85)
-        }
-
-        guard let imageData = data else {
-            // WebP 인코딩 실패 시 JPEG fallback
-            if format == "webp", let fallbackData = image.jpegData(compressionQuality: 0.85) {
-                let path = (tempDir as NSString).appendingPathComponent(
-                    "turbo_picker_\(prefix)_\(timestamp)_\(index).jpg")
-                let url = URL(fileURLWithPath: path)
-                try? fallbackData.write(to: url)
-                return url.absoluteString
-            }
-            return nil
-        }
-
-        let fileName = "turbo_picker_\(prefix)_\(timestamp)_\(index).\(ext)"
-        let filePath = (tempDir as NSString).appendingPathComponent(fileName)
-        let fileURL  = URL(fileURLWithPath: filePath)
-
-        do {
-            try imageData.write(to: fileURL)
-            return fileURL.absoluteString
-        } catch {
-            print("❌ [TurboImagePicker] \(format.uppercased()) 저장 실패: \(error)")
-            return nil
-        }
-    }
-
-    
-    /// 저장된 파일 경로에서 fileName, fileExtension, fileSize 반환
-    private func fileMetadata(fromPath filePath: String) -> (fileName: String, fileExtension: String, fileSize: Int64) {
-        let url = URL(fileURLWithPath: filePath.hasPrefix("file://")
-            ? String(filePath.dropFirst(7))
-            : filePath)
-        let fileName = url.lastPathComponent
-        let fileExtension = url.pathExtension.lowercased()
-        let fileSize = (try? FileManager.default.attributesOfItem(atPath: url.path)[.size] as? Int64) ?? 0
-        return (fileName, fileExtension, fileSize)
-    }
-    
     /// 맨 위 컨트롤러에 present. 맨 위가 닫히거나 열리는 중이면(예: openGallery 가 끝난 직후 갤러리 시트가
     /// 닫히는 애니메이션) UIKit 이 present 를 조용히 버리므로, 전환이 끝난 뒤 다시 시도합니다.
     /// 끝내 present 되지 않으면 reject — 안 그러면 JS 약속이 안 풀리고 _editorOpen 가드에 계속 막힙니다.
@@ -1832,99 +1258,55 @@ class RNAttachmentKit: RCTEventEmitter {
     
     // MARK: - Editor Result Processing
 
-    /// 동영상 1장을 전송용 mp4 로 만들어 resolve (갤러리 다중 전송 경로의 동영상 분기와 같은 필드)
+    /// 동영상 1장을 전송용 mp4 로 만들어 resolve (갤러리 다중 전송 경로의 동영상 분기와 같은 필드 — AttachmentProcessor.processVideo)
     private func exportSingleVideo(_ phAsset: PHAsset, galleryVC: GalleryViewController?, tempDir: String,
                                    resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
         let videoOptions = galleryVC?.videoExportOptions ?? VideoExportOptions()
         let state = galleryVC?.videoEditStates[phAsset.localIdentifier] ?? VideoEditState.defaultState(for: phAsset, options: videoOptions)
         let hud: VideoExportHUD? = galleryShowsVideoHUD ? VideoExportHUD.show(accent: galleryVC?.parsedThemeColor ?? UIColor(red: 236/255, green: 73/255, blue: 38/255, alpha: 1), languageCode: galleryVC?.languageCode ?? "en") : nil
-        let exporter = VideoExporter()
-        let hudCancelled = AtomicFlag()
-        hud?.onCancel = { hudCancelled.value = true; exporter.cancel() }
-        let job = MediaProcessingJob()
+        let job = AttachmentProcessingJob()
+        // HUD 취소 = 전체 중단 (Promise reject)
+        hud?.onCancel = { job.abort() }
         let processingId = UUID().uuidString
         processingJobs[processingId] = job
         lastProcessingId = processingId
+        let processingOptions = AttachmentProcessingOptions(video: videoOptions, outputDirectory: tempDir)
         DispatchQueue.global(qos: .userInitiated).async {
-            let poster = Self.requestPoster(phAsset)
+            let poster = AttachmentProcessor.requestPoster(phAsset)
             self.sendEvent(withName: "onProcessingStart", body: [
                 "processingId": processingId,
                 "total": 1,
-                "items": [self.processingStartItem(index: 0, asset: phAsset, image: poster, videoStates: [phAsset.localIdentifier: state],
-                                                   videoOptions: videoOptions, maxWidth: 0, maxHeight: 0, tempDir: tempDir)],
+                "items": [AttachmentProcessor.startItem(index: 0, asset: phAsset, image: poster, videoStates: [phAsset.localIdentifier: state],
+                                                        options: processingOptions).dictionary],
             ])
-            let timestamp = Int(Date().timeIntervalSince1970 * 1000)
-            var result: [String: Any] = [
-                "originalUri":    "ph://\(phAsset.localIdentifier)",
-                "originalWidth":  phAsset.pixelWidth,
-                "originalHeight": phAsset.pixelHeight,
-                "mediaType":      "video",
-                "type":           "video/mp4",
-                "duration":       phAsset.duration,
-            ]
+            let result: AttachmentResult
             do {
-                job.begin(index: 0, exporter: exporter)
-                let throttle = ProgressThrottle()
-                let onProgress: (Double) -> Void = { p in
-                    guard throttle.shouldSend(p) else { return }
+                result = try AttachmentProcessor.processVideo(phAsset, index: 0, state: state, options: processingOptions, job: job, progress: { p in
                     DispatchQueue.main.async { hud?.update(progress: p, index: 0, total: 1) }
                     self.sendEvent(withName: "onVideoProgress", body: ["index": 0, "total": 1, "progress": p, "processingId": processingId])
-                }
-                let r: VideoExportResult
-                // HUD 취소는 exporter.cancel() — 기다리는 동안엔 job 으로 알 수 없으므로 HUD 취소도 job 에 기록
-                if let ready = VideoPrepareManager.shared.takeReady(asset: phAsset, state: state, progress: onProgress,
-                                                                     isCancelled: { job.isCancelled(0) || hudCancelled.value }) {
-                    r = ready; onProgress(1)
-                } else {
-                    if job.isCancelled(0) || hudCancelled.value { throw VideoExporter.ExportError.cancelled }
-                    r = try exporter.export(asset: phAsset, state: state, options: videoOptions,
-                                            outputDir: URL(fileURLWithPath: tempDir), baseName: "turbo_video_\(timestamp)_0", progress: onProgress)
-                }
-                result["uri"]           = "file://" + r.url.path
-                result["width"]         = r.width
-                result["height"]        = r.height
-                result["duration"]      = r.duration
-                result["fileSize"]      = r.fileSize
-                result["fileName"]      = r.url.lastPathComponent
-                result["fileExtension"] = "mp4"
-                result["videoCodec"]    = r.codec
-                result["videoBitrate"]  = r.bitrate
-                result["edited"]        = !r.passthrough
-                if let t = r.thumbnailURL {
-                    result["thumbnailUri"]    = "file://" + t.path
-                    result["thumbnailWidth"]  = r.thumbnailWidth
-                    result["thumbnailHeight"] = r.thumbnailHeight
-                }
-                if job.isCancelled(0) { throw VideoExporter.ExportError.cancelled }
-            } catch VideoExporter.ExportError.cancelled where job.isCancelled(0) {
-                // 앱이 취소 (cancelVideoProcessing) — 이벤트·결과에 cancelled 로
-                result["error"] = "CANCELLED"
-                result["cancelled"] = true
-            } catch VideoExporter.ExportError.cancelled {
-                job.end()
+                })
+            } catch {
                 DispatchQueue.main.async {
                     self.processingJobs[processingId] = nil
                     hud?.dismiss(); reject("CANCELLED", "Video export cancelled", nil)
                 }
                 return
-            } catch {
-                result["error"] = error.localizedDescription
             }
-            job.end()
-            self.sendEvent(withName: "onImageProcessed", body: ["index": 0, "total": 1, "image": result, "processingId": processingId])
+            let dict = result.dictionary
+            self.sendEvent(withName: "onImageProcessed", body: ["index": 0, "total": 1, "image": dict, "processingId": processingId])
             DispatchQueue.main.async {
                 hud?.dismiss()
                 if self.currentGalleryVC == nil || self.currentGalleryVC === galleryVC { self.currentGalleryVC = nil }
                 self.processingJobs[processingId] = nil
                 galleryVC?.releaseAfterReturn(discardPreparedVideos: self.currentGalleryVC == nil)
-                resolve([result])
+                resolve([dict])
             }
         }
     }
 
     
     private func processEditorResult(asset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String, galleryVC: GalleryViewController?, targetMaxWidth: Int? = nil, targetMaxHeight: Int? = nil, thumbnail: PhotoThumbnailOptions? = nil, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        let tempDir = prepareCacheDirectory()
+        let tempDir = AttachmentProcessor.prepareCacheDirectory()
         // 동영상 1장 편집 → 전송: 편집 화면에서 고른 품질·음소거로 VideoExporter (사진 경로와 같은 결과 형태)
         if let phAsset = asset, phAsset.mediaType == .video {
             exportSingleVideo(phAsset, galleryVC: galleryVC, tempDir: tempDir, resolve: resolve, reject: reject)
@@ -1961,7 +1343,7 @@ class RNAttachmentKit: RCTEventEmitter {
                 finalImage = ImageProcessor.shared.applyWatermarkIfNeeded(finalImage)
                 resultImage = finalImage
                 // ✅ 2순위: 에디터 결과 원본 저장 (WebP 소프트웨어 인코딩 방지를 위해 하드웨어 가속되는 JPG 강제 사용)
-                originalFilePath = self.saveImage(finalImage, format: format, prefix: "original", index: 0, timestamp: timestamp, tempDir: tempDir, forceJPEG: true)
+                originalFilePath = AttachmentProcessor.saveImage(finalImage, format: format, prefix: "original", index: 0, timestamp: timestamp, tempDir: tempDir, forceJPEG: true)
                 dispatchGroup.leave()
             }
             
@@ -1996,32 +1378,32 @@ class RNAttachmentKit: RCTEventEmitter {
                 "originalUri": originalUri,
                 "originalWidth": Int(originalSize.width),
                 "originalHeight": Int(originalSize.height),
-                "type": self.mimeType(for: format),
+                "type": AttachmentProcessor.mimeType(for: format),
                 "caption": caption
             ]
             
             if let originalFilePath = originalFilePath {
                 result["originalFileUri"] = originalFilePath
                 result["uri"] = originalFilePath // 기본적으로 uri에도 파일 경로 저장
-                let meta = self.fileMetadata(fromPath: originalFilePath)
+                let meta = AttachmentProcessor.fileMetadata(fromPath: originalFilePath)
                 result["fileName"] = meta.fileName
                 result["fileExtension"] = meta.fileExtension
                 result["fileSize"] = meta.fileSize
             }
             
-            let finalImageForFormat = self.resizeImage(image, maxWidth: maxWidth, maxHeight: maxHeight) ?? image
+            let finalImageForFormat = AttachmentProcessor.resizeImage(image, maxWidth: maxWidth, maxHeight: maxHeight) ?? image
             
-            if let finalUri = self.saveImage(finalImageForFormat, format: format, prefix: "final", index: 0, timestamp: timestamp, tempDir: tempDir) {
+            if let finalUri = AttachmentProcessor.saveImage(finalImageForFormat, format: format, prefix: "final", index: 0, timestamp: timestamp, tempDir: tempDir) {
                 result["uri"] = finalUri
                 result["width"] = Int(finalImageForFormat.size.width)
                 result["height"] = Int(finalImageForFormat.size.height)
-                let finalMeta = self.fileMetadata(fromPath: finalUri)
+                let finalMeta = AttachmentProcessor.fileMetadata(fromPath: finalUri)
                 result["fileName"] = finalMeta.fileName
                 result["fileExtension"] = finalMeta.fileExtension
                 result["fileSize"] = finalMeta.fileSize
             }
             // 썸네일: 크롭·그리기·필터가 반영된 결과(uri 와 같은 비트맵)에서
-            result.merge(self.makePhotoThumbnail(finalImageForFormat, options: thumbOptions, index: 0,
+            result.merge(AttachmentProcessor.photoThumbnailFields(finalImageForFormat, options: thumbOptions, index: 0,
                                                  timestamp: timestamp, tempDir: tempDir)) { $1 }
             
             DispatchQueue.main.async {
@@ -2034,7 +1416,7 @@ class RNAttachmentKit: RCTEventEmitter {
 
 
     private func processEditorResultMulti(assets: [PHAsset], croppedImages: [PHAsset: UIImage], filterStates: [PHAsset: FilterState], galleryVC: GalleryViewController, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
-        let tempDir = prepareCacheDirectory()
+        let tempDir = AttachmentProcessor.prepareCacheDirectory()
         let maxWidth = galleryVC.maxWidth
         let maxHeight = galleryVC.maxHeight
         let format = galleryVC.outputFormat
@@ -2072,32 +1454,32 @@ class RNAttachmentKit: RCTEventEmitter {
                         "originalUri": originalUri,
                         "originalWidth": Int(finalImage.size.width),
                         "originalHeight": Int(finalImage.size.height),
-                        "type": self.mimeType(for: format)
+                        "type": AttachmentProcessor.mimeType(for: format)
                     ]
                     
                     // ✅ 2순위: 에디터 다중 결과 원본 저장 (JPG 강제 사용으로 속도 최적화)
-                    if let originalFilePath = self.saveImage(finalImage, format: format, prefix: "original", index: index, timestamp: timestamp, tempDir: tempDir, forceJPEG: true) {
+                    if let originalFilePath = AttachmentProcessor.saveImage(finalImage, format: format, prefix: "original", index: index, timestamp: timestamp, tempDir: tempDir, forceJPEG: true) {
                         result["originalFileUri"] = originalFilePath
                         result["uri"] = originalFilePath // 기본적으로 uri에도 파일 경로 저장
-                        let meta = self.fileMetadata(fromPath: originalFilePath)
+                        let meta = AttachmentProcessor.fileMetadata(fromPath: originalFilePath)
                         result["fileName"] = meta.fileName
                         result["fileExtension"] = meta.fileExtension
                         result["fileSize"] = meta.fileSize
                     }
                     
-                    let resizedForThumb = (maxWidth > 0 || maxHeight > 0) ? self.resizeImage(finalImage, maxWidth: maxWidth, maxHeight: maxHeight) : nil
+                    let resizedForThumb = (maxWidth > 0 || maxHeight > 0) ? AttachmentProcessor.resizeImage(finalImage, maxWidth: maxWidth, maxHeight: maxHeight) : nil
                     if let resizedImage = resizedForThumb {
-                        if let resizedUri = self.saveImage(resizedImage, format: format, prefix: "resized", index: index, timestamp: timestamp, tempDir: tempDir) {
+                        if let resizedUri = AttachmentProcessor.saveImage(resizedImage, format: format, prefix: "resized", index: index, timestamp: timestamp, tempDir: tempDir) {
                             result["uri"] = resizedUri
                             result["width"] = Int(resizedImage.size.width)
                             result["height"] = Int(resizedImage.size.height)
-                            let resizedMeta = self.fileMetadata(fromPath: resizedUri)
+                            let resizedMeta = AttachmentProcessor.fileMetadata(fromPath: resizedUri)
                             result["fileName"] = resizedMeta.fileName
                             result["fileExtension"] = resizedMeta.fileExtension
                             result["fileSize"] = resizedMeta.fileSize
                         }
                     }
-                    result.merge(self.makePhotoThumbnail(resizedForThumb ?? finalImage, options: thumbOptions, index: index,
+                    result.merge(AttachmentProcessor.photoThumbnailFields(resizedForThumb ?? finalImage, options: thumbOptions, index: index,
                                                          timestamp: timestamp, tempDir: tempDir)) { $1 }
                     
                     resultsLock.lock()
@@ -2141,29 +1523,6 @@ class RNAttachmentKit: RCTEventEmitter {
                 galleryVC.releaseAfterReturn()
             }
         }
-    }
-}
-
-/// GalleryOptions.thumbnail / EditorOptions.thumbnail
-struct PhotoThumbnailOptions {
-    let maxWidth: Int
-    let maxHeight: Int
-    /// true = "cover" (상자를 꽉 채우고 가운데 기준으로 자름), false = "fit"
-    let cover: Bool
-    let quality: CGFloat
-    /// "webp" | "jpg"
-    let format: String
-
-    /// RN 옵션 → 값. maxWidth 가 없거나 0 이하면 nil (썸네일 안 만듦)
-    init?(_ raw: Any?) {
-        guard let d = raw as? NSDictionary, let mw = (d["maxWidth"] as? NSNumber)?.intValue, mw > 0 else { return nil }
-        maxWidth = mw
-        let mh = (d["maxHeight"] as? NSNumber)?.intValue ?? 0
-        maxHeight = mh > 0 ? mh : mw
-        cover = (d["mode"] as? String)?.lowercased() == "cover"
-        quality = CGFloat(min(max((d["quality"] as? NSNumber)?.doubleValue ?? 0.8, 0), 1))
-        let f = (d["format"] as? String)?.lowercased()
-        format = (f == "jpg" || f == "jpeg") ? "jpg" : "webp"
     }
 }
 
@@ -2611,71 +1970,5 @@ extension RNAttachmentKit: UIViewControllerTransitioningDelegate {
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         zoomAnimator.isPresenting = false
         return zoomAnimator
-    }
-}
-
-// MARK: - 전송 처리 상태 (앱에서 동영상 취소)
-
-/// openGallery 결과 처리 한 번. cancelVideoProcessing(index) → 그 동영상만(또는 전부) 취소
-private final class MediaProcessingJob {
-    private let lock = NSLock()
-    private var cancelAll = false
-    private var cancelled = Set<Int>()
-    private var currentIndex: Int?
-    private var currentExporter: VideoExporter?
-
-    func cancel(index: Int?) {
-        lock.lock(); defer { lock.unlock() }
-        if let i = index {
-            cancelled.insert(i)
-            if currentIndex == i { currentExporter?.cancel() }
-        } else {
-            cancelAll = true
-            currentExporter?.cancel()
-        }
-    }
-
-    func isCancelled(_ i: Int) -> Bool {
-        lock.lock(); defer { lock.unlock() }
-        return cancelAll || cancelled.contains(i)
-    }
-
-    func begin(index: Int, exporter: VideoExporter) {
-        lock.lock(); defer { lock.unlock() }
-        currentIndex = index
-        currentExporter = exporter
-    }
-
-    func end() {
-        lock.lock(); defer { lock.unlock() }
-        currentIndex = nil
-        currentExporter = nil
-    }
-}
-
-/// onVideoProgress 를 1% 이상 바뀌고 0.1초 지났을 때만 (브릿지가 넘치지 않게). 0 과 1 은 항상
-private final class ProgressThrottle {
-    private let lock = NSLock()
-    private var last: Double = -1
-    private var lastTime: CFTimeInterval = 0
-
-    func shouldSend(_ p: Double) -> Bool {
-        lock.lock(); defer { lock.unlock() }
-        let now = CACurrentMediaTime()
-        guard p >= 1 || last < 0 || (p - last >= 0.01 && now - lastTime >= 0.1) else { return false }
-        if p >= 1 && last >= 1 { return false }
-        last = p
-        lastTime = now
-        return true
-    }
-}
-
-/// 스레드 사이에서 읽고 쓰는 Bool
-private final class AtomicFlag {
-    private let lock = NSLock()
-    private var v = false
-    var value: Bool {
-        get { lock.lock(); defer { lock.unlock() }; return v }
-        set { lock.lock(); v = newValue; lock.unlock() }
     }
 }

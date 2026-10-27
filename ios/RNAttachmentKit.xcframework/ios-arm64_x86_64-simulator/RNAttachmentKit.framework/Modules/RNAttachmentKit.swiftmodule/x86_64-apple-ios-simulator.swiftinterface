@@ -392,8 +392,12 @@ extension RNAttachmentKit.GalleryBaseViewController : UIKit.UIAdaptivePresentati
 }
 @_hasMissingDesignatedInitializers public class LicenseManager {
   public static let shared: RNAttachmentKit.LicenseManager
+  public var isInitialized: Swift.Bool {
+    get
+  }
   public func initialize(with key: Swift.String) -> Swift.Bool
   public func isValidLicense() -> Swift.Bool
+  public func whenInitialized(timeout: Foundation.TimeInterval = 3, _ block: @escaping () -> Swift.Void)
   @objc deinit
 }
 public enum LicenseGate {
@@ -940,6 +944,109 @@ public struct ViewerVideoItem {
   final public func discard(asset: Photos.PHAsset)
   final public func discardAll()
   @objc deinit
+}
+public struct PhotoThumbnailOptions {
+  public let maxWidth: Swift.Int
+  public let maxHeight: Swift.Int
+  public let cover: Swift.Bool
+  public let quality: CoreFoundation.CGFloat
+  public let format: Swift.String
+  public init(maxWidth: Swift.Int, maxHeight: Swift.Int = 0, cover: Swift.Bool = false, quality: CoreFoundation.CGFloat = 0.8, format: Swift.String = "webp")
+  public init?(_ raw: Any?)
+}
+public struct AttachmentProcessingOptions {
+  public var maxWidth: Swift.Int
+  public var maxHeight: Swift.Int
+  public var outputFormat: Swift.String
+  public var thumbnail: RNAttachmentKit.PhotoThumbnailOptions?
+  public var video: RNAttachmentKit.VideoExportOptions
+  public var outputDirectory: Swift.String
+  public init(maxWidth: Swift.Int = 0, maxHeight: Swift.Int = 0, outputFormat: Swift.String = "webp", thumbnail: RNAttachmentKit.PhotoThumbnailOptions? = nil, video: RNAttachmentKit.VideoExportOptions = VideoExportOptions(), outputDirectory: Swift.String? = nil)
+}
+public struct AttachmentStartItem {
+  public let index: Swift.Int
+  public let isVideo: Swift.Bool
+  public let originalUri: Swift.String?
+  public let width: Swift.Int
+  public let height: Swift.Int
+  public let duration: Swift.Double?
+  public let posterURL: Foundation.URL?
+  public let posterWidth: Swift.Int
+  public let posterHeight: Swift.Int
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+}
+public struct AttachmentResult {
+  public let index: Swift.Int
+  public let isVideo: Swift.Bool
+  public var uri: Swift.String?
+  public var mimeType: Swift.String
+  public var width: Swift.Int?
+  public var height: Swift.Int?
+  public var fileName: Swift.String?
+  public var fileExtension: Swift.String?
+  public var fileSize: Swift.Int64?
+  public var originalUri: Swift.String
+  public var originalFileUri: Swift.String?
+  public var originalWidth: Swift.Int
+  public var originalHeight: Swift.Int
+  public var thumbnailURL: Foundation.URL?
+  public var thumbnailWidth: Swift.Int?
+  public var thumbnailHeight: Swift.Int?
+  public var thumbnailFileSize: Swift.Int?
+  public var duration: Swift.Double?
+  public var videoCodec: Swift.String?
+  public var videoBitrate: Swift.Int?
+  public var edited: Swift.Bool?
+  public var error: Swift.String?
+  public var cancelled: Swift.Bool
+  public var path: Swift.String? {
+    get
+  }
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+}
+final public class AttachmentProcessingJob {
+  public init()
+  final public func cancel(index: Swift.Int?)
+  final public func abort()
+  final public var isAborted: Swift.Bool {
+    get
+  }
+  final public func isCancelled(_ i: Swift.Int) -> Swift.Bool
+  final public func begin(index: Swift.Int, exporter: RNAttachmentKit.VideoExporter)
+  final public func end()
+  @objc deinit
+}
+final public class AttachmentProgressThrottle {
+  public init()
+  final public func shouldSend(_ p: Swift.Double) -> Swift.Bool
+  @objc deinit
+}
+public enum AttachmentProcessor {
+  @discardableResult
+  public static func process(_ selected: [(Photos.PHAsset?, UIKit.UIImage)], videoStates: [Swift.String : RNAttachmentKit.VideoEditState], options: RNAttachmentKit.AttachmentProcessingOptions, job: RNAttachmentKit.AttachmentProcessingJob, onStart: (([RNAttachmentKit.AttachmentStartItem]) -> Swift.Void)? = nil, onVideoProgress: ((Swift.Int, Swift.Double) -> Swift.Void)? = nil, onItem: ((RNAttachmentKit.AttachmentResult) -> Swift.Void)? = nil) -> (results: [RNAttachmentKit.AttachmentResult], aborted: Swift.Bool)
+  public static func startItem(index: Swift.Int, asset: Photos.PHAsset?, image: UIKit.UIImage?, videoStates: [Swift.String : RNAttachmentKit.VideoEditState], options: RNAttachmentKit.AttachmentProcessingOptions) -> RNAttachmentKit.AttachmentStartItem
+  public static func processPhoto(_ image: UIKit.UIImage, asset: Photos.PHAsset?, index: Swift.Int, options: RNAttachmentKit.AttachmentProcessingOptions) -> RNAttachmentKit.AttachmentResult?
+  public static func processVideo(_ phAsset: Photos.PHAsset, index: Swift.Int, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.AttachmentProcessingOptions, job: RNAttachmentKit.AttachmentProcessingJob, progress: ((Swift.Double) -> Swift.Void)? = nil) throws -> RNAttachmentKit.AttachmentResult
+  public static var cacheDirectory: Swift.String {
+    get
+  }
+  @discardableResult
+  public static func prepareCacheDirectory() -> Swift.String
+  public static func resizeImage(_ image: UIKit.UIImage, maxWidth: Swift.Int, maxHeight: Swift.Int) -> UIKit.UIImage?
+  public static func saveOriginalImageAsJPEG(_ image: UIKit.UIImage, index: Swift.Int, timestamp: Swift.Int, tempDir: Swift.String) -> Swift.String?
+  public static func saveImage(_ image: UIKit.UIImage, format: Swift.String, prefix: Swift.String, index: Swift.Int, timestamp: Swift.Int, tempDir: Swift.String, forceJPEG: Swift.Bool = false) -> Swift.String?
+  public static func encodeWebP(image: UIKit.UIImage, quality: CoreFoundation.CGFloat) -> Foundation.Data?
+  public static func mimeType(for format: Swift.String) -> Swift.String
+  public static func fileMetadata(fromPath filePath: Swift.String) -> (fileName: Swift.String, fileExtension: Swift.String, fileSize: Swift.Int64)
+  public static func photoThumbnailLayout(width w: Swift.Int, height h: Swift.Int, options o: RNAttachmentKit.PhotoThumbnailOptions) -> (crop: CoreFoundation.CGRect, size: CoreFoundation.CGSize)
+  public static func makePhotoThumbnail(_ image: UIKit.UIImage, options: RNAttachmentKit.PhotoThumbnailOptions?, index: Swift.Int, timestamp: Swift.Int, tempDir: Swift.String) -> (url: Foundation.URL, width: Swift.Int, height: Swift.Int, fileSize: Swift.Int)?
+  public static func photoThumbnailFields(_ image: UIKit.UIImage, options: RNAttachmentKit.PhotoThumbnailOptions?, index: Swift.Int, timestamp: Swift.Int, tempDir: Swift.String) -> [Swift.String : Any]
+  public static func videoFrame(_ asset: Photos.PHAsset, at seconds: Swift.Double) -> UIKit.UIImage?
+  public static func requestPoster(_ asset: Photos.PHAsset) -> UIKit.UIImage?
 }
 extension RNAttachmentKit.AttachMenuTab : Swift.Equatable {}
 extension RNAttachmentKit.AttachMenuTab : Swift.Hashable {}

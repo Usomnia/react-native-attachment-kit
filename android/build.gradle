@@ -97,7 +97,10 @@ if (project != rootProject) {
     }
 
     dependencies {
-        implementation files('src/main/libs/rnattachmentkit-release.aar')
+        // 1.1.0: aar 를 `api` 로 — 앱의 네이티브 코드도 키트 공개 클래스(AttachmentProcessor·ImagePickerBottomSheet·
+        //   ImageViewerOverlayView·VideoExporter …)를 바로 쓸 수 있게 (전엔 앱이 같은 aar 를 compileOnly 로 따로 잡아야 했음).
+        //   클래스 이름은 aar 의 proguard-rules.pro(-keep class com.rnattachmentkit.**)가 그대로 둠
+        api files('src/main/libs/rnattachmentkit-release.aar')
         compileOnly "com.facebook.react:react-android:+"
         
         implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0"
@@ -107,7 +110,8 @@ if (project != rootProject) {
         implementation "androidx.fragment:fragment-ktx:1.6.2"
         implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
         implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
-        implementation "com.google.android.material:material:1.11.0"
+        // 공개 클래스의 부모 타입(BottomSheetDialogFragment 등)이라 앱 컴파일 경로에도 보여야 함
+        api "com.google.android.material:material:1.11.0"
         implementation "androidx.recyclerview:recyclerview:1.3.2"
         implementation "androidx.cardview:cardview:1.0.0"
         implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
@@ -132,7 +136,8 @@ if (project != rootProject) {
         // 이미지 뷰어 동영상: HLS(.m3u8) 스트리밍 재생 (iOS AVPlayer 와 맞춤)
         implementation "androidx.media3:media3-exoplayer-hls:${media3_version}"
         implementation "androidx.media3:media3-ui:${media3_version}"
-        implementation "androidx.media3:media3-transformer:${media3_version}"
+        // VideoExporter 공개 API 가 쓰는 타입 — 앱 컴파일 경로에도 보여야 함
+        api "androidx.media3:media3-transformer:${media3_version}"
         implementation "androidx.media3:media3-effect:${media3_version}"
 
         // CameraX dependencies — 1.4.0+ 부터 libimage_processing_util_jni.so 가 16KB 정렬 (AAR 쪽과 같은 버전)

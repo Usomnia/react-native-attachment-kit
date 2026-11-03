@@ -341,6 +341,8 @@ ref.current?.measure((x, y, width, height, pageX, pageY) => {
 | `sourceBorderCorners` | `('topLeft' \| 'topRight' \| 'bottomLeft' \| 'bottomRight')[]` | Which corners are rounded (chat-bubble groups). `[]` = none. |
 | `sourceBackgroundColor` | `string` | Background behind the thumbnail during the animation. |
 | `hideSourceImage` | `boolean` | A native mask hides the source thumbnail while the viewer is open. |
+| `sourceClipInsets` | `{ top?, bottom?, left?, right? }` | Screen-edge insets of the area where the **moving photo and the `hideSourceImage` mask** are drawn during the zoom open / close (e.g. `{ top: headerHeight, bottom: tabBarHeight }` for translucent bars). A thumbnail half under a translucent bar then slides **behind** the bar instead of over it. The clip widens to the full screen in the second half of the open (when the viewer background covers the bar) and narrows in the first 20 % of the close, so the viewer itself is never cut. iOS + Android `useOverlayViewer`. |
+| `sourceClipRect` | `SourceRect` | Same, as a rect in `sourceRect` coordinates (e.g. a list area inside a sheet). With both, the intersection is used. Omit both = no clipping (as before). |
 
 **Actions**
 
@@ -368,8 +370,8 @@ ref.current?.measure((x, y, width, height, pageX, pageY) => {
 | `useDialogViewer: true` | DialogFragment — no `AppState` blip, but background RN layout changes may not render until it closes. |
 | `useOverlayViewer: true` | ⭐ View on top of the host Activity's window — no `AppState` blip, background changes render in real time. Wins over `useDialogViewer`. |
 
-#### `updateSourceRect(rect: SourceRect & { sourceBorderRadius?, sourceBorderCorners? }): Promise<void>`
-Updates where the viewer closes to (e.g. after paging to another thumbnail or scrolling).
+#### `updateSourceRect(rect: ViewerSourceUpdate): Promise<void>`
+Updates where the viewer closes to (e.g. after paging to another thumbnail or scrolling). `ViewerSourceUpdate = SourceRect & { sourceBorderRadius?, sourceBorderCorners?, sourceClipRect?, sourceClipInsets? }` — the clip keys change only when passed (`null` = stop clipping).
 
 #### `injectImageCache(url: string, localPath: string): Promise<boolean>`
 Seeds the viewer's image cache with a local file for a remote URL, so it opens instantly without network.

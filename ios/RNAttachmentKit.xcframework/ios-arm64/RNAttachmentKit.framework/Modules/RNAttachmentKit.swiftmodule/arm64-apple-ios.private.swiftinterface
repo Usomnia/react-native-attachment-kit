@@ -700,6 +700,9 @@ extension RNAttachmentKit.MediaGalleryViewController : UIKit.UICollectionViewDat
   @_Concurrency.MainActor @preconcurrency public var sourceBorderCorners: QuartzCore.CACornerMask
   @_Concurrency.MainActor @preconcurrency public var sourceBackgroundColor: UIKit.UIColor
   @_Concurrency.MainActor @preconcurrency public var fadeOutOnDismiss: Swift.Bool
+  @_Concurrency.MainActor @preconcurrency public var sourceClipRect: CoreFoundation.CGRect?
+  @_Concurrency.MainActor @preconcurrency public var sourceClipInsets: UIKit.UIEdgeInsets?
+  @_Concurrency.MainActor @preconcurrency public func clipRect(in bounds: CoreFoundation.CGRect) -> CoreFoundation.CGRect?
   @_Concurrency.MainActor @preconcurrency public func updateMaskView()
   @_Concurrency.MainActor @preconcurrency public var openDuration: Swift.Double
   @_Concurrency.MainActor @preconcurrency public var closeDuration: Swift.Double

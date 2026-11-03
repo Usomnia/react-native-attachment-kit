@@ -89,7 +89,7 @@ let _editorOpen = false
 let _asyncImgProcessedSub: { remove: () => void } | null = null
 
 export type { AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
-export type { VideoOptions, VideoProgressEvent, ViewerVideo, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions } from "./types"
+export type { VideoOptions, VideoProgressEvent, ViewerVideo, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions, SourceRect, SourceClipInsets, ViewerSourceUpdate } from "./types"
 export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
@@ -102,7 +102,8 @@ export interface RNAttachmentKit {
   openGallery(options?: GalleryOptions): Promise<ImageResult[]>
   openEditor(options: EditorOptions): Promise<ImageResult>
   openViewer(options: ViewerOptions): Promise<void>
-  updateSourceRect(rect: import("./types").SourceRect): Promise<void>
+  /** 닫힐 때 돌아갈 자리 (페이지를 넘겼을 때). sourceClipRect·sourceClipInsets 도 함께 바꿀 수 있음 */
+  updateSourceRect(rect: import("./types").ViewerSourceUpdate): Promise<void>
   /** 지도 뷰어. 닫히면 resolve */
   openMapViewer(options: import("./types").MapViewerOptions): Promise<void>
   /** 지도 뷰어가 열린 동안 말풍선 위치가 바뀌었을 때 (닫힐 때 돌아갈 자리) */
@@ -426,7 +427,7 @@ const AttachmentKit: RNAttachmentKit = {
     // 정상적으로 열렸으면 리스너는 onViewerWillClose 콜백 안에서 제거됨
   },
 
-  updateSourceRect: async (rect: import("./types").SourceRect): Promise<void> => {
+  updateSourceRect: async (rect: import("./types").ViewerSourceUpdate): Promise<void> => {
     if (!RNAttachmentKitModule) {
       throw new Error(LINKING_ERROR)
     }

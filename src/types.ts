@@ -143,6 +143,26 @@ export interface SourceRect {
   height: number
 }
 
+/**
+ * 열림·닫힘(zoom) 중 움직이는 사진과 원래 자리 가림 판(hideSourceImage)이 보이는 영역의 화면 가장자리 여백.
+ * 앱의 위·아래 반투명 바 높이를 주면, 바 밑에 걸친 사진이 바 "뒤로" 들어가는 것처럼 바 밖에서만 보입니다.
+ * 빠진 값은 0. 단위·기준은 sourceRect 와 같음 (dp, 화면 기준)
+ */
+export interface SourceClipInsets {
+  top?: number
+  bottom?: number
+  left?: number
+  right?: number
+}
+
+/** updateSourceRect 인자 — 닫힐 때 돌아갈 자리. 잘라내기 키는 넘긴 것만 바뀜 (null = 자르지 않음) */
+export interface ViewerSourceUpdate extends SourceRect {
+  sourceBorderRadius?: number
+  sourceBorderCorners?: ('topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight')[]
+  sourceClipRect?: SourceRect | null
+  sourceClipInsets?: SourceClipInsets | null
+}
+
 export interface GalleryOptions {
   maxSelection?: number
   maxWidth?: number // 최대 width
@@ -443,6 +463,14 @@ export interface ViewerOptions {
   sourceBackgroundColor?: string
   sourceBorderCorners?: ('topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight')[]
   hideSourceImage?: boolean
+  /**
+   * 잘라내기 영역 (zoom 전용). 열림·닫힘 중 움직이는 사진과 hideSourceImage 가림 판이 이 사각형 안에서만 그려집니다.
+   * sourceRect 와 같은 화면 좌표. 사진이 화면을 다 채우는 쪽으로 갈수록 잘림이 풀려, 뷰어 본체는 잘리지 않습니다.
+   * sourceClipInsets 와 같이 주면 둘의 교집합. 생략 = 자르지 않음 (예전과 같음). updateSourceRect 로 바꿀 수 있음.
+   */
+  sourceClipRect?: SourceRect
+  /** 잘라내기를 화면 가장자리 여백으로 (예: { top: 상단 바 높이, bottom: 탭 바 높이 }). 설명은 sourceClipRect 참조 */
+  sourceClipInsets?: SourceClipInsets
   onPageSelected?: (index: number) => void
   onViewerWillClose?: () => void
   /**

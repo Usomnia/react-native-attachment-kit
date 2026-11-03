@@ -33857,6 +33857,269 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "sourceClipRect",
+            "printedName": "sourceClipRect",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreFoundation.CGRect?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGRect",
+                    "printedName": "CoreFoundation.CGRect",
+                    "usr": "c:@S@CGRect"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvp",
+            "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreFoundation.CGRect?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGRect",
+                        "printedName": "CoreFoundation.CGRect",
+                        "usr": "c:@S@CGRect"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvg",
+                "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "CoreFoundation.CGRect?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "CGRect",
+                        "printedName": "CoreFoundation.CGRect",
+                        "usr": "c:@S@CGRect"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvs",
+                "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvM",
+                "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC14sourceClipRectSo6CGRectVSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "sourceClipInsets",
+            "printedName": "sourceClipInsets",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIEdgeInsets?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIEdgeInsets",
+                    "printedName": "UIKit.UIEdgeInsets",
+                    "usr": "c:@S@UIEdgeInsets"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvp",
+            "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIEdgeInsets?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIEdgeInsets",
+                        "printedName": "UIKit.UIEdgeInsets",
+                        "usr": "c:@S@UIEdgeInsets"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvg",
+                "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "UIKit.UIEdgeInsets?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "UIEdgeInsets",
+                        "printedName": "UIKit.UIEdgeInsets",
+                        "usr": "c:@S@UIEdgeInsets"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvs",
+                "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvM",
+                "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC16sourceClipInsetsSo06UIEdgeH0VSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "clipRect",
+            "printedName": "clipRect(in:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "CoreFoundation.CGRect?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "CGRect",
+                    "printedName": "CoreFoundation.CGRect",
+                    "usr": "c:@S@CGRect"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit22ZoomTransitionAnimatorC8clipRect2inSo6CGRectVSgAG_tF",
+            "mangledName": "$s15RNAttachmentKit22ZoomTransitionAnimatorC8clipRect2inSo6CGRectVSgAG_tF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
             "kind": "Function",
             "name": "updateMaskView",
             "printedName": "updateMaskView()",
@@ -63431,14 +63694,14 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ZoomTransitionAnimator.swift",
       "kind": "FloatLiteral",
-      "offset": 1586,
+      "offset": 3644,
       "length": 4,
       "value": "0.37"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ZoomTransitionAnimator.swift",
       "kind": "FloatLiteral",
-      "offset": 1636,
+      "offset": 3694,
       "length": 4,
       "value": "0.37"
     },

@@ -175,6 +175,13 @@ class RNAttachmentKit: RCTEventEmitter {
                 } else if let r = optDict["sourceBorderRadius"] as? Double {
                     self.zoomAnimator.sourceBorderRadius = CGFloat(r)
                 }
+                // 잘라내기 영역 — 키가 있을 때만 바꿈 (null = 자르지 않음)
+                if optDict.keys.contains("sourceClipRect") {
+                    self.zoomAnimator.sourceClipRect = RNAttachmentKit.parseRect(optDict["sourceClipRect"])
+                }
+                if optDict.keys.contains("sourceClipInsets") {
+                    self.zoomAnimator.sourceClipInsets = RNAttachmentKit.parseInsets(optDict["sourceClipInsets"])
+                }
                 self.zoomAnimator.updateMaskView()
                 
                 resolve(true)
@@ -201,6 +208,13 @@ class RNAttachmentKit: RCTEventEmitter {
               let x = cgFloat(d["x"]), let y = cgFloat(d["y"]),
               let w = cgFloat(d["width"]), let h = cgFloat(d["height"]), w > 0, h > 0 else { return nil }
         return CGRect(x: x, y: y, width: w, height: h)
+    }
+
+    /// { top, bottom, left, right } (빠진 값 0). 객체가 아니면 nil
+    private static func parseInsets(_ v: Any?) -> UIEdgeInsets? {
+        guard let d = v as? NSDictionary else { return nil }
+        return UIEdgeInsets(top: cgFloat(d["top"]) ?? 0, left: cgFloat(d["left"]) ?? 0,
+                            bottom: cgFloat(d["bottom"]) ?? 0, right: cgFloat(d["right"]) ?? 0)
     }
 
     /// 말풍선 이미지(정적 지도 스냅샷) 로드. 메모리/디스크 캐시 → file:// → 다운로드 순.
@@ -495,6 +509,9 @@ class RNAttachmentKit: RCTEventEmitter {
             parsedRect = CGRect(x: x, y: y, width: w, height: h)
         }
         
+        let sourceClipRect = RNAttachmentKit.parseRect(options["sourceClipRect"])
+        let sourceClipInsets = RNAttachmentKit.parseInsets(options["sourceClipInsets"])
+
         var sourceBorderRadius: CGFloat = 0
         if let radiusNum = options["sourceBorderRadius"] as? NSNumber {
             sourceBorderRadius = CGFloat(truncating: radiusNum)
@@ -551,6 +568,9 @@ class RNAttachmentKit: RCTEventEmitter {
             self.zoomAnimator.sourceBorderRadius = sourceBorderRadius
             self.zoomAnimator.sourceBorderCorners = mask
             self.zoomAnimator.sourceBackgroundColor = sourceBackgroundColor
+            // 애니메이터는 재사용되므로 이번 호출 값으로 덮어씀 (안 주면 자르지 않음)
+            self.zoomAnimator.sourceClipRect = sourceClipRect
+            self.zoomAnimator.sourceClipInsets = sourceClipInsets
             // Reset any sourceImage left over from a previous openViewer() call - it's only
             // meant to carry this call's local placeholder (see below), and must not leak
             // into a later call that has no placeholder of its own.

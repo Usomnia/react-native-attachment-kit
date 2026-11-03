@@ -522,8 +522,29 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                 intent.putStringArrayListExtra("sourceBorderCorners", corners)
             }
         }
+        // 잘라내기 영역 — 넘긴 키만 바뀜 (useOverlayViewer 뷰어만 반영)
+        clipArrayOf(options, "sourceClipRect")?.let { intent.putExtra("sourceClipRect", it) }
+        clipArrayOf(options, "sourceClipInsets")?.let { intent.putExtra("sourceClipInsets", it) }
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext).sendBroadcast(intent)
         promise.resolve(null)
+    }
+
+    /**
+     * sourceClipRect {x,y,width,height} / sourceClipInsets {top,bottom,left,right} (dp) → 화면 px [l,t,r,b]
+     * (여백이면 각 변의 여백). 키가 없으면 null(안 바꿈), 값이 null 이면 빈 배열(자르지 않음).
+     */
+    private fun clipArrayOf(options: ReadableMap, key: String): FloatArray? {
+        if (!options.hasKey(key)) return null
+        if (options.isNull(key)) return FloatArray(0)
+        val m = options.getMap(key) ?: return FloatArray(0)
+        fun px(k: String) = if (m.hasKey(k) && !m.isNull(k)) com.facebook.react.uimanager.PixelUtil.toPixelFromDIP(m.getDouble(k).toFloat()) else 0f
+        return if (key == "sourceClipRect") {
+            val x = px("x")
+            val y = px("y")
+            floatArrayOf(x, y, x + px("width"), y + px("height"))
+        } else {
+            floatArrayOf(px("left"), px("top"), px("right"), px("bottom"))
+        }
     }
 
     /** 동영상 변환 취소 (HUD 없이 앱이 말풍선에서). index -1 = 남은 동영상 전부. 진행 중인 처리가 없으면 false */
@@ -673,6 +694,9 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     if (options.hasKey("sourceBackgroundColor")) {
                         putString("sourceBackgroundColor", options.getString("sourceBackgroundColor"))
                     }
+                    // 잘라내기 영역 (열림·닫힘 중 사진과 가림 판이 그려지는 곳) — 이 오버레이 뷰어만
+                    clipArrayOf(options, "sourceClipRect")?.let { putFloatArray("sourceClipRect", it) }
+                    clipArrayOf(options, "sourceClipInsets")?.let { putFloatArray("sourceClipInsets", it) }
                     // placeholderImages: 타입/뷰어 코드에는 있었지만 브릿지에서 한 번도 전달되지 않았던
                     // 필드. 네이티브 뷰어가 onlyRetrieveFromCache(true)로 첫 프레임을 즉시 그리려 할 때
                     // 쓰는 저해상도 대체 이미지 목록입니다(원본 다운로드 전 임시 표시용).

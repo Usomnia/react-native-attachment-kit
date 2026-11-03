@@ -161,6 +161,7 @@ export interface ViewerSourceUpdate extends SourceRect {
   sourceBorderCorners?: ('topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight')[]
   sourceClipRect?: SourceRect | null
   sourceClipInsets?: SourceClipInsets | null
+  closeBelowViewTag?: number | null
 }
 
 export interface GalleryOptions {
@@ -471,6 +472,13 @@ export interface ViewerOptions {
   sourceClipRect?: SourceRect
   /** 잘라내기를 화면 가장자리 여백으로 (예: { top: 상단 바 높이, bottom: 탭 바 높이 }). 설명은 sourceClipRect 참조 */
   sourceClipInsets?: SourceClipInsets
+  /**
+   * 앱의 반투명 바(를 감싼 뷰)의 RN 태그(findNodeHandle). 열림·닫힘 동안 움직이는 사진과 원래 자리 가림 판의 사본을
+   * 앱 화면 안, 이 뷰 바로 아래 층에 그립니다 — 바의 흐림 너머로 사진이 움직이며 바 뒤로 들어가고 나오는 게 보임
+   * (잘라내기만으로는 바 밑 부분이 안 보일 뿐). sourceClipRect/Insets 와 같이 씀. iOS + Android useOverlayViewer.
+   * 이 뷰의 부모에 잠깐 네이티브 뷰를 끼워 넣으므로, 바와 리스트가 형제인 화면의 바(를 감싼 뷰)를 넘기세요.
+   */
+  closeBelowViewTag?: number
   onPageSelected?: (index: number) => void
   onViewerWillClose?: () => void
   /**

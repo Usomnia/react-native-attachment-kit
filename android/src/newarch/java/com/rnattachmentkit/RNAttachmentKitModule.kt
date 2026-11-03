@@ -215,6 +215,9 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         // 잘라내기 영역 — 넘긴 키만 바뀜 (useOverlayViewer 뷰어만 반영)
         clipArrayOf(options, "sourceClipRect")?.let { intent.putExtra("sourceClipRect", it) }
         clipArrayOf(options, "sourceClipInsets")?.let { intent.putExtra("sourceClipInsets", it) }
+        if (options.hasKey("closeBelowViewTag")) {
+            intent.putExtra("closeBelowViewTag", if (options.isNull("closeBelowViewTag")) 0 else options.getDouble("closeBelowViewTag").toInt())
+        }
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .sendBroadcast(intent)
             
@@ -688,6 +691,10 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     // 잘라내기 영역 (열림·닫힘 중 사진과 가림 판이 그려지는 곳) — 이 오버레이 뷰어만
                     clipArrayOf(options, "sourceClipRect")?.let { putFloatArray("sourceClipRect", it) }
                     clipArrayOf(options, "sourceClipInsets")?.let { putFloatArray("sourceClipInsets", it) }
+                    // 앱 쪽 사본을 그릴 자리 — 이 RN 뷰(태그 = view id) 바로 아래 층
+                    if (options.hasKey("closeBelowViewTag") && !options.isNull("closeBelowViewTag")) {
+                        putInt("closeBelowViewTag", options.getDouble("closeBelowViewTag").toInt())
+                    }
                     // placeholderImages: 타입/뷰어 코드에는 있었지만 브릿지에서 한 번도 전달되지 않았던
                     // 필드. 네이티브 뷰어가 onlyRetrieveFromCache(true)로 첫 프레임을 즉시 그리려 할 때
                     // 쓰는 저해상도 대체 이미지 목록입니다(원본 다운로드 전 임시 표시용).

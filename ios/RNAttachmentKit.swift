@@ -182,6 +182,9 @@ class RNAttachmentKit: RCTEventEmitter {
                 if optDict.keys.contains("sourceClipInsets") {
                     self.zoomAnimator.sourceClipInsets = RNAttachmentKit.parseInsets(optDict["sourceClipInsets"])
                 }
+                if optDict.keys.contains("closeBelowViewTag") {
+                    self.zoomAnimator.underView = RNAttachmentKit.viewForTag(optDict["closeBelowViewTag"])
+                }
                 self.zoomAnimator.updateMaskView()
                 
                 resolve(true)
@@ -208,6 +211,19 @@ class RNAttachmentKit: RCTEventEmitter {
               let x = cgFloat(d["x"]), let y = cgFloat(d["y"]),
               let w = cgFloat(d["width"]), let h = cgFloat(d["height"]), w > 0, h > 0 else { return nil }
         return CGRect(x: x, y: y, width: w, height: h)
+    }
+
+    /// RN 뷰 태그(findNodeHandle) → 앱 창의 네이티브 뷰. Fabric 은 컴포넌트 뷰의 tag 에 RN 태그를 넣음. 없으면 nil (메인 스레드)
+    private static func viewForTag(_ v: Any?) -> UIView? {
+        guard let n = v as? NSNumber, n.intValue > 0 else { return nil }
+        let tag = n.intValue
+        for scene in UIApplication.shared.connectedScenes {
+            guard let ws = scene as? UIWindowScene else { continue }
+            for w in ws.windows {
+                if let found = w.viewWithTag(tag) { return found }
+            }
+        }
+        return nil
     }
 
     /// { top, bottom, left, right } (빠진 값 0). 객체가 아니면 nil
@@ -571,6 +587,7 @@ class RNAttachmentKit: RCTEventEmitter {
             // 애니메이터는 재사용되므로 이번 호출 값으로 덮어씀 (안 주면 자르지 않음)
             self.zoomAnimator.sourceClipRect = sourceClipRect
             self.zoomAnimator.sourceClipInsets = sourceClipInsets
+            self.zoomAnimator.underView = RNAttachmentKit.viewForTag(options["closeBelowViewTag"])
             // Reset any sourceImage left over from a previous openViewer() call - it's only
             // meant to carry this call's local placeholder (see below), and must not leak
             // into a later call that has no placeholder of its own.

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- **Viewer (iOS): a video page with no poster image now shows the video**. The player layer sits inside the page's image view, and that view only got a size from a loaded image, so with an empty poster URL or a failed poster download the layer stayed 0×0: the video played (sound, position moving) on an empty page. `ViewerVideoItemView` now sizes the area from `presentationSize` (rotation metadata included), or the page size until that is known. Once a poster arrives its size is used, as before.
+  - Checked on the iOS simulator (test harness): empty poster and 404 poster with local / remote / download-to-`cacheFile` videos, landscape, portrait and 90°-rotation-metadata files. Poster pages have the same frames as before; a poster arriving late, swiping away and back, pinch zoom, and the zoom close from the current frame all work.
+
 ## 1.1.2 — 2026-11-03
 
 - **Viewer: `closeBelowViewTag` — the photo moves *behind* the app's translucent bar during the zoom open / close (iOS + Android `useOverlayViewer`)**. With 1.1.1's clip the moving photo was only cut at the bar, so the part under the bar was simply missing while it moved (and an app that kept its cell visible showed that part already in place). Now, given the RN tag of the view wrapping the bar, the kit also draws a copy of the moving photo and of the source mask inside the app's own view tree, right below that view (inserted into its parent for the animation): the bar's live blur shows the photo sliding under it and the source cell's under-bar part is hidden by the copied mask from the first frame until the close ends. The clipped photo in the viewer window stays as before (so it never covers the bar).

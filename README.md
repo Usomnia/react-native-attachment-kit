@@ -343,7 +343,7 @@ ref.current?.measure((x, y, width, height, pageX, pageY) => {
 | `hideSourceImage` | `boolean` | A native mask hides the source thumbnail while the viewer is open. |
 | `sourceClipInsets` | `{ top?, bottom?, left?, right? }` | Screen-edge insets of the area where the **moving photo and the `hideSourceImage` mask** are drawn during the zoom open / close (e.g. `{ top: headerHeight, bottom: tabBarHeight }` for translucent bars). A thumbnail half under a translucent bar then slides **behind** the bar instead of over it. The clip widens to the full screen in the second half of the open (when the viewer background covers the bar) and narrows in the first 20 % of the close, so the viewer itself is never cut. iOS + Android `useOverlayViewer`. |
 | `sourceClipRect` | `SourceRect` | Same, as a rect in `sourceRect` coordinates (e.g. a list area inside a sheet). With both, the intersection is used. Omit both = no clipping (as before). |
-| `closeBelowViewTag` | `number` | `findNodeHandle` of the view wrapping the app's translucent bar. During the zoom open / close a copy of the moving photo and of the source mask is drawn **inside the app, right below that view** (in its parent), so the bar's live blur shows the photo sliding behind it — clipping alone only hides the part under the bar. Use with `sourceClipInsets` / `sourceClipRect`. The copy is a native view inserted into that parent for the animation only. iOS + Android `useOverlayViewer`. |
+| `underlayViewTag` | `number` | `findNodeHandle` of an **empty** view the app places right below its translucent bar: full screen, no children, `collapsable={false}`, `pointerEvents="none"`, rendered after the list and before the bar. During the zoom open / close a copy of the moving photo and of the source mask is drawn inside it, so the bar's live blur shows the photo sliding behind it — clipping alone only hides the part under the bar. Use with `sourceClipInsets` / `sourceClipRect`. Never pass a view that has React children: native views added there shift React's child indexes and the app can crash. iOS + Android `useOverlayViewer`. |
 
 **Actions**
 
@@ -372,7 +372,7 @@ ref.current?.measure((x, y, width, height, pageX, pageY) => {
 | `useOverlayViewer: true` | ⭐ View on top of the host Activity's window — no `AppState` blip, background changes render in real time. Wins over `useDialogViewer`. |
 
 #### `updateSourceRect(rect: ViewerSourceUpdate): Promise<void>`
-Updates where the viewer closes to (e.g. after paging to another thumbnail or scrolling). `ViewerSourceUpdate = SourceRect & { sourceBorderRadius?, sourceBorderCorners?, sourceClipRect?, sourceClipInsets?, closeBelowViewTag? }` — the clip keys change only when passed (`null` = stop clipping).
+Updates where the viewer closes to (e.g. after paging to another thumbnail or scrolling). `ViewerSourceUpdate = SourceRect & { sourceBorderRadius?, sourceBorderCorners?, sourceClipRect?, sourceClipInsets?, underlayViewTag? }` — the clip keys change only when passed (`null` = stop clipping).
 
 #### `injectImageCache(url: string, localPath: string): Promise<boolean>`
 Seeds the viewer's image cache with a local file for a remote URL, so it opens instantly without network.

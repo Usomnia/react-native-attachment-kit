@@ -182,8 +182,8 @@ class RNAttachmentKit: RCTEventEmitter {
                 if optDict.keys.contains("sourceClipInsets") {
                     self.zoomAnimator.sourceClipInsets = RNAttachmentKit.parseInsets(optDict["sourceClipInsets"])
                 }
-                if optDict.keys.contains("closeBelowViewTag") {
-                    self.zoomAnimator.underView = RNAttachmentKit.viewForTag(optDict["closeBelowViewTag"])
+                if optDict.keys.contains("underlayViewTag") {
+                    self.zoomAnimator.underView = RNAttachmentKit.viewForTag(optDict["underlayViewTag"])
                 }
                 self.zoomAnimator.updateMaskView()
                 
@@ -587,7 +587,7 @@ class RNAttachmentKit: RCTEventEmitter {
             // 애니메이터는 재사용되므로 이번 호출 값으로 덮어씀 (안 주면 자르지 않음)
             self.zoomAnimator.sourceClipRect = sourceClipRect
             self.zoomAnimator.sourceClipInsets = sourceClipInsets
-            self.zoomAnimator.underView = RNAttachmentKit.viewForTag(options["closeBelowViewTag"])
+            self.zoomAnimator.underView = RNAttachmentKit.viewForTag(options["underlayViewTag"])
             // Reset any sourceImage left over from a previous openViewer() call - it's only
             // meant to carry this call's local placeholder (see below), and must not leak
             // into a later call that has no placeholder of its own.

@@ -906,6 +906,7 @@ public enum VideoSendIssue {
 }
 final public class VideoExporter {
   public static let sizeMargin: Swift.Double
+  public static func tooLongText(maxDurationSec: Swift.Double, languageCode: Swift.String) -> Swift.String
   public static func sendIssue(sourceDuration: Swift.Double, sourceShortSide: CoreFoundation.CGFloat, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions) -> RNAttachmentKit.VideoSendIssue?
   public static func fittedQuality(_ want: Swift.Int, sourceShortSide: CoreFoundation.CGFloat, outputDuration: Swift.Double, options: RNAttachmentKit.VideoExportOptions) -> Swift.Int
   public enum ExportError : Foundation.LocalizedError {

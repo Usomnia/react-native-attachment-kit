@@ -1122,7 +1122,7 @@ class RNAttachmentKit: RCTEventEmitter {
                         self.processingJobs[processingId] = nil
                         if aborted {
                             // 변환 취소: 이미 만든 파일은 버림
-                            results.compactMap { $0.path }.forEach { try? FileManager.default.removeItem(atPath: $0) }
+                            results.flatMap { [$0.path, $0.previewPath].compactMap { $0 } }.forEach { try? FileManager.default.removeItem(atPath: $0) }
                             reject("CANCELLED", "User cancelled video conversion", nil)
                         } else {
                             resolve(results.map { $0.dictionary })

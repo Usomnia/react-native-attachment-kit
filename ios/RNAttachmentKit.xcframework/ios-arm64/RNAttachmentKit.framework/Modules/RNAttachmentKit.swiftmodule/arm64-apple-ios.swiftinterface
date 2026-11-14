@@ -834,6 +834,23 @@ public struct ReverseGeocodeError : Swift.Error {
   public static func apply(_ config: [Swift.String : Any])
   @objc deinit
 }
+public struct VideoPreviewOptions {
+  public var height: Swift.Int
+  public var bitrate: Swift.Int
+  public var maxFps: Swift.Double
+  public var maxDurationSec: Swift.Double
+  public var codec: Swift.String
+  public init()
+  public init?(any v: Any?)
+}
+public struct VideoPreviewResult {
+  public let url: Foundation.URL
+  public let width: Swift.Int
+  public let height: Swift.Int
+  public let duration: Swift.Double
+  public let fileSize: Swift.Int64
+  public let bitrate: Swift.Int
+}
 public struct VideoExportOptions {
   public var maxDurationSec: Swift.Double
   public var maxFileSizeMB: Swift.Double
@@ -841,6 +858,7 @@ public struct VideoExportOptions {
   public var defaultQuality: Swift.Int
   public var codec: Swift.String
   public var posterFormat: Swift.String
+  public var preview: RNAttachmentKit.VideoPreviewOptions?
   public init()
   public init(dictionary d: [Swift.String : Any]?)
 }
@@ -923,6 +941,8 @@ final public class VideoExporter {
   final public func cancel()
   final public func export(asset: Photos.PHAsset, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions, outputDir: Foundation.URL, baseName: Swift.String, progress: @escaping (Swift.Double) -> Swift.Void) throws -> RNAttachmentKit.VideoExportResult
   final public func export(fileURL: Foundation.URL, state: RNAttachmentKit.VideoEditState, options: RNAttachmentKit.VideoExportOptions, outputDir: Foundation.URL, baseName: Swift.String, progress: @escaping (Swift.Double) -> Swift.Void) throws -> RNAttachmentKit.VideoExportResult
+  public static func previewWorthMaking(sentShortSide: Swift.Int, sentFileSize: Swift.Int64, sentDuration: Swift.Double, options: RNAttachmentKit.VideoPreviewOptions) -> Swift.Bool
+  final public func makePreview(from source: Foundation.URL, options: RNAttachmentKit.VideoPreviewOptions, to url: Foundation.URL, progress: @escaping (Swift.Double) -> Swift.Void) throws -> RNAttachmentKit.VideoPreviewResult
   public static func encodePoster(_ image: UIKit.UIImage, format: Swift.String, quality: CoreFoundation.CGFloat) -> (data: Foundation.Data, fileExtension: Swift.String)?
   @objc deinit
 }
@@ -1005,8 +1025,19 @@ public struct AttachmentResult {
   public var videoCodec: Swift.String?
   public var videoBitrate: Swift.Int?
   public var edited: Swift.Bool?
+  public var previewURL: Foundation.URL?
+  public var previewWidth: Swift.Int?
+  public var previewHeight: Swift.Int?
+  public var previewDuration: Swift.Double?
+  public var previewFileSize: Swift.Int64?
+  public var previewBitrate: Swift.Int?
+  public var previewError: Swift.String?
+  public var previewSkipped: Swift.String?
   public var error: Swift.String?
   public var cancelled: Swift.Bool
+  public var previewPath: Swift.String? {
+    get
+  }
   public var path: Swift.String? {
     get
   }

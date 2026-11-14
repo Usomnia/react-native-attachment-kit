@@ -41755,6 +41755,831 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "VideoPreviewOptions",
+        "printedName": "VideoPreviewOptions",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "height",
+            "printedName": "height",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6heightSivp",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6heightSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6heightSivg",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6heightSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6heightSivs",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6heightSivs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6heightSivM",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6heightSivM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "bitrate",
+            "printedName": "bitrate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivp",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivg",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivs",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivM",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV7bitrateSivM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "maxFps",
+            "printedName": "maxFps",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvp",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvg",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvs",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvM",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV6maxFpsSdvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "maxDurationSec",
+            "printedName": "maxDurationSec",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvp",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvg",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvs",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvM",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV14maxDurationSecSdvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "codec",
+            "printedName": "codec",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV5codecSSvp",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV5codecSSvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV5codecSSvg",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV5codecSSvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV5codecSSvs",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV5codecSSvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV5codecSSvM",
+                "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV5codecSSvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VideoPreviewOptions",
+                "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsVACycfc",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsVACycfc",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(any:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.VideoPreviewOptions?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "VideoPreviewOptions",
+                    "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                    "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV3anyACSgypSg_tcfc",
+            "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV3anyACSgypSg_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV",
+        "mangledName": "$s15RNAttachmentKit19VideoPreviewOptionsV",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "VideoPreviewResult",
+        "printedName": "VideoPreviewResult",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "url",
+            "printedName": "url",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoPreviewResultV3url10Foundation3URLVvp",
+            "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV3url10Foundation3URLVvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV3url10Foundation3URLVvg",
+                "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV3url10Foundation3URLVvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "width",
+            "printedName": "width",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoPreviewResultV5widthSivp",
+            "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV5widthSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV5widthSivg",
+                "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV5widthSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "height",
+            "printedName": "height",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoPreviewResultV6heightSivp",
+            "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV6heightSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV6heightSivg",
+                "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV6heightSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "duration",
+            "printedName": "duration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoPreviewResultV8durationSdvp",
+            "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV8durationSdvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV8durationSdvg",
+                "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV8durationSdvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "fileSize",
+            "printedName": "fileSize",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int64",
+                "printedName": "Swift.Int64",
+                "usr": "s:s5Int64V"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoPreviewResultV8fileSizes5Int64Vvp",
+            "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV8fileSizes5Int64Vvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int64",
+                    "printedName": "Swift.Int64",
+                    "usr": "s:s5Int64V"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV8fileSizes5Int64Vvg",
+                "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV8fileSizes5Int64Vvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "bitrate",
+            "printedName": "bitrate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoPreviewResultV7bitrateSivp",
+            "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV7bitrateSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV7bitrateSivg",
+                "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV7bitrateSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15RNAttachmentKit18VideoPreviewResultV",
+        "mangledName": "$s15RNAttachmentKit18VideoPreviewResultV",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "VideoExportOptions",
         "printedName": "VideoExportOptions",
         "children": [
@@ -42300,6 +43125,117 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "preview",
+            "printedName": "preview",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.VideoPreviewOptions?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "VideoPreviewOptions",
+                    "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                    "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvp",
+            "mangledName": "$s15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "RNAttachmentKit.VideoPreviewOptions?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "VideoPreviewOptions",
+                        "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                        "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvg",
+                "mangledName": "$s15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "RNAttachmentKit.VideoPreviewOptions?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "VideoPreviewOptions",
+                        "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                        "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvs",
+                "mangledName": "$s15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvM",
+                "mangledName": "$s15RNAttachmentKit18VideoExportOptionsV7previewAA0c7PreviewE0VSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init()",
@@ -42316,8 +43252,7 @@
             "mangledName": "$s15RNAttachmentKit18VideoExportOptionsVACycfc",
             "moduleName": "RNAttachmentKit",
             "declAttributes": [
-              "AccessControl",
-              "RawDocComment"
+              "AccessControl"
             ],
             "init_kind": "Designated"
           },
@@ -45692,6 +46627,114 @@
             "declKind": "Func",
             "usr": "s:15RNAttachmentKit13VideoExporterC6export7fileURL5state7options9outputDir8baseName8progressAA0C12ExportResultV10Foundation0G0V_AA0C9EditStateVAA0cO7OptionsVAOSSySdctKF",
             "mangledName": "$s15RNAttachmentKit13VideoExporterC6export7fileURL5state7options9outputDir8baseName8progressAA0C12ExportResultV10Foundation0G0V_AA0C9EditStateVAA0cO7OptionsVAOSSySdctKF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "previewWorthMaking",
+            "printedName": "previewWorthMaking(sentShortSide:sentFileSize:sentDuration:options:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int64",
+                "printedName": "Swift.Int64",
+                "usr": "s:s5Int64V"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "VideoPreviewOptions",
+                "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit13VideoExporterC18previewWorthMaking13sentShortSide0H8FileSize0H8Duration7optionsSbSi_s5Int64VSdAA0C14PreviewOptionsVtFZ",
+            "mangledName": "$s15RNAttachmentKit13VideoExporterC18previewWorthMaking13sentShortSide0H8FileSize0H8Duration7optionsSbSi_s5Int64VSdAA0C14PreviewOptionsVtFZ",
+            "moduleName": "RNAttachmentKit",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "makePreview",
+            "printedName": "makePreview(from:options:to:progress:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "VideoPreviewResult",
+                "printedName": "RNAttachmentKit.VideoPreviewResult",
+                "usr": "s:15RNAttachmentKit18VideoPreviewResultV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "VideoPreviewOptions",
+                "printedName": "RNAttachmentKit.VideoPreviewOptions",
+                "usr": "s:15RNAttachmentKit19VideoPreviewOptionsV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "URL",
+                "printedName": "Foundation.URL",
+                "usr": "s:10Foundation3URLV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Double) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit13VideoExporterC11makePreview4from7options2to8progressAA0cF6ResultV10Foundation3URLV_AA0cF7OptionsVAMySdctKF",
+            "mangledName": "$s15RNAttachmentKit13VideoExporterC11makePreview4from7options2to8progressAA0cF6ResultV10Foundation3URLV_AA0cF7OptionsVAMySdctKF",
             "moduleName": "RNAttachmentKit",
             "declAttributes": [
               "Final",
@@ -50762,6 +51805,889 @@
           },
           {
             "kind": "Var",
+            "name": "previewURL",
+            "printedName": "previewURL",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.URL?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.URL?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "URL",
+                        "printedName": "Foundation.URL",
+                        "usr": "s:10Foundation3URLV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Foundation.URL?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "URL",
+                        "printedName": "Foundation.URL",
+                        "usr": "s:10Foundation3URLV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV10previewURL10Foundation0F0VSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewWidth",
+            "printedName": "previewWidth",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewWidthSiSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewHeight",
+            "printedName": "previewHeight",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV13previewHeightSiSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewDuration",
+            "printedName": "previewDuration",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewDurationSdSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewFileSize",
+            "printedName": "previewFileSize",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int64?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int64",
+                    "printedName": "Swift.Int64",
+                    "usr": "s:s5Int64V"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int64?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int64",
+                        "printedName": "Swift.Int64",
+                        "usr": "s:s5Int64V"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int64?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int64",
+                        "printedName": "Swift.Int64",
+                        "usr": "s:s5Int64V"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV15previewFileSizes5Int64VSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewBitrate",
+            "printedName": "previewBitrate",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Int?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewBitrateSiSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewError",
+            "printedName": "previewError",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV12previewErrorSSSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewSkipped",
+            "printedName": "previewSkipped",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvs",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvM",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV14previewSkippedSSSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "error",
             "printedName": "error",
             "children": [
@@ -50953,6 +52879,63 @@
                 "moduleName": "RNAttachmentKit",
                 "implicit": true,
                 "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "previewPath",
+            "printedName": "previewPath",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit16AttachmentResultV11previewPathSSSgvp",
+            "mangledName": "$s15RNAttachmentKit16AttachmentResultV11previewPathSSSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit16AttachmentResultV11previewPathSSSgvg",
+                "mangledName": "$s15RNAttachmentKit16AttachmentResultV11previewPathSSSgvg",
+                "moduleName": "RNAttachmentKit",
+                "accessorKind": "get"
               }
             ]
           },
@@ -64229,42 +66212,42 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MainViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21532,
+      "offset": 22506,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MainViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 46784,
+      "offset": 47758,
       "length": 4,
       "value": "1024"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MainViewController.swift",
       "kind": "Dictionary",
-      "offset": 51703,
+      "offset": 52677,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MainViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 58256,
+      "offset": 62639,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MainViewController.swift",
       "kind": "Array",
-      "offset": 58386,
+      "offset": 62769,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MainViewController.swift",
       "kind": "Dictionary",
-      "offset": 58534,
+      "offset": 62917,
       "length": 3,
       "value": "[]"
     },
@@ -65881,443 +67864,758 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 1117,
+      "offset": 1318,
+      "length": 3,
+      "value": "360"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1389,
+      "length": 7,
+      "value": "450000"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1490,
+      "length": 2,
+      "value": "24"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1604,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 1637,
+      "length": 6,
+      "value": "\"h264\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2778,
       "length": 3,
       "value": "600"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 1160,
+      "offset": 2821,
       "length": 3,
       "value": "100"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "Array",
-      "offset": 1198,
+      "offset": 2859,
       "length": 21,
       "value": "[360, 480, 720, 1080]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 1257,
+      "offset": 2918,
       "length": 3,
       "value": "720"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 1292,
+      "offset": 2953,
       "length": 6,
       "value": "\"h264\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 1358,
+      "offset": 3019,
       "length": 6,
       "value": "\"webp\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 3753,
+      "offset": 5616,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 3838,
+      "offset": 5701,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 3873,
+      "offset": 5736,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 4114,
+      "offset": 5977,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 4143,
+      "offset": 6006,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 4180,
+      "offset": 6043,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 4213,
+      "offset": 6076,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 4246,
+      "offset": 6109,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 4279,
+      "offset": 6142,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 11845,
+      "offset": 13708,
       "length": 6,
       "value": "\"webp\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "FloatLiteral",
-      "offset": 12074,
+      "offset": 13937,
       "length": 4,
       "value": "1.15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 17135,
+      "offset": 18998,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 17524,
+      "offset": 19387,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29073,
+      "offset": 30936,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29133,
+      "offset": 30996,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29170,
+      "offset": 31033,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29191,
+      "offset": 31054,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29217,
+      "offset": 31080,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29255,
+      "offset": 31118,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29276,
+      "offset": 31139,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 29732,
+      "offset": 31595,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 31207,
+      "offset": 33070,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 31289,
+      "offset": 33152,
       "length": 14,
       "value": "\"reader video\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 31566,
+      "offset": 33429,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 31781,
+      "offset": 33644,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 31817,
+      "offset": 33680,
       "length": 6,
       "value": "\"hevc\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 32045,
+      "offset": 33908,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 32563,
+      "offset": 34426,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 32644,
+      "offset": 34507,
       "length": 14,
       "value": "\"writer video\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 33042,
+      "offset": 34905,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 33067,
+      "offset": 34930,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "Dictionary",
-      "offset": 33759,
+      "offset": 35622,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 34290,
+      "offset": 36153,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 34310,
+      "offset": 36173,
       "length": 5,
       "value": "44100"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 34338,
+      "offset": 36201,
       "length": 7,
       "value": "128000"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 34391,
+      "offset": 36254,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 34696,
+      "offset": 36559,
       "length": 8,
       "value": "\"reader\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 34820,
+      "offset": 36683,
       "length": 8,
       "value": "\"writer\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 35140,
+      "offset": 37003,
       "length": 34,
       "value": "\"com.rnattachmentkit.video.encode\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 35530,
+      "offset": 37393,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 35749,
+      "offset": 37612,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 35914,
+      "offset": 37777,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 36922,
+      "offset": 38785,
       "length": 14,
       "value": "\"append video\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 36987,
+      "offset": 38850,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 37139,
+      "offset": 39002,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "FloatLiteral",
-      "offset": 37156,
+      "offset": 39019,
       "length": 4,
       "value": "0.99"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 37166,
+      "offset": 39029,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 37367,
+      "offset": 39230,
       "length": 34,
       "value": "\"com.rnattachmentkit.audio.encode\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "FloatLiteral",
-      "offset": 38368,
+      "offset": 40231,
       "length": 3,
       "value": "0.2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 39030,
+      "offset": 40893,
       "length": 15,
       "value": "\"writer failed\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 39188,
+      "offset": 41051,
       "length": 15,
       "value": "\"reader failed\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 39251,
+      "offset": 41114,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 39627,
+      "offset": 41490,
       "length": 15,
       "value": "\"writer failed\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "IntegerLiteral",
-      "offset": 39663,
+      "offset": 41526,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 39749,
+      "offset": 41612,
       "length": 6,
       "value": "\"hevc\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "StringLiteral",
-      "offset": 39758,
+      "offset": 41621,
       "length": 6,
       "value": "\"h264\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
       "kind": "BooleanLiteral",
-      "offset": 39779,
+      "offset": 41642,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43210,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "FloatLiteral",
+      "offset": 43256,
+      "length": 4,
+      "value": "0.05"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43371,
+      "length": 3,
+      "value": "600"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43413,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43446,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43489,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43530,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43551,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43577,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43619,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43640,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43665,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 43871,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 45018,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 45100,
+      "length": 16,
+      "value": "\"preview reader\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 45266,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 45310,
+      "length": 6,
+      "value": "\"hevc\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 45529,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 45604,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 46065,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 46146,
+      "length": 16,
+      "value": "\"preview writer\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 46420,
+      "length": 16,
+      "value": "\"preview reader\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 46552,
+      "length": 16,
+      "value": "\"preview writer\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 46832,
+      "length": 36,
+      "value": "\"com.rnattachmentkit.preview.encode\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 47002,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 47221,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 47362,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 47500,
+      "length": 16,
+      "value": "\"preview append\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "BooleanLiteral",
+      "offset": 47567,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 47726,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "FloatLiteral",
+      "offset": 47743,
+      "length": 4,
+      "value": "0.99"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 47753,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "FloatLiteral",
+      "offset": 47933,
+      "length": 3,
+      "value": "0.2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 48492,
+      "length": 16,
+      "value": "\"preview failed\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 48622,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "StringLiteral",
+      "offset": 48978,
+      "length": 16,
+      "value": "\"preview failed\""
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 49023,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 49166,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 49256,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoExporter.swift",
+      "kind": "IntegerLiteral",
+      "offset": 49279,
+      "length": 1,
+      "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
@@ -79692,371 +81990,371 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "BooleanLiteral",
-      "offset": 7896,
+      "offset": 9035,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "BooleanLiteral",
-      "offset": 7928,
+      "offset": 9067,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9425,
+      "offset": 10564,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 9471,
+      "offset": 10610,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 13848,
+      "offset": 14987,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 13856,
+      "offset": 14995,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 14357,
+      "offset": 15496,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "FloatLiteral",
-      "offset": 14601,
+      "offset": 15740,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 14700,
+      "offset": 15839,
       "length": 98,
       "value": "\"turbo_video_poster_\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 14757,
+      "offset": 15896,
       "length": 4,
       "value": "1000"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 14763,
+      "offset": 15902,
       "length": 1,
       "value": "\"_\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 14772,
+      "offset": 15911,
       "length": 1,
       "value": "\".\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 14797,
+      "offset": 15936,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "BooleanLiteral",
-      "offset": 15204,
+      "offset": 16343,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 15223,
+      "offset": 16362,
       "length": 27,
       "value": "\"ph:\/\/\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 15249,
+      "offset": 16388,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15727,
+      "offset": 16866,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15798,
+      "offset": 16937,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15887,
+      "offset": 17026,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15894,
+      "offset": 17033,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15931,
+      "offset": 17070,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15959,
+      "offset": 17098,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 15976,
+      "offset": 17115,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16039,
+      "offset": 17178,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16075,
+      "offset": 17214,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16114,
+      "offset": 17253,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16151,
+      "offset": 17290,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16191,
+      "offset": 17330,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "BooleanLiteral",
-      "offset": 16299,
+      "offset": 17438,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 16331,
+      "offset": 17470,
       "length": 28,
       "value": "\"ph:\/\/\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 16358,
+      "offset": 17497,
       "length": 4,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16528,
+      "offset": 17667,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 16545,
+      "offset": 17684,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "BooleanLiteral",
-      "offset": 26968,
+      "offset": 30335,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 28684,
+      "offset": 32051,
       "length": 13,
       "value": "\"public.webp\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 28711,
+      "offset": 32078,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 29228,
+      "offset": 32595,
       "length": 18,
       "value": "\"SDImageWebPCoder\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 29323,
+      "offset": 32690,
       "length": 13,
       "value": "\"sharedCoder\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 29411,
+      "offset": 32778,
       "length": 13,
       "value": "\"sharedCoder\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 29498,
+      "offset": 32865,
       "length": 38,
       "value": "\"encodedDataWithImage:format:options:\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 30120,
+      "offset": 33487,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 30124,
+      "offset": 33491,
       "length": 26,
       "value": "\"encodeCompressionQuality\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 30236,
+      "offset": 33603,
       "length": 84,
       "value": "\"❌ [AttachmentProcessor] SDImageWebPCoder 런타임 인코딩 실패 (nil 반환)\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "StringLiteral",
-      "offset": 30360,
+      "offset": 33727,
       "length": 71,
       "value": "\"❌ [AttachmentProcessor] 모든 WebP 인코딩 실패 → nil 반환\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32013,
+      "offset": 35380,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32046,
+      "offset": 35413,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32052,
+      "offset": 35419,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32115,
+      "offset": 35482,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32151,
+      "offset": 35518,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32429,
+      "offset": 35796,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32465,
+      "offset": 35832,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32740,
+      "offset": 36107,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/AttachmentProcessor.swift",
       "kind": "IntegerLiteral",
-      "offset": 32773,
+      "offset": 36140,
       "length": 1,
       "value": "1"
     },

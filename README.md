@@ -8,6 +8,7 @@ A fully native attachment toolkit for React Native chat apps: a Telegram-style p
 
 - **Pure native UI** (Swift / Kotlin) — smooth on both platforms, New Architecture (Turbo Modules) and old architecture supported.
 - **Photo picker** — bottom-sheet gallery, single or multi selection, albums, camera cell, optional editor step, profile (1:1) crop mode.
+  - In-app camera: tap the shutter for a photo, **hold it to record a video** (when `mediaType` is `'all'` / `'video'`); a ratio pill (Full / 9:16 / 3:4 / 1:1) sets the framing for both, and a resolution pill sets the video quality (HD / FHD default / 4K when supported). The screen stays portrait; holding the phone sideways captures a landscape photo or video (only the controls rotate). A timer (3s/10s), tap-to-focus with an exposure handle, and a ⚙ menu (grid, level, stabilization, selfie mirror, 30/60 fps) are built in; the front camera uses the screen as a flash. Captures go to the photo library and are inserted at the top of the grid, selected.
 - **Attach menu** — Gallery / **Location** / **File** tabs under the gallery (Telegram style).
   - Location: map with a center pin, "send my current location", place search, "Share my location" switch, map snapshot image.
   - File: system file picker, files copied into the app's temp folder.
@@ -65,6 +66,9 @@ Rebuild the app after installing or updating (the module ships compiled native c
 ```xml
 <key>NSCameraUsageDescription</key>
 <string>We need access to your camera to take photos.</string>
+<!-- In-app camera: hold the shutter to record a video with sound (without this key the recording has no audio) -->
+<key>NSMicrophoneUsageDescription</key>
+<string>We need the microphone to record sound in videos.</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>We need access to your photo library to select images.</string>
 <key>NSPhotoLibraryAddUsageDescription</key>
@@ -72,7 +76,17 @@ Rebuild the app after installing or updating (the module ships compiled native c
 <!-- Attach menu → Location ("send my current location", my-location dot) -->
 <key>NSLocationWhenInUseUsageDescription</key>
 <string>We use your location to share it in a chat.</string>
+<!-- Map viewer → Directions: lets it tell whether each map app is installed -->
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>comgooglemaps</string>
+  <string>kakaomap</string>
+  <string>nmap</string>
+  <string>tmap</string>
+</array>
 ```
+
+The Directions menu shows Apple Maps and Google Maps, plus Kakao Map, Naver Map and TMAP when `languageCode` is Korean. Without the schemes above it still works: an app that isn't installed falls back to the web map (TMAP: App Store), and cancelling the system "Open in …?" prompt opens nothing.
 
 ### Android — Google Maps key
 
@@ -155,7 +169,7 @@ Opens the gallery bottom sheet. Resolves with the picked images (`[]` when the u
 | `onProcessingStart` | `(e: ProcessingStartEvent) => void` | — | Once, right after Send, before any processing. |
 | `onImageProcessed` | `(e) => void` | — | Per item `{ index, total, image }` as soon as it is ready. |
 | `mediaType` | `'photo' \| 'all' \| 'video'` | `'photo'` | `'all'` mixes photos and videos. |
-| `video` | `VideoOptions` | — | `maxDurationSec`, `maxFileSizeMB`, `qualities`, `defaultQuality`, `codec`, `onProgress`, `showProgressHUD`. |
+| `video` | `VideoOptions` | — | `maxDurationSec`, `maxFileSizeMB`, `qualities`, `defaultQuality`, `codec`, `posterFormat`, `preview`, `onProgress`, `showProgressHUD`. |
 | `openDuration` / `closeDuration` | `number` (ms) | native | Animation durations. |
 | `showAttachMenu` … | | | Attach menu options — see [Attach menu](#attach-menu-location--file). |
 
@@ -175,6 +189,25 @@ Opens the gallery bottom sheet. Resolves with the picked images (`[]` when the u
 | `fileName?` / `fileExtension?` / `fileSize?` | | Output file info (bytes). |
 | `thumbnailUri?` / `thumbnailWidth?` / `thumbnailHeight?` | | Photo: the thumbnail when the `thumbnail` option is set. Video: the poster (always, see `video.posterFormat`). |
 | `thumbnailFileSize?` | `number` | Photo thumbnail file size (bytes). |
+| `previewUri?` / `previewWidth?` / `previewHeight?` / `previewDuration?` / `previewFileSize?` / `previewBitrate?` | | Video with `video.preview`: the small silent preview mp4. |
+| `previewError?` / `previewSkipped?` | `string` | Preview failed (`"ENCODE_FAILED"`, the video itself is fine) / not made (`"SOURCE_SMALL"`). |
+
+#### Video previews (`video.preview`, 1.2.0)
+
+For feeds that autoplay videos silently in a list, ask for a small preview file next to the one you send:
+
+```ts
+const items = await AttachmentKit.openGallery({ mediaType: 'all', video: { preview: true } })
+// or tune it: video: { preview: { height: 360, bitrate: 450_000, maxFps: 24, maxDurationSec: 0, codec: 'h264' } }
+// items[i].previewUri → file://….preview.mp4 (no audio, 360p, ~450 kbps, moov first, keyframe every second)
+```
+
+- Made **from the video you send** after it is ready, so trims, crops, drawings and mute are all in it.
+- `height` is the short side (default 360), `bitrate` default 450 000 bps, `maxFps` default 24 (iOS only — on Android media3 1.4.1 keeps the source frame rate; the size is still set by `bitrate`), `maxDurationSec` 0 = full length, `codec` default `h264`.
+- Not made when the sent video is already as small (short side ≤ `height`, or its file ≤ the expected preview size): `previewSkipped: "SOURCE_SMALL"` — use the sent file.
+- A failed preview never fails the video: `uri` is returned and `previewError: "ENCODE_FAILED"` is set.
+- Progress stays one 0 → 1 value per video (send file 0–0.9, preview 0.9–1); the progress HUD closes after the preview. Cancelling removes the sent file, poster and preview.
+- Saved next to the sent file as `<name>.preview.mp4`.
 
 #### Photo thumbnails
 
@@ -210,7 +243,7 @@ Selection events outside `openGallery`; returns an unsubscribe function.
 
 A chat can show every sent item at once and fill it in as it finishes (photos are resized, videos are encoded), the same way for photos and videos:
 
-1. **`onProcessingStart`** `{ total, items }`: once, right after Send. Each item has `index`, `mediaType` (`'image' | 'video'`), `originalUri`, and the expected output `width` / `height` (for the aspect ratio). Videos also have `duration` (seconds, after trim) and `thumbnailUri` / `thumbnailWidth` / `thumbnailHeight` (a poster jpg with crop and drawing applied). Create the placeholders here.
+1. **`onProcessingStart`** `{ total, items }`: once, right after Send. Each item has `index`, `mediaType` (`'image' | 'video'`), `originalUri`, and the expected output `width` / `height` (for the aspect ratio). Videos also have `duration` (seconds, after trim) and `thumbnailUri` / `thumbnailWidth` / `thumbnailHeight` (a poster image with crop and drawing applied — **webp** by default; set `video.posterFormat: 'jpg'` for jpg). Create the placeholders here.
 2. **`onVideoProgress`** `{ index, total, progress }`: video encoding 0…1 (at most every 1% / 0.1 s). Draw a progress ring on that placeholder.
 3. **`onImageProcessed`** `{ index, total, image }`: the item is ready. Replace the placeholder with `image.uri`. A video the app cancelled comes as `{ error: 'CANCELLED', cancelled: true }`; a failed one has `error`.
 
@@ -331,6 +364,22 @@ ref.current?.measure((x, y, width, height, pageX, pageY) => {
 | `themeColor` / `appearance` / `languageCode` | | defaults | Per-call overrides. |
 | `animationType` / `closeAnimationType` | `'zoom' \| 'fade' \| 'slide'` | `zoom` with `sourceRect`, else `slide` | Open / close animation. |
 | `openDuration` / `closeDuration` | `number` (ms) | native | Animation durations. |
+
+**Videos** — iOS viewer and Android `useOverlayViewer: true` only (the other Android viewers show the poster)
+
+| Option | Type | Description |
+|---|---|---|
+| `videos` | `(ViewerVideo \| null)[]` | Same order as `images`. A non-null entry makes that page a video; `images[i]` is then its **poster** (shown until the first frame, and for the open animation). `ViewerVideo = { uri, duration?, cacheFile? }` — `uri` is `https://` (mp4/mov, or an HLS `.m3u8` stream) or a local file; `cacheFile` works like `cacheFiles`: if the file exists it is played without network, otherwise the video streams and is downloaded there in the background for next time. |
+
+```ts
+AttachmentKit.openViewer({
+  images: [photoUrl, videoPosterUrl],
+  videos: [null, { uri: videoUrl, duration: 12.4, cacheFile: `${cacheDir}/v_123.mp4` }],
+  useOverlayViewer: true,
+})
+```
+
+On a video page: autoplay from the start (leaving the page pauses, no loop — at the end it pauses and shows ▶), a centre ▶/❚❚ button (spinner while buffering), a progress pill `0:03 ━━●── 0:12` (drag to seek), ⚙ playback speed (`0.5x` / Normal / `1.5x` / `2x`, kept while the viewer is open) and ⛶ full screen for landscape videos (the app's orientation is never changed — the video and its controls are rotated 90° to fill the screen; stand the phone up or tap ⛶ / Android back to leave). Tap toggles the controls (auto-hide after 3 s while playing); no pinch zoom; pull-to-dismiss moves only the video and closes on the current frame. Save / share handle videos as files: saved to the photo library as a video, shared as an mp4 (a remote video is downloaded first, with a small progress label; HLS streams cannot be saved). The sound follows the silent switch on iOS (default audio session).
 
 **Sticky transition**
 
@@ -483,7 +532,7 @@ A native grid built for thousands of photos. It opens like the picker (same bott
 
 - **Native data source (recommended)**: implement `MediaGalleryDataSource` in your app's native code and register it with `MediaGalleryRegistry.register("name", source)` (iOS Swift / Android Kotlin). Pass `dataSource: "name"` and `dataSourceParams`. Pages are loaded natively, no JS round trip. Built-in demo: `dataSource: "turboDemo", dataSourceParams: { count: 10000 }`.
 - **JS data source**: pass `initialItems`, `hasMore`, `nextCursor`; answer `onNeedPage` with `appendGalleryItems({ galleryId, items, nextCursor, hasMore })`.
-- `MediaGalleryItem`: `{ id, groupId?, timestamp?, thumbUri? (file:// only — no base64), imageUri, cacheFile?, isMine?, width?, height? }`.
+- `MediaGalleryItem`: `{ id, groupId?, timestamp?, thumbUri? (file:// only — no base64), imageUri, cacheFile?, isMine?, width?, height?, mediaType?, videoUri?, videoCacheFile?, duration? }`. A video item has `mediaType: 'video'` and `videoUri` (`imageUri` / `thumbUri` are its poster); the grid shows a "▶ 0:12" badge (from `duration`, seconds) and the viewer plays it (see `openViewer` → Videos).
 - `title` (required), `gridSize: '3x3' | '4x4' | '5x5'` (default until the user picks one; the user's choice is saved on the device and wins), `spacing`, `theme`, `appearance`, `languageCode`, `emptyTitle`, `emptySubtitle`, `countFormat`.
 - `viewer`: `{ themeColor, deleteOptionsForMine, deleteOptionsForOthers, titleFormat: 'date' | 'none', …openViewer text options }`.
 - Events: `onItemDeleted({ galleryId, id, groupId, option })` (the module already removed that group from the screen — delete it in the app), `onNeedPage`, `onGridSizeChanged`, `onClosed`.
@@ -596,6 +645,26 @@ app.post('/ai/generate', auth, express.json({ limit: '20mb' }), async (req, res)
 | Photo thumbnails (`thumbnail` option) | `Library/Caches/RNAttachmentKit/turbo_picker_thumb_*` | `cache/turbo_picker_thumb_*` | Deleted after 24 h (next gallery open). |
 | Location thumbnails | `Library/Caches/RNAttachmentKit/LocationThumbs/` | `cache/RNAttachmentKitLocationThumbs/` | 300 max → 250, least recently used. `clearLocationThumbnailCache()`. |
 | Reverse-geocode results | `Library/Caches/RNAttachmentKit/Geocode/` | `cache/RNAttachmentKitGeocode/` | 1000 max → 800, least recently used. `clearReverseGeocodeCache()`. |
+| Viewer videos downloaded for save/share (no `cacheFile` given) | `Library/Caches/RNAttachmentKit/viewer_video/` | `cache/RNAttachmentKit/viewer_video/` | Reused for playback next time; the OS may purge. With `cacheFile` the file goes there instead (app-owned). |
+| Viewer share copies (Android) | — | `<external files>/Pictures/viewer_share/` | Overwritten names per share; same folder as shared photos. |
+
+---
+
+## 🔧 Maintainers (source project)
+
+This folder is the **source** project. Apps use the compiled distribution `../RNAttachmentKit-Dist` (published to npm as `react-native-attachment-kit`), where Kotlin/Swift are shipped as `.aar` / `.xcframework`.
+
+- **Edit code only here.** After changing native code or `src/*.ts`, rebuild the distribution — apps see nothing until then:
+  ```bash
+  cd .. && bash -l ./run_deploy.command      # make_framework.rb + deploy.rb, log in ../deploy_last.log
+  cd RNAttachmentKit/ios && ruby restore_app.rb   # back to app mode for the iOS harness
+  ```
+  Hand-edit in Dist only `package.json`, the podspec, `react-native.config.js` and `README.md`. Keep this README and the Dist README in sync (same content; this section is source-only).
+- **Native test apps**: iOS — `ios/RNAttachmentKit.xcodeproj` in app mode (`ruby restore_app.rb`; `ruby make_framework.rb` before building the framework). Android — open `android/` and run `app` (its Maps key lives in git-ignored `android/local.properties`, for the test app only). RN example app: `../RNAttachmentKitApp` (`portal:` to Dist).
+- **Translations**: all strings live in `scripts/i18n/strings.json` (every language must have every key). Run `python3 scripts/i18n/generate.py` to regenerate `ios/RNAttachmentKit/Localizer.swift` and Android `res/values*/strings*.xml`.
+- **Editor icons**: single source `scripts/editor_icons/icons.py` (Android vectors + iOS `ToolbarIcons` webp).
+- **Docs**: version history in `CHANGELOG.md`; location-message integration notes in `docs/location-api.md`; old diagnostics in `docs/history/` (not authoritative).
+- **Publishing**: bump `version` in both `package.json` files, rebuild Dist, then run `../publish_npm.sh` from a terminal (npm login + OTP).
 
 ---
 

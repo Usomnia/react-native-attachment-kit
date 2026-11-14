@@ -42,6 +42,20 @@ export interface ImageResult {
   error?: string
   /** 앱이 cancelVideoProcessing 으로 취소한 동영상 (uri 없음) */
   cancelled?: boolean
+  /** 동영상: 미리보기 영상 file:// (video.preview 를 줬고 만들었을 때). 소리 없음, 저화질 mp4 (moov 앞쪽) */
+  previewUri?: string
+  previewWidth?: number
+  previewHeight?: number
+  /** 초(소수) — preview.maxDurationSec 로 잘랐으면 그 길이 */
+  previewDuration?: number
+  /** bytes */
+  previewFileSize?: number
+  /** 평균 비트레이트(bps) — 파일 크기 ÷ 길이 */
+  previewBitrate?: number
+  /** 미리보기만 실패 (전송본 uri 는 정상). "ENCODE_FAILED" */
+  previewError?: string
+  /** 일부러 만들지 않음. "SOURCE_SMALL" = 전송본이 미리보기 기준보다 작거나 같음 (짧은 변 ≤ preview.height 이거나 파일이 예상 미리보기보다 작음) */
+  previewSkipped?: string
 }
 
 /**
@@ -97,6 +111,20 @@ export interface ThumbnailOptions {
 }
 
 /** 동영상 옵션 (GalleryOptions.video). mediaType 이 "video"/"all" 일 때만 의미 */
+/** video.preview — 목록·카드용 미리보기 영상 (1.2.0). 모두 선택, 0 이하·틀린 값은 기본값 */
+export interface VideoPreviewOptions {
+  /** 짧은 변(px). 기본 360. 전송본이 이보다 작거나 같으면 만들지 않음 (previewSkipped "SOURCE_SMALL") */
+  height?: number
+  /** 평균 비트레이트(bps). 기본 450_000 */
+  bitrate?: number
+  /** 최대 fps. 기본 24. 원본이 더 낮으면 원본 그대로. iOS 만 — Android(media3 1.4.1)는 원본 fps 유지 */
+  maxFps?: number
+  /** 앞에서부터 이 길이(초)까지만. 기본 0 = 전송본 전체 */
+  maxDurationSec?: number
+  /** 기본 "h264" (호환성 때문에 h264 권장) */
+  codec?: "h264" | "hevc"
+}
+
 export interface VideoOptions {
   /** 고를 수 있는 최대 길이(초). 기본 600 (10분). 넘는 동영상은 누르면 안내만. 0 = 제한 없음 */
   maxDurationSec?: number
@@ -117,6 +145,11 @@ export interface VideoOptions {
    * onProcessingStart / onImageProcessed 의 thumbnailUri 확장자가 이 값을 따름 (webp 인코딩이 안 되는 드문 경우엔 jpg 로 대신하니, 확장자는 uri 로 확인)
    */
   posterFormat?: "webp" | "jpg"
+  /**
+   * 목록·카드용 미리보기 영상(소리 없음, 저화질 mp4, moov 앞쪽, 키프레임 1초)을 전송본과 함께 만듦 — 전송본(트림·크롭·그리기·음소거가
+   * 반영된 파일)에서 만들어 화면이 같음. 결과 previewUri 등. 없거나 false 면 예전과 같음, true 면 기본값 (1.2.0, iOS + Android)
+   */
+  preview?: boolean | VideoPreviewOptions
   /** 전송 전 변환 진행률 (동영상마다 0~1, 1% 이상 바뀔 때·최소 0.1초 간격) */
   onProgress?: (e: VideoProgressEvent) => void
   /**

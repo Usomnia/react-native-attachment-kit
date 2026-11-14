@@ -89,12 +89,24 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
     // 채로 다음 이미지를 열면, 두 구독이 동시에 반응해서 "이전 이미지의 위치 정보"로
     // updateSourceRect()가 잘못 호출되어 닫기 애니메이션이 엉뚱한(이전) 위치로 돌아가는
     // 버그의 원인이었습니다.
+    /** 1.2.1: VIEWER_WILL_CLOSE 의 currentIndex·videoPositions → JS 본문 (오버레이 뷰어만 보냄, 다른 뷰어는 빈 본문) */
+    private fun viewerWillCloseBody(intent: android.content.Intent): com.facebook.react.bridge.WritableMap {
+        val body = com.facebook.react.bridge.Arguments.createMap()
+        if (intent.hasExtra("currentIndex")) body.putInt("currentIndex", intent.getIntExtra("currentIndex", 0))
+        intent.getBundleExtra("videoPositions")?.let { b ->
+            val m = com.facebook.react.bridge.Arguments.createMap()
+            for (k in b.keySet()) m.putDouble(k, b.getDouble(k))
+            body.putMap("videoPositions", m)
+        }
+        return body
+    }
+
     private val viewerWillCloseReceiver = object : android.content.BroadcastReceiver() {
         override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
             if (intent?.action == "com.rnattachmentkit.VIEWER_WILL_CLOSE") {
                 reactApplicationContext
                     .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                    .emit("onViewerWillClose", Arguments.createMap())
+                    .emit("onViewerWillClose", viewerWillCloseBody(intent))
             }
         }
     }
@@ -715,13 +727,21 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                         if (videoArray != null) {
                             val uris = ArrayList<String>()
                             val caches = ArrayList<String>()
+                            val starts = DoubleArray(videoArray.size())
+                            val durations = DoubleArray(videoArray.size())
+                            fun num(m: com.facebook.react.bridge.ReadableMap?, key: String): Double =
+                                if (m != null && m.hasKey(key) && m.getType(key) == com.facebook.react.bridge.ReadableType.Number) m.getDouble(key) else 0.0
                             for (i in 0 until videoArray.size()) {
                                 val m = if (videoArray.getType(i) == com.facebook.react.bridge.ReadableType.Map) videoArray.getMap(i) else null
                                 uris.add(if (m != null && m.hasKey("uri") && !m.isNull("uri")) m.getString("uri") ?: "" else "")
                                 caches.add(if (m != null && m.hasKey("cacheFile") && !m.isNull("cacheFile")) m.getString("cacheFile") ?: "" else "")
+                                starts[i] = num(m, "startTime")
+                                durations[i] = num(m, "duration")
                             }
                             putStringArrayList(com.rnattachmentkit.ViewerVideoSource.ARG_URIS, uris)
                             putStringArrayList(com.rnattachmentkit.ViewerVideoSource.ARG_CACHE_FILES, caches)
+                            putDoubleArray(com.rnattachmentkit.ViewerVideoSource.ARG_START_TIMES, starts)
+                            putDoubleArray(com.rnattachmentkit.ViewerVideoSource.ARG_DURATIONS, durations)
                         }
                     }
                     // 상단바 저장/공유/삭제 버튼과 그 문구들 (iOS와 동일한 옵션 키). 문구를 안 넘기면

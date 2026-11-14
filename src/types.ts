@@ -465,6 +465,23 @@ export interface ViewerVideo {
   cacheFile?: string
   width?: number
   height?: number
+  /**
+   * 초(소수). 이 페이지를 처음 열 때 이 위치부터 재생 (1.2.1). 생략·0 = 처음.
+   * 음수이거나 길이 이상이면 처음부터. 열기 애니메이션 동안은 포스터, 영상은 그 위치로 옮긴 뒤에 나타남
+   * (처음 장면이 비치지 않음). 다른 페이지로 넘겼다 돌아오면 지금처럼 처음부터. 스트리밍·캐시 파일 모두
+   */
+  startTime?: number
+}
+
+/** onViewerWillClose 인자 (1.2.1) */
+export interface ViewerWillCloseEvent {
+  /** 닫을 때 보고 있던 페이지 */
+  currentIndex: number
+  /**
+   * 동영상 페이지 번호 → 마지막 재생 위치(초, 소수). 이번에 재생한 동영상 페이지만 (사진·열지 않은 페이지는 없음).
+   * 끝까지 봤으면 길이. 하나도 없으면 생략
+   */
+  videoPositions?: Record<number, number>
 }
 
 export interface ViewerOptions {
@@ -514,7 +531,11 @@ export interface ViewerOptions {
    */
   underlayViewTag?: number
   onPageSelected?: (index: number) => void
-  onViewerWillClose?: () => void
+  /**
+   * 닫기 시작할 때. 1.2.1 부터 { currentIndex, videoPositions } 를 넘김 — 인자 없이 쓰던 코드도 그대로 동작.
+   * (Android 는 useOverlayViewer 뷰어만 videoPositions, 다른 Android 뷰어는 인자 없음)
+   */
+  onViewerWillClose?: (e?: ViewerWillCloseEvent) => void
   /**
    * 상단바에 저장/공유/삭제 아이콘 3개를 표시할지 여부. 기본값 true.
    */

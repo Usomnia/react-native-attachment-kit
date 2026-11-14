@@ -612,8 +612,9 @@ class RNAttachmentKit: RCTEventEmitter {
             // 공유된 zoomAnimator.sourceRect를 덮어써버렸습니다 - "스와이프 후 닫으면 전혀
             // 다른 그룹 이미지 위치로 애니메이션되는" 버그의 근본 원인이었습니다. 이제 실제로
             // 뷰어가 닫히기 시작할 때 이벤트를 보내서 JS가 제때 구독을 정리하도록 합니다.
-            viewerVC.onViewerWillClose = { [weak self] () -> Void in
-                self?.sendEvent(withName: "onViewerWillClose", body: nil)
+            // 1.2.1: { currentIndex, videoPositions } — 앱은 인자를 무시해도 됨
+            viewerVC.onViewerWillClose = { [weak self, weak viewerVC] () -> Void in
+                self?.sendEvent(withName: "onViewerWillClose", body: viewerVC?.willCloseEventBody())
             }
             viewerVC.onImageDeleted = { [weak self] (index: Int, url: String, option: String?) -> Void in
                 guard let self = self else { return }

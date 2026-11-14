@@ -67,6 +67,23 @@ if (!RNAttachmentKitModule) {
 const eventEmitter = new NativeEventEmitter(RNAttachmentKitModule)
 
 /** 같은 화면을 중복으로 열려고 할 때 reject 하는 Error (code: "E_ALREADY_OPEN") */
+/** 네이티브 onViewerWillClose 본문 → { currentIndex, videoPositions } (예전 네이티브·다른 Android 뷰어처럼 값이 없으면 undefined) */
+function toViewerWillCloseEvent(e: any): import("./types").ViewerWillCloseEvent | undefined {
+  if (!e || typeof e.currentIndex !== 'number') return undefined
+  const out: import("./types").ViewerWillCloseEvent = { currentIndex: e.currentIndex }
+  const raw = e.videoPositions
+  if (raw && typeof raw === 'object') {
+    const positions: Record<number, number> = {}
+    let any = false
+    for (const k of Object.keys(raw)) {
+      const i = Number(k), v = raw[k]
+      if (Number.isInteger(i) && typeof v === 'number' && isFinite(v)) { positions[i] = v; any = true }
+    }
+    if (any) out.videoPositions = positions
+  }
+  return out
+}
+
 function alreadyOpenError(what: string): Error {
   const err = new Error(`${what} is already open`)
   ;(err as any).code = "E_ALREADY_OPEN"
@@ -89,7 +106,7 @@ let _editorOpen = false
 let _asyncImgProcessedSub: { remove: () => void } | null = null
 
 export type { AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
-export type { VideoOptions, VideoProgressEvent, ViewerVideo, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions, VideoPreviewOptions, SourceRect, SourceClipInsets, ViewerSourceUpdate } from "./types"
+export type { VideoOptions, VideoProgressEvent, ViewerVideo, ViewerWillCloseEvent, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions, VideoPreviewOptions, SourceRect, SourceClipInsets, ViewerSourceUpdate } from "./types"
 export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
 
@@ -379,9 +396,13 @@ const AttachmentKit: RNAttachmentKit = {
     // 네이티브 "onViewerWillClose"(iOS sendEvent / Android RCTDeviceEventEmitter) 는 앱이 콜백을 넘기지 않아도
     // 항상 구독합니다 — 이 이벤트가 와야 onPageSelected / onImageDeleted 구독을 정리할 수 있기 때문입니다
     // (예전엔 options.onViewerWillClose 가 없으면 구독을 안 해서 뷰어를 열 때마다 리스너가 누수됐음).
-    const closeHandler = () => {
+    // Android 는 같은 이벤트가 두 구독(eventEmitter·DeviceEventEmitter)으로 올 수 있어 한 번만
+    let closeSent = false
+    const closeHandler = (event?: any) => {
+      if (closeSent) return
+      closeSent = true
       if (options.onViewerWillClose) {
-        options.onViewerWillClose()
+        options.onViewerWillClose(toViewerWillCloseEvent(event))
       }
       if (subscriptionPageSelected) {
         subscriptionPageSelected.remove()

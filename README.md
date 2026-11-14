@@ -369,13 +369,15 @@ ref.current?.measure((x, y, width, height, pageX, pageY) => {
 
 | Option | Type | Description |
 |---|---|---|
-| `videos` | `(ViewerVideo \| null)[]` | Same order as `images`. A non-null entry makes that page a video; `images[i]` is then its **poster** (shown until the first frame, and for the open animation). `ViewerVideo = { uri, duration?, cacheFile? }` — `uri` is `https://` (mp4/mov, or an HLS `.m3u8` stream) or a local file; `cacheFile` works like `cacheFiles`: if the file exists it is played without network, otherwise the video streams and is downloaded there in the background for next time. |
+| `videos` | `(ViewerVideo \| null)[]` | Same order as `images`. A non-null entry makes that page a video; `images[i]` is then its **poster** (shown until the first frame, and for the open animation). `ViewerVideo = { uri, duration?, cacheFile?, startTime? }` — `uri` is `https://` (mp4/mov, or an HLS `.m3u8` stream) or a local file; `cacheFile` works like `cacheFiles`: if the file exists it is played without network, otherwise the video streams and is downloaded there in the background for next time. `startTime` (seconds, 1.2.1): the first time that page is shown, play from there instead of the start — the poster stays until the player has moved to that point, so the opening frames never flash; 0, negative or ≥ the length = from the start; leaving the page and coming back starts from the beginning as before. Streaming and cached files both. |
 
 ```ts
 AttachmentKit.openViewer({
   images: [photoUrl, videoPosterUrl],
-  videos: [null, { uri: videoUrl, duration: 12.4, cacheFile: `${cacheDir}/v_123.mp4` }],
+  videos: [null, { uri: videoUrl, duration: 12.4, cacheFile: `${cacheDir}/v_123.mp4`, startTime: card.position }],
   useOverlayViewer: true,
+  // where the user stopped watching (seconds), e.g. to continue the card's preview from there
+  onViewerWillClose: (e) => { const t = e?.videoPositions?.[1]; if (t != null) card.seek(t) },
 })
 ```
 
@@ -409,7 +411,7 @@ On a video page: autoplay from the start (leaving the page pauses, no loop — a
 | Option | Platform | Description |
 |---|---|---|
 | `onPageSelected(index)` | both | Page changed. |
-| `onViewerWillClose()` | both | Close animation starts. |
+| `onViewerWillClose(e?)` | both | Close animation starts. 1.2.1: `e = { currentIndex, videoPositions? }` — `videoPositions` maps each video page played in this viewer to its last position in seconds (the length if it played to the end); pages never played are absent. Old code that ignores the argument still works. On Android only the `useOverlayViewer` viewer sends `e` (the other Android viewers call it with no argument). |
 | `onViewerOpened()` | Android | Open animation finished (safe moment for background scroll corrections). |
 
 **Android viewer modes**

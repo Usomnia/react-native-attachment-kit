@@ -490,6 +490,7 @@ extension RNAttachmentKit.RemoteImageViewerViewController : UIKit.UICollectionVi
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func collectionView(_ collectionView: UIKit.UICollectionView, didSelectItemAt indexPath: Foundation.IndexPath)
 }
 extension RNAttachmentKit.RemoteImageViewerViewController {
+  @_Concurrency.MainActor @preconcurrency public func willCloseEventBody() -> [Swift.String : Any]
   @_Concurrency.MainActor @preconcurrency public func videoCloseSnapshot(in container: UIKit.UIView) -> (image: UIKit.UIImage, frame: CoreFoundation.CGRect)?
 }
 public struct Localizer {
@@ -960,7 +961,8 @@ public struct ViewerVideoItem {
   public var uri: Swift.String
   public var duration: Swift.Double?
   public var cacheFile: Swift.String?
-  public init(uri: Swift.String, duration: Swift.Double? = nil, cacheFile: Swift.String? = nil)
+  public var startTime: Swift.Double?
+  public init(uri: Swift.String, duration: Swift.Double? = nil, cacheFile: Swift.String? = nil, startTime: Swift.Double? = nil)
   public init?(dictionary d: Any?)
 }
 @_hasMissingDesignatedInitializers final public class VideoPrepareManager {

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.3 — 2026-11-15
+
+- **Location: `renderLocationThumbnail` can draw the map only (`markerType: 'none'`) and take a web-map `zoomLevel` (iOS + Android)**. For using the map as a background (e.g. a profile cover) instead of a chat bubble. Existing calls (chat bubbles, map viewer, attach menu) are unchanged, and their cache keys are the same as before.
+  - `markerType: 'none'`: no marker is drawn (the my-location dot still is, if `myLatitude/myLongitude` are given). The separate markerless copy (`<key>.base.webp`) is not written, since the image itself has no marker.
+  - `zoomLevel?: number`: same meaning as Google Maps / Mapbox / Leaflet zoom, fractions allowed, clamped to 2–21. Takes precedence over `spanMeters`. The width then covers `156543.03392 × cos(latitude) × width / 2^zoomLevel` m (256-pt tiles), so both platforms show the same area: iOS turns it into the snapshot region (without the 50 m minimum that `spanMeters` has), Android uses it as the camera zoom directly. With `myLatitude/myLongitude` the area still widens to include both points, as with `spanMeters`. Non-numbers / NaN are ignored (falls back to `spanMeters`).
+  - The cache key gets the zoom level and the width (dp/pt) only when `zoomLevel` is given; `'none'` is already part of the key as the marker type.
+  - iOS: `LocationThumbnailRequest.zoomLevel`, `LocationThumbnailRenderer.spanMeters(forZoomLevel:latitude:widthPt:)`. Android: `LocationThumbnailRenderer.Request.zoomLevel` / `noMarker`, `spanMetersForZoom`.
+  - Checked on the iOS simulator (example app, Dist build) and an Android emulator (standalone test app, `--ez coverMapTest true`), Seoul City Hall at 300 × 150 dp: `pin` + `spanMeters` is unchanged (same cache file as before on iOS), `'none'` draws the same map without the marker (identical to the old markerless copy). Area check with the my-location dot placed 300 m / 4 km / 200 km east of the centre at zoom 15 / 11 / 5: the measured width is within 0.7 % of `156543.03392 × cos(lat) × 300 / 2^z` on both platforms and within 0.2 % between them.
+
 ## 1.2.2 — 2026-11-14
 
 - **Viewer: a video opened with the UI hidden no longer flashes the centre button while it starts (iOS + Android)**. Opening a remote video with `startWithUiHidden: true` (e.g. from a feed card, with `startTime`) showed the 64 pt glass button for about half a second before playback began, as the loading circle with ⏸ showing through it.

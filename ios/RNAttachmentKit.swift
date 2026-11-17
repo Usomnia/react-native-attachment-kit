@@ -389,6 +389,8 @@ class RNAttachmentKit: RCTEventEmitter {
                 req.maxPixelWidth = maxW ?? .greatestFiniteMagnitude
                 req.maxPixelHeight = maxH ?? .greatestFiniteMagnitude
             }
+            // 웹 지도 줌 레벨 — 있으면 spanMeters 보다 우선
+            if let z = (options["zoomLevel"] as? NSNumber)?.doubleValue, z.isFinite { req.zoomLevel = z }
             LocationThumbnailRenderer.render(req) { result in
                 switch result {
                 case .success(let dict): resolve(dict)

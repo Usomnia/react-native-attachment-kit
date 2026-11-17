@@ -37946,6 +37946,117 @@
           },
           {
             "kind": "Var",
+            "name": "zoomLevel",
+            "printedName": "zoomLevel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvp",
+            "mangledName": "$s15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvg",
+                "mangledName": "$s15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvs",
+                "mangledName": "$s15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvM",
+                "mangledName": "$s15RNAttachmentKit24LocationThumbnailRequestV9zoomLevelSdSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "accentColor",
             "printedName": "accentColor",
             "children": [
@@ -38652,6 +38763,47 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Function",
+            "name": "spanMeters",
+            "printedName": "spanMeters(forZoomLevel:latitude:widthPt:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Double",
+                "printedName": "Swift.Double",
+                "usr": "s:Sd"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit25LocationThumbnailRendererO10spanMeters12forZoomLevel8latitude7widthPtS2d_Sd14CoreFoundation7CGFloatVtFZ",
+            "mangledName": "$s15RNAttachmentKit25LocationThumbnailRendererO10spanMeters12forZoomLevel8latitude7widthPtS2d_Sd12CoreGraphics7CGFloatVtFZ",
+            "moduleName": "RNAttachmentKit",
+            "static": true,
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
@@ -66558,98 +66710,112 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 2987,
+      "offset": 3232,
       "length": 3,
       "value": "400"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 3091,
+      "offset": 3336,
       "length": 3,
       "value": "512"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "StringLiteral",
-      "offset": 3134,
+      "offset": 3379,
       "length": 6,
       "value": "\"webp\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "StringLiteral",
-      "offset": 3406,
+      "offset": 3651,
       "length": 7,
       "value": "\".base\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "FloatLiteral",
-      "offset": 3607,
+      "offset": 3852,
       "length": 4,
       "value": "0.19"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 4196,
+      "offset": 3966,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 4252,
+      "offset": 3970,
+      "length": 2,
+      "value": "21"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5065,
+      "length": 1,
+      "value": "2"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
+      "kind": "IntegerLiteral",
+      "offset": 5121,
       "length": 2,
       "value": "10"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 4289,
+      "offset": 5158,
       "length": 3,
       "value": "300"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 4325,
+      "offset": 5194,
       "length": 3,
       "value": "250"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "StringLiteral",
-      "offset": 4430,
+      "offset": 5299,
       "length": 41,
       "value": "\"RNAttachmentKit.LocationThumbnail.state\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "Dictionary",
-      "offset": 4531,
+      "offset": 5400,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "Array",
-      "offset": 4616,
+      "offset": 5485,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "IntegerLiteral",
-      "offset": 4652,
+      "offset": 5521,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/LocationThumbnailRenderer.swift",
       "kind": "Dictionary",
-      "offset": 4776,
+      "offset": 5645,
       "length": 3,
       "value": "[]"
     },

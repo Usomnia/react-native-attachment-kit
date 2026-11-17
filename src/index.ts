@@ -509,6 +509,10 @@ const AttachmentKit: RNAttachmentKit = {
       delete mergedOptions.myLatitude
       delete mergedOptions.myLongitude
     }
+    // 줌 레벨은 유한한 숫자일 때만 (아니면 spanMeters 그대로)
+    if (typeof mergedOptions.zoomLevel !== "number" || !isFinite(mergedOptions.zoomLevel)) {
+      delete mergedOptions.zoomLevel
+    }
     return RNAttachmentKitModule.renderLocationThumbnail(mergedOptions)
   },
 

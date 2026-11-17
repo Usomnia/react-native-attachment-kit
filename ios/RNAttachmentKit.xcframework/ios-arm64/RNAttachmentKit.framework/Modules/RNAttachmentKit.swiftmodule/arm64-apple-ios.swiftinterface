@@ -763,6 +763,7 @@ public struct LocationThumbnailRequest {
   public var markerType: Swift.String?
   public var placeCategory: Swift.String?
   public var spanMeters: Swift.Double?
+  public var zoomLevel: Swift.Double?
   public var accentColor: UIKit.UIColor
   public var myLocation: _LocationEssentials.CLLocationCoordinate2D?
   public var maxPixelWidth: CoreFoundation.CGFloat
@@ -776,6 +777,7 @@ public enum LocationThumbnailRenderer {
   public typealias Completion = (Swift.Result<[Swift.String : Any], any Swift.Error>) -> Swift.Void
   public static let defaultMaxPixel: CoreFoundation.CGFloat
   public static let markerWidthFraction: CoreFoundation.CGFloat
+  public static func spanMeters(forZoomLevel zoom: Swift.Double, latitude: Swift.Double, widthPt: CoreFoundation.CGFloat) -> Swift.Double
   public static func markerlessFile(for path: Swift.String) -> Swift.String?
   public static func render(_ req: RNAttachmentKit.LocationThumbnailRequest, completion: @escaping RNAttachmentKit.LocationThumbnailRenderer.Completion)
   public static func height(forWidth w: CoreFoundation.CGFloat, aspect: Swift.String?) -> CoreFoundation.CGFloat?

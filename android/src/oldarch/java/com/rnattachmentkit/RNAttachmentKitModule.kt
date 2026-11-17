@@ -1457,6 +1457,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             // 결과 최대 크기 (px). 둘 다 없으면 512 × 512, 하나만 주면 다른 쪽은 제한 없음(0)
             maxOutWidthPx = maxOutW ?: if (maxOutH != null) 0 else LocationThumbnailRenderer.DEFAULT_MAX_OUT_PX,
             maxOutHeightPx = maxOutH ?: if (maxOutW != null) 0 else LocationThumbnailRenderer.DEFAULT_MAX_OUT_PX,
+            // 웹 지도 줌 레벨 — 있으면 spanMeters 보다 우선
+            zoomLevel = num("zoomLevel")?.takeIf { it.isFinite() },
         )
         com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
             try {

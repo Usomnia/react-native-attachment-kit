@@ -473,16 +473,26 @@ Draws a map thumbnail on this device from the location info alone, in this devic
 | `width` | `number` (dp/pt) | **Required.** Output px = width × screen scale (capped by `maxWidth/maxHeight`). |
 | `height` / `aspect` | `number` / `'square' \| 'portrait' \| 'device'` | Height directly, or from the width: `square` 1:1, `portrait` 9:19.5 (same as the sent snapshot), `device` this screen's ratio (the image then fills the screen exactly in the map viewer). |
 | `maxWidth` / `maxHeight` | `number` (px) | Scale down to fit. Both omitted → 512 × 512; only one given → the other is not limited. |
-| `markerType`, `placeCategory` | | Marker icon (as `AttachLocationResult`). Android has no per-category icons. |
-| `spanMeters` | `number` | Distance covered by the width (`imageSpanMeters`). Default 400. |
+| `markerType`, `placeCategory` | | Marker icon (as `AttachLocationResult`). Android has no per-category icons. `markerType: 'none'` draws the map only, without a marker (e.g. a profile background). |
+| `spanMeters` | `number` | Distance covered by the width (`imageSpanMeters`). Default 400. Ignored when `zoomLevel` is given. |
+| `zoomLevel` | `number` | Web-map zoom level (same meaning as Google Maps / Mapbox / Leaflet, fractions allowed, clamped to 2–21). Takes precedence over `spanMeters`; the area is computed from the latitude and `width`, so iOS and Android show the same area: width covers `156543.03392 × cos(lat) × width / 2^zoomLevel` m. Roughly 15–16 streets, 10–11 a city, 5–6 a country. |
 | `myLatitude`, `myLongitude` | `number` | Only if the sender shared their location (`includesMyLocation`): draws the dot and widens the area. |
 | `themeColor`, `appearance` | | Marker color, light/dark map (`system` = current app/device mode). |
 
 Result: `{ uri: 'file://…webp', path, width, height (px), cached }`.
 
-- Cached by coordinates, output size, theme, marker, span, color and my-location; identical requests in flight are merged. A theme change renders once more, then that is cached too.
+- Cached by coordinates, output size, theme, marker, span (or zoom level and width), color and my-location; identical requests in flight are merged. A theme change renders once more, then that is cached too.
 - Errors: `E_INVALID_ARGS`, `E_THUMBNAIL_FAILED` (no tiles — e.g. offline — or a 10 s timeout). Failures are not cached.
-- The renderer also stores the same map without the marker; the map viewer uses it so the marker keeps the right size while the bubble grows into the map.
+- The renderer also stores the same map without the marker; the map viewer uses it so the marker keeps the right size while the bubble grows into the map. (Not with `markerType: 'none'` — that image already has no marker.)
+
+```ts
+// map only, no marker, at a web-map zoom level (e.g. a profile cover)
+const cover = await AttachmentKit.renderLocationThumbnail({
+  latitude: 37.5665, longitude: 126.978,
+  width: 390, height: 260, maxWidth: 1024, maxHeight: 1024,
+  markerType: 'none', zoomLevel: 11, appearance: 'dark',
+})
+```
 
 #### `reverseGeocode(options: ReverseGeocodeOptions): Promise<ReverseGeocodeResult>`
 

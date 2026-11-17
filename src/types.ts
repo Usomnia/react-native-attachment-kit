@@ -352,12 +352,21 @@ export interface LocationThumbnailOptions {
   maxWidth?: number
   /** 결과 이미지 최대 세로 (px). maxWidth 참고 */
   maxHeight?: number
-  /** AttachLocationResult.markerType — 마커 아이콘 */
-  markerType?: 'current' | 'pin' | 'place'
+  /**
+   * AttachLocationResult.markerType — 마커 아이콘. 생략하면 "pin".
+   * "none" 이면 마커 없이 지도만 그립니다 (프로필 배경 등). 내 위치 점(myLatitude/myLongitude)은 넘기면 그대로 그립니다.
+   */
+  markerType?: 'current' | 'pin' | 'place' | 'none'
   /** (iOS 아이콘) AttachLocationResult.placeCategory */
   placeCategory?: string
-  /** 썸네일 가로가 덮는 실제 거리(m). AttachLocationResult.imageSpanMeters. 없으면 400 */
+  /** 썸네일 가로가 덮는 실제 거리(m). AttachLocationResult.imageSpanMeters. 없으면 400. zoomLevel 을 주면 무시 */
   spanMeters?: number
+  /**
+   * 웹 지도(Google/Mapbox/Leaflet)와 같은 뜻의 줌 레벨 (2~21 로 맞춤, 소수 가능). 주면 spanMeters 보다 우선합니다.
+   * 위도와 width(dp/pt)로 넓이를 계산하므로 iOS·Android 가 같은 넓이로 보입니다
+   * (가로가 덮는 거리 = 156543.03392 × cos(위도) × width / 2^zoomLevel m). 예: 도시 ≈ 10~11, 나라 ≈ 5~6
+   */
+  zoomLevel?: number
   /**
    * 보낸 쪽이 "내 위치 공유"를 켰을 때(includesMyLocation)의 내 위치 — 있으면 파란 점을 그리고
    * 두 점이 다 들어오게 범위를 넓힙니다. 공유를 안 켰으면 넘기지 마세요.

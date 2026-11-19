@@ -443,6 +443,14 @@ export interface MapViewerOptions {
   spanMeters?: number
   /** "길찾기" 버튼 표시 (기본 true) */
   showDirections?: boolean
+  /**
+   * 확대 한도 — 웹 지도 줌 레벨 (renderLocationThumbnail 의 zoomLevel 과 같은 뜻, 2–21, 소수 가능).
+   * maxZoomLevel: 이보다 가까이(자세히) 못 봄 — 예: 12 면 구·동 수준까지만 보여 집 위치가 특정되지 않음 (프로필 지도).
+   * minZoomLevel: 이보다 멀리 못 봄. 처음 축척(spanMeters)·"내 위치와 함께 보기"가 한도 밖이면 한도 안으로 맞춰짐.
+   * 둘 다 없으면 지도 기본 범위 (채팅 위치 말풍선은 그대로).
+   */
+  minZoomLevel?: number
+  maxZoomLevel?: number
   /** 말풍선 이미지 위치 (measureInWindow 값 그대로, dp/pt). 있으면 스티키 애니메이션 */
   sourceRect?: SourceRect
   /**
@@ -493,8 +501,60 @@ export interface ViewerWillCloseEvent {
   videoPositions?: Record<number, number>
 }
 
+/** 뷰어 상단 소셜 액션 아이콘(좋아요·댓글·책갈피)의 종류 — onViewerAction.action */
+export type ViewerActionKind = 'like' | 'comment' | 'bookmark'
+
+/** 뷰어 상단 소셜 아이콘의 상태 (updateViewerActions 로 바꿀 수 있음 — 넘긴 키만 바뀜) */
+export interface ViewerActionsState {
+  /** 좋아요 눌림 (하트 채움) */
+  liked?: boolean
+  /** 좋아요 수 (0 이면 숫자 숨김) */
+  likeCount?: number
+  /** 댓글 수 (0 이면 숫자 숨김) */
+  commentCount?: number
+  /** 책갈피 눌림 (아이콘 채움) */
+  bookmarked?: boolean
+}
+
+/**
+ * 뷰어 상단바 오른쪽의 소셜 액션 아이콘 세트 (피드 사진 뷰어용). 넘기면 [좋아요(하트·수)] [댓글(수)] [책갈피] 가
+ * 저장·공유 아이콘 왼쪽에 그려지고, 누르면 onViewerAction 이벤트가 옵니다. 넘기지 않으면 예전과 같음.
+ * - 좋아요: 누르는 즉시 네이티브가 하트를 토글하고(피드 카드와 같은 튀어 오르는 애니메이션·고리·점·가벼운 햅틱) 수를 ±1
+ *   한 뒤 이벤트를 보냄. 앱은 서버 결과로 updateViewerActions({ liked, likeCount }) 를 불러 맞춤(실패하면 되돌림).
+ * - 댓글: 이벤트만 보내고 뷰어는 그대로 (닫고 댓글로 갈지는 앱이 closeViewer 로 결정).
+ * - 책갈피: 누르는 즉시 아이콘 토글 + 이벤트. 저장은 앱 몫.
+ * 지원: iOS 뷰어, Android 는 useOverlayViewer 뷰어 (다른 Android 뷰어는 무시).
+ */
+export interface ViewerActions extends ViewerActionsState {
+  /** 각 아이콘 표시 여부 (기본 true). 셋 다 false 면 아무것도 안 그림 */
+  showLike?: boolean
+  showComment?: boolean
+  showBookmark?: boolean
+  /** 좋아요를 누를 수 없게 (내 글) — 하트·수는 보이되 눌러도 반응 없음 */
+  likeDisabled?: boolean
+  /** 접근성 문구 (스크린 리더). 생략하면 영어 기본값 */
+  likeLabel?: string
+  commentLabel?: string
+  bookmarkLabel?: string
+}
+
+/** onViewerAction 인자 */
+export interface ViewerActionEvent {
+  action: ViewerActionKind
+  /** 누른 순간 보고 있던 페이지 */
+  index: number
+  /** 누른 뒤의(토글된) 상태 — like / bookmark 액션에만 */
+  liked?: boolean
+  likeCount?: number
+  bookmarked?: boolean
+}
+
 export interface ViewerOptions {
   images: string[]
+  /** 상단바 오른쪽 소셜 액션 아이콘(좋아요·댓글·책갈피). 설명은 ViewerActions */
+  actions?: ViewerActions
+  /** actions 의 아이콘을 눌렀을 때 */
+  onViewerAction?: (e: ViewerActionEvent) => void
   placeholderImages?: string[]
   /**
    * images 와 같은 순서의 로컬 캐시 파일 경로(절대 경로, file:// 없음). 원격 URL 사진에 대해:

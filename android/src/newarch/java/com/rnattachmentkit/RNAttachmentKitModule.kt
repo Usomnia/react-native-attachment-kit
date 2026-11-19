@@ -141,6 +141,24 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         }
     }
 
+    // 뷰어 상단 소셜 아이콘(좋아요·댓글·책갈피)을 눌렀을 때 (ImageViewerOverlayView) → JS "onViewerAction"
+    // { action, index, liked, likeCount, bookmarked } — iOS 와 같은 본문
+    private val viewerActionReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
+            if (intent?.action == "com.rnattachmentkit.VIEWER_ACTION") {
+                val params = Arguments.createMap()
+                params.putString("action", intent.getStringExtra("action") ?: "")
+                params.putInt("index", intent.getIntExtra("index", 0))
+                params.putBoolean("liked", intent.getBooleanExtra("liked", false))
+                params.putInt("likeCount", intent.getIntExtra("likeCount", 0))
+                params.putBoolean("bookmarked", intent.getBooleanExtra("bookmarked", false))
+                reactApplicationContext
+                    .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                    .emit("onViewerAction", params)
+            }
+        }
+    }
+
     // 열기 애니메이션이 끝난 시점을 JS에 알리는 이벤트 (배경 스크롤 보정 타이밍용).
     private val viewerOpenedReceiver = object : android.content.BroadcastReceiver() {
         override fun onReceive(context: android.content.Context?, intent: android.content.Intent?) {
@@ -178,6 +196,27 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             .registerReceiver(viewerWillCloseReceiver, android.content.IntentFilter("com.rnattachmentkit.VIEWER_WILL_CLOSE"))
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .registerReceiver(imageDeletedReceiver, android.content.IntentFilter("com.rnattachmentkit.IMAGE_DELETED"))
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
+            .registerReceiver(viewerActionReceiver, android.content.IntentFilter("com.rnattachmentkit.VIEWER_ACTION"))
+    }
+
+    /** RN updateViewerActions — 열려 있는 오버레이 뷰어의 소셜 아이콘 상태 (넘긴 키만). 뷰어가 없으면 아무 일 없음 */
+    override fun updateViewerActions(state: ReadableMap, promise: Promise) {
+        fun b(k: String): Boolean? = if (state.hasKey(k) && !state.isNull(k) && state.getType(k) == com.facebook.react.bridge.ReadableType.Boolean) state.getBoolean(k) else null
+        fun n(k: String): Int? = if (state.hasKey(k) && !state.isNull(k) && state.getType(k) == com.facebook.react.bridge.ReadableType.Number) state.getDouble(k).toInt() else null
+        val liked = b("liked"); val likeCount = n("likeCount"); val commentCount = n("commentCount"); val bookmarked = b("bookmarked")
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            ImageViewerOverlayView.currentInstance?.get()?.applySocialActions(liked, likeCount, commentCount, bookmarked)
+            promise.resolve(null)
+        }
+    }
+
+    /** RN closeViewer — 열려 있는 오버레이 뷰어를 뒤로가기처럼 닫음 (onViewerWillClose 가 옴). 뷰어가 없으면 아무 일 없음 */
+    override fun closeViewer(promise: Promise) {
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            ImageViewerOverlayView.currentInstance?.get()?.requestClose()
+            promise.resolve(null)
+        }
     }
 
     override fun updateSourceRect(options: ReadableMap, promise: Promise) {
@@ -750,6 +789,20 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                     putBoolean("showDeleteButton", !options.hasKey("showDeleteButton") || options.getBoolean("showDeleteButton"))
                     // 처음에 상단바·하단바·동영상 조작 UI 를 숨긴 채로 엶 (탭하면 보임)
                     putBoolean("startWithUiHidden", options.hasKey("startWithUiHidden") && options.getBoolean("startWithUiHidden"))
+                    // 상단바 소셜 아이콘(좋아요·댓글·책갈피) — RN ViewerOptions.actions (이 오버레이 뷰어만)
+                    if (options.hasKey("actions") && !options.isNull("actions")) {
+                        options.getMap("actions")?.let { a ->
+                            fun b(k: String, def: Boolean) = if (a.hasKey(k) && !a.isNull(k) && a.getType(k) == com.facebook.react.bridge.ReadableType.Boolean) a.getBoolean(k) else def
+                            fun n(k: String) = if (a.hasKey(k) && !a.isNull(k) && a.getType(k) == com.facebook.react.bridge.ReadableType.Number) a.getDouble(k).toInt().coerceAtLeast(0) else 0
+                            fun str(k: String) = if (a.hasKey(k) && !a.isNull(k) && a.getType(k) == com.facebook.react.bridge.ReadableType.String) a.getString(k) else null
+                            putBundle(ViewerSocialActionsConfig.ARG_KEY, ViewerSocialActionsConfig(
+                                showLike = b("showLike", true), showComment = b("showComment", true), showBookmark = b("showBookmark", true),
+                                likeDisabled = b("likeDisabled", false), liked = b("liked", false), likeCount = n("likeCount"),
+                                commentCount = n("commentCount"), bookmarked = b("bookmarked", false),
+                                likeLabel = str("likeLabel"), commentLabel = str("commentLabel"), bookmarkLabel = str("bookmarkLabel"),
+                            ).toBundle())
+                        }
+                    }
                     for (key in listOf(
                         "saveAllText", "saveOneText", "shareAllText", "shareOneText", "actionCancelText",
                         "deleteConfirmTitle", "deleteConfirmMessage", "deleteConfirmGroupMessage", "deleteButtonText"
@@ -1281,6 +1334,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
             .unregisterReceiver(viewerWillCloseReceiver)
         androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
             .unregisterReceiver(imageDeletedReceiver)
+        androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(reactApplicationContext)
+            .unregisterReceiver(viewerActionReceiver)
     }
 
     // ── 지도 뷰어 (위치 메시지 → 지도) ──
@@ -1362,6 +1417,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                         sourceImagePath = imagePath,
                         sourceCornerRadius = radiusPx,
                         spanMeters = num("spanMeters") ?: 0.0,
+                        minZoomLevel = num("minZoomLevel") ?: 0.0,   // 확대 한도 (프로필 지도)
+                        maxZoomLevel = num("maxZoomLevel") ?: 0.0,
                         appearance = str("appearance"),
                         addressLanguageCode = str("addressLanguageCode"),
                     )

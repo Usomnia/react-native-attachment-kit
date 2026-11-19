@@ -106,6 +106,7 @@ let _editorOpen = false
 let _asyncImgProcessedSub: { remove: () => void } | null = null
 
 export type { AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
+export type { ViewerActionKind, ViewerActionsState, ViewerActions, ViewerActionEvent } from "./types"
 export type { VideoOptions, VideoProgressEvent, ViewerVideo, ViewerWillCloseEvent, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions, VideoPreviewOptions, SourceRect, SourceClipInsets, ViewerSourceUpdate } from "./types"
 export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
@@ -121,6 +122,10 @@ export interface RNAttachmentKit {
   openViewer(options: ViewerOptions): Promise<void>
   /** 닫힐 때 돌아갈 자리 (페이지를 넘겼을 때). sourceClipRect·sourceClipInsets 도 함께 바꿀 수 있음 */
   updateSourceRect(rect: import("./types").ViewerSourceUpdate): Promise<void>
+  /** 열려 있는 뷰어의 상단 소셜 아이콘 상태를 바꿈 (넘긴 키만). 뷰어가 없으면 아무 일 없음 */
+  updateViewerActions(state: import("./types").ViewerActionsState): Promise<void>
+  /** 열려 있는 사진 뷰어를 닫음 (X 를 누른 것과 같음 — onViewerWillClose 가 옴). 뷰어가 없으면 아무 일 없음 */
+  closeViewer(): Promise<void>
   /** 지도 뷰어. 닫히면 resolve */
   openMapViewer(options: import("./types").MapViewerOptions): Promise<void>
   /** 지도 뷰어가 열린 동안 말풍선 위치가 바뀌었을 때 (닫힐 때 돌아갈 자리) */
@@ -379,6 +384,19 @@ const AttachmentKit: RNAttachmentKit = {
     let subscriptionViewerWillClose: any = null
     let deviceSubscriptionViewerWillClose: any = null
 
+    // 상단 소셜 아이콘(좋아요·댓글·책갈피) — actions 를 넘긴 호출만 구독 (iOS sendEvent / Android DeviceEventEmitter)
+    let subscriptionViewerAction: any = null
+    if (options.onViewerAction && options.actions) {
+      subscriptionViewerAction = eventEmitter.addListener("onViewerAction", (event: any) => {
+        if (!options.onViewerAction || !event || typeof event.action !== 'string') return
+        const e: import("./types").ViewerActionEvent = { action: event.action, index: typeof event.index === 'number' ? event.index : 0 }
+        if (typeof event.liked === 'boolean') e.liked = event.liked
+        if (typeof event.likeCount === 'number') e.likeCount = event.likeCount
+        if (typeof event.bookmarked === 'boolean') e.bookmarked = event.bookmarked
+        try { options.onViewerAction(e) } catch (err) { console.error("[RNAttachmentKit] options.onViewerAction() threw:", err) }
+      })
+    }
+
     let subscriptionImageDeleted: any = null
     if (options.onImageDeleted) {
       subscriptionImageDeleted = eventEmitter.addListener("onImageDeleted", (event: any) => {
@@ -419,6 +437,9 @@ const AttachmentKit: RNAttachmentKit = {
       if (subscriptionImageDeleted) {
         subscriptionImageDeleted.remove()
       }
+      if (subscriptionViewerAction) {
+        subscriptionViewerAction.remove()
+      }
     };
 
     subscriptionViewerWillClose = eventEmitter.addListener("onViewerWillClose", closeHandler);
@@ -428,7 +449,7 @@ const AttachmentKit: RNAttachmentKit = {
     }
 
     try {
-      const { onPageSelected, onViewerWillClose, onViewerOpened, onImageDeleted, ...restOptions } = options
+      const { onPageSelected, onViewerWillClose, onViewerOpened, onImageDeleted, onViewerAction, ...restOptions } = options
       const mergedOptions = {
         themeColor: _defaultThemeColor,
         languageCode: _defaultLanguageCode,
@@ -440,7 +461,7 @@ const AttachmentKit: RNAttachmentKit = {
       return await RNAttachmentKitModule.openViewer(mergedOptions)
     } catch (e) {
       // 뷰어가 아예 안 떴으면(reject) onViewerWillClose 가 오지 않으므로 여기서 구독 정리 (앱 콜백은 호출 안 함)
-      for (const sub of [subscriptionPageSelected, subscriptionViewerOpened, subscriptionImageDeleted, subscriptionViewerWillClose, deviceSubscriptionViewerWillClose]) {
+      for (const sub of [subscriptionPageSelected, subscriptionViewerOpened, subscriptionImageDeleted, subscriptionViewerAction, subscriptionViewerWillClose, deviceSubscriptionViewerWillClose]) {
         try { sub?.remove() } catch (err) { /* noop */ }
       }
       throw e
@@ -453,6 +474,25 @@ const AttachmentKit: RNAttachmentKit = {
       throw new Error(LINKING_ERROR)
     }
     return RNAttachmentKitModule.updateSourceRect(rect)
+  },
+
+  updateViewerActions: async (state: import("./types").ViewerActionsState): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    const body: Record<string, any> = {}
+    if (typeof state.liked === 'boolean') body.liked = state.liked
+    if (typeof state.likeCount === 'number' && isFinite(state.likeCount)) body.likeCount = Math.max(0, Math.round(state.likeCount))
+    if (typeof state.commentCount === 'number' && isFinite(state.commentCount)) body.commentCount = Math.max(0, Math.round(state.commentCount))
+    if (typeof state.bookmarked === 'boolean') body.bookmarked = state.bookmarked
+    return RNAttachmentKitModule.updateViewerActions(body)
+  },
+
+  closeViewer: async (): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    return RNAttachmentKitModule.closeViewer()
   },
 
   openMapViewer: async (options: import("./types").MapViewerOptions): Promise<void> => {

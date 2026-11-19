@@ -77,7 +77,7 @@ class RNAttachmentKit: RCTEventEmitter {
         return ["onSelectionChange", "onImageProcessed", "onPageSelected", "onViewerWillClose", "onImageDeleted",
                 "onGalleryItemDeleted", "onGalleryNeedPage", "onGalleryClosed", "onGalleryGridSizeChanged",
                 "onLocationSelected", "onFilesSelected", "onAIUsage", "onAIChargeRequired", "onVideoProgress",
-                "onMapViewerWillClose", "onProcessingStart"]
+                "onMapViewerWillClose", "onProcessingStart", "onViewerAction"]
     }
     
     // MARK: - Public Methods
@@ -194,6 +194,31 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
     
+    /// RN updateViewerActions — 열려 있는 뷰어의 소셜 아이콘 상태 (넘긴 키만). 뷰어가 없으면 아무 일 없음
+    @objc
+    func updateViewerActions(_ state: NSDictionary,
+                             resolve: @escaping RCTPromiseResolveBlock,
+                             reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let d = state as? [String: Any] ?? [:]
+        func bool(_ k: String) -> Bool? { (d[k] as? Bool) ?? (d[k] as? NSNumber)?.boolValue }
+        func int(_ k: String) -> Int? { (d[k] as? NSNumber)?.intValue ?? (d[k] as? Double).map { Int($0) } }
+        DispatchQueue.main.async {
+            self.activeViewerVC?.updateSocialActions(liked: bool("liked"), likeCount: int("likeCount"),
+                                                     commentCount: int("commentCount"), bookmarked: bool("bookmarked"))
+            resolve(nil)
+        }
+    }
+
+    /// RN closeViewer — 열려 있는 사진 뷰어를 X 처럼 닫음 (onViewerWillClose 가 옴). 뷰어가 없으면 아무 일 없음
+    @objc
+    func closeViewer(_ resolve: @escaping RCTPromiseResolveBlock,
+                     reject: @escaping RCTPromiseRejectBlock) -> Void {
+        DispatchQueue.main.async {
+            self.activeViewerVC?.closeFromOutside()
+            resolve(nil)
+        }
+    }
+
     // MARK: - Map Viewer (위치 메시지 → 지도)
 
     private weak var activeMapViewerVC: MapViewerViewController?
@@ -306,6 +331,9 @@ class RNAttachmentKit: RCTEventEmitter {
                 vc.showsDirections = (options["showDirections"] as? Bool) ?? true
                 vc.addressLanguageCode = (options["addressLanguageCode"] as? String).flatMap { $0.isEmpty ? nil : $0 }
                 if let span = RNAttachmentKit.cgFloat(options["spanMeters"]), span > 0 { vc.spanMeters = Double(span) }
+                // 확대 한도 (프로필 지도: 집 위치가 특정되지 않게). 숫자가 아니면 무시
+                if let z = RNAttachmentKit.cgFloat(options["minZoomLevel"]), z.isFinite, z > 0 { vc.minZoomLevel = Double(z) }
+                if let z = RNAttachmentKit.cgFloat(options["maxZoomLevel"]), z.isFinite, z > 0 { vc.maxZoomLevel = Double(z) }
                 if let r = RNAttachmentKit.cgFloat(options["sourceCornerRadius"]) { vc.sourceCornerRadius = r }
                 self.mapViewerSourceRect = sourceRect
                 if let rect = sourceRect {
@@ -482,6 +510,8 @@ class RNAttachmentKit: RCTEventEmitter {
         let showActionButtons = (options["showActionButtons"] as? Bool) ?? true
         let showDeleteButton = (options["showDeleteButton"] as? Bool) ?? true
         let startWithUiHidden = (options["startWithUiHidden"] as? Bool) ?? false
+        // 상단바 소셜 아이콘(좋아요·댓글·책갈피) — 없으면 예전과 같음
+        let socialActions = ViewerSocialActionsConfig(dictionary: options["actions"])
         let saveAllText = options["saveAllText"] as? String
         let saveOneText = options["saveOneText"] as? String
         let shareAllText = options["shareAllText"] as? String
@@ -567,6 +597,7 @@ class RNAttachmentKit: RCTEventEmitter {
             viewerVC.showActionButtons = showActionButtons
             viewerVC.showDeleteButton = showDeleteButton
             viewerVC.startWithUiHidden = startWithUiHidden
+            viewerVC.socialActions = socialActions
             if let saveAllText = saveAllText { viewerVC.saveAllText = saveAllText }
             if let saveOneText = saveOneText { viewerVC.saveOneText = saveOneText }
             if let shareAllText = shareAllText { viewerVC.shareAllText = shareAllText }
@@ -626,6 +657,13 @@ class RNAttachmentKit: RCTEventEmitter {
             }
             viewerVC.onWillDismissForDelete = { [weak self] () -> Void in
                 self?.zoomAnimator.fadeOutOnDismiss = true
+            }
+            // 소셜 아이콘 → RN onViewerAction { action, index, liked, likeCount, bookmarked }
+            viewerVC.onSocialAction = { [weak self] (action: ViewerSocialAction, index: Int, state: ViewerSocialActionsConfig) -> Void in
+                var body: [String: Any] = state.stateDictionary
+                body["action"] = action.rawValue
+                body["index"] = index
+                self?.sendEvent(withName: "onViewerAction", body: body)
             }
             
             let resolveResult: [String: Any] = ["success": true]
@@ -1966,7 +2004,7 @@ fileprivate extension RNAttachmentKit {
             }
         }
 
-        editorVC.onConfirm = { [weak self, weak galleryNav, weak currentGallery] (editedAsset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String) in
+        editorVC.onConfirm = { [weak self, weak galleryNav, weak currentGallery, weak editorVC] (editedAsset: PHAsset?, croppedImage: UIImage?, filterState: FilterState, caption: String) in
             guard let self = self else { return }
             // 단일 편집 → 전송: 결과 전달 책임이 processEditorResult 로 넘어가므로, 갤러리를 닫기 "전에"
             // 가드를 세웁니다. 안 그러면 갤러리 viewDidDisappear 의 "스와이프로 닫힘" 안전장치가
@@ -1974,9 +2012,38 @@ fileprivate extension RNAttachmentKit {
             // 않았습니다 (autoCloseOnSelect + enableEditor 조합에서 사진이 안 들어오던 버그).
             currentGallery?.hasReturnedImages = true
             let navToDismiss = galleryNav ?? currentGallery
-            let presenter = navToDismiss?.presentingViewController ?? navToDismiss
-            presenter?.dismiss(animated: true) {
-                self.processEditorResult(asset: editedAsset, croppedImage: croppedImage, filterState: filterState, caption: caption, galleryVC: currentGallery, resolve: resolve, reject: reject)
+            let dismissGalleryAndProcess = {
+                let presenter = navToDismiss?.presentingViewController ?? navToDismiss
+                presenter?.dismiss(animated: true) {
+                    self.processEditorResult(asset: editedAsset, croppedImage: croppedImage, filterState: filterState, caption: caption, galleryVC: currentGallery, resolve: resolve, reject: reject)
+                }
+            }
+            // 2026-11-19: 예전엔 루트(presenter)에서 한 번에 닫았는데, 그러면 UIKit 은 맨 위의 편집 화면만 애니메이션하고
+            // 중간의 갤러리 시트는 애니메이션 없이 바로 치웁니다. 편집 화면의 닫기 전환(ImageEditorTransitionAnimator)은
+            // 사진을 "갤러리 칸 자리"(frameProvider)로 되돌리므로, 이미 사라진 갤러리의 칸 좌표 — 앱 화면 위의 아무것도
+            // 없는 자리 — 로 사진이 날아갔습니다. selectionMode 'single' + enableEditor(프로필 사진 바꾸기)에서만 보이고,
+            // 'multi'(채팅·가입)는 onSendMulti 경로라 멀쩡했던 이유. 이제 multi 의 전송(patch399)·Android 와 같이
+            // 편집 화면이 갤러리 칸으로 돌아간 뒤 → 갤러리 시트가 아래로 내려가고 → 결과를 넘깁니다.
+            if let editorVC = editorVC, editorVC.transitioningDelegate != nil,
+               let gallery = currentGallery, gallery.view.window != nil {
+                // 돌아갈 칸에 편집본을 먼저 그려 두어 사진이 내려앉은 뒤 원본으로 바뀌지 않게 (onSendMulti 와 같은 처리)
+                if let a = editedAsset, var img = croppedImage {
+                    if filterState.filterId != "original",
+                       let filter = FilterManager.shared.filters.first(where: { $0.id == filterState.filterId }),
+                       let ciImage = CIImage(image: img),
+                       let out = filter.apply(ciImage, filterState.intensity),
+                       let cgImg = FilterManager.shared.context.createCGImage(out, from: out.extent) {
+                        img = UIImage(cgImage: cgImg, scale: img.scale, orientation: img.imageOrientation)
+                    }
+                    gallery.editedImages[a.localIdentifier] = img
+                    gallery.refreshThumbnails(for: [a])
+                }
+                editorVC.dismiss(animated: true) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { dismissGalleryAndProcess() }
+                }
+            } else {
+                // 기준 칸이 없어 편집 화면이 페이드로 열린 경우 등: 예전처럼 한 번에 닫음
+                dismissGalleryAndProcess()
             }
         }
 

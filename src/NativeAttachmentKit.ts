@@ -15,6 +15,9 @@ export interface Spec extends TurboModule {
   removeListeners(count: number): void;
   
   updateSourceRect(options: Object): Promise<void>;
+  // 뷰어 상단 소셜 아이콘 상태 갱신 (ViewerActionsState) / 열려 있는 뷰어 닫기
+  updateViewerActions(state: Object): Promise<void>;
+  closeViewer(): Promise<void>;
   
   getDefaultAnimationConfig(): Promise<Object>;
 

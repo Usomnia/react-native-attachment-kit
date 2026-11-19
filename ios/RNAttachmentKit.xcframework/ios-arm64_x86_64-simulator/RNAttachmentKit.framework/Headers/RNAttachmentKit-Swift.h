@@ -642,6 +642,23 @@ SWIFT_CLASS("_TtC15RNAttachmentKit14VideoExportHUD")
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
+/// 피드 카드와 같은 좋아요 하트 (24×24 경로를 bounds 에 맞춰 그림). 고리·점은 bounds 밖까지 그려지므로 clipsToBounds 금지
+SWIFT_CLASS("_TtC15RNAttachmentKit19ViewerLikeHeartView")
+@interface ViewerLikeHeartView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
+
+/// [하트 수] [말풍선 수] [책갈피] — 상단바의 저장·공유 왼쪽에 둠
+SWIFT_CLASS("_TtC15RNAttachmentKit23ViewerSocialActionsView")
+@interface ViewerSocialActionsView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
 @protocol UIViewControllerContextTransitioning;
 SWIFT_CLASS("_TtC15RNAttachmentKit22ZoomTransitionAnimator")
 @interface ZoomTransitionAnimator : NSObject <UIViewControllerAnimatedTransitioning>
@@ -1299,6 +1316,23 @@ SWIFT_CLASS("_TtC15RNAttachmentKit14VideoExportHUD")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)layoutSubviews;
 - (void)willMoveToSuperview:(UIView * _Nullable)newSuperview;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+/// 피드 카드와 같은 좋아요 하트 (24×24 경로를 bounds 에 맞춰 그림). 고리·점은 bounds 밖까지 그려지므로 clipsToBounds 금지
+SWIFT_CLASS("_TtC15RNAttachmentKit19ViewerLikeHeartView")
+@interface ViewerLikeHeartView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
+
+/// [하트 수] [말풍선 수] [책갈피] — 상단바의 저장·공유 왼쪽에 둠
+SWIFT_CLASS("_TtC15RNAttachmentKit23ViewerSocialActionsView")
+@interface ViewerSocialActionsView : UIView
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 

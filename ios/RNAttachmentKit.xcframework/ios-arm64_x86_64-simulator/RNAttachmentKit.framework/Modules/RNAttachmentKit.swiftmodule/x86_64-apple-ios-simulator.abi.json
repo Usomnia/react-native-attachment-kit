@@ -21016,6 +21016,325 @@
           },
           {
             "kind": "Var",
+            "name": "socialActions",
+            "printedName": "socialActions",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialActionsConfig",
+                    "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                    "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvp",
+            "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "RNAttachmentKit.ViewerSocialActionsConfig?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ViewerSocialActionsConfig",
+                        "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                        "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvg",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "RNAttachmentKit.ViewerSocialActionsConfig?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ViewerSocialActionsConfig",
+                        "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                        "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvs",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvM",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC13socialActionsAA0e6SocialI6ConfigVSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "onSocialAction",
+            "printedName": "onSocialAction",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tuple",
+                        "printedName": "(RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig)",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ViewerSocialAction",
+                            "printedName": "RNAttachmentKit.ViewerSocialAction",
+                            "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Int",
+                            "printedName": "Swift.Int",
+                            "usr": "s:Si"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ViewerSocialActionsConfig",
+                            "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvp",
+            "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ViewerSocialAction",
+                                "printedName": "RNAttachmentKit.ViewerSocialAction",
+                                "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ViewerSocialActionsConfig",
+                                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvg",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Tuple",
+                            "printedName": "(RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig)",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ViewerSocialAction",
+                                "printedName": "RNAttachmentKit.ViewerSocialAction",
+                                "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Int",
+                                "printedName": "Swift.Int",
+                                "usr": "s:Si"
+                              },
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ViewerSocialActionsConfig",
+                                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvs",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvM",
+                "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC14onSocialActionyAA0eiJ0O_SiAA0eI13ActionsConfigVtcSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "startWithUiHidden",
             "printedName": "startWithUiHidden",
             "children": [
@@ -23442,6 +23761,108 @@
               "Custom",
               "Override",
               "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "closeFromOutside",
+            "printedName": "closeFromOutside()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC16closeFromOutsideyyF",
+            "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC16closeFromOutsideyyF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "updateSocialActions",
+            "printedName": "updateSocialActions(liked:likeCount:commentCount:bookmarked:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit31RemoteImageViewerViewControllerC19updateSocialActions5liked9likeCount07commentM010bookmarkedySbSg_SiSgAjItF",
+            "mangledName": "$s15RNAttachmentKit31RemoteImageViewerViewControllerC19updateSocialActions5liked9likeCount07commentM010bookmarkedySbSg_SiSgAjItF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -35698,6 +36119,251 @@
                 "declKind": "Accessor",
                 "usr": "s:15RNAttachmentKit23MapViewerViewControllerC10spanMetersSdSgvM",
                 "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC10spanMetersSdSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "minZoomLevel",
+            "printedName": "minZoomLevel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvp",
+            "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvg",
+                "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvs",
+                "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvM",
+                "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12minZoomLevelSdSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "maxZoomLevel",
+            "printedName": "maxZoomLevel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Double?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Double",
+                    "printedName": "Swift.Double",
+                    "usr": "s:Sd"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvp",
+            "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvg",
+                "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.Double?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Double",
+                        "printedName": "Swift.Double",
+                        "usr": "s:Sd"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvs",
+                "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvM",
+                "mangledName": "$s15RNAttachmentKit23MapViewerViewControllerC12maxZoomLevelSdSgvM",
                 "moduleName": "RNAttachmentKit",
                 "implicit": true,
                 "declAttributes": [
@@ -48120,6 +48786,2747 @@
             "printedName": "Escapable",
             "usr": "s:s9EscapableP",
             "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ViewerSocialAction",
+        "printedName": "ViewerSocialAction",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "like",
+            "printedName": "like",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(RNAttachmentKit.ViewerSocialAction.Type) -> RNAttachmentKit.ViewerSocialAction",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialAction",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction",
+                    "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ViewerSocialAction",
+                        "printedName": "RNAttachmentKit.ViewerSocialAction",
+                        "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15RNAttachmentKit18ViewerSocialActionO4likeyA2CmF",
+            "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO4likeyA2CmF",
+            "moduleName": "RNAttachmentKit"
+          },
+          {
+            "kind": "Var",
+            "name": "comment",
+            "printedName": "comment",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(RNAttachmentKit.ViewerSocialAction.Type) -> RNAttachmentKit.ViewerSocialAction",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialAction",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction",
+                    "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ViewerSocialAction",
+                        "printedName": "RNAttachmentKit.ViewerSocialAction",
+                        "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15RNAttachmentKit18ViewerSocialActionO7commentyA2CmF",
+            "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO7commentyA2CmF",
+            "moduleName": "RNAttachmentKit"
+          },
+          {
+            "kind": "Var",
+            "name": "bookmark",
+            "printedName": "bookmark",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(RNAttachmentKit.ViewerSocialAction.Type) -> RNAttachmentKit.ViewerSocialAction",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialAction",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction",
+                    "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ViewerSocialAction",
+                        "printedName": "RNAttachmentKit.ViewerSocialAction",
+                        "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:15RNAttachmentKit18ViewerSocialActionO8bookmarkyA2CmF",
+            "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO8bookmarkyA2CmF",
+            "moduleName": "RNAttachmentKit"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.ViewerSocialAction?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialAction",
+                    "printedName": "RNAttachmentKit.ViewerSocialAction",
+                    "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15RNAttachmentKit18ViewerSocialActionO8rawValueACSgSS_tcfc",
+            "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO8rawValueACSgSS_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit18ViewerSocialActionO8rawValueSSvp",
+            "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO8rawValueSSvp",
+            "moduleName": "RNAttachmentKit",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit18ViewerSocialActionO8rawValueSSvg",
+                "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO8rawValueSSvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:15RNAttachmentKit18ViewerSocialActionO",
+        "mangledName": "$s15RNAttachmentKit18ViewerSocialActionO",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "enumRawTypeName": "String",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ViewerSocialActionsConfig",
+        "printedName": "ViewerSocialActionsConfig",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "showLike",
+            "printedName": "showLike",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV8showLikeSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "showComment",
+            "printedName": "showComment",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV11showCommentSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "showBookmark",
+            "printedName": "showBookmark",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12showBookmarkSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "likeDisabled",
+            "printedName": "likeDisabled",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12likeDisabledSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "liked",
+            "printedName": "liked",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV5likedSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "likeCount",
+            "printedName": "likeCount",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeCountSivM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "commentCount",
+            "printedName": "commentCount",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentCountSivM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "bookmarked",
+            "printedName": "bookmarked",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV10bookmarkedSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "likeLabel",
+            "printedName": "likeLabel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV9likeLabelSSSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "commentLabel",
+            "printedName": "commentLabel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV12commentLabelSSSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "bookmarkLabel",
+            "printedName": "bookmarkLabel",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvs",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvM",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV13bookmarkLabelSSSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ViewerSocialActionsConfig",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigVACycfc",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigVACycfc",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(dictionary:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialActionsConfig",
+                    "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                    "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Any?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV10dictionaryACSgypSg_tcfc",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV10dictionaryACSgypSg_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "isEmpty",
+            "printedName": "isEmpty",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV7isEmptySbvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV7isEmptySbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV7isEmptySbvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV7isEmptySbvg",
+                "moduleName": "RNAttachmentKit",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "stateDictionary",
+            "printedName": "stateDictionary",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Dictionary",
+                "printedName": "[Swift.String : Any]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ProtocolComposition",
+                    "printedName": "Any"
+                  }
+                ],
+                "usr": "s:SD"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV15stateDictionarySDySSypGvp",
+            "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV15stateDictionarySDySSypGvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Dictionary",
+                    "printedName": "[Swift.String : Any]",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ProtocolComposition",
+                        "printedName": "Any"
+                      }
+                    ],
+                    "usr": "s:SD"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV15stateDictionarySDySSypGvg",
+                "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV15stateDictionarySDySSypGvg",
+                "moduleName": "RNAttachmentKit",
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV",
+        "mangledName": "$s15RNAttachmentKit25ViewerSocialActionsConfigV",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "AccessControl",
+          "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ViewerLikeHeartView",
+        "printedName": "ViewerLikeHeartView",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "idleColor",
+            "printedName": "idleColor",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "usr": "c:objc(cs)UIColor"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvp",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvg",
+                "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvs",
+                "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvM",
+                "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC9idleColorSo7UIColorCvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "liked",
+            "printedName": "liked",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvp",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvg",
+                "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvs",
+                "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvM",
+                "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC5likedSbvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(frame:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ViewerLikeHeartView",
+                "printedName": "RNAttachmentKit.ViewerLikeHeartView",
+                "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView(im)initWithFrame:",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC5frameACSo6CGRectV_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "objc_name": "initWithFrame:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(coder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.ViewerLikeHeartView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerLikeHeartView",
+                    "printedName": "RNAttachmentKit.ViewerLikeHeartView",
+                    "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView(im)initWithCoder:",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC5coderACSgSo7NSCoderC_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "objc_name": "initWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Required",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "layoutSubviews",
+            "printedName": "layoutSubviews()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView(im)layoutSubviews",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC14layoutSubviewsyyF",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "objc_name": "layoutSubviews",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "traitCollectionDidChange",
+            "printedName": "traitCollectionDidChange(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UITraitCollection?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UITraitCollection",
+                    "printedName": "UIKit.UITraitCollection",
+                    "usr": "c:objc(cs)UITraitCollection"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView(im)traitCollectionDidChange:",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC24traitCollectionDidChangeyySo07UITraitH0CSgF",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "objc_name": "traitCollectionDidChange:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "animateLike",
+            "printedName": "animateLike()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC07animateD0yyF",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC07animateD0yyF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "animateUnlike",
+            "printedName": "animateUnlike()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit19ViewerLikeHeartViewC13animateUnlikeyyF",
+            "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC13animateUnlikeyyF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerLikeHeartView",
+        "mangledName": "$s15RNAttachmentKit19ViewerLikeHeartViewC",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "Preconcurrency",
+          "Custom",
+          "Final",
+          "AccessControl",
+          "RawDocComment",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)UIView",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "UIKit.UIView",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "__DefaultCustomPlaygroundQuickLookable",
+            "printedName": "__DefaultCustomPlaygroundQuickLookable",
+            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ViewerSocialActionsView",
+        "printedName": "ViewerSocialActionsView",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "config",
+            "printedName": "config",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ViewerSocialActionsConfig",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC6configAA0cdE6ConfigVvp",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC6configAA0cdE6ConfigVvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "SetterAccess",
+              "AccessControl"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialActionsConfig",
+                    "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                    "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC6configAA0cdE6ConfigVvg",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC6configAA0cdE6ConfigVvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "onAction",
+            "printedName": "onAction",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((RNAttachmentKit.ViewerSocialAction) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(RNAttachmentKit.ViewerSocialAction) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ViewerSocialAction",
+                        "printedName": "RNAttachmentKit.ViewerSocialAction",
+                        "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvp",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((RNAttachmentKit.ViewerSocialAction) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(RNAttachmentKit.ViewerSocialAction) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ViewerSocialAction",
+                            "printedName": "RNAttachmentKit.ViewerSocialAction",
+                            "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvg",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "((RNAttachmentKit.ViewerSocialAction) -> ())?",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(RNAttachmentKit.ViewerSocialAction) -> ()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Void",
+                            "printedName": "()"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ViewerSocialAction",
+                            "printedName": "RNAttachmentKit.ViewerSocialAction",
+                            "usr": "s:15RNAttachmentKit18ViewerSocialActionO"
+                          }
+                        ]
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvs",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvM",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC8onActionyAA0cdH0OcSgvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "tintColorForIcons",
+            "printedName": "tintColorForIcons",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "usr": "c:objc(cs)UIColor"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvp",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvg",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvs",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvM",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17tintColorForIconsSo7UIColorCvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "bookmarkFillColor",
+            "printedName": "bookmarkFillColor",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIColor",
+                "printedName": "UIKit.UIColor",
+                "usr": "c:objc(cs)UIColor"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvp",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvp",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "Preconcurrency",
+              "Custom",
+              "HasStorage",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvg",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvg",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Set",
+                "printedName": "Set()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIColor",
+                    "printedName": "UIKit.UIColor",
+                    "usr": "c:objc(cs)UIColor"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvs",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvs",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "set"
+              },
+              {
+                "kind": "Accessor",
+                "name": "Modify",
+                "printedName": "Modify()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvM",
+                "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC17bookmarkFillColorSo7UIColorCvM",
+                "moduleName": "RNAttachmentKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "_modify"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(config:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ViewerSocialActionsView",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsView",
+                "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ViewerSocialActionsConfig",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsConfig",
+                "usr": "s:15RNAttachmentKit25ViewerSocialActionsConfigV"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC6configAcA0cdE6ConfigV_tcfc",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC6configAcA0cdE6ConfigV_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(coder:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsView?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ViewerSocialActionsView",
+                    "printedName": "RNAttachmentKit.ViewerSocialActionsView",
+                    "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "NSCoder",
+                "printedName": "Foundation.NSCoder",
+                "usr": "c:objc(cs)NSCoder"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView(im)initWithCoder:",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC5coderACSgSo7NSCoderC_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "objc_name": "initWithCoder:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Required",
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "traitCollectionDidChange",
+            "printedName": "traitCollectionDidChange(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UITraitCollection?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UITraitCollection",
+                    "printedName": "UIKit.UITraitCollection",
+                    "usr": "c:objc(cs)UITraitCollection"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView(im)traitCollectionDidChange:",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC24traitCollectionDidChangeyySo07UITraitH0CSgF",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "objc_name": "traitCollectionDidChange:",
+            "declAttributes": [
+              "Final",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "update",
+            "printedName": "update(liked:likeCount:commentCount:bookmarked:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Int?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:15RNAttachmentKit23ViewerSocialActionsViewC6update5liked9likeCount07commentJ010bookmarkedySbSg_SiSgAjItF",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC6update5liked9likeCount07commentJ010bookmarkedySbSg_SiSgAjItF",
+            "moduleName": "RNAttachmentKit",
+            "declAttributes": [
+              "Preconcurrency",
+              "Custom",
+              "Final",
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(frame:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ViewerSocialActionsView",
+                "printedName": "RNAttachmentKit.ViewerSocialActionsView",
+                "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGRect",
+                "printedName": "CoreFoundation.CGRect",
+                "usr": "c:@S@CGRect"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView(im)initWithFrame:",
+            "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC5frameACSo6CGRectV_tcfc",
+            "moduleName": "RNAttachmentKit",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "initWithFrame:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Preconcurrency",
+              "Custom",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@RNAttachmentKit@objc(cs)ViewerSocialActionsView",
+        "mangledName": "$s15RNAttachmentKit23ViewerSocialActionsViewC",
+        "moduleName": "RNAttachmentKit",
+        "declAttributes": [
+          "Preconcurrency",
+          "Custom",
+          "Final",
+          "AccessControl",
+          "RawDocComment",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)UIView",
+        "superclassNames": [
+          "UIKit.UIView",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "SendableMetatype",
+            "printedName": "SendableMetatype",
+            "usr": "s:s16SendableMetatypeP",
+            "mangledName": "$ss16SendableMetatypeP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "__DefaultCustomPlaygroundQuickLookable",
+            "printedName": "__DefaultCustomPlaygroundQuickLookable",
+            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "UITraitChangeObservable",
+            "printedName": "UITraitChangeObservable",
+            "usr": "s:5UIKit23UITraitChangeObservableP",
+            "mangledName": "$s5UIKit23UITraitChangeObservableP"
           }
         ]
       },
@@ -64946,595 +68353,595 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21823,
+      "offset": 22319,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21969,
+      "offset": 22465,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "Array",
-      "offset": 23192,
+      "offset": 23688,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29389,
+      "offset": 29885,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29424,
+      "offset": 29920,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29473,
+      "offset": 29969,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29658,
+      "offset": 30154,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 29816,
+      "offset": 30312,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 29856,
+      "offset": 30352,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 29948,
+      "offset": 30444,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30136,
+      "offset": 30632,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 30183,
+      "offset": 30679,
       "length": 7,
       "value": "\"xmark\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30734,
+      "offset": 31230,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 30872,
+      "offset": 31368,
       "length": 2,
       "value": "15"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 31400,
+      "offset": 31896,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 31942,
+      "offset": 32438,
       "length": 23,
       "value": "\"square.and.arrow.down\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 32068,
+      "offset": 32564,
       "length": 21,
       "value": "\"square.and.arrow.up\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 32193,
+      "offset": 32689,
       "length": 7,
       "value": "\"trash\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 32409,
+      "offset": 32905,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 32549,
+      "offset": 33045,
       "length": 2,
       "value": "18"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 32729,
+      "offset": 33225,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 32887,
+      "offset": 33383,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 32927,
+      "offset": 33423,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 33019,
+      "offset": 33515,
       "length": 3,
       "value": "0.8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33260,
+      "offset": 33756,
       "length": 2,
       "value": "50"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33272,
+      "offset": 33768,
       "length": 2,
       "value": "65"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33317,
+      "offset": 33813,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33355,
+      "offset": 33851,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33405,
+      "offset": 33901,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33414,
+      "offset": 33910,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33426,
+      "offset": 33922,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 33436,
+      "offset": 33932,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 33582,
+      "offset": 34078,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 33668,
+      "offset": 34164,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 33798,
+      "offset": 34294,
       "length": 15,
       "value": "\"ThumbnailCell\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 33982,
+      "offset": 34478,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 34039,
+      "offset": 34535,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 34204,
+      "offset": 34700,
       "length": 20,
       "value": "\"photo.on.rectangle\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 34411,
+      "offset": 34907,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 34652,
+      "offset": 35148,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 35149,
+      "offset": 35645,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 36127,
+      "offset": 36623,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "Dictionary",
-      "offset": 45516,
+      "offset": 47242,
       "length": 3,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 45556,
+      "offset": 47282,
       "length": 1,
       "value": "3"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 47450,
+      "offset": 49176,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 51153,
+      "offset": 52879,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 68942,
+      "offset": 71272,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 85354,
+      "offset": 87684,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 85363,
+      "offset": 87693,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 85375,
+      "offset": 87705,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 85385,
+      "offset": 87715,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 86120,
+      "offset": 88450,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 86209,
+      "offset": 88539,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 86253,
+      "offset": 88583,
       "length": 1,
       "value": "4"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 86572,
+      "offset": 88902,
       "length": 4,
       "value": "0.08"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 86585,
+      "offset": 88915,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 86607,
+      "offset": 88937,
       "length": 3,
       "value": "0.9"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 86619,
+      "offset": 88949,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 86747,
+      "offset": 89077,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 86798,
+      "offset": 89128,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 87032,
+      "offset": 89362,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87082,
+      "offset": 89412,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87141,
+      "offset": 89471,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 87144,
+      "offset": 89474,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87158,
+      "offset": 89488,
       "length": 3,
       "value": "185"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 87162,
+      "offset": 89492,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87175,
+      "offset": 89505,
       "length": 3,
       "value": "129"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 87179,
+      "offset": 89509,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 87193,
+      "offset": 89523,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87251,
+      "offset": 89581,
       "length": 1,
       "value": "6"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 87288,
+      "offset": 89618,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87473,
+      "offset": 89803,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87570,
+      "offset": 89900,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87669,
+      "offset": 89999,
       "length": 2,
       "value": "-2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 87765,
+      "offset": 90095,
       "length": 2,
       "value": "-2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 92106,
+      "offset": 94436,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 92109,
+      "offset": 94439,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 92123,
+      "offset": 94453,
       "length": 3,
       "value": "185"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 92127,
+      "offset": 94457,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 92140,
+      "offset": 94470,
       "length": 3,
       "value": "129"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 92144,
+      "offset": 94474,
       "length": 5,
       "value": "255.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 92158,
+      "offset": 94488,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 92758,
+      "offset": 95088,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 98946,
+      "offset": 101276,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/RemoteImageViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 103876,
+      "offset": 106206,
       "length": 5,
       "value": "false"
     },
@@ -66591,119 +69998,119 @@
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 2191,
+      "offset": 2558,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2242,
+      "offset": 2609,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2764,
+      "offset": 3131,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 2774,
+      "offset": 3141,
       "length": 4,
       "value": "0.42"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 2786,
+      "offset": 3153,
       "length": 4,
       "value": "0.21"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 2799,
+      "offset": 3166,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "StringLiteral",
-      "offset": 2826,
+      "offset": 3193,
       "length": 4,
       "value": "\"en\""
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4154,
+      "offset": 4521,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 4158,
+      "offset": 4525,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4071,
+      "offset": 4438,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4244,
+      "offset": 4611,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4278,
+      "offset": 4645,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4461,
+      "offset": 4828,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4497,
+      "offset": 4864,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 4530,
+      "offset": 4897,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "FloatLiteral",
-      "offset": 4700,
+      "offset": 5067,
       "length": 3,
       "value": "1.2"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/MapViewerViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16920,
+      "offset": 17312,
       "length": 5,
       "value": "false"
     },
@@ -69334,101 +72741,787 @@
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
+      "kind": "IntegerLiteral",
+      "offset": 52031,
+      "length": 2,
+      "value": "22"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "BooleanLiteral",
-      "offset": 52299,
+      "offset": 52647,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "BooleanLiteral",
-      "offset": 52641,
+      "offset": 52989,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "BooleanLiteral",
-      "offset": 52678,
+      "offset": 53026,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "BooleanLiteral",
-      "offset": 52719,
+      "offset": 53067,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 52760,
+      "offset": 53108,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 52793,
+      "offset": 53141,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "Array",
-      "offset": 52866,
+      "offset": 53214,
       "length": 16,
       "value": "[0.5, 1, 1.5, 2]"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 53016,
+      "offset": 53364,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 53180,
+      "offset": 53615,
       "length": 2,
       "value": "16"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 59140,
+      "offset": 53818,
+      "length": 2,
+      "value": "16"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
+      "kind": "IntegerLiteral",
+      "offset": 60908,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 59177,
+      "offset": 60945,
       "length": 2,
       "value": "-1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "IntegerLiteral",
-      "offset": 59382,
+      "offset": 61150,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "BooleanLiteral",
-      "offset": 63864,
+      "offset": 65984,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
       "kind": "BooleanLiteral",
-      "offset": 63899,
+      "offset": 66019,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
+      "kind": "BooleanLiteral",
+      "offset": 66058,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerVideoSupport.swift",
+      "kind": "BooleanLiteral",
+      "offset": 66130,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1058,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1092,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1127,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1162,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1191,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1224,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 1256,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1286,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3241,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3253,
+      "length": 3,
+      "value": "107"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3257,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3270,
+      "length": 3,
+      "value": "139"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3274,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3288,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3324,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3336,
+      "length": 2,
+      "value": "59"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3339,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3352,
+      "length": 2,
+      "value": "92"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3355,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3369,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3407,
+      "length": 3,
+      "value": "225"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3411,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3425,
+      "length": 2,
+      "value": "29"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3428,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3441,
+      "length": 2,
+      "value": "72"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3444,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3458,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3519,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3531,
+      "length": 2,
+      "value": "77"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3534,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3547,
+      "length": 3,
+      "value": "141"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3551,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3565,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3740,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3752,
+      "length": 2,
+      "value": "59"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3755,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3768,
+      "length": 2,
+      "value": "92"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3771,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3785,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3824,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3836,
+      "length": 3,
+      "value": "209"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3840,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3853,
+      "length": 3,
+      "value": "102"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3857,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3871,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3908,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3920,
+      "length": 2,
+      "value": "77"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3923,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3936,
+      "length": 3,
+      "value": "141"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3940,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3954,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3992,
+      "length": 3,
+      "value": "244"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 3996,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4010,
+      "length": 3,
+      "value": "114"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4014,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4027,
+      "length": 3,
+      "value": "182"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4031,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4045,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4081,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4093,
+      "length": 3,
+      "value": "107"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4097,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4110,
+      "length": 3,
+      "value": "139"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4114,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4128,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4165,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4177,
+      "length": 3,
+      "value": "201"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4181,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4194,
+      "length": 2,
+      "value": "60"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4197,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4211,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4332,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4344,
+      "length": 2,
+      "value": "59"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4347,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4360,
+      "length": 2,
+      "value": "92"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4363,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4377,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4424,
+      "length": 3,
+      "value": "1.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4436,
+      "length": 3,
+      "value": "107"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4440,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4453,
+      "length": 3,
+      "value": "139"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 4457,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4471,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 4502,
+      "length": 2,
+      "value": "10"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "Array",
+      "offset": 6101,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "BooleanLiteral",
+      "offset": 6256,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 14624,
+      "length": 2,
+      "value": "16"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 14627,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 14641,
+      "length": 3,
+      "value": "185"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 14645,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 14658,
+      "length": 3,
+      "value": "129"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "FloatLiteral",
+      "offset": 14662,
+      "length": 5,
+      "value": "255.0"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 14676,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 15140,
+      "length": 2,
+      "value": "22"
+    },
+    {
+      "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/ViewerSocialActionsView.swift",
+      "kind": "IntegerLiteral",
+      "offset": 15196,
+      "length": 2,
+      "value": "14"
     },
     {
       "filePath": "\/Users\/mike\/source\/PaidModules\/RNAttachmentKit\/RNAttachmentKit\/ios\/RNAttachmentKit\/VideoPrepareManager.swift",

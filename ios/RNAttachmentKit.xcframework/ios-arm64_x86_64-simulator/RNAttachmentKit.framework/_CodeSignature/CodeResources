@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		g6yZrbEglkdHc1mfZaxagZ5xtQU=
+		24XBU3LEblGjGTOAqjhqZ+mB2U0=
 		</data>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		zLlHIopvg4oFhHZOaT45l9MzLio=
+		bbHAbEywVBLHwmu2EqWPPnzrg8M=
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		WYiwqiYtHJdBV3aT3xnRA29FUgk=
+		PpmDDPh+14xFJeh0tmvGwGbuZYA=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -227,7 +227,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			t4fvHNhwvX9Xc+yxU1dNnVy6zn+bhryN6MxDfE4HVwY=
+			hcxV/4NZu79SXIpwsHu8Fo8WVAZLQfuKhITugdLFV+I=
 			</data>
 		</dict>
 		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
@@ -290,7 +290,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2hH5M48Yr7y0ePr+gRu5xAccpBAph93AQ4w7z5+UB8Q=
+			zXp0prZ5LRnLIMJ/0Ai4W029gZz4XZxXIPWnElIX8Uo=
 			</data>
 		</dict>
 		<key>Modules/RNAttachmentKit.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -325,7 +325,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6G9pUrgas7SUlcig8oJ3KqVGQtUpovTVZz5u73YaA90=
+			zmUWHRpma3/PxwZ1MSJBqcfbd9x5In/woS3AJTZtjTY=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

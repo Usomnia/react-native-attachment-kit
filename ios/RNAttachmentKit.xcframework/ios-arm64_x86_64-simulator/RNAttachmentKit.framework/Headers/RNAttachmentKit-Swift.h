@@ -593,8 +593,10 @@ SWIFT_CLASS("_TtC15RNAttachmentKit31RemoteImageViewerViewController")
 @interface RemoteImageViewerViewController : UIViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidAppear:(BOOL)animated;
 - (void)viewWillDisappear:(BOOL)animated;
+@property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
 @property (nonatomic, readonly) BOOL prefersStatusBarHidden;
 @property (nonatomic, readonly) UIStatusBarAnimation preferredStatusBarUpdateAnimation;
 @property (nonatomic, readonly) BOOL prefersHomeIndicatorAutoHidden;
@@ -639,6 +641,18 @@ SWIFT_CLASS("_TtC15RNAttachmentKit14VideoExportHUD")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)layoutSubviews;
 - (void)willMoveToSuperview:(UIView * _Nullable)newSuperview;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+@class UITextView;
+/// 전체 화면 위에 얹는 입력창 — 위쪽 빈 곳을 누르면 내려감. 키보드 높이만큼 따라 올라옴
+SWIFT_CLASS("_TtC15RNAttachmentKit25ViewerCommentComposerView")
+@interface ViewerCommentComposerView : UIView <UITextViewDelegate>
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (void)textViewDidChange:(UITextView * _Nonnull)textView;
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
@@ -1270,8 +1284,10 @@ SWIFT_CLASS("_TtC15RNAttachmentKit31RemoteImageViewerViewController")
 @interface RemoteImageViewerViewController : UIViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidAppear:(BOOL)animated;
 - (void)viewWillDisappear:(BOOL)animated;
+@property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
 @property (nonatomic, readonly) BOOL prefersStatusBarHidden;
 @property (nonatomic, readonly) UIStatusBarAnimation preferredStatusBarUpdateAnimation;
 @property (nonatomic, readonly) BOOL prefersHomeIndicatorAutoHidden;
@@ -1316,6 +1332,18 @@ SWIFT_CLASS("_TtC15RNAttachmentKit14VideoExportHUD")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)layoutSubviews;
 - (void)willMoveToSuperview:(UIView * _Nullable)newSuperview;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+@class UITextView;
+/// 전체 화면 위에 얹는 입력창 — 위쪽 빈 곳을 누르면 내려감. 키보드 높이만큼 따라 올라옴
+SWIFT_CLASS("_TtC15RNAttachmentKit25ViewerCommentComposerView")
+@interface ViewerCommentComposerView : UIView <UITextViewDelegate>
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)layoutSubviews;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (void)textViewDidChange:(UITextView * _Nonnull)textView;
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString * _Nonnull)text SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 

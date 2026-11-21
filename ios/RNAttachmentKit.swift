@@ -209,6 +209,32 @@ class RNAttachmentKit: RCTEventEmitter {
         }
     }
 
+    /// RN completeViewerComment — 뷰어 안 댓글 입력창의 보내기 결과 { ok, message? }
+    @objc
+    func completeViewerComment(_ result: NSDictionary,
+                               resolve: @escaping RCTPromiseResolveBlock,
+                               reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let d = result as? [String: Any] ?? [:]
+        let ok = (d["ok"] as? Bool) ?? (d["ok"] as? NSNumber)?.boolValue ?? false
+        let message = d["message"] as? String
+        DispatchQueue.main.async {
+            self.activeViewerVC?.completeComment(ok: ok, message: message)
+            resolve(nil)
+        }
+    }
+
+    /// RN setViewerCommentPhoto — 입력창 미리보기 사진 { uri } (빈 딕셔너리/uri 없음 = 뺌)
+    @objc
+    func setViewerCommentPhoto(_ photo: NSDictionary,
+                               resolve: @escaping RCTPromiseResolveBlock,
+                               reject: @escaping RCTPromiseRejectBlock) -> Void {
+        let uri = (photo as? [String: Any])?["uri"] as? String
+        DispatchQueue.main.async {
+            self.activeViewerVC?.setCommentPhoto(uri: (uri?.isEmpty ?? true) ? nil : uri)
+            resolve(nil)
+        }
+    }
+
     /// RN closeViewer — 열려 있는 사진 뷰어를 X 처럼 닫음 (onViewerWillClose 가 옴). 뷰어가 없으면 아무 일 없음
     @objc
     func closeViewer(_ resolve: @escaping RCTPromiseResolveBlock,
@@ -217,6 +243,33 @@ class RNAttachmentKit: RCTEventEmitter {
             self.activeViewerVC?.closeFromOutside()
             resolve(nil)
         }
+    }
+
+    /// 상단 소셜 아이콘·댓글 입력창 이벤트 → RN (openViewer 의 큰 클로저 밖으로 빼 둠 — 타입 검사기가 포기하지 않게)
+    private func wireViewerSocialActions(_ viewerVC: RemoteImageViewerViewController) {
+        // 소셜 아이콘 → RN onViewerAction { action, index, liked, likeCount, bookmarked }
+        viewerVC.onSocialAction = { [weak self] (action: ViewerSocialAction, index: Int, state: ViewerSocialActionsConfig) -> Void in
+            var body: [String: Any] = state.stateDictionary
+            body["action"] = action.rawValue
+            body["index"] = index
+            self?.sendEvent(withName: "onViewerAction", body: body)
+        }
+        // 입력창 보내기 → RN onViewerAction { action: "commentSend", index, text }
+        viewerVC.onCommentSend = { [weak self] (text: String, photoUri: String?, index: Int) -> Void in
+            var body: [String: Any] = ["action": "commentSend", "index": index, "text": text]
+            if let u = photoUri { body["photoUri"] = u }
+            self?.sendEvent(withName: "onViewerAction", body: body)
+        }
+        // 사진 버튼 → RN 이 갤러리를 열어 고른 뒤 setViewerCommentPhoto 로 돌려줌 / 미리보기 × 는 알림만
+        viewerVC.onCommentPhotoTap = { [weak self] (index: Int) -> Void in
+            let body: [String: Any] = ["action": "commentPhoto", "index": index]
+            self?.sendEvent(withName: "onViewerAction", body: body)
+        }
+        viewerVC.onCommentPhotoRemove = { [weak self] (index: Int) -> Void in
+            let body: [String: Any] = ["action": "commentPhotoRemove", "index": index]
+            self?.sendEvent(withName: "onViewerAction", body: body)
+        }
+        
     }
 
     // MARK: - Map Viewer (위치 메시지 → 지도)
@@ -598,6 +651,8 @@ class RNAttachmentKit: RCTEventEmitter {
             viewerVC.showDeleteButton = showDeleteButton
             viewerVC.startWithUiHidden = startWithUiHidden
             viewerVC.socialActions = socialActions
+            // 댓글 아이콘 → 뷰어 안 네이티브 입력창 (actions.commentInput)
+            if let a = options["actions"] as? [String: Any] { viewerVC.commentInput = ViewerCommentInputConfig(dictionary: a["commentInput"]) }
             if let saveAllText = saveAllText { viewerVC.saveAllText = saveAllText }
             if let saveOneText = saveOneText { viewerVC.saveOneText = saveOneText }
             if let shareAllText = shareAllText { viewerVC.shareAllText = shareAllText }
@@ -658,14 +713,8 @@ class RNAttachmentKit: RCTEventEmitter {
             viewerVC.onWillDismissForDelete = { [weak self] () -> Void in
                 self?.zoomAnimator.fadeOutOnDismiss = true
             }
-            // 소셜 아이콘 → RN onViewerAction { action, index, liked, likeCount, bookmarked }
-            viewerVC.onSocialAction = { [weak self] (action: ViewerSocialAction, index: Int, state: ViewerSocialActionsConfig) -> Void in
-                var body: [String: Any] = state.stateDictionary
-                body["action"] = action.rawValue
-                body["index"] = index
-                self?.sendEvent(withName: "onViewerAction", body: body)
-            }
-            
+            self.wireViewerSocialActions(viewerVC)
+
             let resolveResult: [String: Any] = ["success": true]
             
             // Cache-first, then local placeholder, then wait-for-download - in that priority
@@ -800,6 +849,7 @@ class RNAttachmentKit: RCTEventEmitter {
                 
                 let editorVC = ImageEditorViewController()
                 editorVC.languageCode = options["languageCode"] as? String ?? "en"
+                editorVC.sendTitle = options["editorSendText"] as? String
                 editorVC.allAssets = [asset]
                 editorVC.currentIndex = 0
                 editorVC.modalPresentationStyle = .fullScreen
@@ -847,6 +897,7 @@ class RNAttachmentKit: RCTEventEmitter {
                         DispatchQueue.main.async {
                             let editorVC = ImageEditorViewController()
                 editorVC.languageCode = options["languageCode"] as? String ?? "en"
+                editorVC.sendTitle = options["editorSendText"] as? String
                             editorVC.standaloneImage = image
                             editorVC.currentIndex = 0
                             editorVC.modalPresentationStyle = .fullScreen
@@ -1001,6 +1052,7 @@ class RNAttachmentKit: RCTEventEmitter {
                     if enableEditor {
                         let editorVC = ImageEditorViewController()
                 editorVC.languageCode = options["languageCode"] as? String ?? "en"
+                editorVC.sendTitle = options["editorSendText"] as? String
                         editorVC.allAssets = [asset]
                         editorVC.currentIndex = 0
                         editorVC.singlePhotoMode = true
@@ -1820,6 +1872,7 @@ fileprivate extension RNAttachmentKit {
 
         let editorVC = ImageEditorViewController()
         editorVC.languageCode = options["languageCode"] as? String ?? "en"
+                editorVC.sendTitle = options["editorSendText"] as? String
         var editorAssets = currentGallery.allAssets
         var targetIndex = 0
         if let idx = editorAssets.firstIndex(of: asset) {

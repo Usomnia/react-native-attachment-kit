@@ -53,6 +53,14 @@ RCT_EXTERN_METHOD(updateViewerActions:(NSDictionary *)state
 RCT_EXTERN_METHOD(closeViewer:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(completeViewerComment:(NSDictionary *)result
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(setViewerCommentPhoto:(NSDictionary *)photo
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(openMapViewer:(NSDictionary *)options
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
@@ -149,6 +157,14 @@ RCT_EXTERN_METHOD(updateViewerActions:(NSDictionary *)state
                   reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(closeViewer:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(completeViewerComment:(NSDictionary *)result
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+
+RCT_EXTERN_METHOD(setViewerCommentPhoto:(NSDictionary *)photo
+                  resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject)
 
 RCT_EXTERN_METHOD(openMapViewer:(NSDictionary *)options

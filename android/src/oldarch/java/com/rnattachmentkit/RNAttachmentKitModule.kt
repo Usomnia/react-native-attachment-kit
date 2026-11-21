@@ -128,6 +128,8 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                 params.putBoolean("liked", intent.getBooleanExtra("liked", false))
                 params.putInt("likeCount", intent.getIntExtra("likeCount", 0))
                 params.putBoolean("bookmarked", intent.getBooleanExtra("bookmarked", false))
+                intent.getStringExtra("text")?.let { params.putString("text", it) }
+                intent.getStringExtra("photoUri")?.let { params.putString("photoUri", it) }
                 reactApplicationContext
                     .getJSModule(com.facebook.react.modules.core.DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
                     .emit("onViewerAction", params)
@@ -391,7 +393,9 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                             options.getBoolean("captureLocationImage"),
                         // 동영상 (mediaType "video"/"all" 일 때 그리드에 동영상, 길이 제한)
                         mediaType = mediaType,
-                        maxVideoDurationSec = videoOptions.maxDurationSec
+                        maxVideoDurationSec = videoOptions.maxDurationSec,
+                        // 편집 화면 버튼 문구 ("첨부" 등). 없으면 "전송"
+                        editorSendText = if (options.hasKey("editorSendText") && !options.isNull("editorSendText")) options.getString("editorSendText") else null
                     )
                     // 위치 탭에서 보내기 → onLocationSelected 이벤트로 결과를 넘기고, openGallery 는 빈 배열로 끝냄
                     bottomSheet.setOnLocationSelectedListener { loc ->
@@ -518,6 +522,27 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
         val liked = b("liked"); val likeCount = n("likeCount"); val commentCount = n("commentCount"); val bookmarked = b("bookmarked")
         com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
             ImageViewerOverlayView.currentInstance?.get()?.applySocialActions(liked, likeCount, commentCount, bookmarked)
+            promise.resolve(null)
+        }
+    }
+
+    /** RN completeViewerComment — 뷰어 안 댓글 입력창의 보내기 결과 { ok, message? } */
+    @ReactMethod
+    fun completeViewerComment(result: ReadableMap, promise: Promise) {
+        val ok = result.hasKey("ok") && !result.isNull("ok") && result.getType("ok") == com.facebook.react.bridge.ReadableType.Boolean && result.getBoolean("ok")
+        val message = if (result.hasKey("message") && !result.isNull("message") && result.getType("message") == com.facebook.react.bridge.ReadableType.String) result.getString("message") else null
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            ImageViewerOverlayView.currentInstance?.get()?.completeComment(ok, message)
+            promise.resolve(null)
+        }
+    }
+
+    /** RN setViewerCommentPhoto — 뷰어 안 댓글 입력창 미리보기 사진 { uri } (uri 없음 = 뺌) */
+    @ReactMethod
+    fun setViewerCommentPhoto(photo: ReadableMap, promise: Promise) {
+        val uri = if (photo.hasKey("uri") && !photo.isNull("uri") && photo.getType("uri") == com.facebook.react.bridge.ReadableType.String) photo.getString("uri") else null
+        com.facebook.react.bridge.UiThreadUtil.runOnUiThread {
+            ImageViewerOverlayView.currentInstance?.get()?.setCommentPhoto(if (uri.isNullOrEmpty()) null else uri)
             promise.resolve(null)
         }
     }
@@ -812,6 +837,34 @@ class RNAttachmentKitModule(reactContext: ReactApplicationContext) :
                                 commentCount = n("commentCount"), bookmarked = b("bookmarked", false),
                                 likeLabel = str("likeLabel"), commentLabel = str("commentLabel"), bookmarkLabel = str("bookmarkLabel"),
                             ).toBundle())
+                            // 댓글 아이콘 → 뷰어 안 네이티브 입력창
+                            if (a.hasKey("commentInput") && !a.isNull("commentInput") && a.getType("commentInput") == com.facebook.react.bridge.ReadableType.Map) {
+                                a.getMap("commentInput")?.let { ci ->
+                                    fun cs(k: String) = if (ci.hasKey(k) && !ci.isNull(k) && ci.getType(k) == com.facebook.react.bridge.ReadableType.String) ci.getString(k) else null
+                                    val max = if (ci.hasKey("maxLength") && !ci.isNull("maxLength") && ci.getType("maxLength") == com.facebook.react.bridge.ReadableType.Number) ci.getDouble("maxLength").toInt() else 1000
+                                    // 사진 버튼 { label?, removeLabel? } (true 도 허용) · 색 theme
+                                    var showPhoto = false; var photoLabel: String? = null; var removeLabel: String? = null
+                                    if (ci.hasKey("photo") && !ci.isNull("photo")) {
+                                        when (ci.getType("photo")) {
+                                            com.facebook.react.bridge.ReadableType.Map -> { showPhoto = true; ci.getMap("photo")?.let { pm ->
+                                                fun ps(k: String) = if (pm.hasKey(k) && !pm.isNull(k) && pm.getType(k) == com.facebook.react.bridge.ReadableType.String) pm.getString(k) else null
+                                                photoLabel = ps("label"); removeLabel = ps("removeLabel") } }
+                                            com.facebook.react.bridge.ReadableType.Boolean -> showPhoto = ci.getBoolean("photo")
+                                            else -> {}
+                                        }
+                                    }
+                                    val theme = ViewerCommentTheme()
+                                    if (ci.hasKey("theme") && !ci.isNull("theme") && ci.getType("theme") == com.facebook.react.bridge.ReadableType.Map) {
+                                        ci.getMap("theme")?.let { tm ->
+                                            fun tc(k: String): Int? = if (tm.hasKey(k) && !tm.isNull(k) && tm.getType(k) == com.facebook.react.bridge.ReadableType.String) ViewerCommentTheme.parseColor(tm.getString(k)) else null
+                                            theme.primary = tc("primary"); theme.text = tc("text"); theme.placeholder = tc("placeholder")
+                                            theme.fieldBackground = tc("fieldBackground"); theme.fieldBorder = tc("fieldBorder")
+                                            theme.sideButtonBackground = tc("sideButtonBackground"); theme.sideButtonIcon = tc("sideButtonIcon"); theme.wrapperBackground = tc("wrapperBackground")
+                                        }
+                                    }
+                                    putBundle(ViewerCommentInputConfig.ARG_KEY, ViewerCommentInputConfig(cs("placeholder"), cs("sendLabel"), max.coerceAtLeast(1), showPhoto, photoLabel, removeLabel, theme).toBundle())
+                                }
+                            }
                         }
                     }
                     for (key in listOf(

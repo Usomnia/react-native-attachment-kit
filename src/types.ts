@@ -228,6 +228,11 @@ export interface GalleryOptions {
   selectionMode?: "single" | "multi"
   enableEditor?: boolean // 단일 이미지 선택 시 편집기 활성화 여부
   profileMode?: boolean // 1:1 프로필 크롭 모드 활성화 여부
+  /**
+   * 편집 화면(단일 사진)의 오른쪽 위 완료 버튼 문구 — 생략하면 "전송"(모듈 번역). 댓글 첨부처럼 보내는 게 아닐 때 "첨부" 등으로.
+   * iOS + Android. 여러 장(multi) 편집의 체크 버튼엔 영향 없음
+   */
+  editorSendText?: string
   themeColor?: string // 테마 컬러 지정 (ex: "#FFEB3B")
   /**
    * 화면 모드. "system"(기본)은 기기 설정을 따르고, "light"/"dark" 는 강제합니다.
@@ -501,8 +506,48 @@ export interface ViewerWillCloseEvent {
   videoPositions?: Record<number, number>
 }
 
-/** 뷰어 상단 소셜 액션 아이콘(좋아요·댓글·책갈피)의 종류 — onViewerAction.action */
-export type ViewerActionKind = 'like' | 'comment' | 'bookmark'
+/**
+ * 뷰어 상단 소셜 액션 아이콘(좋아요·댓글·책갈피)의 종류 — onViewerAction.action.
+ * 'commentSend' = 네이티브 댓글 입력창(ViewerActions.commentInput)에서 보내기를 누름 (text 와 함께)
+ */
+export type ViewerActionKind = 'like' | 'comment' | 'bookmark' | 'commentSend' | 'commentPhoto' | 'commentPhotoRemove'
+
+/** 뷰어 안 댓글 입력창 색 (앱 테마 값을 넘김 — 생략하면 HeyTalk 기본색). hex 또는 rgba() */
+export interface ViewerCommentTheme {
+  /** 보내기 버튼·커서 */
+  primary?: string
+  text?: string
+  placeholder?: string
+  /** 입력칸 바탕(블러 위 60% 틴트)·테두리 */
+  fieldBackground?: string
+  fieldBorder?: string
+  /** 왼쪽 사진 버튼 원 바탕·아이콘 */
+  sideButtonBackground?: string
+  sideButtonIcon?: string
+  /** 아래 그라데이션 색 (입력창 위 → 화면 끝) */
+  wrapperBackground?: string
+}
+
+/**
+ * 뷰어 안 네이티브 댓글 입력창 (ViewerActions.commentInput). 넘기면 댓글 아이콘을 눌렀을 때 뷰어 위로 입력창과 키보드가
+ * 올라오고, 보내기를 누르면 onViewerAction({ action: 'commentSend', text }) 로 글만 넘어옵니다 — 실제 등록은 앱이 API 로.
+ * 입력창은 보내는 동안 잠기고, 앱이 completeViewerComment({ ok }) 를 부르면 성공 시 비우고 내려가며 실패 시 글을 그대로 두고
+ * message 를 빨갛게 보여 줍니다. 색은 뷰어 appearance(라이트/다크)를 따르고 iOS 키보드도 같은 모드로 뜸.
+ */
+export interface ViewerCommentInput {
+  placeholder?: string
+  /** 보내기 버튼 접근성 문구 */
+  sendLabel?: string
+  /** 최대 글자 수 (기본 1000) */
+  maxLength?: number
+  /**
+   * 왼쪽 44 원형 사진 버튼. 누르면 onViewerAction({ action: 'commentPhoto' }) 만 옴 — 앱이 갤러리를 열어 1장 고른 뒤
+   * setViewerCommentPhoto({ uri }) 로 돌려주면 입력칸 위에 72×72 미리보기(× 로 빼기 → 'commentPhotoRemove'). 사진이 있으면 글 없이도 보냄
+   */
+  photo?: { label?: string; removeLabel?: string }
+  /** 색 (RN 댓글 입력창과 같게 앱 테마 값을 넘김) */
+  theme?: ViewerCommentTheme
+}
 
 /** 뷰어 상단 소셜 아이콘의 상태 (updateViewerActions 로 바꿀 수 있음 — 넘긴 키만 바뀜) */
 export interface ViewerActionsState {
@@ -526,6 +571,8 @@ export interface ViewerActionsState {
  * 지원: iOS 뷰어, Android 는 useOverlayViewer 뷰어 (다른 Android 뷰어는 무시).
  */
 export interface ViewerActions extends ViewerActionsState {
+  /** 댓글 아이콘을 누르면 뷰어 위에 네이티브 입력창을 띄움 (설명은 ViewerCommentInput). 없으면 'comment' 이벤트만 */
+  commentInput?: ViewerCommentInput
   /** 각 아이콘 표시 여부 (기본 true). 셋 다 false 면 아무것도 안 그림 */
   showLike?: boolean
   showComment?: boolean
@@ -547,6 +594,17 @@ export interface ViewerActionEvent {
   liked?: boolean
   likeCount?: number
   bookmarked?: boolean
+  /** commentSend 에만 — 입력한 글 (앞뒤 공백 제거; 사진이 있으면 빈 글도 올 수 있음) */
+  text?: string
+  /** commentSend 에만 — setViewerCommentPhoto 로 넘겼던 사진 uri (없으면 생략) */
+  photoUri?: string
+}
+
+/** completeViewerComment 인자 */
+export interface ViewerCommentResult {
+  ok: boolean
+  /** 실패 때 입력창 위에 보여 줄 문구 (없으면 입력창만 다시 풀림) */
+  message?: string
 }
 
 export interface ViewerOptions {

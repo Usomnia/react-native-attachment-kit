@@ -243,6 +243,7 @@ public struct FilterState {
 }
 @objc @_Concurrency.MainActor @preconcurrency public class ImageEditorViewController : UIKit.UIViewController {
   @_Concurrency.MainActor @preconcurrency public var languageCode: Swift.String
+  @_Concurrency.MainActor @preconcurrency public var sendTitle: Swift.String?
   @_Concurrency.MainActor @preconcurrency @objc dynamic public init()
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor @preconcurrency public var allAssets: [Photos.PHAsset]
@@ -438,6 +439,10 @@ public enum LicenseGate {
   @_Concurrency.MainActor @preconcurrency public var showActionButtons: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var socialActions: RNAttachmentKit.ViewerSocialActionsConfig?
   @_Concurrency.MainActor @preconcurrency public var onSocialAction: ((RNAttachmentKit.ViewerSocialAction, Swift.Int, RNAttachmentKit.ViewerSocialActionsConfig) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var commentInput: RNAttachmentKit.ViewerCommentInputConfig?
+  @_Concurrency.MainActor @preconcurrency public var onCommentSend: ((Swift.String, Swift.String?, Swift.Int) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onCommentPhotoTap: ((Swift.Int) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency public var onCommentPhotoRemove: ((Swift.Int) -> Swift.Void)?
   @_Concurrency.MainActor @preconcurrency public var startWithUiHidden: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var showDeleteButton: Swift.Bool
   @_Concurrency.MainActor @preconcurrency public var saveAllText: Swift.String?
@@ -463,8 +468,12 @@ public enum LicenseGate {
   @_Concurrency.MainActor @preconcurrency public static func prefetchImage(from urlString: Swift.String, completion: @escaping (UIKit.UIImage?) -> Swift.Void)
   @_Concurrency.MainActor @preconcurrency public init(imageUrls: [Swift.String], initialIndex: Swift.Int)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var preferredStatusBarStyle: UIKit.UIStatusBarStyle {
+    @objc get
+  }
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public var prefersStatusBarHidden: Swift.Bool {
     @objc get
   }
@@ -478,6 +487,9 @@ public enum LicenseGate {
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public func viewDidLayoutSubviews()
   @_Concurrency.MainActor @preconcurrency public func closeFromOutside()
   @_Concurrency.MainActor @preconcurrency public func updateSocialActions(liked: Swift.Bool?, likeCount: Swift.Int?, commentCount: Swift.Int?, bookmarked: Swift.Bool?)
+  @_Concurrency.MainActor @preconcurrency public func presentCommentComposer()
+  @_Concurrency.MainActor @preconcurrency public func completeComment(ok: Swift.Bool, message: Swift.String?)
+  @_Concurrency.MainActor @preconcurrency public func setCommentPhoto(uri: Swift.String?)
 }
 extension RNAttachmentKit.RemoteImageViewerViewController : UIKit.UIGestureRecognizerDelegate {
   @_Concurrency.MainActor @preconcurrency @objc dynamic public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIKit.UIGestureRecognizer) -> Swift.Bool
@@ -973,6 +985,16 @@ public struct ViewerVideoItem {
   public init(uri: Swift.String, duration: Swift.Double? = nil, cacheFile: Swift.String? = nil, startTime: Swift.Double? = nil)
   public init?(dictionary d: Any?)
 }
+public enum ViewerIcon {
+  case close, comment, bookmark, bookmarkFill, save, share, trash, send, image, sendPlane
+  public static let strokeWidth: CoreFoundation.CGFloat
+  public func image(size: CoreFoundation.CGFloat) -> UIKit.UIImage
+  public static func == (a: RNAttachmentKit.ViewerIcon, b: RNAttachmentKit.ViewerIcon) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 public enum ViewerSocialAction : Swift.String {
   case like, comment, bookmark
   public init?(rawValue: Swift.String)
@@ -1032,11 +1054,63 @@ public struct ViewerSocialActionsConfig {
     get
     set
   }
+  @_Concurrency.MainActor @preconcurrency public static let iconGap: CoreFoundation.CGFloat
   @_Concurrency.MainActor @preconcurrency public init(config: RNAttachmentKit.ViewerSocialActionsConfig)
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor @preconcurrency final public func update(liked: Swift.Bool?, likeCount: Swift.Int?, commentCount: Swift.Int?, bookmarked: Swift.Bool?)
   @objc deinit
+}
+public struct ViewerCommentTheme {
+  public var primary: UIKit.UIColor?
+  public var text: UIKit.UIColor?
+  public var placeholder: UIKit.UIColor?
+  public var fieldBackground: UIKit.UIColor?
+  public var fieldBorder: UIKit.UIColor?
+  public var sideButtonBackground: UIKit.UIColor?
+  public var sideButtonIcon: UIKit.UIColor?
+  public var wrapperBackground: UIKit.UIColor?
+  public init()
+  public init(dictionary d: [Swift.String : Any])
+}
+public struct ViewerCommentInputConfig {
+  public var placeholder: Swift.String?
+  public var sendLabel: Swift.String?
+  public var maxLength: Swift.Int
+  public var photoLabel: Swift.String?
+  public var showPhotoButton: Swift.Bool
+  public var removePhotoLabel: Swift.String?
+  public var theme: RNAttachmentKit.ViewerCommentTheme
+  public init()
+  public init?(dictionary: Any?)
+}
+@objc @_Concurrency.MainActor @preconcurrency final public class ViewerCommentComposerView : UIKit.UIView, UIKit.UITextViewDelegate {
+  @_Concurrency.MainActor @preconcurrency final public var onSend: ((Swift.String, Swift.String?) -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var onDismiss: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var onPhotoTap: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var onPhotoRemove: (() -> Swift.Void)?
+  @_Concurrency.MainActor @preconcurrency final public var isSending: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency final public var photoUri: Swift.String? {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency public init(config: RNAttachmentKit.ViewerCommentInputConfig, themeColor: UIKit.UIColor)
+  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+  @_Concurrency.MainActor @preconcurrency @objc override final public func layoutSubviews()
+  @_Concurrency.MainActor @preconcurrency @objc override final public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor @preconcurrency final public var isPresented: Swift.Bool {
+    get
+  }
+  @_Concurrency.MainActor @preconcurrency final public func present(in container: UIKit.UIView)
+  @_Concurrency.MainActor @preconcurrency final public func dismiss(animated: Swift.Bool = true)
+  @_Concurrency.MainActor @preconcurrency final public func endEditing()
+  @_Concurrency.MainActor @preconcurrency final public func focus()
+  @_Concurrency.MainActor @preconcurrency final public func setPhoto(uri: Swift.String?)
+  @_Concurrency.MainActor @preconcurrency final public func complete(ok: Swift.Bool, message: Swift.String?)
+  @_Concurrency.MainActor @preconcurrency @objc final public func textViewDidChange(_ textView: UIKit.UITextView)
+  @_Concurrency.MainActor @preconcurrency @objc final public func textView(_ textView: UIKit.UITextView, shouldChangeTextIn range: Foundation.NSRange, replacementText text: Swift.String) -> Swift.Bool
 }
 @_hasMissingDesignatedInitializers final public class VideoPrepareManager {
   public static let shared: RNAttachmentKit.VideoPrepareManager
@@ -1167,6 +1241,8 @@ extension RNAttachmentKit.ImageEditorTransitionDelegate : Swift.Sendable {}
 extension RNAttachmentKit.ZoomTransitionAnimator : Swift.Sendable {}
 extension RNAttachmentKit.VideoSendIssue : Swift.Equatable {}
 extension RNAttachmentKit.VideoSendIssue : Swift.Hashable {}
+extension RNAttachmentKit.ViewerIcon : Swift.Equatable {}
+extension RNAttachmentKit.ViewerIcon : Swift.Hashable {}
 extension RNAttachmentKit.ViewerSocialAction : Swift.Equatable {}
 extension RNAttachmentKit.ViewerSocialAction : Swift.Hashable {}
 extension RNAttachmentKit.ViewerSocialAction : Swift.RawRepresentable {}

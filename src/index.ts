@@ -106,7 +106,7 @@ let _editorOpen = false
 let _asyncImgProcessedSub: { remove: () => void } | null = null
 
 export type { AIConfig, AIUsageEvent, AIChargeRequiredEvent } from "./types"
-export type { ViewerActionKind, ViewerActionsState, ViewerActions, ViewerActionEvent } from "./types"
+export type { ViewerActionKind, ViewerActionsState, ViewerActions, ViewerActionEvent, ViewerCommentInput, ViewerCommentResult, ViewerCommentTheme } from "./types"
 export type { VideoOptions, VideoProgressEvent, ViewerVideo, ViewerWillCloseEvent, ProcessingStartEvent, ProcessingStartItem, ThumbnailOptions, VideoPreviewOptions, SourceRect, SourceClipInsets, ViewerSourceUpdate } from "./types"
 export type { SelectionChangeEvent, Appearance, AttachLocationResult, MapViewerOptions, ReverseGeocodeOptions, ReverseGeocodeResult, ReverseGeocodeErrorCode, AttachFileResult, AttachFileFailure, LocationThumbnailOptions, LocationThumbnailResult } from "./types"
 export type { MediaGalleryItem, MediaGalleryOptions, MediaGalleryGridSize, MediaGalleryGridSizeChangedEvent, MediaGalleryTheme, MediaGalleryViewerOptions, MediaGalleryDeleteOption, MediaGalleryItemDeletedEvent, MediaGalleryNeedPageEvent, MediaGalleryClosedEvent, MediaGalleryAppendPayload, MediaGalleryRemovePayload } from "./types"
@@ -126,6 +126,10 @@ export interface RNAttachmentKit {
   updateViewerActions(state: import("./types").ViewerActionsState): Promise<void>
   /** 열려 있는 사진 뷰어를 닫음 (X 를 누른 것과 같음 — onViewerWillClose 가 옴). 뷰어가 없으면 아무 일 없음 */
   closeViewer(): Promise<void>
+  /** 뷰어 안 댓글 입력창의 보내기 결과 — ok 면 비우고 내려감, 아니면 글을 두고 message 표시 */
+  completeViewerComment(result: import("./types").ViewerCommentResult): Promise<void>
+  /** 뷰어 안 댓글 입력창의 미리보기 사진 — 앱이 고른 파일 uri, null 이면 뺌 */
+  setViewerCommentPhoto(photo: { uri: string } | null): Promise<void>
   /** 지도 뷰어. 닫히면 resolve */
   openMapViewer(options: import("./types").MapViewerOptions): Promise<void>
   /** 지도 뷰어가 열린 동안 말풍선 위치가 바뀌었을 때 (닫힐 때 돌아갈 자리) */
@@ -393,6 +397,8 @@ const AttachmentKit: RNAttachmentKit = {
         if (typeof event.liked === 'boolean') e.liked = event.liked
         if (typeof event.likeCount === 'number') e.likeCount = event.likeCount
         if (typeof event.bookmarked === 'boolean') e.bookmarked = event.bookmarked
+        if (typeof event.text === 'string') e.text = event.text
+        if (typeof event.photoUri === 'string' && event.photoUri.length > 0) e.photoUri = event.photoUri
         try { options.onViewerAction(e) } catch (err) { console.error("[RNAttachmentKit] options.onViewerAction() threw:", err) }
       })
     }
@@ -493,6 +499,22 @@ const AttachmentKit: RNAttachmentKit = {
       throw new Error(LINKING_ERROR)
     }
     return RNAttachmentKitModule.closeViewer()
+  },
+
+  setViewerCommentPhoto: async (photo: { uri: string } | null): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    return RNAttachmentKitModule.setViewerCommentPhoto(photo && typeof photo.uri === 'string' && photo.uri ? { uri: photo.uri } : {})
+  },
+
+  completeViewerComment: async (result: import("./types").ViewerCommentResult): Promise<void> => {
+    if (!RNAttachmentKitModule) {
+      throw new Error(LINKING_ERROR)
+    }
+    const body: Record<string, any> = { ok: !!result?.ok }
+    if (typeof result?.message === 'string' && result.message.length > 0) body.message = result.message
+    return RNAttachmentKitModule.completeViewerComment(body)
   },
 
   openMapViewer: async (options: import("./types").MapViewerOptions): Promise<void> => {

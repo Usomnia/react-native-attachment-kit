@@ -18,6 +18,10 @@ export interface Spec extends TurboModule {
   // 뷰어 상단 소셜 아이콘 상태 갱신 (ViewerActionsState) / 열려 있는 뷰어 닫기
   updateViewerActions(state: Object): Promise<void>;
   closeViewer(): Promise<void>;
+  // 뷰어 안 댓글 입력창의 보내기 결과 (ViewerCommentResult)
+  completeViewerComment(result: Object): Promise<void>;
+  // 뷰어 안 댓글 입력창의 미리보기 사진 { uri } (빈 객체 = 뺌)
+  setViewerCommentPhoto(photo: Object): Promise<void>;
   
   getDefaultAnimationConfig(): Promise<Object>;
 
